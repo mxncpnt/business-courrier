@@ -45,7 +45,7 @@ export async function GET(
   // Return PDF as download
   const filename = `courrier-${letter.type}-${letter.id.substring(0, 8)}.pdf`;
 
-  return new NextResponse(pdfBuffer, {
+  return new NextResponse(new Uint8Array(pdfBuffer), {
     headers: {
       "Content-Type": "application/pdf",
       "Content-Disposition": `attachment; filename="${filename}"`,
