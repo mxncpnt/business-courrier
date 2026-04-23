@@ -33,7 +33,7 @@ export async function submitLetterForm(
   const baseResult = baseSchema.safeParse(rawData);
   if (!baseResult.success) {
     return {
-      error: baseResult.error.errors.map((e) => e.message).join(", "),
+      error: baseResult.error.issues.map((e) => e.message).join(", "),
     };
   }
 
