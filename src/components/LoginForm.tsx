@@ -14,23 +14,29 @@ export default function LoginForm() {
     setLoading(true);
     setError("");
 
-    const supabase = createClient();
+    try {
+      const supabase = createClient();
 
-    const { error: authError } = await supabase.auth.signInWithOtp({
-      email,
-      options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
-      },
-    });
+      const { error: authError } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
 
-    setLoading(false);
+      if (authError) {
+        setError(`Erreur : ${authError.message}`);
+        setLoading(false);
+        return;
+      }
 
-    if (authError) {
-      setError("Impossible d'envoyer le lien. Vérifiez votre email et réessayez.");
-      return;
+      setSent(true);
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("Erreur de connexion au serveur. Réessayez plus tard.");
     }
 
-    setSent(true);
+    setLoading(false);
   }
 
   if (sent) {
