@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { renderConfirmationEmail } from "@/emails/ConfirmationEmail";
+import { renderConfirmationEmail } from "@/emails/confirmation-email";
 
 // ---------------------------------------------------------------------------
 // Initialisation Resend (lazy — évite le crash au build si la clé est absente)

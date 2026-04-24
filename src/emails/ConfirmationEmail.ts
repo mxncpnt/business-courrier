@@ -1,3 +1,2 @@
-// Ce fichier est intentionnellement vide.
-// Le module actif est ConfirmationEmail.tsx (résolu en priorité par TypeScript).
+// Fichier obsolète — remplacé par confirmation-email.ts
 export {};
