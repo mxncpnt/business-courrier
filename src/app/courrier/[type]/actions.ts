@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { createServiceClient } from "@/lib/supabase/server";
+import { createAuthClient } from "@/lib/supabase/server-auth";
 import { generateLetter } from "@/lib/claude";
 import { getLetterType } from "@/config/letter-types";
 
@@ -46,6 +47,16 @@ export async function submitLetterForm(
 
   const supabase = createServiceClient();
 
+  // Check if user is logged in (optional auth)
+  let userId: string | null = null;
+  try {
+    const authClient = await createAuthClient();
+    const { data: { user } } = await authClient.auth.getUser();
+    userId = user?.id ?? null;
+  } catch {
+    // Not logged in — that's fine, auth is optional
+  }
+
   // Insert letter as draft
   const { data: letter, error: insertError } = await supabase
     .from("letters")
@@ -54,6 +65,7 @@ export async function submitLetterForm(
       type: letterTypeSlug,
       form_data: rawData,
       status: "draft",
+      ...(userId ? { user_id: userId } : {}),
     })
     .select("id")
     .single();

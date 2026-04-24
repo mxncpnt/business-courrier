@@ -1,7 +1,17 @@
 import Link from "next/link";
 import { categories, letterTypes } from "@/config/letter-types";
+import { createAuthClient } from "@/lib/supabase/server-auth";
 
-export default function Home() {
+export default async function Home() {
+  let user = null;
+  try {
+    const supabase = await createAuthClient();
+    const { data } = await supabase.auth.getUser();
+    user = data.user;
+  } catch {
+    // Not logged in
+  }
+
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* Header */}
@@ -15,6 +25,21 @@ export default function Home() {
             <a href="#fonctionnement" className="hover:text-gray-900">
               Comment ça marche
             </a>
+            {user ? (
+              <Link
+                href="/dashboard"
+                className="px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Mes courriers
+              </Link>
+            ) : (
+              <Link
+                href="/connexion"
+                className="px-4 py-2 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                Se connecter
+              </Link>
+            )}
           </nav>
         </div>
       </header>
