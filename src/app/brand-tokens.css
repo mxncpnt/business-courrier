@@ -20,10 +20,10 @@
   --jc-success: #2F6B45;
   --jc-danger: #9C2A2A;
 
-  /* Typo */
-  --jc-font-display: "Newsreader", Georgia, serif;
-  --jc-font-body: "Inter", system-ui, sans-serif;
-  --jc-font-mono: "JetBrains Mono", monospace;
+  /* Typo — next/font injecte les familles via --font-* variables */
+  --jc-font-display: var(--font-newsreader), Georgia, serif;
+  --jc-font-body: var(--font-inter), system-ui, sans-serif;
+  --jc-font-mono: var(--font-jetbrains-mono), monospace;
 
   /* Forme */
   --jc-radius: 10px;
