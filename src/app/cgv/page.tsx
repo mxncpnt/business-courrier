@@ -1,37 +1,37 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Conditions Générales de Vente — Courrier IA",
+  title: "Conditions Générales de Vente — JusteCourrier",
 };
 
 export default function CGVPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-100">
+    <div className="min-h-screen bg-jc-bg">
+      <header className="bg-jc-bg-elev border-b border-jc-line">
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
           <Link
             href="/"
-            className="text-gray-500 hover:text-gray-700 transition-colors"
+            className="text-jc-ink-muted hover:text-jc-ink-soft transition-colors"
           >
             ← Accueil
           </Link>
-          <span className="text-xl font-bold text-gray-900">Courrier IA</span>
+          <span className="text-xl font-bold text-jc-ink">JusteCourrier</span>
         </div>
       </header>
 
       <main className="max-w-3xl mx-auto px-6 py-10">
-        <h1 className="text-2xl font-bold text-gray-900 mb-8">
+        <h1 className="text-2xl font-bold text-jc-ink mb-8 font-display">
           Conditions Générales de Vente
         </h1>
 
-        <div className="prose prose-gray max-w-none space-y-8 text-gray-700 text-[15px] leading-relaxed">
+        <div className="prose max-w-none space-y-8 text-jc-ink-soft text-[15px] leading-relaxed">
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               1. Objet
             </h2>
             <p>
               Les présentes Conditions Générales de Vente (CGV) régissent les
-              relations contractuelles entre l&apos;éditeur du site Courrier IA
+              relations contractuelles entre l&apos;éditeur du site JusteCourrier
               (ci-après « le Prestataire ») et toute personne physique effectuant
               un achat sur le site (ci-après « le Client »).
             </p>
@@ -42,17 +42,17 @@ export default function CGVPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               2. Description du service
             </h2>
             <p>
-              Courrier IA propose un service de génération de courriers
+              JusteCourrier propose un service de génération de courriers
               administratifs et juridiques personnalisés par intelligence
               artificielle. Le Client remplit un formulaire en ligne, un courrier
               est généré automatiquement, et après paiement, le Client accède au
               texte complet et peut le télécharger au format PDF.
             </p>
-            <p className="mt-2 font-medium text-gray-800">
+            <p className="mt-2 font-medium text-jc-ink">
               Les courriers générés sont produits à titre informatif et ne
               constituent pas un conseil juridique professionnel. Le Client est
               invité à consulter un professionnel du droit pour toute situation
@@ -61,7 +61,7 @@ export default function CGVPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               3. Prix
             </h2>
             <p>
@@ -77,7 +77,7 @@ export default function CGVPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               4. Modalités de paiement
             </h2>
             <p>
@@ -89,7 +89,7 @@ export default function CGVPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               5. Livraison
             </h2>
             <p>
@@ -102,7 +102,7 @@ export default function CGVPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               6. Droit de rétractation
             </h2>
             <p>
@@ -123,7 +123,7 @@ export default function CGVPage() {
               insatisfait sur simple demande par email à{" "}
               <a
                 href="mailto:maxence.pinta@gmail.com"
-                className="text-blue-600 hover:text-blue-700 underline"
+                className="text-jc-primary hover:text-jc-primary-hover underline"
               >
                 maxence.pinta@gmail.com
               </a>{" "}
@@ -133,7 +133,7 @@ export default function CGVPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               7. Responsabilité
             </h2>
             <p>
@@ -151,7 +151,7 @@ export default function CGVPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               8. Réclamations
             </h2>
             <p>
@@ -159,7 +159,7 @@ export default function CGVPage() {
               email à{" "}
               <a
                 href="mailto:maxence.pinta@gmail.com"
-                className="text-blue-600 hover:text-blue-700 underline"
+                className="text-jc-primary hover:text-jc-primary-hover underline"
               >
                 maxence.pinta@gmail.com
               </a>
@@ -179,7 +179,7 @@ export default function CGVPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               9. Propriété intellectuelle
             </h2>
             <p>
@@ -190,14 +190,14 @@ export default function CGVPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               10. Données personnelles
             </h2>
             <p>
               Le traitement des données personnelles est décrit dans notre{" "}
               <Link
                 href="/confidentialite"
-                className="text-blue-600 hover:text-blue-700 underline"
+                className="text-jc-primary hover:text-jc-primary-hover underline"
               >
                 politique de confidentialité
               </Link>
@@ -206,7 +206,7 @@ export default function CGVPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               11. Droit applicable et juridiction compétente
             </h2>
             <p>
@@ -216,7 +216,7 @@ export default function CGVPage() {
             </p>
           </section>
 
-          <p className="text-sm text-gray-400 mt-10">
+          <p className="text-sm text-jc-ink-muted mt-10">
             Dernière mise à jour : avril 2026
           </p>
         </div>

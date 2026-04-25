@@ -22,14 +22,14 @@ export default function LetterForm({ letterType }: LetterFormProps) {
   return (
     <form action={formAction} className="space-y-6">
       {state?.error && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+        <div className="p-4 bg-red-50 border border-red-200 rounded-jc-sm text-red-700 text-sm">
           {state.error}
         </div>
       )}
 
       {/* Common fields */}
       <fieldset className="space-y-4">
-        <legend className="text-lg font-semibold text-gray-900 mb-2">
+        <legend className="text-lg font-semibold text-jc-ink mb-2">
           Vos informations
         </legend>
         {commonFields.map((field) => (
@@ -39,7 +39,7 @@ export default function LetterForm({ letterType }: LetterFormProps) {
 
       {/* Specific fields */}
       <fieldset className="space-y-4">
-        <legend className="text-lg font-semibold text-gray-900 mb-2">
+        <legend className="text-lg font-semibold text-jc-ink mb-2">
           Détails du courrier
         </legend>
         {letterType.fields.map((field) => (
@@ -50,7 +50,7 @@ export default function LetterForm({ letterType }: LetterFormProps) {
       <button
         type="submit"
         disabled={isPending}
-        className="w-full py-3 px-6 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full py-3 px-6 bg-jc-primary text-white font-medium rounded-jc hover:bg-jc-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isPending ? (
           <span className="flex items-center justify-center gap-2">
@@ -89,13 +89,13 @@ function FormField({
   field: (typeof commonFields)[number];
 }) {
   const baseClasses =
-    "w-full px-4 py-2.5 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors";
+    "w-full px-4 py-2.5 border border-jc-line-strong rounded-jc-sm text-jc-ink placeholder-jc-ink-muted focus:ring-2 focus:ring-jc-primary focus:border-jc-primary outline-none transition-colors";
 
   return (
     <div>
       <label
         htmlFor={field.name}
-        className="block text-sm font-medium text-gray-700 mb-1"
+        className="block text-sm font-medium text-jc-ink-soft mb-1"
       >
         {field.label}
         {field.required && <span className="text-red-500 ml-1">*</span>}

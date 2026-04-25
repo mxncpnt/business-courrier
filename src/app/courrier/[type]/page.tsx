@@ -18,7 +18,7 @@ export async function generateMetadata({
   if (!letterType) return {};
 
   return {
-    title: `${letterType.title} — Courrier IA`,
+    title: `${letterType.title} — JusteCourrier`,
     description: letterType.description,
   };
 }
@@ -36,17 +36,17 @@ export default async function LetterFormPage({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-jc-bg">
       {/* Header */}
-      <header className="bg-white border-b border-gray-100">
+      <header className="bg-jc-bg-elev border-b border-jc-line">
         <div className="max-w-3xl mx-auto px-6 py-4 flex items-center gap-4">
           <Link
             href="/"
-            className="text-gray-500 hover:text-gray-700 transition-colors"
+            className="text-jc-ink-muted hover:text-jc-ink-soft transition-colors"
           >
             ← Retour
           </Link>
-          <span className="text-xl font-bold text-gray-900">Courrier IA</span>
+          <span className="text-xl font-bold text-jc-ink">JusteCourrier</span>
         </div>
       </header>
 
@@ -55,18 +55,18 @@ export default async function LetterFormPage({
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
             <span className="text-3xl">{letterType.icon}</span>
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-2xl font-bold text-jc-ink font-display">
               {letterType.title}
             </h1>
           </div>
-          <p className="text-gray-600">{letterType.description}</p>
-          <p className="mt-2 text-sm text-blue-600 font-medium">
+          <p className="text-jc-ink-soft">{letterType.description}</p>
+          <p className="mt-2 text-sm text-jc-accent font-medium">
             {(letterType.priceCents / 100).toFixed(2)} € — PDF personnalisé
           </p>
         </div>
 
         {/* Form */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6 sm:p-8">
+        <div className="bg-jc-bg-elev rounded-jc-lg border border-jc-line p-6 sm:p-8">
           <LetterForm letterType={letterType} />
         </div>
       </main>

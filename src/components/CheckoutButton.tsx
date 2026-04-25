@@ -36,7 +36,7 @@ export default function CheckoutButton({ letterId }: CheckoutButtonProps) {
     <button
       onClick={handleCheckout}
       disabled={loading}
-      className="px-8 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      className="px-8 py-3 bg-jc-primary text-white font-medium rounded-jc hover:bg-jc-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
     >
       {loading ? "Redirection vers le paiement…" : "Télécharger le PDF — 4,90 €"}
     </button>

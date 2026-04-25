@@ -3,7 +3,7 @@ import { createServiceClient } from "@/lib/supabase/server";
 import LetterPreview from "@/components/LetterPreview";
 
 export const metadata = {
-  title: "Paiement réussi — Courrier IA",
+  title: "Paiement réussi — JusteCourrier",
 };
 
 export default async function SuccessPage({
@@ -25,21 +25,21 @@ export default async function SuccessPage({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-100">
+    <div className="min-h-screen bg-jc-bg">
+      <header className="bg-jc-bg-elev border-b border-jc-line">
         <div className="max-w-4xl mx-auto px-6 py-4">
-          <span className="text-xl font-bold text-gray-900">Courrier IA</span>
+          <span className="text-xl font-bold text-jc-ink">JusteCourrier</span>
         </div>
       </header>
 
       <main className="max-w-3xl mx-auto px-6 py-10">
-        <div className="bg-white rounded-xl border border-gray-200 p-8 text-center mb-8">
+        <div className="bg-jc-bg-elev rounded-jc-lg border border-jc-line p-8 text-center mb-8">
           <div className="text-5xl mb-4">✅</div>
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-2xl font-bold text-jc-ink font-display">
             Paiement réussi !
           </h1>
-          <p className="mt-2 text-gray-600">
-            Votre courrier complet est disponible ci-dessous.
+          <p className="mt-2 text-jc-ink-soft">
+            Ton courrier complet est disponible ci-dessous.
           </p>
         </div>
 
@@ -51,14 +51,14 @@ export default async function SuccessPage({
           {letter_id && (
             <a
               href={`/api/download/${letter_id}`}
-              className="inline-block px-8 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+              className="inline-block px-8 py-3 bg-jc-primary text-white font-medium rounded-jc hover:bg-jc-primary-hover transition-colors"
             >
               Télécharger le PDF
             </a>
           )}
           <Link
             href="/"
-            className="text-blue-600 hover:text-blue-700 font-medium"
+            className="text-jc-primary hover:text-jc-primary-hover font-medium"
           >
             ← Générer un autre courrier
           </Link>

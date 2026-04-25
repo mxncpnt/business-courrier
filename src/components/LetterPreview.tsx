@@ -12,9 +12,9 @@ export default function LetterPreview({ text, isPaid }: LetterPreviewProps) {
   const visibleCount = isPaid ? lines.length : Math.ceil(lines.length * 0.4);
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+    <div className="bg-jc-bg-elev rounded-jc-lg border border-jc-line shadow-sm overflow-hidden">
       {/* Paper-like container */}
-      <div className="p-8 sm:p-12 font-serif text-gray-800 leading-relaxed relative">
+      <div className="p-8 sm:p-12 font-display text-jc-ink leading-relaxed relative">
         {/* Visible portion */}
         <div className="whitespace-pre-wrap">
           {lines.slice(0, visibleCount).join("\n")}

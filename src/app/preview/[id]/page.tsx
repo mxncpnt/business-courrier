@@ -5,7 +5,7 @@ import LetterPreview from "@/components/LetterPreview";
 import CheckoutButton from "@/components/CheckoutButton";
 
 export const metadata = {
-  title: "Prévisualisation — Courrier IA",
+  title: "Prévisualisation — JusteCourrier",
 };
 
 export default async function PreviewPage({
@@ -29,29 +29,29 @@ export default async function PreviewPage({
   const isPaid = letter.status === "paid" || letter.status === "delivered";
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-jc-bg">
       {/* Header */}
-      <header className="bg-white border-b border-gray-100">
+      <header className="bg-jc-bg-elev border-b border-jc-line">
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
           <Link
             href="/"
-            className="text-gray-500 hover:text-gray-700 transition-colors"
+            className="text-jc-ink-muted hover:text-jc-ink-soft transition-colors"
           >
             ← Accueil
           </Link>
-          <span className="text-xl font-bold text-gray-900">Courrier IA</span>
+          <span className="text-xl font-bold text-jc-ink">JusteCourrier</span>
         </div>
       </header>
 
       <main className="max-w-3xl mx-auto px-6 py-10">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">
-            Votre courrier est prêt
+          <h1 className="text-2xl font-bold text-jc-ink font-display">
+            Ton courrier est prêt
           </h1>
-          <p className="mt-1 text-gray-600">
+          <p className="mt-1 text-jc-ink-soft">
             {isPaid
-              ? "Votre courrier complet est affiché ci-dessous."
-              : "Aperçu de votre courrier. Débloquez le texte complet et le PDF pour 4,90 €."}
+              ? "Ton courrier complet est affiché ci-dessous."
+              : "Aperçu de ton courrier. Débloque le texte complet et le PDF pour 4,90 €."}
           </p>
         </div>
 
@@ -63,18 +63,18 @@ export default async function PreviewPage({
           <div className="mt-6 text-center">
             <a
               href={`/api/download/${letter.id}`}
-              className="inline-block px-8 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+              className="inline-block px-8 py-3 bg-jc-primary text-white font-medium rounded-jc hover:bg-jc-primary-hover transition-colors"
             >
               Télécharger le PDF
             </a>
           </div>
         ) : (
-          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6 text-center">
-            <p className="text-gray-700 mb-4">
+          <div className="mt-6 bg-jc-bg-elev rounded-jc-lg border border-jc-line p-6 text-center">
+            <p className="text-jc-ink-soft mb-4">
               Pour obtenir le texte complet et le télécharger en PDF :
             </p>
             <CheckoutButton letterId={letter.id} />
-            <p className="mt-3 text-xs text-gray-400">
+            <p className="mt-3 text-xs text-jc-ink-muted">
               Paiement sécurisé par Stripe. Satisfait ou remboursé.
             </p>
           </div>

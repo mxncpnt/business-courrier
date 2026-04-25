@@ -1,32 +1,32 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Politique de confidentialité — Courrier IA",
+  title: "Politique de confidentialité — JusteCourrier",
 };
 
 export default function ConfidentialitePage() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-100">
+    <div className="min-h-screen bg-jc-bg">
+      <header className="bg-jc-bg-elev border-b border-jc-line">
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
           <Link
             href="/"
-            className="text-gray-500 hover:text-gray-700 transition-colors"
+            className="text-jc-ink-muted hover:text-jc-ink-soft transition-colors"
           >
             ← Accueil
           </Link>
-          <span className="text-xl font-bold text-gray-900">Courrier IA</span>
+          <span className="text-xl font-bold text-jc-ink">JusteCourrier</span>
         </div>
       </header>
 
       <main className="max-w-3xl mx-auto px-6 py-10">
-        <h1 className="text-2xl font-bold text-gray-900 mb-8">
+        <h1 className="text-2xl font-bold text-jc-ink mb-8 font-display">
           Politique de confidentialité
         </h1>
 
-        <div className="prose prose-gray max-w-none space-y-8 text-gray-700 text-[15px] leading-relaxed">
+        <div className="prose max-w-none space-y-8 text-jc-ink-soft text-[15px] leading-relaxed">
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               1. Responsable du traitement
             </h2>
             <p>
@@ -39,11 +39,11 @@ export default function ConfidentialitePage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               2. Données collectées
             </h2>
             <p>
-              Dans le cadre de l&apos;utilisation du service Courrier IA, nous
+              Dans le cadre de l&apos;utilisation du service JusteCourrier, nous
               collectons les données suivantes :
             </p>
             <ul className="list-disc pl-6 space-y-2 mt-3">
@@ -68,7 +68,7 @@ export default function ConfidentialitePage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               3. Finalités du traitement
             </h2>
             <p>Vos données sont collectées pour les finalités suivantes :</p>
@@ -97,7 +97,7 @@ export default function ConfidentialitePage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               4. Sous-traitants et transferts de données
             </h2>
             <p>
@@ -135,7 +135,7 @@ export default function ConfidentialitePage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               5. Durée de conservation
             </h2>
             <ul className="list-disc pl-6 space-y-2">
@@ -155,7 +155,7 @@ export default function ConfidentialitePage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               6. Vos droits
             </h2>
             <p>
@@ -194,7 +194,7 @@ export default function ConfidentialitePage() {
               Pour exercer ces droits, envoyez un email à{" "}
               <a
                 href="mailto:maxence.pinta@gmail.com"
-                className="text-blue-600 hover:text-blue-700 underline"
+                className="text-jc-primary hover:text-jc-primary-hover underline"
               >
                 maxence.pinta@gmail.com
               </a>{" "}
@@ -209,7 +209,7 @@ export default function ConfidentialitePage() {
                 href="https://www.cnil.fr"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-700 underline"
+                className="text-jc-primary hover:text-jc-primary-hover underline"
               >
                 www.cnil.fr
               </a>
@@ -218,11 +218,11 @@ export default function ConfidentialitePage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               7. Cookies
             </h2>
             <p>
-              Le site Courrier IA utilise uniquement des cookies strictement
+              Le site JusteCourrier utilise uniquement des cookies strictement
               nécessaires au fonctionnement du service (cookies de session, état
               du paiement). Aucun cookie publicitaire ou de suivi n&apos;est
               utilisé.
@@ -235,7 +235,7 @@ export default function ConfidentialitePage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               8. Sécurité
             </h2>
             <p>
@@ -248,7 +248,7 @@ export default function ConfidentialitePage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">
+            <h2 className="text-lg font-semibold text-jc-ink mb-3">
               9. Modifications
             </h2>
             <p>
@@ -259,7 +259,7 @@ export default function ConfidentialitePage() {
             </p>
           </section>
 
-          <p className="text-sm text-gray-400 mt-10">
+          <p className="text-sm text-jc-ink-muted mt-10">
             Dernière mise à jour : avril 2026
           </p>
         </div>
