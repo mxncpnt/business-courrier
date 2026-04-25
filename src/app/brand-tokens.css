@@ -1,0 +1,32 @@
+/* brand-tokens.css — JusteCourrier v1.0 */
+:root {
+  /* Couleurs primaires */
+  --jc-ink: #0F2235;
+  --jc-primary: #13314F;
+  --jc-primary-hover: #1B4670;
+  --jc-accent: #C9722D;
+  --jc-accent-soft: #F4E4D1;
+
+  /* Neutres papier */
+  --jc-bg: #FAF8F4;
+  --jc-bg-elev: #FFFFFF;
+  --jc-surface: #F2EFE8;
+  --jc-line: #E4DFD4;
+  --jc-line-strong: #C8C0AF;
+  --jc-ink-soft: #34465A;
+  --jc-ink-muted: #6B7785;
+
+  /* Système */
+  --jc-success: #2F6B45;
+  --jc-danger: #9C2A2A;
+
+  /* Typo */
+  --jc-font-display: "Newsreader", Georgia, serif;
+  --jc-font-body: "Inter", system-ui, sans-serif;
+  --jc-font-mono: "JetBrains Mono", monospace;
+
+  /* Forme */
+  --jc-radius: 10px;
+  --jc-radius-sm: 6px;
+  --jc-radius-lg: 16px;
+}
