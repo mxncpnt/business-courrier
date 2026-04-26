@@ -19,7 +19,7 @@ const CAT_ICONS: Record<string, string> = {
 };
 
 export const metadata = {
-  title: "Paiement confirmé — JusteCourrier",
+  title: "Paiement confirmé",
 };
 
 export default async function SuccessPage({

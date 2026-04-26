@@ -2,7 +2,9 @@ import Link from "next/link";
 import Logo from "@/components/Logo";
 
 export const metadata = {
-  title: "Conditions Générales de Vente — JusteCourrier",
+  title: "Conditions Générales de Vente",
+  description:
+    "Conditions générales de vente du service JusteCourrier. Prix, livraison, droit de rétractation, responsabilité.",
 };
 
 export default function CGVPage() {

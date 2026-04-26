@@ -2,7 +2,9 @@ import Link from "next/link";
 import Logo from "@/components/Logo";
 
 export const metadata = {
-  title: "Politique de confidentialité — JusteCourrier",
+  title: "Politique de confidentialité",
+  description:
+    "Politique de confidentialité de JusteCourrier. Données collectées, finalités, droits des utilisateurs, cookies.",
 };
 
 export default function ConfidentialitePage() {

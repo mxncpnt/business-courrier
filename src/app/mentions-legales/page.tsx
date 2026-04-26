@@ -2,7 +2,9 @@ import Link from "next/link";
 import Logo from "@/components/Logo";
 
 export const metadata = {
-  title: "Mentions légales — JusteCourrier",
+  title: "Mentions légales",
+  description:
+    "Mentions légales du site justecourrier.fr. Éditeur, hébergeur, propriété intellectuelle.",
 };
 
 export default function MentionsLegalesPage() {

@@ -25,10 +25,38 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const APP_URL = "https://justecourrier.fr";
+
 export const metadata: Metadata = {
-  title: "JusteCourrier — Ton courrier administratif, simple et juste",
+  title: {
+    default: "JusteCourrier — Ton courrier administratif, simple et juste",
+    template: "%s — JusteCourrier",
+  },
   description:
     "Résiliation, mise en demeure, réclamation, contestation… Remplis un formulaire, notre IA rédige un courrier professionnel adapté à ta situation. PDF prêt à envoyer, 4,90 €.",
+  metadataBase: new URL(APP_URL),
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    url: APP_URL,
+    siteName: "JusteCourrier",
+    title: "JusteCourrier — Ton courrier administratif, simple et juste",
+    description:
+      "Résiliation, mise en demeure, réclamation, contestation… Remplis un formulaire, notre IA rédige un courrier professionnel adapté à ta situation. PDF prêt à envoyer, 4,90 €.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "JusteCourrier — Ton courrier administratif, simple et juste",
+    description:
+      "Résiliation, mise en demeure, réclamation, contestation… Remplis un formulaire, notre IA rédige un courrier professionnel adapté à ta situation. PDF prêt à envoyer, 4,90 €.",
+  },
+  alternates: {
+    canonical: APP_URL,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

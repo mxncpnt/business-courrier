@@ -26,8 +26,8 @@ export async function generateMetadata({
   if (!letterType) return {};
 
   return {
-    title: `${letterType.title} — JusteCourrier`,
-    description: letterType.description,
+    title: letterType.title,
+    description: `${letterType.description} Courrier professionnel rédigé par IA, prêt à envoyer. 4,90 €.`,
   };
 }
 

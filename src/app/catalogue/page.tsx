@@ -5,9 +5,9 @@ import Logo from "@/components/Logo";
 import { IconArrow } from "@/components/Icons";
 
 export const metadata = {
-  title: "Catalogue — JusteCourrier",
+  title: "Catalogue des courriers",
   description:
-    "10 modèles de courriers administratifs, un seul prix. Résiliation, contestation, réclamation, mise en demeure, demande de remboursement.",
+    "10 modèles de courriers administratifs personnalisés par IA. Résiliation, contestation, réclamation, mise en demeure, demande de remboursement. 4,90 € le courrier.",
 };
 
 // Icônes catalogue par slug

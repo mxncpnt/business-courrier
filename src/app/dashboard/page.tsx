@@ -35,7 +35,7 @@ const STATUS_BADGES: Record<string, { label: string; classes: string }> = {
 };
 
 export const metadata = {
-  title: "Mes courriers — JusteCourrier",
+  title: "Mes courriers",
 };
 
 export default async function DashboardPage() {

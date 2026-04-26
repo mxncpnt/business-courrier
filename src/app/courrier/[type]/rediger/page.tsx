@@ -20,7 +20,7 @@ export async function generateMetadata({
   if (!letterType) return {};
 
   return {
-    title: `Rédiger — ${letterType.title} — JusteCourrier`,
+    title: `Rédiger — ${letterType.title}`,
     description: `Formulaire de rédaction : ${letterType.description}`,
   };
 }

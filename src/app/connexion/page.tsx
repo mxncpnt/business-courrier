@@ -4,7 +4,9 @@ import LoginForm from "@/components/LoginForm";
 import { IconShield } from "@/components/Icons";
 
 export const metadata = {
-  title: "Connexion — JusteCourrier",
+  title: "Connexion",
+  description:
+    "Connectez-vous à votre espace JusteCourrier pour retrouver vos courriers et télécharger vos PDF.",
 };
 
 export default async function ConnexionPage({

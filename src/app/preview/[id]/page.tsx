@@ -9,7 +9,7 @@ import Logo from "@/components/Logo";
 import { IconCheck } from "@/components/Icons";
 
 export const metadata = {
-  title: "Aperçu — JusteCourrier",
+  title: "Aperçu du courrier",
 };
 
 export default async function PreviewPage({
