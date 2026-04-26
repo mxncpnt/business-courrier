@@ -2,6 +2,15 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
+  // Si un paramètre `code` arrive sur une page autre que /auth/callback,
+  // rediriger vers /auth/callback pour échanger le code contre une session.
+  const code = request.nextUrl.searchParams.get("code");
+  if (code && !request.nextUrl.pathname.startsWith("/auth/callback")) {
+    const callbackUrl = new URL("/auth/callback", request.url);
+    callbackUrl.searchParams.set("code", code);
+    return NextResponse.redirect(callbackUrl);
+  }
+
   let supabaseResponse = NextResponse.next({ request });
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
