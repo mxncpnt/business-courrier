@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { letterTypes } from "@/config/letter-types";
+import { guides } from "@/config/guides";
 
 const BASE = "https://justecourrier.fr";
 
@@ -19,6 +20,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
+    },
+    {
+      url: `${BASE}/guides`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.8,
     },
     {
       url: `${BASE}/connexion`,
@@ -54,5 +61,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...letterPages];
+  // Pages guides
+  const guidePages: MetadataRoute.Sitemap = guides.map((g) => ({
+    url: `${BASE}/guides/${g.slug}`,
+    lastModified: new Date(g.updatedAt),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...letterPages, ...guidePages];
 }

@@ -54,8 +54,49 @@ export default async function ProductPage({
     // Not logged in
   }
 
+  // JSON-LD structured data
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: letterType.title,
+    description: letterType.description,
+    url: `https://justecourrier.fr/courrier/${letterType.slug}`,
+    brand: { "@type": "Brand", name: "JusteCourrier" },
+    offers: {
+      "@type": "Offer",
+      price: "4.90",
+      priceCurrency: "EUR",
+      availability: "https://schema.org/InStock",
+      url: `https://justecourrier.fr/courrier/${letterType.slug}/rediger`,
+      seller: {
+        "@type": "Organization",
+        name: "JusteCourrier",
+        url: "https://justecourrier.fr",
+      },
+    },
+    category: categoryLabel,
+  };
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Accueil", item: "https://justecourrier.fr" },
+      { "@type": "ListItem", position: 2, name: categoryLabel, item: "https://justecourrier.fr/catalogue" },
+      { "@type": "ListItem", position: 3, name: letterType.title, item: `https://justecourrier.fr/courrier/${letterType.slug}` },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-jc-bg">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       {/* ─── Nav ─── */}
       <header className="flex items-center justify-between border-b border-jc-line bg-jc-bg px-8 py-[18px]">
         <Link href="/" className="no-underline">
@@ -70,7 +111,7 @@ export default async function ProductPage({
             Catalogue
           </Link>
           <Link
-            href="#"
+            href="/guides"
             className="text-jc-ink-soft text-sm font-medium no-underline hover:text-jc-ink transition-colors"
           >
             Guides
@@ -278,7 +319,7 @@ export default async function ProductPage({
                   Catalogue
                 </Link>
                 <Link
-                  href="#"
+                  href="/guides"
                   className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors"
                 >
                   Guides juridiques

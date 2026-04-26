@@ -1,0 +1,43 @@
+# JusteCourrier
+
+> Service en ligne de rédaction de courriers administratifs et juridiques par intelligence artificielle.
+
+## Ce que fait JusteCourrier
+
+JusteCourrier permet aux particuliers de générer des courriers professionnels adaptés à leur situation personnelle. L'utilisateur remplit un formulaire avec les détails de sa situation, et l'IA rédige un courrier conforme aux normes françaises (mise en page AFNOR NF Z 11-001), avec les références juridiques appropriées.
+
+Le courrier est livré en PDF prêt à imprimer ou à envoyer par courrier recommandé.
+
+## Types de courriers disponibles
+
+- Résiliation d'abonnement (télécom, salle de sport, assurance, presse)
+- Résiliation de bail locatif (congé locataire avec préavis)
+- Contestation d'amende (stationnement, excès de vitesse, feu rouge)
+- Contestation de facture (prélèvement abusif, double facturation)
+- Contestation de décision administrative (CAF, France Travail, préfecture)
+- Réclamation service client (retard livraison, produit défectueux)
+- Réclamation administration (CPAM, impôts, mairie)
+- Mise en demeure de payer (loyer, facture, prêt impayé)
+- Mise en demeure d'exécuter (travaux, livraison, prestation)
+- Demande de remboursement (rétractation, trop-perçu, service non rendu)
+
+## Tarification
+
+Prix unique : 4,90 EUR par courrier. Pas d'abonnement, pas de frais cachés.
+
+## Public cible
+
+Particuliers résidant en France ayant besoin d'envoyer un courrier administratif ou juridique formel.
+
+## Informations techniques
+
+- URL : https://justecourrier.fr
+- Catalogue : https://justecourrier.fr/catalogue
+- Guides pratiques : https://justecourrier.fr/guides
+- Langue : Français
+- Zone : France métropolitaine et DOM-TOM
+- Contact : contact@justecourrier.fr
+
+## Avertissement
+
+JusteCourrier n'est pas un cabinet d'avocats et ne fournit pas de conseil juridique. Pour les litiges complexes, il est recommandé de consulter un professionnel du droit.

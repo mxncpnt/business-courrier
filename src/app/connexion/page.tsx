@@ -32,7 +32,7 @@ export default async function ConnexionPage({
             Catalogue
           </Link>
           <Link
-            href="#"
+            href="/guides"
             className="text-jc-ink-soft text-sm font-medium no-underline hover:text-jc-ink transition-colors"
           >
             Guides
@@ -109,7 +109,7 @@ export default async function ConnexionPage({
               </h5>
               <div className="flex flex-col gap-1">
                 <Link href="/catalogue" className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors">Catalogue</Link>
-                <Link href="#" className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors">Guides juridiques</Link>
+                <Link href="/guides" className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors">Guides juridiques</Link>
                 <Link href="/catalogue" className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors">Tarifs</Link>
               </div>
             </div>

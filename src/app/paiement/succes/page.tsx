@@ -68,7 +68,7 @@ export default async function SuccessPage({
             Catalogue
           </Link>
           <Link
-            href="#"
+            href="/guides"
             className="text-jc-ink-soft text-sm font-medium no-underline hover:text-jc-ink transition-colors"
           >
             Guides
@@ -246,7 +246,7 @@ export default async function SuccessPage({
                   Catalogue
                 </Link>
                 <Link
-                  href="#"
+                  href="/guides"
                   className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors"
                 >
                   Guides juridiques
