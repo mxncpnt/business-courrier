@@ -47,12 +47,12 @@ export default async function Home() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-7">
-          <a
-            href="#catalogue"
+          <Link
+            href="/catalogue"
             className="text-jc-ink-soft text-sm font-medium no-underline hover:text-jc-ink transition-colors"
           >
             Catalogue
-          </a>
+          </Link>
           <Link
             href="#"
             className="text-jc-ink-soft text-sm font-medium no-underline hover:text-jc-ink transition-colors"
@@ -84,7 +84,7 @@ export default async function Home() {
                 Se connecter
               </Link>
               <Link
-                href="#catalogue"
+                href="/catalogue"
                 className="inline-flex items-center gap-2 px-[14px] py-2 text-sm font-medium bg-jc-primary text-white rounded-jc-sm hover:bg-jc-primary-hover transition-colors no-underline"
               >
                 Commencer un courrier
@@ -113,12 +113,12 @@ export default async function Home() {
             </p>
 
             <div className="flex gap-3 flex-wrap">
-              <a
-                href="#catalogue"
+              <Link
+                href="/catalogue"
                 className="inline-flex items-center gap-2 px-6 py-3.5 bg-jc-primary text-white font-medium rounded-jc hover:bg-jc-primary-hover transition-colors text-base no-underline"
               >
                 Choisir un courrier — 4,90 € <IconArrow />
-              </a>
+              </Link>
               <a
                 href="#fonctionnement"
                 className="inline-flex items-center gap-2 px-6 py-3.5 border border-jc-line-strong text-jc-ink font-medium rounded-jc hover:bg-jc-surface transition-colors text-base no-underline"
@@ -208,7 +208,7 @@ export default async function Home() {
               </h2>
             </div>
             <Link
-              href="#catalogue"
+              href="/catalogue"
               className="inline-flex items-center gap-2 px-5 py-3 border border-jc-line-strong text-jc-ink font-medium rounded-jc hover:bg-jc-surface transition-colors text-sm no-underline"
             >
               Voir le catalogue complet <IconArrow />
@@ -286,12 +286,12 @@ export default async function Home() {
           <p className="text-[17px] text-jc-ink-soft mb-7 max-md:text-[15px]">
             4,90 € le courrier. Pas d&apos;abonnement, pas de surprise.
           </p>
-          <a
-            href="#catalogue"
+          <Link
+            href="/catalogue"
             className="inline-flex items-center gap-2 px-6 py-3.5 bg-jc-primary text-white font-medium rounded-jc hover:bg-jc-primary-hover transition-colors text-base no-underline"
           >
             Commencer maintenant <IconArrow />
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -315,24 +315,24 @@ export default async function Home() {
                 Service
               </h5>
               <div className="flex flex-col gap-1">
-                <a
-                  href="#catalogue"
+                <Link
+                  href="/catalogue"
                   className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors"
                 >
                   Catalogue
-                </a>
+                </Link>
                 <Link
                   href="#"
                   className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors"
                 >
                   Guides juridiques
                 </Link>
-                <a
-                  href="#catalogue"
+                <Link
+                  href="/catalogue"
                   className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors"
                 >
                   Tarifs
-                </a>
+                </Link>
               </div>
             </div>
 

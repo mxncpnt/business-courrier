@@ -16,15 +16,17 @@ export interface LetterType {
   description: string;
   icon: string;
   priceCents: number;
+  popular?: boolean;
+  duration: string;
   fields: FormField[];
 }
 
 export const categories = [
-  { slug: "resiliation", label: "Résiliation", icon: "✂️" },
-  { slug: "contestation", label: "Contestation", icon: "⚖️" },
-  { slug: "reclamation", label: "Réclamation", icon: "📢" },
-  { slug: "mise-en-demeure", label: "Mise en demeure", icon: "⚠️" },
-  { slug: "demande", label: "Demande", icon: "📋" },
+  { slug: "resiliation", label: "Résiliation", icon: "✂️", description: "Mettre fin à un contrat ou un abonnement." },
+  { slug: "contestation", label: "Contestation", icon: "⚖️", description: "Faire valoir vos droits face à une décision." },
+  { slug: "reclamation", label: "Réclamation", icon: "📢", description: "Obtenir réparation après un service défaillant." },
+  { slug: "mise-en-demeure", label: "Mise en demeure", icon: "⚠️", description: "Exiger un paiement ou une exécution sous peine de poursuites." },
+  { slug: "demande", label: "Demande", icon: "📋", description: "Solliciter un remboursement ou un droit." },
 ] as const;
 
 // Champs communs à tous les courriers
@@ -45,6 +47,8 @@ export const letterTypes: LetterType[] = [
     description: "Résilier un contrat télécom, salle de sport, assurance, presse, etc.",
     icon: "✂️",
     priceCents: 490,
+    popular: true,
+    duration: "2 min",
     fields: [
       { name: "provider", label: "Nom de l'opérateur / entreprise", type: "text", placeholder: "Orange, Basic-Fit, MAIF...", required: true },
       { name: "contract_number", label: "Numéro de contrat ou client", type: "text", placeholder: "CLI-123456", required: false },
@@ -60,6 +64,7 @@ export const letterTypes: LetterType[] = [
     description: "Donner congé à votre propriétaire (préavis locataire).",
     icon: "🏠",
     priceCents: 490,
+    duration: "3 min",
     fields: [
       { name: "landlord_name", label: "Nom du propriétaire / agence", type: "text", placeholder: "M. Martin / Agence Immobilière XYZ", required: true },
       { name: "property_address", label: "Adresse du logement", type: "textarea", placeholder: "Adresse complète du bien loué", required: true },
@@ -78,6 +83,8 @@ export const letterTypes: LetterType[] = [
     description: "Contester une amende de stationnement, excès de vitesse, etc.",
     icon: "🚗",
     priceCents: 490,
+    popular: true,
+    duration: "3 min",
     fields: [
       { name: "fine_number", label: "Numéro de l'avis de contravention", type: "text", placeholder: "N° figurant sur l'avis", required: true },
       { name: "fine_date", label: "Date de l'infraction", type: "date", required: true },
@@ -93,6 +100,7 @@ export const letterTypes: LetterType[] = [
     description: "Contester un prélèvement abusif ou une facture injustifiée.",
     icon: "💳",
     priceCents: 490,
+    duration: "2 min",
     fields: [
       { name: "company", label: "Entreprise concernée", type: "text", placeholder: "EDF, SFR, Amazon...", required: true },
       { name: "invoice_number", label: "Numéro de facture", type: "text", placeholder: "FA-2024-001234", required: false },
@@ -108,6 +116,7 @@ export const letterTypes: LetterType[] = [
     description: "Contester une décision de la CAF, Pôle emploi, préfecture, etc.",
     icon: "🏛️",
     priceCents: 490,
+    duration: "4 min",
     fields: [
       { name: "administration", label: "Administration concernée", type: "text", placeholder: "CAF, France Travail, Préfecture...", required: true },
       { name: "decision_date", label: "Date de la décision", type: "date", required: true },
@@ -125,6 +134,7 @@ export const letterTypes: LetterType[] = [
     description: "Réclamer suite à un retard de livraison, produit défectueux, etc.",
     icon: "📦",
     priceCents: 490,
+    duration: "2 min",
     fields: [
       { name: "company", label: "Entreprise concernée", type: "text", placeholder: "Amazon, FNAC, Cdiscount...", required: true },
       { name: "order_number", label: "Numéro de commande", type: "text", placeholder: "CMD-123456", required: false },
@@ -141,6 +151,7 @@ export const letterTypes: LetterType[] = [
     description: "Réclamer auprès de la CAF, impôts, CPAM, mairie, etc.",
     icon: "🏛️",
     priceCents: 490,
+    duration: "3 min",
     fields: [
       { name: "administration", label: "Administration concernée", type: "text", placeholder: "CAF, CPAM, Service des impôts...", required: true },
       { name: "dossier_number", label: "Numéro de dossier / allocataire", type: "text", placeholder: "N° de dossier", required: false },
@@ -157,6 +168,7 @@ export const letterTypes: LetterType[] = [
     description: "Exiger le paiement d'une somme due (loyer, facture, prêt).",
     icon: "💰",
     priceCents: 490,
+    duration: "3 min",
     fields: [
       { name: "debt_nature", label: "Nature de la dette", type: "select", required: true, options: ["Loyer impayé", "Facture impayée", "Prêt non remboursé", "Caution non restituée", "Autre"] },
       { name: "amount_due", label: "Montant dû (€)", type: "text", placeholder: "1 500,00", required: true },
@@ -172,6 +184,7 @@ export const letterTypes: LetterType[] = [
     description: "Exiger l'exécution d'un engagement (travaux, livraison, prestation).",
     icon: "🔧",
     priceCents: 490,
+    duration: "3 min",
     fields: [
       { name: "obligation_type", label: "Type d'obligation", type: "select", required: true, options: ["Travaux non réalisés", "Livraison non effectuée", "Prestation non fournie", "Engagement contractuel non tenu"] },
       { name: "contract_date", label: "Date de l'engagement / contrat", type: "date", required: true },
@@ -188,6 +201,7 @@ export const letterTypes: LetterType[] = [
     description: "Demander le remboursement d'un achat, d'un trop-perçu, etc.",
     icon: "💶",
     priceCents: 490,
+    duration: "2 min",
     fields: [
       { name: "company", label: "Entreprise / organisme", type: "text", placeholder: "Nom de l'entreprise ou administration", required: true },
       { name: "purchase_date", label: "Date d'achat / paiement", type: "date", required: true },
