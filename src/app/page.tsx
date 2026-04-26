@@ -2,6 +2,7 @@ import Link from "next/link";
 import { categories, letterTypes } from "@/config/letter-types";
 import { createAuthClient } from "@/lib/supabase/server-auth";
 import HeroLetter from "@/components/HeroLetter";
+import Logo from "@/components/Logo";
 import {
   IconArrow,
   IconCheck,
@@ -41,11 +42,8 @@ export default async function Home() {
     <div className="min-h-screen bg-jc-bg">
       {/* ─── Nav ─── */}
       <header className="flex items-center justify-between border-b border-jc-line bg-jc-bg px-8 py-[18px]">
-        <Link
-          href="/"
-          className="text-xl font-bold text-jc-ink font-display tracking-tight no-underline"
-        >
-          JusteCourrier
+        <Link href="/" className="no-underline">
+          <Logo size={22} />
         </Link>
 
         <nav className="hidden md:flex items-center gap-7">
@@ -304,9 +302,7 @@ export default async function Home() {
           <div className="grid grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr] gap-8 pb-8">
             {/* Col 1 — Logo + description */}
             <div className="col-span-2 md:col-span-1">
-              <span className="text-xl font-bold text-jc-ink font-display tracking-tight">
-                JusteCourrier
-              </span>
+              <Logo size={22} />
               <p className="mt-3.5 max-w-[280px] text-jc-ink-muted">
                 Le courrier administratif simple, transparent et juste. Pas
                 d&apos;abonnement, pas de piège.
