@@ -18,6 +18,7 @@ export interface LetterType {
   priceCents: number;
   popular?: boolean;
   duration: string;
+  useCases: string[];
   fields: FormField[];
 }
 
@@ -49,6 +50,11 @@ export const letterTypes: LetterType[] = [
     priceCents: 490,
     popular: true,
     duration: "2 min",
+    useCases: [
+      "Tu veux mettre fin à un contrat sans engagement ou hors période d'engagement",
+      "Tu souhaites invoquer un motif légitime (déménagement, hausse tarifaire…)",
+      "Tu veux laisser une trace écrite avec date certaine",
+    ],
     fields: [
       { name: "provider", label: "Nom de l'opérateur / entreprise", type: "text", placeholder: "Orange, Basic-Fit, MAIF...", required: true },
       { name: "contract_number", label: "Numéro de contrat ou client", type: "text", placeholder: "CLI-123456", required: false },
@@ -65,6 +71,11 @@ export const letterTypes: LetterType[] = [
     icon: "🏠",
     priceCents: 490,
     duration: "3 min",
+    useCases: [
+      "Tu quittes ton logement et dois informer ton propriétaire dans les règles",
+      "Tu veux bénéficier du préavis réduit (zone tendue, mutation, perte d'emploi…)",
+      "Tu as besoin d'une lettre de congé formelle avec date certaine",
+    ],
     fields: [
       { name: "landlord_name", label: "Nom du propriétaire / agence", type: "text", placeholder: "M. Martin / Agence Immobilière XYZ", required: true },
       { name: "property_address", label: "Adresse du logement", type: "textarea", placeholder: "Adresse complète du bien loué", required: true },
@@ -85,6 +96,11 @@ export const letterTypes: LetterType[] = [
     priceCents: 490,
     popular: true,
     duration: "3 min",
+    useCases: [
+      "Tu as reçu un PV que tu estimes injustifié (erreur de lieu, de plaque, de signalisation)",
+      "Tu n'étais pas le conducteur au moment de l'infraction",
+      "Tu veux contester dans le délai légal de 45 jours avec les bons arguments",
+    ],
     fields: [
       { name: "fine_number", label: "Numéro de l'avis de contravention", type: "text", placeholder: "N° figurant sur l'avis", required: true },
       { name: "fine_date", label: "Date de l'infraction", type: "date", required: true },
@@ -101,6 +117,11 @@ export const letterTypes: LetterType[] = [
     icon: "💳",
     priceCents: 490,
     duration: "2 min",
+    useCases: [
+      "Tu as été prélevé d'un montant que tu n'as pas autorisé ou qui ne correspond pas",
+      "Tu constates une double facturation ou un service facturé mais non rendu",
+      "Tu veux formaliser ta contestation par écrit pour obtenir un remboursement",
+    ],
     fields: [
       { name: "company", label: "Entreprise concernée", type: "text", placeholder: "EDF, SFR, Amazon...", required: true },
       { name: "invoice_number", label: "Numéro de facture", type: "text", placeholder: "FA-2024-001234", required: false },
@@ -117,6 +138,11 @@ export const letterTypes: LetterType[] = [
     icon: "🏛️",
     priceCents: 490,
     duration: "4 min",
+    useCases: [
+      "Tu as reçu une décision de refus ou de suppression de droits que tu juges erronée",
+      "Tu veux exercer un recours gracieux avant d'envisager un recours contentieux",
+      "Tu as besoin de formaliser tes arguments pour obtenir un réexamen de ton dossier",
+    ],
     fields: [
       { name: "administration", label: "Administration concernée", type: "text", placeholder: "CAF, France Travail, Préfecture...", required: true },
       { name: "decision_date", label: "Date de la décision", type: "date", required: true },
@@ -135,6 +161,11 @@ export const letterTypes: LetterType[] = [
     icon: "📦",
     priceCents: 490,
     duration: "2 min",
+    useCases: [
+      "Tu as reçu un produit défectueux, non conforme ou en retard",
+      "Le service client ne répond pas ou ne traite pas ta demande",
+      "Tu veux escalader ta réclamation par écrit pour obtenir une solution concrète",
+    ],
     fields: [
       { name: "company", label: "Entreprise concernée", type: "text", placeholder: "Amazon, FNAC, Cdiscount...", required: true },
       { name: "order_number", label: "Numéro de commande", type: "text", placeholder: "CMD-123456", required: false },
@@ -152,6 +183,11 @@ export const letterTypes: LetterType[] = [
     icon: "🏛️",
     priceCents: 490,
     duration: "3 min",
+    useCases: [
+      "Tu fais face à un retard de traitement anormal de la part d'une administration",
+      "Tu constates une erreur de calcul sur tes droits ou tes prestations",
+      "Tu veux formaliser ta demande par écrit pour accélérer le traitement de ton dossier",
+    ],
     fields: [
       { name: "administration", label: "Administration concernée", type: "text", placeholder: "CAF, CPAM, Service des impôts...", required: true },
       { name: "dossier_number", label: "Numéro de dossier / allocataire", type: "text", placeholder: "N° de dossier", required: false },
@@ -169,6 +205,11 @@ export const letterTypes: LetterType[] = [
     icon: "💰",
     priceCents: 490,
     duration: "3 min",
+    useCases: [
+      "Tu es créancier d'une somme impayée (loyer, facture, prêt entre particuliers)",
+      "Tu veux formaliser ta demande de paiement avant d'engager des poursuites",
+      "Tu as besoin d'un courrier avec valeur juridique pour prouver ta démarche amiable",
+    ],
     fields: [
       { name: "debt_nature", label: "Nature de la dette", type: "select", required: true, options: ["Loyer impayé", "Facture impayée", "Prêt non remboursé", "Caution non restituée", "Autre"] },
       { name: "amount_due", label: "Montant dû (€)", type: "text", placeholder: "1 500,00", required: true },
@@ -185,6 +226,11 @@ export const letterTypes: LetterType[] = [
     icon: "🔧",
     priceCents: 490,
     duration: "3 min",
+    useCases: [
+      "Un prestataire, artisan ou fournisseur ne respecte pas ses engagements contractuels",
+      "Tu veux fixer un délai formel avant d'envisager une résolution ou des dommages-intérêts",
+      "Tu as besoin d'une trace écrite prouvant que tu as exigé l'exécution de l'obligation",
+    ],
     fields: [
       { name: "obligation_type", label: "Type d'obligation", type: "select", required: true, options: ["Travaux non réalisés", "Livraison non effectuée", "Prestation non fournie", "Engagement contractuel non tenu"] },
       { name: "contract_date", label: "Date de l'engagement / contrat", type: "date", required: true },
@@ -202,6 +248,11 @@ export const letterTypes: LetterType[] = [
     icon: "💶",
     priceCents: 490,
     duration: "2 min",
+    useCases: [
+      "Tu as exercé ton droit de rétractation dans les 14 jours et attends ton remboursement",
+      "Tu as payé un service ou un produit qui n'a jamais été fourni",
+      "Tu constates un trop-perçu ou un prélèvement en trop sur ton compte",
+    ],
     fields: [
       { name: "company", label: "Entreprise / organisme", type: "text", placeholder: "Nom de l'entreprise ou administration", required: true },
       { name: "purchase_date", label: "Date d'achat / paiement", type: "date", required: true },
@@ -219,4 +270,8 @@ export function getLetterType(slug: string): LetterType | undefined {
 
 export function getLettersByCategory(category: string): LetterType[] {
   return letterTypes.filter((lt) => lt.category === category);
+}
+
+export function getCategoryLabel(categorySlug: string): string {
+  return categories.find((c) => c.slug === categorySlug)?.label ?? categorySlug;
 }
