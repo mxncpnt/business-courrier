@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Logo from "@/components/Logo";
 
 export const metadata = {
   title: "Politique de confidentialité — JusteCourrier",
@@ -7,24 +8,59 @@ export const metadata = {
 export default function ConfidentialitePage() {
   return (
     <div className="min-h-screen bg-jc-bg">
-      <header className="bg-jc-bg-elev border-b border-jc-line">
-        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
+      {/* ─── Nav ─── */}
+      <header className="flex items-center justify-between border-b border-jc-line bg-jc-bg px-8 py-[18px]">
+        <Link href="/" className="no-underline">
+          <Logo size={22} />
+        </Link>
+
+        <nav className="hidden md:flex items-center gap-7">
           <Link
-            href="/"
-            className="text-jc-ink-muted hover:text-jc-ink-soft transition-colors"
+            href="/catalogue"
+            className="text-jc-ink-soft text-sm font-medium no-underline hover:text-jc-ink transition-colors"
           >
-            ← Accueil
+            Catalogue
           </Link>
-          <span className="text-xl font-bold text-jc-ink">JusteCourrier</span>
-        </div>
+          <Link
+            href="#"
+            className="text-jc-ink-soft text-sm font-medium no-underline hover:text-jc-ink transition-colors"
+          >
+            Guides
+          </Link>
+          <Link
+            href="/#fonctionnement"
+            className="text-jc-ink-soft text-sm font-medium no-underline hover:text-jc-ink transition-colors"
+          >
+            Comment ça marche
+          </Link>
+        </nav>
+
+        <Link
+          href="/catalogue"
+          className="inline-flex items-center gap-2 px-[14px] py-2 text-sm font-medium bg-jc-primary text-white rounded-jc-sm hover:bg-jc-primary-hover transition-colors no-underline"
+        >
+          Commencer un courrier
+        </Link>
       </header>
 
-      <main className="max-w-3xl mx-auto px-6 py-10">
-        <h1 className="text-2xl font-bold text-jc-ink mb-8 font-display">
+      {/* ─── Breadcrumb ─── */}
+      <div className="px-8 pt-5 max-w-[820px] mx-auto">
+        <nav className="text-[13px] text-jc-ink-muted flex items-center gap-1.5">
+          <Link href="/" className="hover:text-jc-ink transition-colors no-underline">
+            Accueil
+          </Link>
+          <span>›</span>
+          <span className="text-jc-ink">Confidentialité</span>
+        </nav>
+      </div>
+
+      {/* ─── Content ─── */}
+      <main className="max-w-[820px] mx-auto px-8 pt-6 pb-20">
+        <h1 className="text-[28px] sm:text-[36px] font-display font-bold text-jc-ink mb-10">
           Politique de confidentialité
         </h1>
 
-        <div className="prose max-w-none space-y-8 text-jc-ink-soft text-[15px] leading-relaxed">
+        <div className="space-y-8 text-jc-ink-soft text-[15px] leading-relaxed">
           <section>
             <h2 className="text-lg font-semibold text-jc-ink mb-3">
               1. Responsable du traitement
@@ -34,7 +70,7 @@ export default function ConfidentialitePage() {
             </p>
             <ul className="list-none pl-0 space-y-1 mt-2">
               <li>Maxence Pinta, entrepreneur individuel</li>
-              <li>Email : maxence.pinta@gmail.com</li>
+              <li>Email : contact@justecourrier.fr</li>
             </ul>
           </section>
 
@@ -193,10 +229,10 @@ export default function ConfidentialitePage() {
             <p className="mt-3">
               Pour exercer ces droits, envoyez un email à{" "}
               <a
-                href="mailto:maxence.pinta@gmail.com"
-                className="text-jc-primary hover:text-jc-primary-hover underline"
+                href="mailto:contact@justecourrier.fr"
+                className="text-jc-accent hover:underline no-underline"
               >
-                maxence.pinta@gmail.com
+                contact@justecourrier.fr
               </a>{" "}
               en précisant votre demande et en joignant un justificatif
               d&apos;identité. Nous nous engageons à répondre dans un délai d&apos;un
@@ -209,7 +245,7 @@ export default function ConfidentialitePage() {
                 href="https://www.cnil.fr"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-jc-primary hover:text-jc-primary-hover underline"
+                className="text-jc-accent hover:underline no-underline"
               >
                 www.cnil.fr
               </a>
@@ -264,6 +300,54 @@ export default function ConfidentialitePage() {
           </p>
         </div>
       </main>
+
+      {/* ─── Footer ─── */}
+      <footer className="border-t border-jc-line px-8 pt-12 pb-7 text-[13px] text-jc-ink-muted">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr] gap-8 pb-8">
+            <div className="col-span-2 md:col-span-1">
+              <Logo size={22} />
+              <p className="mt-3.5 max-w-[280px] text-jc-ink-muted">
+                Le courrier administratif simple, transparent et juste. Pas
+                d&apos;abonnement, pas de piège.
+              </p>
+            </div>
+            <div>
+              <h5 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
+                Service
+              </h5>
+              <div className="flex flex-col gap-1">
+                <Link href="/catalogue" className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors">Catalogue</Link>
+                <Link href="#" className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors">Guides juridiques</Link>
+                <Link href="/catalogue" className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors">Tarifs</Link>
+              </div>
+            </div>
+            <div>
+              <h5 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
+                Société
+              </h5>
+              <div className="flex flex-col gap-1">
+                <Link href="/mentions-legales" className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors">Mentions légales</Link>
+                <Link href="/cgv" className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors">CGV</Link>
+                <Link href="/confidentialite" className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors">Confidentialité</Link>
+              </div>
+            </div>
+            <div>
+              <h5 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
+                Contact
+              </h5>
+              <div className="flex flex-col gap-1">
+                <span className="text-jc-ink-soft py-1">contact@justecourrier.fr</span>
+                <span className="text-jc-ink-soft py-1">Aide &amp; FAQ</span>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-jc-line pt-5 flex justify-between flex-wrap gap-2">
+            <span>© {new Date().getFullYear()} JusteCourrier · SIRET en cours</span>
+            <span>Édité en France</span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
