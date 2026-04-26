@@ -30,13 +30,26 @@ export const categories = [
   { slug: "demande", label: "Demande", icon: "📋", description: "Solliciter un remboursement ou un droit." },
 ] as const;
 
-// Champs communs à tous les courriers
-export const commonFields: FormField[] = [
-  { name: "sender_name", label: "Votre nom complet", type: "text", placeholder: "Jean Dupont", required: true },
-  { name: "sender_address", label: "Votre adresse", type: "textarea", placeholder: "12 rue de la Paix\n75002 Paris", required: true },
-  { name: "sender_email", label: "Votre email", type: "email", placeholder: "jean@email.com", required: true },
+// Champs destinataire (affichés dans l'étape 1 « Contexte »)
+export const recipientFields: FormField[] = [
   { name: "recipient_name", label: "Nom du destinataire", type: "text", placeholder: "Société XYZ / M. Martin", required: true },
   { name: "recipient_address", label: "Adresse du destinataire", type: "textarea", placeholder: "Service client\n1 avenue des Champs-Élysées\n75008 Paris", required: true },
+];
+
+// Champs expéditeur (affichés dans l'étape 2 « Coordonnées »)
+export const senderFields: FormField[] = [
+  { name: "sender_firstname", label: "Prénom", type: "text", placeholder: "Camille", required: true },
+  { name: "sender_lastname", label: "Nom", type: "text", placeholder: "Durand", required: true },
+  { name: "sender_street", label: "Adresse postale", type: "text", placeholder: "14 rue des Lilas", required: true },
+  { name: "sender_zipcode", label: "Code postal", type: "text", placeholder: "75011", required: true },
+  { name: "sender_city", label: "Ville", type: "text", placeholder: "Paris", required: true },
+  { name: "sender_email", label: "Email pour recevoir ton PDF", type: "email", placeholder: "camille.durand@email.fr", required: true },
+];
+
+// Legacy — pour compatibilité (sera supprimé quand toutes les pages migreront)
+export const commonFields: FormField[] = [
+  ...senderFields,
+  ...recipientFields,
 ];
 
 export const letterTypes: LetterType[] = [

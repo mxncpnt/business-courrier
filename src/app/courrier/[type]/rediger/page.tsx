@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getLetterType, getCategoryLabel, letterTypes } from "@/config/letter-types";
+import { getLetterType, letterTypes } from "@/config/letter-types";
 import { createAuthClient } from "@/lib/supabase/server-auth";
 import LetterForm from "@/components/LetterForm";
 import Logo from "@/components/Logo";
@@ -36,8 +36,6 @@ export default async function RedigerPage({
   if (!letterType) {
     notFound();
   }
-
-  const categoryLabel = getCategoryLabel(letterType.category);
 
   let user = null;
   try {
@@ -104,55 +102,21 @@ export default async function RedigerPage({
         </div>
       </header>
 
-      {/* ─── Breadcrumb ─── */}
-      <div className="px-6 md:px-20 pt-6 max-w-[1200px] mx-auto">
-        <div className="text-[13px] text-jc-ink-muted">
-          <Link
-            href="/"
-            className="text-jc-ink-muted no-underline hover:text-jc-ink transition-colors"
-          >
-            Accueil
-          </Link>
-          {" / "}
-          <Link
-            href="/catalogue"
-            className="text-jc-ink-muted no-underline hover:text-jc-ink transition-colors"
-          >
-            {categoryLabel}
-          </Link>
-          {" / "}
-          <Link
-            href={`/courrier/${letterType.slug}`}
-            className="text-jc-ink-muted no-underline hover:text-jc-ink transition-colors"
-          >
-            {letterType.title}
-          </Link>
-          {" / "}
-          <span className="text-jc-ink">Rédiger</span>
-        </div>
-      </div>
+      {/* ─── Tunnel ─── */}
+      <section className="px-6 md:px-20 pt-10 pb-24 max-w-[880px] mx-auto">
+        {/* Back link */}
+        <Link
+          href={`/courrier/${letterType.slug}`}
+          className="text-[13px] text-jc-ink-muted no-underline hover:text-jc-ink transition-colors"
+        >
+          ← Retour à {letterType.title}
+        </Link>
 
-      {/* ─── Form ─── */}
-      <main className="max-w-2xl mx-auto px-6 py-10">
-        {/* Title */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
-            <span className="text-3xl">{letterType.icon}</span>
-            <h1 className="text-2xl font-bold text-jc-ink font-display">
-              {letterType.title}
-            </h1>
-          </div>
-          <p className="text-jc-ink-soft">{letterType.description}</p>
-          <p className="mt-2 text-sm text-jc-accent font-medium">
-            {(letterType.priceCents / 100).toFixed(2)} € — PDF personnalisé
-          </p>
-        </div>
-
-        {/* Form card */}
-        <div className="bg-jc-bg-elev rounded-jc-lg border border-jc-line p-6 sm:p-8">
+        {/* Form tunnel — step indicator, header, and card are inside LetterForm */}
+        <div className="mt-[18px]">
           <LetterForm letterType={letterType} />
         </div>
-      </main>
+      </section>
 
       {/* ─── Footer ─── */}
       <footer className="border-t border-jc-line px-8 pt-12 pb-7 text-[13px] text-jc-ink-muted">

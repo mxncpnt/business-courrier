@@ -8,8 +8,11 @@ import { generateLetter } from "@/lib/claude";
 import { getLetterType } from "@/config/letter-types";
 
 const baseSchema = z.object({
-  sender_name: z.string().min(2, "Nom requis"),
-  sender_address: z.string().min(5, "Adresse requise"),
+  sender_firstname: z.string().min(1, "Prénom requis"),
+  sender_lastname: z.string().min(1, "Nom requis"),
+  sender_street: z.string().min(2, "Adresse requise"),
+  sender_zipcode: z.string().min(4, "Code postal requis"),
+  sender_city: z.string().min(1, "Ville requise"),
   sender_email: z.string().email("Email invalide"),
   recipient_name: z.string().min(2, "Nom du destinataire requis"),
   recipient_address: z.string().min(5, "Adresse du destinataire requise"),
@@ -44,6 +47,10 @@ export async function submitLetterForm(
       return { error: `Le champ "${field.label}" est requis` };
     }
   }
+
+  // Recombine sender fields for Claude (backward-compatible format)
+  const senderName = `${rawData.sender_firstname} ${rawData.sender_lastname}`;
+  const senderAddress = `${rawData.sender_street}\n${rawData.sender_zipcode} ${rawData.sender_city}`;
 
   const supabase = createServiceClient();
 
@@ -81,8 +88,8 @@ export async function submitLetterForm(
       type: letterTypeSlug,
       title: letterType.title,
       formData: rawData,
-      senderName: rawData.sender_name,
-      senderAddress: rawData.sender_address,
+      senderName,
+      senderAddress,
       recipientName: rawData.recipient_name,
       recipientAddress: rawData.recipient_address,
     });
