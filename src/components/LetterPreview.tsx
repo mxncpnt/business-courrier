@@ -47,8 +47,8 @@ export default function LetterPreview({
   const hasStructuredHeader = !!(senderName || recipientName);
 
   return (
-    <div className="bg-jc-bg-elev border border-jc-line rounded-jc-sm max-w-[720px] mx-auto">
-      <div className="px-8 py-8 sm:px-10 sm:py-8 font-body text-jc-ink text-[13px] leading-[1.65]">
+    <div className="bg-jc-bg-elev border border-jc-line rounded-jc-sm max-w-[595px] mx-auto shadow-[0_1px_4px_rgba(0,0,0,0.06)]" style={{ aspectRatio: "210 / 297" }}>
+      <div className="px-[56px] py-[56px] font-body text-jc-ink text-[11.5px] leading-[1.7] h-full overflow-hidden">
         {/* ─── Structured header ─── */}
         {hasStructuredHeader && (
           <>
@@ -68,9 +68,6 @@ export default function LetterPreview({
               <div className="text-right">
                 <div className="text-jc-ink-muted">
                   {senderCity}, le {today}
-                </div>
-                <div className="text-jc-ink-muted mt-1">
-                  Lettre recommandée AR
                 </div>
               </div>
             </div>
@@ -100,7 +97,7 @@ export default function LetterPreview({
         )}
 
         {/* ─── Letter body ─── */}
-        <div className="text-[13px] leading-[1.7]">
+        <div className="text-[11.5px] leading-[1.7]">
           {/* Visible portion */}
           {lines.slice(0, visibleCount).map((line, i) => (
             <p
