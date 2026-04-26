@@ -14,14 +14,14 @@ export default function LetterPreview({
   letterTitle,
 }: LetterPreviewProps) {
   const lines = text.split("\n");
-  // Show only first 2 non-empty lines of body when not paid
+  // Show salutation + first paragraph only when not paid
   const visibleCount = isPaid
     ? lines.length
     : (() => {
         let nonEmpty = 0;
         for (let i = 0; i < lines.length; i++) {
           if (lines[i].trim() !== "") nonEmpty++;
-          if (nonEmpty >= 3) return i + 1;
+          if (nonEmpty >= 2) return i + 1;
         }
         return lines.length;
       })();
