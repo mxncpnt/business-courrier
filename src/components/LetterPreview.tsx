@@ -14,7 +14,17 @@ export default function LetterPreview({
   letterTitle,
 }: LetterPreviewProps) {
   const lines = text.split("\n");
-  const visibleCount = isPaid ? lines.length : Math.ceil(lines.length * 0.4);
+  // Show only first 2 non-empty lines of body when not paid
+  const visibleCount = isPaid
+    ? lines.length
+    : (() => {
+        let nonEmpty = 0;
+        for (let i = 0; i < lines.length; i++) {
+          if (lines[i].trim() !== "") nonEmpty++;
+          if (nonEmpty >= 3) return i + 1;
+        }
+        return lines.length;
+      })();
 
   // ─── Structured data from form ───
   const senderName =
@@ -56,8 +66,8 @@ export default function LetterPreview({
             {senderEmail && <div className="text-gray-500">{senderEmail}</div>}
           </div>
 
-          {/* ─── Zone 4 : Destinataire (décalé droite — fenêtre enveloppe) ─── */}
-          <div className="text-[8px] leading-[1.5] text-gray-800 ml-[50%] mb-[4%]">
+          {/* ─── Zone 4 : Destinataire (aligné droite — fenêtre enveloppe) ─── */}
+          <div className="text-[8px] leading-[1.5] text-gray-800 text-right mb-[2%]">
             {recipientName && <div className="font-semibold">{recipientName}</div>}
             {recipientAddress && (
               <div className="whitespace-pre-line">{recipientAddress}</div>
