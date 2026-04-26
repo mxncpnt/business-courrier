@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { createServiceClient } from "@/lib/supabase/server";
 import { createAuthClient } from "@/lib/supabase/server-auth";
+import { getLetterType } from "@/config/letter-types";
 import LetterPreview from "@/components/LetterPreview";
 import CheckoutButton from "@/components/CheckoutButton";
 import Logo from "@/components/Logo";
@@ -30,6 +31,8 @@ export default async function PreviewPage({
   }
 
   const isPaid = letter.status === "paid" || letter.status === "delivered";
+  const letterType = getLetterType(letter.type);
+  const letterTitle = letterType?.title;
 
   let user = null;
   try {
@@ -116,7 +119,12 @@ export default async function PreviewPage({
         </div>
 
         {/* Letter preview */}
-        <LetterPreview text={letter.generated_text || ""} isPaid={isPaid} />
+        <LetterPreview
+          text={letter.generated_text || ""}
+          isPaid={isPaid}
+          formData={letter.form_data as Record<string, string> | undefined}
+          letterTitle={letterTitle}
+        />
 
         {/* CTA */}
         {isPaid ? (

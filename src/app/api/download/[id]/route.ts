@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase/server";
 import { generatePdfBuffer } from "@/lib/pdf";
+import { getLetterType } from "@/config/letter-types";
 
 export async function GET(
   _req: NextRequest,
@@ -36,10 +37,13 @@ export async function GET(
     );
   }
 
-  // Generate PDF
+  // Generate PDF with AFNOR layout
+  const letterType = getLetterType(letter.type);
   const pdfBuffer = await generatePdfBuffer({
     text,
     letterId: letter.id,
+    formData: letter.form_data as Record<string, string> | undefined,
+    letterTitle: letterType?.title,
   });
 
   // Return PDF as download
