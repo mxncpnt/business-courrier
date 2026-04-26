@@ -9,8 +9,10 @@ interface CheckoutButtonProps {
 
 export default function CheckoutButton({ letterId }: CheckoutButtonProps) {
   const [loading, setLoading] = useState(false);
+  const [accepted, setAccepted] = useState(false);
 
   async function handleCheckout() {
+    if (!accepted) return;
     setLoading(true);
     try {
       const res = await fetch("/api/checkout", {
@@ -34,39 +36,64 @@ export default function CheckoutButton({ letterId }: CheckoutButtonProps) {
   }
 
   return (
-    <button
-      onClick={handleCheckout}
-      disabled={loading}
-      className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-jc-primary text-white font-medium rounded-jc hover:bg-jc-primary-hover transition-colors text-base disabled:opacity-50 disabled:cursor-not-allowed"
-    >
-      {loading ? (
-        <span className="flex items-center gap-2">
-          <svg
-            className="animate-spin h-4 w-4"
-            viewBox="0 0 24 24"
-            fill="none"
+    <div>
+      {/* Checkbox responsabilité */}
+      <label className="flex items-start gap-3 cursor-pointer mb-4 select-none">
+        <input
+          type="checkbox"
+          checked={accepted}
+          onChange={(e) => setAccepted(e.target.checked)}
+          className="mt-0.5 h-4 w-4 shrink-0 rounded border-jc-line-strong accent-jc-primary cursor-pointer"
+        />
+        <span className="text-[13px] leading-[1.5] text-jc-ink-soft">
+          Je reconnais que ce courrier est généré par intelligence artificielle
+          et ne constitue pas un conseil juridique. J&apos;ai relu le contenu
+          et j&apos;en assume l&apos;utilisation.{" "}
+          <a
+            href="/cgv"
+            target="_blank"
+            className="text-jc-accent no-underline hover:underline"
           >
-            <circle
-              className="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="4"
-            />
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-            />
-          </svg>
-          Redirection vers le paiement…
+            CGV
+          </a>
         </span>
-      ) : (
-        <>
-          <IconLock /> Payer 4,90 € et télécharger
-        </>
-      )}
-    </button>
+      </label>
+
+      {/* Bouton paiement */}
+      <button
+        onClick={handleCheckout}
+        disabled={loading || !accepted}
+        className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-jc-primary text-white font-medium rounded-jc hover:bg-jc-primary-hover transition-colors text-base disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {loading ? (
+          <span className="flex items-center gap-2">
+            <svg
+              className="animate-spin h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+              />
+            </svg>
+            Redirection vers le paiement…
+          </span>
+        ) : (
+          <>
+            <IconLock /> Payer 4,90 € et télécharger
+          </>
+        )}
+      </button>
+    </div>
   );
 }
