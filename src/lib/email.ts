@@ -20,15 +20,10 @@ function getResend(): Resend {
 }
 
 // ---------------------------------------------------------------------------
-// Adresse expéditeur
-// Pendant les tests : "onboarding@resend.dev" fonctionne sans domaine vérifié,
-// mais Resend limite les envois à l'email de votre compte uniquement.
-// En prod : vérifier votre domaine dans Resend puis remplacer par :
-//   "Courrier IA <noreply@votre-domaine.fr>"
+// Adresse expéditeur — domaine vérifié dans Resend (justecourrier.fr)
 // ---------------------------------------------------------------------------
 
-const FROM_ADDRESS = "Courrier IA <onboarding@resend.dev>";
-// TODO: const FROM_ADDRESS = "Courrier IA <noreply@courrier-ia.fr>";
+const FROM_ADDRESS = "JusteCourrier <noreply@justecourrier.fr>";
 
 // ---------------------------------------------------------------------------
 // Types
