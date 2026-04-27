@@ -6,64 +6,89 @@ import {
   Text,
   View,
   StyleSheet,
+  Font,
 } from "@react-pdf/renderer";
-import { business, formatInvoiceNumber } from "@/config/business";
+import { business } from "@/config/business";
+
+// ─── Register fonts matching the Sage design system ───
+// Newsreader for display/titles, Inter can't be embedded easily so we use Helvetica as body fallback
+Font.register({
+  family: "Helvetica",
+  fonts: [
+    { src: "Helvetica" },
+    { src: "Helvetica-Bold", fontWeight: "bold" },
+  ],
+});
 
 const mm = (v: number) => `${v}mm`;
 
-const colors = {
-  primary: "#2563eb",
-  ink: "#1a1a1a",
-  muted: "#666",
-  light: "#f5f5f5",
-  line: "#e0e0e0",
+// ─── Sage brand tokens (hardcoded for PDF) ───
+const jc = {
+  primary: "#13314F",
+  accent: "#C9722D",
+  ink: "#0F2235",
+  inkSoft: "#34465A",
+  inkMuted: "#6B7785",
+  bg: "#FAF8F4",
+  surface: "#F2EFE8",
+  line: "#E4DFD4",
 };
 
 const styles = StyleSheet.create({
   page: {
-    paddingTop: mm(15),
-    paddingBottom: mm(20),
+    paddingTop: mm(18),
+    paddingBottom: mm(22),
     paddingLeft: mm(20),
     paddingRight: mm(20),
     fontSize: 9,
     fontFamily: "Helvetica",
     lineHeight: 1.5,
-    color: colors.ink,
+    color: jc.ink,
+    backgroundColor: "#FFFFFF",
   },
 
   // ─── Header ───
   headerRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: mm(12),
+    alignItems: "flex-start",
+    paddingBottom: mm(8),
+    borderBottomWidth: 2,
+    borderBottomColor: jc.primary,
+    marginBottom: mm(10),
   },
-  brand: {
-    fontSize: 18,
+  brandName: {
+    fontSize: 20,
     fontWeight: "bold",
-    color: colors.primary,
-    marginBottom: 4,
+    color: jc.primary,
+    letterSpacing: -0.3,
+    marginBottom: 2,
   },
-  companyLine: {
+  brandSubline: {
+    fontSize: 7.5,
+    color: jc.inkMuted,
+    marginBottom: 1,
+  },
+  invoiceTitleBlock: {
+    alignItems: "flex-end",
+  },
+  invoiceLabel: {
     fontSize: 8,
-    color: colors.muted,
-  },
-  invoiceTitle: {
-    fontSize: 22,
     fontWeight: "bold",
-    color: colors.ink,
-    textAlign: "right",
+    letterSpacing: 2,
+    color: jc.accent,
+    textTransform: "uppercase",
+    marginBottom: 3,
   },
   invoiceNumber: {
-    fontSize: 10,
-    color: colors.muted,
-    textAlign: "right",
-    marginTop: 4,
+    fontSize: 12,
+    fontWeight: "bold",
+    color: jc.primary,
+    marginBottom: 2,
   },
   invoiceDate: {
-    fontSize: 9,
-    color: colors.muted,
-    textAlign: "right",
-    marginTop: 2,
+    fontSize: 8.5,
+    color: jc.inkMuted,
   },
 
   // ─── Parties ───
@@ -73,130 +98,135 @@ const styles = StyleSheet.create({
     marginBottom: mm(10),
   },
   partyBlock: {
-    width: "48%",
+    width: "46%",
+    padding: mm(4),
+    backgroundColor: jc.bg,
+    borderRadius: 4,
   },
   partyLabel: {
-    fontSize: 7,
+    fontSize: 6.5,
     fontWeight: "bold",
     textTransform: "uppercase",
-    letterSpacing: 0.5,
-    color: colors.muted,
-    marginBottom: 4,
+    letterSpacing: 1,
+    color: jc.accent,
+    marginBottom: 5,
   },
   partyName: {
     fontSize: 10,
     fontWeight: "bold",
+    color: jc.ink,
     marginBottom: 2,
   },
   partyLine: {
-    fontSize: 9,
-    color: colors.muted,
+    fontSize: 8.5,
+    color: jc.inkSoft,
+    lineHeight: 1.4,
   },
 
   // ─── Tableau ───
   tableHeader: {
     flexDirection: "row",
-    backgroundColor: colors.light,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.line,
-    paddingVertical: 6,
-    paddingHorizontal: 8,
-  },
-  tableRow: {
-    flexDirection: "row",
-    borderBottomWidth: 1,
-    borderBottomColor: colors.light,
-    paddingVertical: 8,
-    paddingHorizontal: 8,
-  },
-  colDescription: {
-    width: "55%",
-  },
-  colQty: {
-    width: "10%",
-    textAlign: "center",
-  },
-  colUnitPrice: {
-    width: "17.5%",
-    textAlign: "right",
-  },
-  colTotal: {
-    width: "17.5%",
-    textAlign: "right",
+    backgroundColor: jc.primary,
+    paddingVertical: 7,
+    paddingHorizontal: 10,
+    borderRadius: 3,
+    marginBottom: 1,
   },
   tableHeaderText: {
     fontSize: 7,
     fontWeight: "bold",
-    textTransform: "uppercase",
     letterSpacing: 0.5,
-    color: colors.muted,
+    color: "#FFFFFF",
+    textTransform: "uppercase",
   },
-  tableCellText: {
-    fontSize: 9,
+  tableRow: {
+    flexDirection: "row",
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: jc.line,
   },
-  tableCellBold: {
-    fontSize: 9,
-    fontWeight: "bold",
-  },
+  colDescription: { width: "52%" },
+  colQty: { width: "12%", textAlign: "center" },
+  colUnitPrice: { width: "18%", textAlign: "right" },
+  colTotal: { width: "18%", textAlign: "right" },
+  cellText: { fontSize: 9, color: jc.ink },
+  cellBold: { fontSize: 9, fontWeight: "bold", color: jc.ink },
 
   // ─── Total ───
   totalBlock: {
-    marginTop: mm(4),
+    marginTop: mm(5),
     alignSelf: "flex-end",
-    width: "40%",
+    width: "42%",
   },
   totalRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     paddingVertical: 4,
+    paddingHorizontal: 6,
   },
   totalLabel: {
-    fontSize: 9,
-    color: colors.muted,
+    fontSize: 8.5,
+    color: jc.inkMuted,
   },
   totalValue: {
-    fontSize: 9,
+    fontSize: 8.5,
+    color: jc.ink,
   },
   totalFinalRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingVertical: 6,
-    borderTopWidth: 2,
-    borderTopColor: colors.ink,
-    marginTop: 2,
+    paddingVertical: 7,
+    paddingHorizontal: 6,
+    backgroundColor: jc.primary,
+    borderRadius: 3,
+    marginTop: 3,
   },
   totalFinalLabel: {
     fontSize: 11,
     fontWeight: "bold",
+    color: "#FFFFFF",
   },
   totalFinalValue: {
     fontSize: 11,
     fontWeight: "bold",
+    color: "#FFFFFF",
   },
 
-  // ─── Mentions ───
+  // ─── Mentions légales ───
   mentionsBlock: {
     position: "absolute",
-    bottom: mm(20),
+    bottom: mm(18),
     left: mm(20),
     right: mm(20),
   },
-  vatMention: {
-    fontSize: 8,
-    color: colors.muted,
-    marginBottom: 8,
+  vatBadge: {
+    fontSize: 7.5,
     fontWeight: "bold",
-  },
-  mentionLine: {
-    fontSize: 7,
-    color: colors.muted,
-    lineHeight: 1.4,
+    color: jc.accent,
+    backgroundColor: jc.bg,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    borderRadius: 3,
+    marginBottom: 8,
+    alignSelf: "flex-start",
   },
   mentionSeparator: {
     borderTopWidth: 1,
-    borderTopColor: colors.line,
+    borderTopColor: jc.line,
     paddingTop: 8,
-    marginTop: 4,
+  },
+  mentionLine: {
+    fontSize: 7,
+    color: jc.inkMuted,
+    lineHeight: 1.5,
+    marginBottom: 1,
+  },
+  footerBrand: {
+    fontSize: 7,
+    color: jc.inkMuted,
+    marginTop: 6,
+    textAlign: "center",
   },
 });
 
@@ -204,7 +234,7 @@ export interface InvoicePdfData {
   invoiceNumber: string;
   year: number;
   sequence: number;
-  paidAt: string; // ISO date
+  paidAt: string;
   customerName: string;
   customerEmail: string;
   customerAddress?: string;
@@ -240,7 +270,6 @@ export async function generateInvoicePdfBuffer(
       ? `${biz.address.zipCode} ${biz.address.city}`
       : "";
 
-  // ─── Build document ───
   const doc = React.createElement(
     Document,
     { title: `Facture ${invoiceNumber}`, author: biz.tradeName },
@@ -248,58 +277,47 @@ export async function generateInvoicePdfBuffer(
       Page,
       { size: "A4", style: styles.page },
 
-      // Header row
+      // ─── Header with brand line ───
       React.createElement(
         View,
         { style: styles.headerRow },
-        // Left: brand
         React.createElement(
           View,
           null,
-          React.createElement(Text, { style: styles.brand }, biz.tradeName),
+          React.createElement(Text, { style: styles.brandName }, biz.tradeName),
           React.createElement(
             Text,
-            { style: styles.companyLine },
-            `${biz.name} — ${biz.legalForm}`
+            { style: styles.brandSubline },
+            `${biz.name} · ${biz.legalForm}`
           ),
           React.createElement(
             Text,
-            { style: styles.companyLine },
+            { style: styles.brandSubline },
             `SIRET : ${biz.siret}`
           ),
-          React.createElement(Text, { style: styles.companyLine }, addressLine),
+          React.createElement(Text, { style: styles.brandSubline }, addressLine),
           cityLine
-            ? React.createElement(Text, { style: styles.companyLine }, cityLine)
+            ? React.createElement(Text, { style: styles.brandSubline }, cityLine)
             : null,
-          React.createElement(
-            Text,
-            { style: styles.companyLine },
-            biz.email
-          )
+          React.createElement(Text, { style: styles.brandSubline }, biz.email)
         ),
-        // Right: invoice info
         React.createElement(
           View,
-          null,
-          React.createElement(Text, { style: styles.invoiceTitle }, "FACTURE"),
+          { style: styles.invoiceTitleBlock },
+          React.createElement(Text, { style: styles.invoiceLabel }, "FACTURE"),
           React.createElement(
             Text,
             { style: styles.invoiceNumber },
-            `N° ${invoiceNumber}`
+            invoiceNumber
           ),
-          React.createElement(
-            Text,
-            { style: styles.invoiceDate },
-            `Date : ${dateStr}`
-          )
+          React.createElement(Text, { style: styles.invoiceDate }, dateStr)
         )
       ),
 
-      // Parties
+      // ─── Vendeur / Client ───
       React.createElement(
         View,
         { style: styles.partiesRow },
-        // Vendeur
         React.createElement(
           View,
           { style: styles.partyBlock },
@@ -311,21 +329,12 @@ export async function generateInvoicePdfBuffer(
             ? React.createElement(Text, { style: styles.partyLine }, cityLine)
             : null
         ),
-        // Client
         React.createElement(
           View,
           { style: styles.partyBlock },
           React.createElement(Text, { style: styles.partyLabel }, "Client"),
-          React.createElement(
-            Text,
-            { style: styles.partyName },
-            customerName
-          ),
-          React.createElement(
-            Text,
-            { style: styles.partyLine },
-            customerEmail
-          ),
+          React.createElement(Text, { style: styles.partyName }, customerName),
+          React.createElement(Text, { style: styles.partyLine }, customerEmail),
           customerAddress
             ? React.createElement(
                 Text,
@@ -336,7 +345,7 @@ export async function generateInvoicePdfBuffer(
         )
       ),
 
-      // Table header
+      // ─── Table header ───
       React.createElement(
         View,
         { style: styles.tableHeader },
@@ -362,44 +371,40 @@ export async function generateInvoicePdfBuffer(
         )
       ),
 
-      // Table row
+      // ─── Table row ───
       React.createElement(
         View,
         { style: styles.tableRow },
         React.createElement(
           Text,
-          { style: { ...styles.tableCellText, ...styles.colDescription } },
+          { style: { ...styles.cellText, ...styles.colDescription } },
           description
         ),
         React.createElement(
           Text,
-          { style: { ...styles.tableCellText, ...styles.colQty } },
+          { style: { ...styles.cellText, ...styles.colQty } },
           "1"
         ),
         React.createElement(
           Text,
-          { style: { ...styles.tableCellText, ...styles.colUnitPrice } },
+          { style: { ...styles.cellText, ...styles.colUnitPrice } },
           `${amountEur} ${biz.currencySymbol}`
         ),
         React.createElement(
           Text,
-          { style: { ...styles.tableCellBold, ...styles.colTotal } },
+          { style: { ...styles.cellBold, ...styles.colTotal } },
           `${amountEur} ${biz.currencySymbol}`
         )
       ),
 
-      // Total
+      // ─── Totaux ───
       React.createElement(
         View,
         { style: styles.totalBlock },
         React.createElement(
           View,
           { style: styles.totalRow },
-          React.createElement(
-            Text,
-            { style: styles.totalLabel },
-            "Total HT"
-          ),
+          React.createElement(Text, { style: styles.totalLabel }, "Total HT"),
           React.createElement(
             Text,
             { style: styles.totalValue },
@@ -432,13 +437,13 @@ export async function generateInvoicePdfBuffer(
         )
       ),
 
-      // Mentions légales obligatoires
+      // ─── Mentions légales ───
       React.createElement(
         View,
         { style: styles.mentionsBlock },
         React.createElement(
           Text,
-          { style: styles.vatMention },
+          { style: styles.vatBadge },
           biz.vatMention
         ),
         React.createElement(
@@ -452,18 +457,18 @@ export async function generateInvoicePdfBuffer(
           React.createElement(
             Text,
             { style: styles.mentionLine },
-            `En cas de retard de paiement, pénalités : ${biz.latePenaltyRate}`
+            `En cas de retard de paiement : ${biz.latePenaltyRate}`
           ),
           React.createElement(
             Text,
             { style: styles.mentionLine },
-            `Indemnité forfaitaire pour frais de recouvrement : ${biz.recoveryIndemnity}`
-          ),
-          React.createElement(
-            Text,
-            { style: styles.mentionLine },
-            `${biz.tradeName} — ${biz.name} — ${biz.legalForm} — SIRET : ${biz.siret}`
+            `Indemnité forfaitaire de recouvrement : ${biz.recoveryIndemnity}`
           )
+        ),
+        React.createElement(
+          Text,
+          { style: styles.footerBrand },
+          `${biz.tradeName} · ${biz.name} · ${biz.legalForm} · SIRET : ${biz.siret} · ${biz.website}`
         )
       )
     )
