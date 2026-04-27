@@ -55,6 +55,16 @@ export default async function DashboardPage() {
     .eq("user_id", user.id)
     .order("created_at", { ascending: false });
 
+  // Récupérer les factures de l'utilisateur
+  const { data: invoices } = await supabase
+    .from("invoices")
+    .select("id, letter_id, invoice_number")
+    .eq("user_id", user.id);
+
+  const invoiceByLetter = new Map(
+    (invoices ?? []).map((inv) => [inv.letter_id, inv])
+  );
+
   return (
     <div className="min-h-screen bg-jc-bg">
       {/* ─── Nav ─── */}
@@ -169,12 +179,23 @@ export default async function DashboardPage() {
 
                   <div className="flex items-center gap-2 shrink-0">
                     {isPaid ? (
-                      <a
-                        href={`/api/download/${letter.id}`}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-jc-primary text-white text-sm font-medium rounded-jc-sm hover:bg-jc-primary-hover transition-colors no-underline"
-                      >
-                        <IconDownload /> PDF
-                      </a>
+                      <>
+                        <a
+                          href={`/api/download/${letter.id}`}
+                          className="inline-flex items-center gap-1.5 px-4 py-2 bg-jc-primary text-white text-sm font-medium rounded-jc-sm hover:bg-jc-primary-hover transition-colors no-underline"
+                        >
+                          <IconDownload /> PDF
+                        </a>
+                        {invoiceByLetter.has(letter.id) && (
+                          <a
+                            href={`/api/invoice?id=${invoiceByLetter.get(letter.id)!.id}`}
+                            className="inline-flex items-center gap-1.5 px-4 py-2 border border-jc-line-strong text-jc-ink text-sm font-medium rounded-jc-sm hover:bg-jc-surface transition-colors no-underline"
+                            title={`Facture ${invoiceByLetter.get(letter.id)!.invoice_number}`}
+                          >
+                            Facture
+                          </a>
+                        )}
+                      </>
                     ) : (
                       <Link
                         href={`/preview/${letter.id}`}
