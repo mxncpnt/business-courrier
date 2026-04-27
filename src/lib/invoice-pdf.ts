@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: jc.primary,
     letterSpacing: -0.3,
-    marginBottom: 2,
+    marginBottom: 6,
   },
   brandSubline: {
     fontSize: 7.5,
