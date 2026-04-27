@@ -39,7 +39,16 @@ export default function LetterPreview({
   const senderEmail = formData?.sender_email || "";
 
   const recipientName = formData?.recipient_name || "";
-  const recipientAddress = formData?.recipient_address || "";
+  // Adresse destinataire : champs structurés (nouveau) avec fallback sur textarea legacy
+  const recipientLine1 = formData?.recipient_address_line1 || "";
+  const recipientLine2 = formData?.recipient_address_line2 || "";
+  const recipientZipCity =
+    formData?.recipient_zipcode && formData?.recipient_city
+      ? `${formData.recipient_zipcode} ${formData.recipient_city}`
+      : "";
+  const recipientAddress = recipientLine1
+    ? [recipientLine1, recipientLine2, recipientZipCity].filter((l) => l).join("\n")
+    : formData?.recipient_address || "";
 
   const senderCity = formData?.sender_city || "";
   const today = new Date().toLocaleDateString("fr-FR", {

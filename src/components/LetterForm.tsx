@@ -147,11 +147,22 @@ export default function LetterForm({ letterType }: LetterFormProps) {
               <p className="text-[13px] text-jc-ink-muted mb-4">
                 À qui le courrier doit-il être adressé ?
               </p>
-              {recipientFields.map((field) => (
-                <div key={field.name} className="mt-4">
-                  <FieldRenderer field={field} />
+              <div className="space-y-4">
+                {/* Nom + Adresse ligne 1 */}
+                <FieldRenderer field={recipientFields[0]} />
+                <FieldRenderer field={recipientFields[1]} />
+                {/* Complément (facultatif) */}
+                <FieldRenderer field={recipientFields[2]} />
+                {/* CP + Ville sur la même ligne */}
+                <div className="flex gap-4 flex-wrap">
+                  <div className="w-[120px] shrink-0">
+                    <FieldRenderer field={recipientFields[3]} />
+                  </div>
+                  <div className="flex-1 min-w-[200px]">
+                    <FieldRenderer field={recipientFields[4]} />
+                  </div>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>

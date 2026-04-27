@@ -15,7 +15,10 @@ const baseSchema = z.object({
   sender_city: z.string().min(1, "Ville requise"),
   sender_email: z.string().email("Email invalide"),
   recipient_name: z.string().min(2, "Nom du destinataire requis"),
-  recipient_address: z.string().min(5, "Adresse du destinataire requise"),
+  recipient_address_line1: z.string().min(2, "Adresse du destinataire requise"),
+  recipient_address_line2: z.string().optional(),
+  recipient_zipcode: z.string().min(4, "Code postal du destinataire requis"),
+  recipient_city: z.string().min(1, "Ville du destinataire requise"),
 });
 
 export async function submitLetterForm(
@@ -48,9 +51,15 @@ export async function submitLetterForm(
     }
   }
 
-  // Recombine sender fields for Claude (backward-compatible format)
+  // Recombine sender + recipient fields for Claude (backward-compatible format)
   const senderName = `${rawData.sender_firstname} ${rawData.sender_lastname}`;
   const senderAddress = `${rawData.sender_street}\n${rawData.sender_zipcode} ${rawData.sender_city}`;
+  const recipientAddressLines = [
+    rawData.recipient_address_line1,
+    rawData.recipient_address_line2,
+    `${rawData.recipient_zipcode} ${rawData.recipient_city}`,
+  ].filter((l) => l && l.trim());
+  const recipientAddress = recipientAddressLines.join("\n");
 
   const supabase = createServiceClient();
 
@@ -91,7 +100,7 @@ export async function submitLetterForm(
       senderName,
       senderAddress,
       recipientName: rawData.recipient_name,
-      recipientAddress: rawData.recipient_address,
+      recipientAddress,
     });
 
     // Update letter with generated text

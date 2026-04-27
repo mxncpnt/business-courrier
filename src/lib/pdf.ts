@@ -124,7 +124,17 @@ export async function generatePdfBuffer(params: GeneratePdfParams): Promise<Buff
   const senderEmail = formData?.sender_email || "";
 
   const recipientName = formData?.recipient_name || "";
-  const recipientAddress = formData?.recipient_address || "";
+  // Adresse destinataire : champs structurés (nouveau) avec fallback sur textarea legacy
+  const recipientLine1 = formData?.recipient_address_line1 || "";
+  const recipientLine2 = formData?.recipient_address_line2 || "";
+  const recipientZipCity =
+    formData?.recipient_zipcode && formData?.recipient_city
+      ? `${formData.recipient_zipcode} ${formData.recipient_city}`
+      : "";
+  const recipientAddressLines = recipientLine1
+    ? [recipientLine1, recipientLine2, recipientZipCity].filter((l) => l)
+    : (formData?.recipient_address || "").split("\n").filter((l) => l.trim());
+  const recipientAddress = recipientAddressLines.join("\n");
 
   const senderCity = formData?.sender_city || "";
   const today = new Date().toLocaleDateString("fr-FR", {

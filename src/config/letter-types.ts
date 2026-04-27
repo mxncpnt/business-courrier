@@ -31,9 +31,13 @@ export const categories = [
 ] as const;
 
 // Champs destinataire (affichés dans l'étape 1 « Contexte »)
+// Structurés pour permettre l'envoi physique et la validation d'adresse via API
 export const recipientFields: FormField[] = [
   { name: "recipient_name", label: "Nom du destinataire", type: "text", placeholder: "Société XYZ / M. Martin", required: true },
-  { name: "recipient_address", label: "Adresse du destinataire", type: "textarea", placeholder: "Service client\n1 avenue des Champs-Élysées\n75008 Paris", required: true },
+  { name: "recipient_address_line1", label: "Adresse (n° et rue)", type: "text", placeholder: "1 avenue des Champs-Élysées", required: true },
+  { name: "recipient_address_line2", label: "Complément d'adresse", type: "text", placeholder: "Service client, bâtiment B…", required: false },
+  { name: "recipient_zipcode", label: "Code postal", type: "text", placeholder: "75008", required: true },
+  { name: "recipient_city", label: "Ville", type: "text", placeholder: "Paris", required: true },
 ];
 
 // Champs expéditeur (affichés dans l'étape 2 « Coordonnées »)
