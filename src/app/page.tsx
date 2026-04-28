@@ -127,6 +127,20 @@ export default async function Home() {
               </a>
             </div>
 
+            {/* Sous-CTA — pousse le LRAR en différenciation prix */}
+            <p className="mt-3.5 text-[13px] text-jc-ink-muted">
+              <span className="font-medium text-jc-ink-soft">
+                Lettre recommandée AR à 11,90&nbsp;€ tout compris
+              </span>{" "}
+              —{" "}
+              <Link
+                href="/tarifs"
+                className="text-jc-accent no-underline hover:underline"
+              >
+                voir tous les tarifs
+              </Link>
+            </p>
+
             <div className="flex gap-6 mt-8 flex-wrap text-jc-ink-muted text-[13px]">
               <span className="inline-flex items-center gap-1.5">
                 <IconCheck /> Prêt en 2 minutes
@@ -328,7 +342,7 @@ export default async function Home() {
                   Guides juridiques
                 </Link>
                 <Link
-                  href="/catalogue"
+                  href="/tarifs"
                   className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors"
                 >
                   Tarifs
