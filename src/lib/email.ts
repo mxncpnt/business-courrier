@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { renderConfirmationEmail } from "@/emails/confirmation-email";
+import type { MailingMode } from "@/config/mailings";
 
 // ---------------------------------------------------------------------------
 // Initialisation Resend (lazy — évite le crash au build si la clé est absente)
@@ -38,6 +39,11 @@ interface SendConfirmationEmailParams {
   letterId: string;
   /** URL complète de téléchargement du PDF */
   downloadUrl: string;
+  /**
+   * Mode d'envoi commandé. undefined = PDF only.
+   * Si défini, le contenu de l'email est adapté (sujet + texte).
+   */
+  mailingMode?: MailingMode;
 }
 
 // ---------------------------------------------------------------------------
@@ -53,15 +59,24 @@ interface SendConfirmationEmailParams {
 export async function sendConfirmationEmail(
   params: SendConfirmationEmailParams
 ): Promise<void> {
-  const { to, letterTitle, letterId, downloadUrl } = params;
+  const { to, letterTitle, letterId, downloadUrl, mailingMode } = params;
 
   const resend = getResend();
-  const { html, text } = renderConfirmationEmail({ letterTitle, letterId, downloadUrl });
+  const { html, text } = renderConfirmationEmail({
+    letterTitle,
+    letterId,
+    downloadUrl,
+    mailingMode,
+  });
+
+  const subject = mailingMode
+    ? `Votre courrier part à La Poste — ${letterTitle}`
+    : `Votre courrier est prêt — ${letterTitle}`;
 
   const { error } = await resend.emails.send({
     from: FROM_ADDRESS,
     to,
-    subject: `Votre courrier est prêt — ${letterTitle}`,
+    subject,
     html,
     text,
   });

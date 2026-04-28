@@ -30,6 +30,8 @@ export default async function SuccessPage({
   const { letter_id } = await searchParams;
 
   let letter: Record<string, unknown> | null = null;
+  let mailingMode: "simple" | "registered" | null = null;
+
   if (letter_id) {
     const supabase = createServiceClient();
     const { data } = await supabase
@@ -38,10 +40,68 @@ export default async function SuccessPage({
       .eq("id", letter_id)
       .single();
     letter = data;
+
+    // Récupérer le mailing associé s'il existe (mode envoi physique commandé)
+    const { data: mailing } = await supabase
+      .from("mailings")
+      .select("mode")
+      .eq("letter_id", letter_id)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (mailing?.mode === "simple" || mailing?.mode === "registered") {
+      mailingMode = mailing.mode;
+    }
   }
 
   const letterType = letter?.type ? getLetterType(letter.type as string) : null;
   const refId = letter_id ? `JC-${letter_id.substring(0, 12).toUpperCase()}` : "";
+
+  // ─── Textes adaptés au mode d'envoi ───────────────────────────────────────
+  const stampLines = mailingMode
+    ? mailingMode === "registered"
+      ? ["Recommandé", "en route", "JC"]
+      : ["Lettre", "en route", "JC"]
+    : ["Courrier", "prêt", "JC"];
+
+  const heading = mailingMode
+    ? mailingMode === "registered"
+      ? "Ton recommandé part à La Poste."
+      : "Ton courrier part à La Poste."
+    : "Ton courrier est prêt.";
+
+  const subtitle = mailingMode
+    ? `On l'imprime, on le met sous pli et on le dépose à La Poste sous 24h ouvrées. Une copie PDF a été envoyée à `
+    : "Le PDF a été envoyé à ";
+
+  const subtitleSuffix = mailingMode
+    ? ". Tu peux la télécharger en archive ci-dessous."
+    : ". Tu peux aussi le télécharger directement ci-dessous.";
+
+  const downloadLabel = mailingMode
+    ? "Télécharger la copie PDF"
+    : "Télécharger le PDF";
+
+  const nextStepsTitle = mailingMode ? "Et maintenant ?" : "Et maintenant ?";
+
+  const nextSteps: string[] = mailingMode
+    ? mailingMode === "registered"
+      ? [
+          "Le courrier sera imprimé et déposé à La Poste sous 24h ouvrées.",
+          "Tu recevras une notification à chaque étape : dépôt, distribution, AR signé.",
+          "L'accusé de réception signé scanné sera disponible dans ton espace dès retour de La Poste.",
+        ]
+      : [
+          "Le courrier sera imprimé et déposé à La Poste sous 24h ouvrées.",
+          "Distribution sous 3 jours ouvrés en France métropolitaine (lettre verte).",
+          "Tu recevras un email à la dépose pour confirmation.",
+        ]
+    : [
+        "Imprime le PDF, signe-le à la main.",
+        "Envoie-le en lettre recommandée avec accusé de réception (LRAR) — c'est ce qui donne date certaine.",
+        "Conserve l'avis de réception pendant au moins 2 ans.",
+      ];
 
   let user = null;
   try {
@@ -120,11 +180,11 @@ export default async function SuccessPage({
               className="absolute inset-[5px] border border-dashed border-jc-accent rounded-full"
               aria-hidden="true"
             />
-            Courrier
+            {stampLines[0]}
             <br />
-            prêt
+            {stampLines[1]}
             <br />
-            JC
+            {stampLines[2]}
           </div>
         </div>
 
@@ -135,16 +195,16 @@ export default async function SuccessPage({
 
         {/* Title */}
         <h1 className="mt-3.5 text-[32px] sm:text-[44px] font-display font-bold text-jc-ink leading-tight">
-          Ton courrier est prêt.
+          {heading}
         </h1>
 
         {/* Subtitle with email */}
         <p className="mt-4 text-[15px] sm:text-[17px] text-jc-ink-soft mb-8">
-          Le PDF a été envoyé à{" "}
+          {subtitle}
           <strong className="text-jc-ink">
             {(letter?.email as string) || "ton adresse email"}
           </strong>
-          . Tu peux aussi le télécharger directement ci-dessous.
+          {subtitleSuffix}
         </p>
 
         {/* ─── Download card ─── */}
@@ -171,7 +231,7 @@ export default async function SuccessPage({
                 href={`/api/download/${letter_id}`}
                 className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-jc-primary text-white font-medium rounded-jc hover:bg-jc-primary-hover transition-colors text-base no-underline"
               >
-                <IconDownload /> Télécharger le PDF
+                <IconDownload /> {downloadLabel}
               </a>
               <Link
                 href="/dashboard"
@@ -186,15 +246,12 @@ export default async function SuccessPage({
         {/* ─── Et maintenant ? ─── */}
         <div className="mt-7 bg-jc-surface rounded-jc p-5 text-left">
           <h4 className="text-[15px] font-semibold text-jc-ink mb-2">
-            Et maintenant ?
+            {nextStepsTitle}
           </h4>
           <ol className="list-decimal pl-5 text-[14px] text-jc-ink-soft space-y-1.5">
-            <li>Imprime le PDF, signe-le à la main.</li>
-            <li>
-              Envoie-le en lettre recommandée avec accusé de réception (LRAR)
-              — c&apos;est ce qui donne date certaine.
-            </li>
-            <li>Conserve l&apos;avis de réception pendant au moins 2 ans.</li>
+            {nextSteps.map((step, i) => (
+              <li key={i}>{step}</li>
+            ))}
           </ol>
         </div>
 

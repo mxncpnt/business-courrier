@@ -1,10 +1,17 @@
 // Template email de confirmation après paiement — branding JusteCourrier / Sage.
 // Retourne { html, text } pour l'API Resend — aucune dépendance externe requise.
 
+import type { MailingMode } from "@/config/mailings";
+
 interface ConfirmationEmailData {
   letterTitle: string;
   letterId: string;
   downloadUrl: string;
+  /**
+   * Mode d'envoi commandé. undefined = PDF only (l'utilisateur poste lui-même).
+   * Si défini, JusteCourrier s'occupe de l'envoi → on adapte les conseils.
+   */
+  mailingMode?: MailingMode;
 }
 
 // Sage brand tokens (hardcoded for email — no CSS variables in email clients)
@@ -25,9 +32,52 @@ export function renderConfirmationEmail(data: ConfirmationEmailData): {
   html: string;
   text: string;
 } {
-  const { letterTitle, letterId, downloadUrl } = data;
+  const { letterTitle, letterId, downloadUrl, mailingMode } = data;
   const shortRef = letterId.substring(0, 8).toUpperCase();
   const year = new Date().getFullYear();
+
+  // ─── Texte adapté au mode d'envoi ────────────────────────────────────────
+  const intro = mailingMode
+    ? `Votre paiement a bien été reçu. Le courrier <strong style="color:${jc.ink};">${escHtml(letterTitle)}</strong> sera déposé à La Poste sous 24h ouvrées.${mailingMode === "registered" ? " L'accusé de réception signé vous sera envoyé dès distribution." : ""} Une copie PDF est disponible en archive.`
+    : `Votre paiement a bien été reçu. Votre courrier <strong style="color:${jc.ink};">${escHtml(letterTitle)}</strong> est disponible en téléchargement.`;
+
+  const ctaLabel = mailingMode
+    ? "Télécharger ma copie (PDF)"
+    : "Télécharger mon courrier (PDF)";
+
+  const conseilsTitle = mailingMode ? "Et maintenant ?" : "Conseils d'envoi";
+
+  const conseilsHtml = mailingMode
+    ? mailingMode === "registered"
+      ? `<p style="margin:8px 0 6px;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Le courrier sera <strong style="color:${jc.ink};">imprimé, mis sous pli et déposé à La Poste sous 24h ouvrées</strong>.</p>
+<p style="margin:0 0 6px;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Vous recevrez une notification email à chaque étape : dépôt, distribution, AR signé.</p>
+<p style="margin:0;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• L'accusé de réception signé scanné sera disponible dans votre espace dès retour de La Poste.</p>`
+      : `<p style="margin:8px 0 6px;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Le courrier sera <strong style="color:${jc.ink};">imprimé, mis sous pli et déposé à La Poste sous 24h ouvrées</strong>.</p>
+<p style="margin:0 0 6px;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Distribution sous 3 jours ouvrés en France métropolitaine (lettre verte).</p>
+<p style="margin:0;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Vous recevrez une notification email à la dépose.</p>`
+    : `<p style="margin:8px 0 6px;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Imprimez votre courrier et signez-le à la main avant envoi.</p>
+<p style="margin:0 0 6px;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Pour les mises en demeure et résiliations, privilégiez l'envoi en <strong style="color:${jc.ink};">lettre recommandée avec accusé de réception</strong>.</p>
+<p style="margin:0;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Conservez une copie du courrier et du récépissé d'envoi.</p>`;
+
+  const conseilsText = mailingMode
+    ? mailingMode === "registered"
+      ? `- Le courrier sera imprimé, mis sous pli et déposé à La Poste sous 24h ouvrées.
+- Vous recevrez une notification email à chaque étape : dépôt, distribution, AR signé.
+- L'accusé de réception signé scanné sera disponible dans votre espace dès retour de La Poste.`
+      : `- Le courrier sera imprimé, mis sous pli et déposé à La Poste sous 24h ouvrées.
+- Distribution sous 3 jours ouvrés en France métropolitaine (lettre verte).
+- Vous recevrez une notification email à la dépose.`
+    : `- Imprimez votre courrier et signez-le à la main avant envoi.
+- Pour les mises en demeure et résiliations, privilégiez l'envoi en lettre recommandée avec accusé de réception.
+- Conservez une copie du courrier et du récépissé d'envoi.`;
+
+  const headline = mailingMode
+    ? "Votre courrier part à La Poste"
+    : "Votre courrier est prêt";
+
+  const introText = mailingMode
+    ? `Votre paiement a bien été reçu. Le courrier "${letterTitle}" sera déposé à La Poste sous 24h ouvrées.${mailingMode === "registered" ? " L'accusé de réception signé vous sera envoyé dès distribution." : ""} Une copie PDF est disponible en archive.`
+    : `Votre paiement a bien été reçu. Votre courrier "${letterTitle}" est disponible en téléchargement.`;
 
   // Logo SVG inline (envelope + accent dot, matching Logo.tsx)
   const logoSvg = `<svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,12 +119,10 @@ export function renderConfirmationEmail(data: ConfirmationEmailData): {
           <tr>
             <td style="padding:40px;">
 
-              <p style="margin:0 0 16px;font-size:22px;font-weight:700;color:${jc.ink};font-family:Georgia,serif;">Votre courrier est prêt</p>
+              <p style="margin:0 0 16px;font-size:22px;font-weight:700;color:${jc.ink};font-family:Georgia,serif;">${headline}</p>
 
               <p style="margin:0 0 24px;font-size:16px;color:${jc.inkSoft};line-height:1.6;">
-                Votre paiement a bien été reçu. Votre courrier
-                <strong style="color:${jc.ink};">${escHtml(letterTitle)}</strong>
-                est disponible en téléchargement.
+                ${intro}
               </p>
 
               <!-- CTA -->
@@ -83,7 +131,7 @@ export function renderConfirmationEmail(data: ConfirmationEmailData): {
                   <td align="center" style="padding:8px 0 32px;">
                     <a href="${escHtml(downloadUrl)}"
                        style="display:inline-block;background-color:${jc.primary};color:#ffffff;font-size:16px;font-weight:600;padding:14px 32px;border-radius:10px;text-decoration:none;">
-                      Télécharger mon courrier (PDF)
+                      ${ctaLabel}
                     </a>
                   </td>
                 </tr>
@@ -103,10 +151,8 @@ export function renderConfirmationEmail(data: ConfirmationEmailData): {
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="background-color:${jc.bg};border-radius:10px;padding:20px 24px;border:1px solid ${jc.line};">
-                    <p style="margin:0 0 4px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:${jc.accent};">Conseils d'envoi</p>
-                    <p style="margin:8px 0 6px;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Imprimez votre courrier et signez-le à la main avant envoi.</p>
-                    <p style="margin:0 0 6px;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Pour les mises en demeure et résiliations, privilégiez l'envoi en <strong style="color:${jc.ink};">lettre recommandée avec accusé de réception</strong>.</p>
-                    <p style="margin:0;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Conservez une copie du courrier et du récépissé d'envoi.</p>
+                    <p style="margin:0 0 4px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:${jc.accent};">${conseilsTitle}</p>
+                    ${conseilsHtml}
                   </td>
                 </tr>
               </table>
@@ -142,18 +188,16 @@ export function renderConfirmationEmail(data: ConfirmationEmailData): {
 </html>`;
 
   // Version texte brut (clients mail sans HTML, délivrabilité)
-  const text = `JusteCourrier — Votre courrier est prêt
+  const text = `JusteCourrier — ${headline}
 
-Votre paiement a bien été reçu. Votre courrier "${letterTitle}" est disponible en téléchargement.
+${introText}
 
-Télécharger votre PDF :
+${mailingMode ? "Télécharger votre copie PDF" : "Télécharger votre PDF"} :
 ${downloadUrl}
 
 ---
-Conseils d'envoi :
-- Imprimez votre courrier et signez-le à la main avant envoi.
-- Pour les mises en demeure et résiliations, privilégiez l'envoi en lettre recommandée avec accusé de réception.
-- Conservez une copie du courrier et du récépissé d'envoi.
+${conseilsTitle} :
+${conseilsText}
 
 Référence : ${shortRef}
 

@@ -4,6 +4,11 @@ import { createServiceClient } from "@/lib/supabase/server";
 import { sendConfirmationEmail } from "@/lib/email";
 import { getLetterType } from "@/config/letter-types";
 import { createInvoice } from "@/lib/invoice";
+import { submitMailingToProvider } from "@/lib/mailings/submit";
+import {
+  getMailingModeConfig,
+  type MailingMode,
+} from "@/config/mailings";
 import Stripe from "stripe";
 
 export async function POST(req: NextRequest) {
@@ -34,6 +39,7 @@ export async function POST(req: NextRequest) {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
     const letterId = session.metadata?.letter_id;
+    const mailingId = session.metadata?.mailing_id ?? null;
 
     if (!letterId) {
       console.error("No letter_id in session metadata");
@@ -77,10 +83,51 @@ export async function POST(req: NextRequest) {
 
     if (paymentError) {
       console.error("Failed to insert payment:", paymentError);
-      // Non-bloquant : on continue même si l'enregistrement du paiement échoue
+      // Non-bloquant
     }
 
-    // 3. Récupérer les infos du courrier pour l'email et la facture
+    // 3. Si mailing_id présent : marquer le mailing comme payé + déclencher submission MSB
+    let mailingMode: MailingMode | undefined;
+
+    if (mailingId) {
+      const { data: mailingUpdate, error: mailingUpdateError } = await supabase
+        .from("mailings")
+        .update({
+          status: "paid",
+          paid_at: new Date().toISOString(),
+          stripe_checkout_session_id: session.id,
+          stripe_payment_intent_id: paymentIntentId,
+        })
+        .eq("id", mailingId)
+        .select("mode")
+        .single();
+
+      if (mailingUpdateError) {
+        console.error(
+          `Failed to update mailing ${mailingId}:`,
+          mailingUpdateError
+        );
+        // Non-bloquant : le paiement Stripe est confirmé, on continue
+      } else {
+        mailingMode = mailingUpdate.mode as MailingMode;
+        console.log(`Mailing ${mailingId} marked as paid (mode=${mailingMode})`);
+
+        // Déclencher la soumission au provider postal en fire-and-forget.
+        // submitMailingToProvider gère ses propres erreurs (status=failed si KO)
+        // — on await mais on ne throw jamais (sécurité du webhook Stripe).
+        try {
+          await submitMailingToProvider(mailingId);
+        } catch (err) {
+          // Filet de sécurité, normalement submitMailingToProvider ne throw pas
+          console.error(
+            `Unexpected throw from submitMailingToProvider(${mailingId}):`,
+            err
+          );
+        }
+      }
+    }
+
+    // 4. Récupérer les infos du courrier pour l'email et la facture
     const { data: letter, error: fetchError } = await supabase
       .from("letters")
       .select("email, type, user_id, form_data")
@@ -89,18 +136,22 @@ export async function POST(req: NextRequest) {
 
     if (fetchError || !letter) {
       console.error("Failed to fetch letter for email:", fetchError);
-      // Non-bloquant : le paiement est confirmé, l'email est secondaire
     } else {
-      // 4. Créer la facture
       const letterType = getLetterType(letter.type);
       const letterTitle = letterType?.title ?? letter.type.replace(/-/g, " ");
 
+      // 5. Créer la facture (description adaptée si envoi physique commandé)
       if (paymentData?.id) {
         const formData = (letter.form_data ?? {}) as Record<string, string>;
         const customerName =
           formData.sender_firstname && formData.sender_lastname
             ? `${formData.sender_firstname} ${formData.sender_lastname}`
             : letter.email;
+
+        // Description enrichie si mailing
+        const description = mailingMode
+          ? `Courrier — ${letterTitle} (envoi ${getMailingModeConfig(mailingMode).label.toLowerCase()})`
+          : `Courrier — ${letterTitle}`;
 
         try {
           await createInvoice({
@@ -109,7 +160,7 @@ export async function POST(req: NextRequest) {
             userId: letter.user_id ?? undefined,
             customerEmail: letter.email,
             customerName,
-            description: `Courrier — ${letterTitle}`,
+            description,
             amountCents,
             stripePaymentIntentId: paymentIntentId ?? undefined,
             paidAt: new Date().toISOString(),
@@ -121,7 +172,7 @@ export async function POST(req: NextRequest) {
         }
       }
 
-      // 5. Envoyer l'email de confirmation
+      // 6. Envoyer l'email de confirmation (contenu adapté au mode)
       const appUrl =
         process.env.NEXT_PUBLIC_APP_URL || "https://localhost:3000";
       const downloadUrl = `${appUrl}/api/download/${letterId}`;
@@ -132,11 +183,14 @@ export async function POST(req: NextRequest) {
           letterTitle,
           letterId,
           downloadUrl,
+          mailingMode,
         });
-        console.log(`Confirmation email sent to ${letter.email} for letter ${letterId}`);
+        console.log(
+          `Confirmation email sent to ${letter.email} for letter ${letterId}` +
+            (mailingMode ? ` (mode=${mailingMode})` : "")
+        );
       } catch (emailError) {
         // Non-bloquant : on log l'erreur mais on ne fait pas échouer le webhook.
-        // Stripe réessaierait le webhook, ce qui redéclencherait un double email.
         console.error("Failed to send confirmation email:", emailError);
       }
     }
