@@ -304,9 +304,10 @@ export class MySendingBoxProvider implements MailProvider {
     form.append("description", `JC-${internalMailingId}`);
 
     // PDF principal — champ "source_file" + "source_file_type=file" (obligatoire)
+    // Uint8Array nécessaire : Buffer<ArrayBufferLike> n'est pas directement assignable à BlobPart
     form.append(
       "source_file",
-      new Blob([pdfBuffer], { type: "application/pdf" }),
+      new Blob([new Uint8Array(pdfBuffer)], { type: "application/pdf" }),
       "courrier.pdf"
     );
     form.append("source_file_type", "file");
