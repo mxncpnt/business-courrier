@@ -7,11 +7,16 @@ import {
   type MailingMode,
 } from "@/config/mailings";
 import CheckoutButton from "@/components/CheckoutButton";
+import AddressEditor from "@/components/AddressEditor";
+import AttachmentUploader from "@/components/AttachmentUploader";
 import { IconCheck } from "@/components/Icons";
+import type { PostalAddress } from "@/lib/mailings/provider";
+import type { AttachmentInfo } from "@/app/preview/[id]/actions";
 
 /**
- * Mode étendu pour l'UI : "pdf" = pas d'envoi physique, l'utilisateur poste lui-même.
- * Côté API checkout, "pdf" → mailingMode undefined (pas de mailing créé).
+ * Mode étendu pour l'UI : "pdf" = pas d'envoi physique, l'utilisateur poste
+ * lui-même. Côté API checkout, "pdf" → mailingMode undefined (pas de mailing
+ * créé).
  */
 type ChoiceMode = "pdf" | MailingMode;
 
@@ -20,38 +25,98 @@ interface MailingChoiceProps {
   letterTypeSlug: string;
   /** Prix de génération du courrier seul (en cents). Vient de letterType.priceCents. */
   letterPriceCents: number;
+  /** Form data sauvegardé en DB (sender_*, recipient_*) — sert d'init aux adresses */
+  formData: Record<string, string>;
 }
 
 function formatEuros(cents: number): string {
   return (cents / 100).toFixed(2).replace(".", ",");
 }
 
+function buildSenderAddress(formData: Record<string, string>): PostalAddress {
+  const firstname = formData.sender_firstname || "";
+  const lastname = formData.sender_lastname || "";
+  return {
+    name: `${firstname} ${lastname}`.trim(),
+    addressLine1: formData.sender_street || "",
+    zipcode: formData.sender_zipcode || "",
+    city: formData.sender_city || "",
+    country: "FR",
+  };
+}
+
+function buildRecipientAddress(
+  formData: Record<string, string>
+): PostalAddress {
+  return {
+    name: formData.recipient_name || "",
+    addressLine1: formData.recipient_address_line1 || "",
+    addressLine2: formData.recipient_address_line2 || undefined,
+    zipcode: formData.recipient_zipcode || "",
+    city: formData.recipient_city || "",
+    country: "FR",
+  };
+}
+
 export default function MailingChoice({
   letterId,
   letterTypeSlug,
   letterPriceCents,
+  formData,
 }: MailingChoiceProps) {
   const recommendedMode = getRecommendedMode(letterTypeSlug);
   const [choice, setChoice] = useState<ChoiceMode>("pdf");
 
-  // Calcul des prix par mode (lettre seule + envoi)
+  // Adresses (initialisées depuis form_data, présupposées valides)
+  const [senderAddress, setSenderAddress] = useState<PostalAddress>(() =>
+    buildSenderAddress(formData)
+  );
+  const [senderValid, setSenderValid] = useState(true);
+  const [recipientAddress, setRecipientAddress] = useState<PostalAddress>(() =>
+    buildRecipientAddress(formData)
+  );
+  const [recipientValid, setRecipientValid] = useState(true);
+
+  // Pièces jointes (uploadées au fur et à mesure dans Storage)
+  const [attachments, setAttachments] = useState<AttachmentInfo[]>([]);
+
+  // Warn-no-block : checkbox d'acceptation du downgrade pour types critiques
+  const [warnAccepted, setWarnAccepted] = useState(false);
+
+  // Calcul des prix par mode
   const simpleConfig = MAILING_MODES.simple;
   const registeredConfig = MAILING_MODES.registered;
   const simpleEnvoiCents =
     simpleConfig.costCentsEstimate + simpleConfig.markupCentsEstimate;
   const registeredEnvoiCents =
     registeredConfig.costCentsEstimate + registeredConfig.markupCentsEstimate;
-
   const simpleTotalCents = letterPriceCents + simpleEnvoiCents;
   const registeredTotalCents = letterPriceCents + registeredEnvoiCents;
 
-  // Total selon le choix actif
   let totalCents = letterPriceCents;
-  if (choice === "simple") {
-    totalCents = simpleTotalCents;
-  } else if (choice === "registered") {
-    totalCents = registeredTotalCents;
-  }
+  if (choice === "simple") totalCents = simpleTotalCents;
+  else if (choice === "registered") totalCents = registeredTotalCents;
+
+  // Mode envoi physique (≠ PDF) : on demande adresses + PJ
+  const isPhysical = choice !== "pdf";
+
+  // Warn-no-block : recommendedMode est registered, choice est inférieur
+  const showWarning =
+    recommendedMode === "registered" && choice !== "registered";
+  const warningMessage = (() => {
+    if (choice === "pdf") {
+      return "Ce type de courrier nécessite généralement un recommandé avec accusé de réception pour avoir valeur juridique opposable. Sans envoi par JusteCourrier, tu devras t'occuper toi-même de l'expédition en LRAR à La Poste.";
+    }
+    if (choice === "simple") {
+      return "Ce type de courrier nécessite généralement un recommandé avec accusé de réception pour avoir valeur juridique opposable. La lettre simple ne fournit ni preuve de dépôt ni AR signé.";
+    }
+    return "";
+  })();
+
+  // Disabled checkout selon les conditions
+  const checkoutDisabled =
+    (isPhysical && (!senderValid || !recipientValid)) ||
+    (showWarning && !warnAccepted);
 
   return (
     <div>
@@ -94,6 +159,52 @@ export default function MailingChoice({
         />
       </div>
 
+      {/* ─── Bloc adresses + PJ (uniquement si envoi physique) ─── */}
+      {isPhysical && (
+        <div className="mb-5 space-y-4 p-4 sm:p-5 border border-jc-line rounded-jc bg-jc-surface">
+          <div>
+            <h3 className="text-[14px] font-semibold text-jc-ink mb-2">
+              Vérifie les adresses
+            </h3>
+            <div className="space-y-3.5">
+              <AddressEditor
+                label="Expéditeur"
+                initialAddress={senderAddress}
+                showLine2={false}
+                onChange={(addr, valid) => {
+                  setSenderAddress(addr);
+                  setSenderValid(valid);
+                }}
+              />
+              <AddressEditor
+                label="Destinataire"
+                initialAddress={recipientAddress}
+                showLine2={true}
+                onChange={(addr, valid) => {
+                  setRecipientAddress(addr);
+                  setRecipientValid(valid);
+                }}
+              />
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-[14px] font-semibold text-jc-ink mb-1">
+              Pièces jointes <span className="text-jc-ink-muted font-normal">(facultatif)</span>
+            </h3>
+            <p className="text-[12px] text-jc-ink-soft mb-2.5">
+              Bail, facture, état des lieux, photo… ajoute jusqu&apos;à 5
+              fichiers (10 Mo total).
+            </p>
+            <AttachmentUploader
+              letterId={letterId}
+              attachments={attachments}
+              onChange={setAttachments}
+            />
+          </div>
+        </div>
+      )}
+
       {/* ─── Récap prix ─── */}
       <div className="bg-jc-surface rounded-jc p-4 mb-5">
         <div className="flex justify-between items-baseline flex-wrap gap-3">
@@ -114,11 +225,37 @@ export default function MailingChoice({
         </div>
       </div>
 
+      {/* ─── Warn-no-block (option c) ─── */}
+      {showWarning && (
+        <div className="mb-5 p-4 bg-amber-50 border border-amber-300 rounded-jc">
+          <div className="text-[13px] text-amber-900 leading-[1.5] mb-3">
+            <strong className="font-semibold">Attention juridique. </strong>
+            {warningMessage}
+          </div>
+          <label className="flex items-start gap-2.5 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={warnAccepted}
+              onChange={(e) => setWarnAccepted(e.target.checked)}
+              className="mt-0.5 h-4 w-4 shrink-0 rounded border-amber-400 accent-amber-600 cursor-pointer"
+            />
+            <span className="text-[13px] leading-[1.4] text-amber-900">
+              Je comprends et je choisis ce mode quand même, sous ma
+              responsabilité.
+            </span>
+          </label>
+        </div>
+      )}
+
       {/* ─── Checkout button ─── */}
       <CheckoutButton
         letterId={letterId}
         mailingMode={choice === "pdf" ? undefined : choice}
         totalCents={totalCents}
+        senderAddress={isPhysical ? senderAddress : undefined}
+        recipientAddress={isPhysical ? recipientAddress : undefined}
+        attachments={isPhysical ? attachments : undefined}
+        disabledExternal={checkoutDisabled}
       />
 
       <p className="mt-3 text-xs text-jc-ink-muted text-center">

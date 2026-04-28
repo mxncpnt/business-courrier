@@ -148,6 +148,7 @@ export default async function PreviewPage({
               letterId={letter.id}
               letterTypeSlug={letter.type}
               letterPriceCents={letterType?.priceCents ?? 390}
+              formData={(letter.form_data ?? {}) as Record<string, string>}
             />
           </div>
         )}

@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { IconLock } from "@/components/Icons";
 import type { MailingMode } from "@/config/mailings";
+import type { PostalAddress } from "@/lib/mailings/provider";
+import type { AttachmentInfo } from "@/app/preview/[id]/actions";
 
 interface CheckoutButtonProps {
   letterId: string;
@@ -13,6 +15,17 @@ interface CheckoutButtonProps {
    * lettre (priceCents) — utile pour le flow PDF only sans MailingChoice.
    */
   totalCents?: number;
+  /** Adresse expéditeur (uniquement si mailingMode défini). Branché en commit 3. */
+  senderAddress?: PostalAddress;
+  /** Adresse destinataire (uniquement si mailingMode défini). Branché en commit 3. */
+  recipientAddress?: PostalAddress;
+  /** Pièces jointes uploadées (uniquement si mailingMode défini). Branché en commit 3. */
+  attachments?: AttachmentInfo[];
+  /**
+   * Désactivation forcée par le parent (ex: adresse invalide, warning non
+   * accepté). S'ajoute à la condition `!accepted` (checkbox responsabilité).
+   */
+  disabledExternal?: boolean;
 }
 
 function formatEuros(cents: number): string {
@@ -23,20 +36,31 @@ export default function CheckoutButton({
   letterId,
   mailingMode,
   totalCents,
+  senderAddress,
+  recipientAddress,
+  attachments,
+  disabledExternal = false,
 }: CheckoutButtonProps) {
   const [loading, setLoading] = useState(false);
   const [accepted, setAccepted] = useState(false);
 
   async function handleCheckout() {
-    if (!accepted) return;
+    if (!accepted || disabledExternal) return;
     setLoading(true);
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        // mailingMode est envoyé dès maintenant ; l'API checkout l'ignore
-        // tant que la Phase 4.3 commit 3 n'est pas livrée. Pas d'effet de bord.
-        body: JSON.stringify({ letterId, mailingMode }),
+        // mailingMode + adresses + attachments sont envoyés dès maintenant ;
+        // l'API checkout les ignore tant que la Phase 4.3 commit 3 n'est pas
+        // livrée. Pas d'effet de bord.
+        body: JSON.stringify({
+          letterId,
+          mailingMode,
+          senderAddress,
+          recipientAddress,
+          attachments,
+        }),
       });
 
       const data = await res.json();
@@ -57,6 +81,8 @@ export default function CheckoutButton({
   const displayCents = totalCents ?? 390;
   const verbe = mailingMode ? "et envoyer" : "et télécharger";
   const buttonLabel = `Payer ${formatEuros(displayCents)} € ${verbe}`;
+
+  const isDisabled = loading || !accepted || disabledExternal;
 
   return (
     <div>
@@ -85,7 +111,7 @@ export default function CheckoutButton({
       {/* Bouton paiement */}
       <button
         onClick={handleCheckout}
-        disabled={loading || !accepted}
+        disabled={isDisabled}
         className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-jc-primary text-white font-medium rounded-jc hover:bg-jc-primary-hover transition-colors text-base disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? (
