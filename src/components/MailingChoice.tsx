@@ -47,13 +47,10 @@ export default function MailingChoice({
 
   // Total selon le choix actif
   let totalCents = letterPriceCents;
-  let envoiCents = 0;
   if (choice === "simple") {
     totalCents = simpleTotalCents;
-    envoiCents = simpleEnvoiCents;
   } else if (choice === "registered") {
     totalCents = registeredTotalCents;
-    envoiCents = registeredEnvoiCents;
   }
 
   return (
@@ -108,12 +105,6 @@ export default function MailingChoice({
                 TTC
               </span>
             </div>
-            {envoiCents > 0 && (
-              <div className="text-[12px] text-jc-ink-muted mt-1">
-                Courrier {formatEuros(letterPriceCents)}&nbsp;€ +
-                Affranchissement {formatEuros(envoiCents)}&nbsp;€
-              </div>
-            )}
           </div>
           <div className="text-xs text-jc-ink-muted max-w-[280px] sm:text-right">
             {choice === "pdf"
