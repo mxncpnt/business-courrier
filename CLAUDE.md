@@ -11,7 +11,7 @@ Service web permettant aux particuliers d'obtenir un courrier administratif/juri
 - Repo GitHub : mxncpnt/business-courrier
 
 ## Stack
-- Next.js 15 (App Router) + TypeScript + Tailwind CSS
+- Next.js 16 (App Router) + TypeScript + Tailwind CSS
 - Supabase (Postgres + Auth magic link + Storage PDFs)
 - API Claude (Anthropic) pour génération des courriers
 - Stripe Checkout pour paiement
@@ -64,7 +64,7 @@ supabase/migrations/            # Migrations SQL
 - Supabase : projet "courrier-ia", région EU (supabase login ✓)
 - Stripe : mode test (stripe login ✓)
 - Anthropic : configuré (clé API dans .env.local ✓)
-- Resend : à configurer
+- Resend : configuré (clé API dans .env.local ✓, RESEND_API_KEY à ajouter sur Vercel)
 
 ## Docs de référence
 - Specs fonctionnelles : ../02-produit/specs-fonctionnelles.md
@@ -85,13 +85,27 @@ supabase/migrations/            # Migrations SQL
 - [x] Prévisualisation floutée (src/app/preview/[id]/ + src/components/LetterPreview.tsx)
 - [x] Intégration Stripe Checkout (src/lib/stripe.ts, src/app/api/checkout/, src/app/api/stripe-webhook/)
 - [x] Pages paiement succès/annulation (src/app/paiement/)
-- [ ] Génération PDF (téléchargement après paiement) ← PROCHAIN
-- [ ] Emails transactionnels (Resend)
-- [ ] CGV / mentions légales / RGPD
-- [ ] Auth optionnelle (Supabase Auth magic link)
-- [ ] Déploiement production (variables d'env Vercel)
+- [x] Génération PDF (@react-pdf/renderer, src/lib/pdf.ts, src/app/api/download/[id]/)
+- [x] Déploiement Vercel (variables d'env configurées, build OK, flow complet testé en prod)
+- [x] Emails transactionnels (resend@6.12.2, template HTML dans src/emails/confirmation-email.ts, branché sur le webhook Stripe)
+- [x] CGV / mentions légales / RGPD (src/app/cgv/, src/app/mentions-legales/, src/app/confidentialite/) — placeholders SIRET/adresse/médiateur à compléter
+- [x] Auth optionnelle (Supabase magic link, src/app/connexion/, src/app/auth/callback/, src/middleware.ts)
+- [x] Dashboard historique (src/app/dashboard/, liste courriers avec statut + téléchargement PDF)
 
 ## Notes techniques
 - Supabase : GRANT ALL sur letters/payments nécessaire pour service_role (fait manuellement via SQL Editor)
-- Stripe : mode test, webhook via `stripe listen --forward-to localhost:3000/api/stripe-webhook`
+- Stripe : mode test, webhook configuré sur Vercel (endpoint: /api/stripe-webhook, événement: checkout.session.completed)
+- Stripe local : `stripe listen --forward-to localhost:3000/api/stripe-webhook` (le whsec_ change à chaque restart)
 - Claude : modèle claude-sonnet-4-6 (l'ancien claude-sonnet-4-20250514 est déprécié)
+- Vercel : variables d'env à mettre au niveau PROJET (pas Team/Shared), sinon non trouvées au runtime
+- Next.js 16 + Zod v4 : utiliser `.issues` (pas `.errors`) sur ZodError
+- Next.js 16 : Buffer incompatible avec NextResponse body, convertir en `new Uint8Array(buffer)`
+- Stripe client : initialisation lazy via `getStripe()` (pas d'import direct) pour éviter crash au build-time quand les env vars ne sont pas dispo
+- Git + zsh : échapper les crochets dans les chemins → `git add "src/app/api/download/[id]/route.ts"`
+- Resend : init lazy via `getResend()` (même pattern que Stripe)
+- Resend en test : avec `onboarding@resend.dev` comme expéditeur, envoi limité à l'email du compte Resend — pour la prod, vérifier un domaine dans le dashboard Resend
+- Resend : template HTML pur `{ html, text }` dans `src/emails/confirmation-email.ts`, passé à `resend.emails.send()`
+- Webhook Stripe : l'email est dans un `try/catch` non-bloquant — une erreur Resend est loguée mais ne renvoie pas d'erreur à Stripe (évite les doubles webhooks)
+- Supabase Auth : magic link via `@supabase/ssr`, middleware pour refresh session, callback dans `/auth/callback`
+- Vercel env vars : les `NEXT_PUBLIC_*` doivent être NON-sensitive (sinon pas injectées dans le bundle client)
+- Next.js 16 : warning "middleware deprecated, use proxy" — non-bloquant, à migrer plus tard
