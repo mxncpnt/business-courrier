@@ -96,7 +96,7 @@ export default async function CataloguePage() {
           Catalogue
         </span>
         <h1 className="mt-3.5 mb-3.5 text-[48px] leading-[1.05] tracking-[-0.03em] font-display font-bold text-jc-ink max-md:text-[32px] max-md:leading-[1.1]">
-          10 modèles de courriers, un seul prix.
+          10 modèles de courriers, des tarifs simples.
         </h1>
         <p className="text-[17px] leading-relaxed text-jc-ink-soft mb-7 max-w-[640px] max-md:text-[15px]">
           Choisis le type de courrier qui correspond à ta situation. Tous nos

@@ -6,7 +6,7 @@
 
 JusteCourrier permet aux particuliers de générer des courriers professionnels adaptés à leur situation personnelle. L'utilisateur remplit un formulaire avec les détails de sa situation, et l'IA rédige un courrier conforme aux normes françaises (mise en page AFNOR NF Z 11-001), avec les références juridiques appropriées.
 
-Le courrier est livré en PDF prêt à imprimer ou à envoyer par courrier recommandé.
+Le courrier est livré en PDF, ou directement déposé à La Poste par JusteCourrier (lettre simple ou recommandé avec accusé de réception, au choix du client).
 
 ## Types de courriers disponibles
 
@@ -23,7 +23,15 @@ Le courrier est livré en PDF prêt à imprimer ou à envoyer par courrier recom
 
 ## Tarification
 
-Prix unique : 4,90 EUR par courrier. Pas d'abonnement, pas de frais cachés.
+Trois niveaux au choix, sans abonnement ni engagement :
+
+- Génération du PDF seule : 3,90 EUR (l'utilisateur télécharge et envoie lui-même)
+- Génération + envoi en lettre verte (J+3) : 5,90 EUR
+- Génération + envoi en recommandé avec accusé de réception (LRAR) : 11,90 EUR
+
+L'affranchissement est refacturé au prix coûtant (via partenaire MySendingBox), sans marge dissimulée. Aucun abonnement, paiement à l'usage uniquement.
+
+JusteCourrier est franchise en base de TVA (article 293 B du CGI), TVA non applicable.
 
 ## Public cible
 
@@ -33,6 +41,7 @@ Particuliers résidant en France ayant besoin d'envoyer un courrier administrati
 
 - URL : https://justecourrier.fr
 - Catalogue : https://justecourrier.fr/catalogue
+- Tarifs détaillés : https://justecourrier.fr/tarifs
 - Guides pratiques : https://justecourrier.fr/guides
 - Langue : Français
 - Zone : France métropolitaine et DOM-TOM
