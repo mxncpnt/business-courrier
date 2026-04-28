@@ -4,7 +4,7 @@ import { createServiceClient } from "@/lib/supabase/server";
 import { createAuthClient } from "@/lib/supabase/server-auth";
 import { getLetterType } from "@/config/letter-types";
 import LetterPreview from "@/components/LetterPreview";
-import CheckoutButton from "@/components/CheckoutButton";
+import MailingChoice from "@/components/MailingChoice";
 import Logo from "@/components/Logo";
 import { IconCheck } from "@/components/Icons";
 
@@ -144,24 +144,11 @@ export default async function PreviewPage({
           </div>
         ) : (
           <div className="mt-6 bg-jc-bg-elev border border-jc-line rounded-jc-lg p-5 sm:p-8">
-            {/* Price band */}
-            <div className="flex justify-between items-center flex-wrap gap-3 mb-5">
-              <div>
-                <div className="text-[13px] text-jc-ink-muted">Total à payer</div>
-                <div className="text-[28px] font-display font-semibold text-jc-ink tabular-nums tracking-tight">
-                  3,90 € <span className="text-[13px] text-jc-ink-muted font-normal">TTC</span>
-                </div>
-              </div>
-              <div className="text-xs text-jc-ink-muted max-w-[280px]">
-                Paiement sécurisé Stripe. Aucune donnée bancaire n&apos;est stockée par JusteCourrier.
-              </div>
-            </div>
-
-            <CheckoutButton letterId={letter.id} />
-
-            <p className="mt-3 text-xs text-jc-ink-muted text-center">
-              Satisfait ou remboursé.
-            </p>
+            <MailingChoice
+              letterId={letter.id}
+              letterTypeSlug={letter.type}
+              letterPriceCents={letterType?.priceCents ?? 390}
+            />
           </div>
         )}
       </main>

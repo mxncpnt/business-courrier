@@ -2,12 +2,28 @@
 
 import { useState } from "react";
 import { IconLock } from "@/components/Icons";
+import type { MailingMode } from "@/config/mailings";
 
 interface CheckoutButtonProps {
   letterId: string;
+  /** Mode d'envoi sélectionné (undefined = PDF only, pas de mailing créé). */
+  mailingMode?: MailingMode;
+  /**
+   * Total à payer en centimes. Si non fourni, l'API retombe sur le prix de la
+   * lettre (priceCents) — utile pour le flow PDF only sans MailingChoice.
+   */
+  totalCents?: number;
 }
 
-export default function CheckoutButton({ letterId }: CheckoutButtonProps) {
+function formatEuros(cents: number): string {
+  return (cents / 100).toFixed(2).replace(".", ",");
+}
+
+export default function CheckoutButton({
+  letterId,
+  mailingMode,
+  totalCents,
+}: CheckoutButtonProps) {
   const [loading, setLoading] = useState(false);
   const [accepted, setAccepted] = useState(false);
 
@@ -18,7 +34,9 @@ export default function CheckoutButton({ letterId }: CheckoutButtonProps) {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ letterId }),
+        // mailingMode est envoyé dès maintenant ; l'API checkout l'ignore
+        // tant que la Phase 4.3 commit 3 n'est pas livrée. Pas d'effet de bord.
+        body: JSON.stringify({ letterId, mailingMode }),
       });
 
       const data = await res.json();
@@ -34,6 +52,11 @@ export default function CheckoutButton({ letterId }: CheckoutButtonProps) {
       setLoading(false);
     }
   }
+
+  // Texte du bouton selon le mode
+  const displayCents = totalCents ?? 390;
+  const verbe = mailingMode ? "et envoyer" : "et télécharger";
+  const buttonLabel = `Payer ${formatEuros(displayCents)} € ${verbe}`;
 
   return (
     <div>
@@ -90,7 +113,7 @@ export default function CheckoutButton({ letterId }: CheckoutButtonProps) {
           </span>
         ) : (
           <>
-            <IconLock /> Payer 3,90 € et télécharger
+            <IconLock /> {buttonLabel}
           </>
         )}
       </button>
