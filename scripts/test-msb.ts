@@ -17,6 +17,7 @@
 
 import { MySendingBoxProvider } from "../src/lib/mailings/mysendingbox";
 import type { PostalAddress } from "../src/lib/mailings/provider";
+import type { MailingMode } from "../src/config/mailings";
 import { createHmac } from "crypto";
 
 // ─── PDF minimal valide ───────────────────────────────────────────────────────
@@ -177,10 +178,20 @@ async function main() {
   console.log(`\n  Bilan : ${invalidPassed}/${invalidCases.length} cas invalides correctement rejetés`);
 
   // ───────────────────────────────────────────────────────────────────────────
-  // 3. submitMailing — sandbox
+  // 3. submitMailing — sandbox sur les 3 modes
   // ───────────────────────────────────────────────────────────────────────────
+  //
+  // Permet de récupérer les prix RÉELS MSB pour caler costCentsEstimate
+  // dans config/mailings.ts. Mode unique possible via arg CLI :
+  //   pnpm test:msb              → teste les 2 modes
+  //   pnpm test:msb simple       → teste uniquement simple (verte)
+  //   pnpm test:msb registered   → teste uniquement registered (lrar)
 
-  section("3. submitMailing — envoi en sandbox");
+  const argMode = process.argv[2] as MailingMode | undefined;
+  const allModes: MailingMode[] = ["simple", "registered"];
+  const modesToTest: MailingMode[] = argMode && allModes.includes(argMode) ? [argMode] : allModes;
+
+  section(`3. submitMailing — envoi en sandbox (modes: ${modesToTest.join(", ")})`);
 
   const sender: PostalAddress = {
     name: "JusteCourrier",
@@ -198,45 +209,49 @@ async function main() {
     country: "FR",
   };
 
-  const internalId = `test-4.2-${Date.now()}`;
-  let providerMailingId: string | null = null;
+  // Map mode → résultat (pour le récap final + Phase 4.2 calage prix)
+  const observedPrices: Partial<Record<MailingMode, { costCents: number; providerMailingId: string }>> = {};
+  let lastSubmittedId: string | null = null;
 
-  try {
-    console.log(`\n  Soumission mailing (mode: simple, ID interne: ${internalId})…`);
-    const result = await provider.submitMailing({
-      mode: "simple",
-      sender,
-      recipient,
-      pdfBuffer: MINIMAL_PDF,
-      internalMailingId: internalId,
-    });
+  for (const mode of modesToTest) {
+    const internalId = `test-4.2-${mode}-${Date.now()}`;
 
-    dump("Résultat submitMailing", result);
-    providerMailingId = result.providerMailingId;
+    try {
+      console.log(`\n  → Soumission mode "${mode}" (ID interne: ${internalId})…`);
+      const result = await provider.submitMailing({
+        mode,
+        sender,
+        recipient,
+        pdfBuffer: MINIMAL_PDF,
+        internalMailingId: internalId,
+      });
 
-    ok(`Provider ID : ${providerMailingId}`);
-    ok(`Coût : ${(result.costCents / 100).toFixed(2)} €`);
-    if (result.trackingNumber) {
-      ok(`Numéro de suivi : ${result.trackingNumber}`);
-    } else {
-      console.log("  ·  Pas de numéro de suivi (normal pour lettre simple)");
+      observedPrices[mode] = {
+        costCents: result.costCents,
+        providerMailingId: result.providerMailingId,
+      };
+      lastSubmittedId = result.providerMailingId;
+
+      ok(`mode="${mode}" → ${(result.costCents / 100).toFixed(2)} € — ID ${result.providerMailingId}`);
+      if (result.trackingNumber) {
+        ok(`  numéro de suivi : ${result.trackingNumber}`);
+      }
+    } catch (err) {
+      fail(`Mode "${mode}" — submitMailing a échoué`, err);
     }
-  } catch (err) {
-    fail("submitMailing a échoué", err);
-    console.log("\n  → Vérifiez que MSB_API_KEY_TEST est valide (dashboard MySendingBox).");
   }
 
   // ───────────────────────────────────────────────────────────────────────────
-  // 4. getMailingStatus — polling
+  // 4. getMailingStatus — polling sur le dernier envoi
   // ───────────────────────────────────────────────────────────────────────────
 
-  section("4. getMailingStatus — polling du statut");
+  section("4. getMailingStatus — polling du statut (dernier envoi)");
 
-  if (!providerMailingId) {
-    warn("submitMailing a échoué — getMailingStatus ignoré.");
+  if (!lastSubmittedId) {
+    warn("Aucun mailing soumis — getMailingStatus ignoré.");
   } else {
     try {
-      const status = await provider.getMailingStatus(providerMailingId);
+      const status = await provider.getMailingStatus(lastSubmittedId);
       dump("Statut retourné", status);
       ok(`Statut unifié : "${status.status}"`);
       if (status.trackingNumber) ok(`Numéro de suivi : ${status.trackingNumber}`);
@@ -292,11 +307,29 @@ async function main() {
 
   console.log("\n╔══════════════════════════════════════════════════╗");
   console.log("║   Tests Phase 4.2 terminés                       ║");
-  if (providerMailingId) {
-    console.log(`║   Mailing sandbox créé : ${providerMailingId.slice(0, 22)}…  ║`);
-  }
-  console.log("║   Prochaine étape : Phase 4.3 (UX preview)       ║");
   console.log("╚══════════════════════════════════════════════════╝\n");
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // Récap prix observés — à reporter dans config/mailings.ts
+  // ───────────────────────────────────────────────────────────────────────────
+
+  if (Object.keys(observedPrices).length > 0) {
+    section("Récap des prix observés (à reporter dans config/mailings.ts)");
+    console.log("");
+    for (const mode of allModes) {
+      const obs = observedPrices[mode];
+      if (obs) {
+        console.log(
+          `  ${mode.padEnd(11)} → costCentsEstimate: ${obs.costCents}  (= ${(obs.costCents / 100).toFixed(2)} €)`
+        );
+      } else {
+        console.log(`  ${mode.padEnd(11)} → non testé`);
+      }
+    }
+    console.log("");
+  }
+
+  console.log("  Prochaine étape : Phase 4.3 (UX preview, checkout combiné, PJ)\n");
 }
 
 main().catch((err) => {

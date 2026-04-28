@@ -45,13 +45,20 @@ import type {
 
 // ─── Mapping modes → postage_type MSB ───────────────────────────────────────
 
-// Valeurs postage_type MSB vérifiées via SDKs officiels et doc publique :
-//   prioritaire = lettre prioritaire J+1 (notre "simple")
-//   lettre_suivi = lettre avec suivi (notre "tracked")
-//   lrar = lettre recommandée avec AR (notre "registered")
+// Valeurs postage_type MSB vérifiées via réponse d'erreur sandbox 2026-04-28 :
+//   Available values : ecopli, verte, prioritaire, lr, lrar,
+//                      destineo_esprit_libre_seuil_1, destineo_esprit_libre_seuil_2
+//
+// Mapping retenu (MVP, 2 niveaux) :
+//   verte = lettre verte J+3, neutre carbone (notre "simple")
+//   lrar  = lettre recommandée avec AR (notre "registered")
+//
+// Note : "suivie" était utilisé jusqu'au 2026-04-28 mais MSB l'a retiré
+// ("postage_type 'suivie' is no longer available"). On a abandonné le 3e
+// niveau "tracked" plutôt que d'utiliser "lr" (recommandé sans AR) trop
+// proche en prix du LRAR — décision produit pour clarifier l'UX MVP.
 const MODE_TO_POSTAGE: Record<MailingMode, string> = {
-  simple: "prioritaire",
-  tracked: "lettre_suivi",
+  simple: "verte",
   registered: "lrar",
 };
 

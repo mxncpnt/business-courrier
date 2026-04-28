@@ -39,7 +39,7 @@ export interface AddressValidationResult {
 }
 
 export interface SubmitMailingInput {
-  /** Mode d'envoi (simple, tracked, registered) */
+  /** Mode d'envoi (simple, registered) */
   mode: MailingMode;
   /** Adresse de l'expéditeur */
   sender: PostalAddress;

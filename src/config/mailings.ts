@@ -9,7 +9,7 @@
  * plus tard sans migration.
  */
 
-export type MailingMode = "simple" | "tracked" | "registered";
+export type MailingMode = "simple" | "registered";
 
 export interface MailingModeConfig {
   /** Identifiant interne */
@@ -31,30 +31,20 @@ export interface MailingModeConfig {
 export const MAILING_MODES: Record<MailingMode, MailingModeConfig> = {
   simple: {
     mode: "simple",
-    label: "Lettre simple",
+    label: "Lettre verte",
     description:
-      "Envoi standard sans suivi. Idéal pour les courriers informatifs ou les demandes simples.",
-    costCentsEstimate: 200,
+      "Envoi standard sans suivi (lettre verte, J+3, neutre carbone). Idéal pour les courriers informatifs ou les demandes simples.",
+    costCentsEstimate: 128, // confirmé sandbox 2026-04-28 (verte)
     hasTracking: false,
     proofType: "none",
-    deliveryEta: "J+2 à J+4",
-  },
-  tracked: {
-    mode: "tracked",
-    label: "Lettre suivie",
-    description:
-      "Suivi en ligne et preuve de dépôt. Recommandé pour les documents importants sans enjeu juridique.",
-    costCentsEstimate: 400,
-    hasTracking: true,
-    proofType: "deposit",
-    deliveryEta: "J+2 à J+4",
+    deliveryEta: "J+3",
   },
   registered: {
     mode: "registered",
     label: "Recommandé avec AR",
     description:
       "Valeur juridique opposable. Obligatoire pour les mises en demeure, résiliations de bail et contestations administratives.",
-    costCentsEstimate: 800,
+    costCentsEstimate: 797, // confirmé sandbox 2026-04-28 (lrar)
     hasTracking: true,
     proofType: "receipt",
     deliveryEta: "J+2 à J+5",
@@ -64,10 +54,16 @@ export const MAILING_MODES: Record<MailingMode, MailingModeConfig> = {
 /**
  * Mode d'envoi recommandé par type de courrier.
  *
- * Logique : on force le recommandé pour tous les cas où la valeur juridique
+ * Logique : on force le recommandé AR pour tous les cas où la valeur juridique
  * est essentielle (mise en demeure, résiliation bail, contestation à délai
- * opposable). On suggère le suivi pour les contestations courantes et la
- * lettre simple pour les demandes informatives.
+ * opposable). Lettre simple par défaut pour les demandes informatives,
+ * réclamations et résiliations courantes — l'utilisateur peut surclasser
+ * en LRAR depuis l'UI s'il le souhaite.
+ *
+ * Note : avant 2026-04-28, on avait un 3e niveau "tracked" (suivi sans AR)
+ * basé sur le postage_type "suivie" de MSB. MSB a retiré cette option ; on
+ * passe à 2 niveaux (simple + registered) pour éviter d'utiliser "lr"
+ * (recommandé sans AR) trop proche en prix du LRAR.
  */
 export const RECOMMENDED_MODE: Record<string, MailingMode> = {
   // Mises en demeure → recommandé obligatoire (preuve de mise en demeure)
@@ -76,27 +72,27 @@ export const RECOMMENDED_MODE: Record<string, MailingMode> = {
 
   // Résiliations à valeur juridique opposable
   "resiliation-bail": "registered",
-  "resiliation-abonnement": "tracked",
+  "resiliation-abonnement": "simple",
 
   // Contestations
   "contestation-amende": "registered", // délai 45 jours opposable
   "contestation-decision": "registered", // recours gracieux à preuve
-  "contestation-facture": "tracked",
+  "contestation-facture": "simple",
 
   // Réclamations
-  "reclamation-administration": "tracked",
+  "reclamation-administration": "simple",
   "reclamation-service-client": "simple",
 
   // Demandes
-  "demande-remboursement": "tracked",
+  "demande-remboursement": "simple",
 };
 
 /**
  * Retourne le mode recommandé pour un type de courrier.
- * Fallback : 'tracked' (compromis raisonnable si le type n'est pas mappé).
+ * Fallback : 'simple' (la grande majorité des courriers admin).
  */
 export function getRecommendedMode(letterTypeSlug: string): MailingMode {
-  return RECOMMENDED_MODE[letterTypeSlug] ?? "tracked";
+  return RECOMMENDED_MODE[letterTypeSlug] ?? "simple";
 }
 
 /**
