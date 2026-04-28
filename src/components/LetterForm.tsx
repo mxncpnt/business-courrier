@@ -254,7 +254,7 @@ export default function LetterForm({ letterType }: LetterFormProps) {
                 </span>
               ) : (
                 <>
-                  <IconLock /> Payer 4,90 € et télécharger
+                  <IconLock /> Payer 3,90 € et télécharger
                 </>
               )}
             </button>
@@ -305,7 +305,7 @@ function ReviewStep({ getSummary }: { getSummary: () => { label: string; value: 
         <div>
           <div className="text-[13px] text-jc-ink-muted">Total à payer</div>
           <div className="text-[28px] font-display font-semibold text-jc-ink tabular-nums tracking-tight">
-            4,90 € <span className="text-[13px] text-jc-ink-muted font-normal">TTC</span>
+            3,90 € <span className="text-[13px] text-jc-ink-muted font-normal">TTC</span>
           </div>
         </div>
         <div className="text-xs text-jc-ink-muted max-w-[280px]">

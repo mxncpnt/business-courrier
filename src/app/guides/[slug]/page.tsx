@@ -213,13 +213,14 @@ export default async function GuidePage({
             </h3>
             <p className="text-[14px] text-jc-ink-soft mb-4">
               JusteCourrier génère un courrier personnalisé et professionnel
-              adapté à votre situation. PDF prêt à envoyer, 4,90&nbsp;€.
+              adapté à votre situation. PDF prêt à envoyer dès 3,90&nbsp;€,
+              ou envoi postal inclus à partir de 5,90&nbsp;€.
             </p>
             <Link
               href={`/courrier/${relatedLetter.slug}`}
               className="inline-flex items-center gap-2 px-5 py-3 bg-jc-primary text-white font-medium rounded-jc hover:bg-jc-primary-hover transition-colors text-sm no-underline"
             >
-              {relatedLetter.title} — 4,90 € <IconArrow />
+              {relatedLetter.title} — Dès 3,90 € <IconArrow />
             </Link>
           </div>
         )}

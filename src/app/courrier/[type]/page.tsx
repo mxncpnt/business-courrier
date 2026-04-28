@@ -27,7 +27,7 @@ export async function generateMetadata({
 
   return {
     title: letterType.title,
-    description: `${letterType.description} Courrier professionnel rédigé par IA, prêt à envoyer. 4,90 €.`,
+    description: `${letterType.description} Courrier professionnel rédigé par IA, prêt à envoyer dès 3,90 €.`,
   };
 }
 
@@ -64,7 +64,7 @@ export default async function ProductPage({
     brand: { "@type": "Brand", name: "JusteCourrier" },
     offers: {
       "@type": "Offer",
-      price: "4.90",
+      price: (letterType.priceCents / 100).toFixed(2),
       priceCurrency: "EUR",
       availability: "https://schema.org/InStock",
       url: `https://justecourrier.fr/courrier/${letterType.slug}/rediger`,
@@ -246,15 +246,16 @@ export default async function ProductPage({
             <div className="bg-jc-bg-elev border border-jc-line rounded-jc-lg p-6">
               <div className="flex justify-between items-baseline mb-1.5">
                 <span className="text-[13px] text-jc-ink-muted">
-                  Tarif unique
+                  À partir de
                 </span>
                 <span className="text-[32px] font-display font-semibold text-jc-ink tabular-nums tracking-tight">
-                  4,90&nbsp;€
+                  {(letterType.priceCents / 100).toFixed(2).replace(".", ",")}&nbsp;€
                 </span>
               </div>
               <p className="text-[13px] text-jc-ink-soft mb-[18px]">
-                Pas d&apos;abonnement. Pas de frais cachés. Tu paies une fois,
-                tu télécharges ton PDF.
+                PDF téléchargeable. Option d&apos;envoi postal disponible :
+                lettre simple 5,90&nbsp;€, recommandé avec AR 11,90&nbsp;€.
+                Pas d&apos;abonnement, pas de frais cachés.
               </p>
               <Link
                 href={`/courrier/${letterType.slug}/rediger`}

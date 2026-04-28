@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
       typeof session.payment_intent === "string"
         ? session.payment_intent
         : session.payment_intent?.id ?? null;
-    const amountCents = session.amount_total ?? 490;
+    const amountCents = session.amount_total ?? 390;
 
     const { data: paymentData, error: paymentError } = await supabase
       .from("payments")

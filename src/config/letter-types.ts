@@ -64,7 +64,7 @@ export const letterTypes: LetterType[] = [
     category: "resiliation",
     description: "Résilier un contrat télécom, salle de sport, assurance, presse, etc.",
     icon: "✂️",
-    priceCents: 490,
+    priceCents: 390,
     popular: true,
     duration: "2 min",
     useCases: [
@@ -86,7 +86,7 @@ export const letterTypes: LetterType[] = [
     category: "resiliation",
     description: "Donner congé à votre propriétaire (préavis locataire).",
     icon: "🏠",
-    priceCents: 490,
+    priceCents: 390,
     duration: "3 min",
     useCases: [
       "Tu quittes ton logement et dois informer ton propriétaire dans les règles",
@@ -110,7 +110,7 @@ export const letterTypes: LetterType[] = [
     category: "contestation",
     description: "Contester une amende de stationnement, excès de vitesse, etc.",
     icon: "🚗",
-    priceCents: 490,
+    priceCents: 390,
     popular: true,
     duration: "3 min",
     useCases: [
@@ -132,7 +132,7 @@ export const letterTypes: LetterType[] = [
     category: "contestation",
     description: "Contester un prélèvement abusif ou une facture injustifiée.",
     icon: "💳",
-    priceCents: 490,
+    priceCents: 390,
     duration: "2 min",
     useCases: [
       "Tu as été prélevé d'un montant que tu n'as pas autorisé ou qui ne correspond pas",
@@ -153,7 +153,7 @@ export const letterTypes: LetterType[] = [
     category: "contestation",
     description: "Contester une décision de la CAF, Pôle emploi, préfecture, etc.",
     icon: "🏛️",
-    priceCents: 490,
+    priceCents: 390,
     duration: "4 min",
     useCases: [
       "Tu as reçu une décision de refus ou de suppression de droits que tu juges erronée",
@@ -176,7 +176,7 @@ export const letterTypes: LetterType[] = [
     category: "reclamation",
     description: "Réclamer suite à un retard de livraison, produit défectueux, etc.",
     icon: "📦",
-    priceCents: 490,
+    priceCents: 390,
     duration: "2 min",
     useCases: [
       "Tu as reçu un produit défectueux, non conforme ou en retard",
@@ -198,7 +198,7 @@ export const letterTypes: LetterType[] = [
     category: "reclamation",
     description: "Réclamer auprès de la CAF, impôts, CPAM, mairie, etc.",
     icon: "🏛️",
-    priceCents: 490,
+    priceCents: 390,
     duration: "3 min",
     useCases: [
       "Tu fais face à un retard de traitement anormal de la part d'une administration",
@@ -220,7 +220,7 @@ export const letterTypes: LetterType[] = [
     category: "mise-en-demeure",
     description: "Exiger le paiement d'une somme due (loyer, facture, prêt).",
     icon: "💰",
-    priceCents: 490,
+    priceCents: 390,
     duration: "3 min",
     useCases: [
       "Tu es créancier d'une somme impayée (loyer, facture, prêt entre particuliers)",
@@ -241,7 +241,7 @@ export const letterTypes: LetterType[] = [
     category: "mise-en-demeure",
     description: "Exiger l'exécution d'un engagement (travaux, livraison, prestation).",
     icon: "🔧",
-    priceCents: 490,
+    priceCents: 390,
     duration: "3 min",
     useCases: [
       "Un prestataire, artisan ou fournisseur ne respecte pas ses engagements contractuels",
@@ -263,7 +263,7 @@ export const letterTypes: LetterType[] = [
     category: "demande",
     description: "Demander le remboursement d'un achat, d'un trop-perçu, etc.",
     icon: "💶",
-    priceCents: 490,
+    priceCents: 390,
     duration: "2 min",
     useCases: [
       "Tu as exercé ton droit de rétractation dans les 14 jours et attends ton remboursement",

@@ -103,9 +103,27 @@ export default function CGVPage() {
               3. Prix
             </h2>
             <p>
-              Le prix de chaque courrier est de <strong>4,90 € TTC</strong>. Le
-              Prestataire bénéficie de la franchise en base de TVA (article 293 B
-              du CGI). TVA non applicable.
+              Les prix appliqués par le Prestataire sont les suivants :
+            </p>
+            <ul className="mt-2 list-disc pl-6 space-y-1">
+              <li>
+                <strong>Génération du courrier au format PDF (sans envoi
+                postal)</strong> : 3,90 € TTC.
+              </li>
+              <li>
+                <strong>Génération + envoi par lettre simple (lettre verte
+                La Poste, J+3)</strong> : 5,90 € TTC.
+              </li>
+              <li>
+                <strong>Génération + envoi par lettre recommandée avec accusé
+                de réception (LRAR La Poste, J+2 à J+5)</strong> : 11,90 € TTC.
+              </li>
+            </ul>
+            <p className="mt-2">
+              Le Prestataire bénéficie de la franchise en base de TVA (article 293 B
+              du CGI). TVA non applicable. Les frais d&apos;affranchissement
+              postal sont refacturés au prix coûtant pratiqué par le partenaire
+              postal MySendingBox, sans marge dissimulée.
             </p>
             <p className="mt-2">
               Le prix est indiqué avant validation de la commande. Le Prestataire

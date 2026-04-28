@@ -149,7 +149,7 @@ export default async function PreviewPage({
               <div>
                 <div className="text-[13px] text-jc-ink-muted">Total à payer</div>
                 <div className="text-[28px] font-display font-semibold text-jc-ink tabular-nums tracking-tight">
-                  4,90 € <span className="text-[13px] text-jc-ink-muted font-normal">TTC</span>
+                  3,90 € <span className="text-[13px] text-jc-ink-muted font-normal">TTC</span>
                 </div>
               </div>
               <div className="text-xs text-jc-ink-muted max-w-[280px]">

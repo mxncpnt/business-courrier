@@ -90,7 +90,7 @@ export default function CheckoutButton({ letterId }: CheckoutButtonProps) {
           </span>
         ) : (
           <>
-            <IconLock /> Payer 4,90 € et télécharger
+            <IconLock /> Payer 3,90 € et télécharger
           </>
         )}
       </button>

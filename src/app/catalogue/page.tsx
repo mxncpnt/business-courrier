@@ -7,7 +7,7 @@ import { IconArrow } from "@/components/Icons";
 export const metadata = {
   title: "Catalogue des courriers",
   description:
-    "10 modèles de courriers administratifs personnalisés par IA. Résiliation, contestation, réclamation, mise en demeure, demande de remboursement. 4,90 € le courrier.",
+    "10 modèles de courriers administratifs personnalisés par IA. Résiliation, contestation, réclamation, mise en demeure, demande de remboursement. Dès 3,90 € le courrier, ou envoi postal inclus à partir de 5,90 €.",
 };
 
 // Icônes catalogue par slug
@@ -101,7 +101,7 @@ export default async function CataloguePage() {
         <p className="text-[17px] leading-relaxed text-jc-ink-soft mb-7 max-w-[640px] max-md:text-[15px]">
           Choisis le type de courrier qui correspond à ta situation. Tous nos
           courriers sont à{" "}
-          <strong className="text-jc-ink">4,90 € à l&apos;unité</strong>, sans
+          <strong className="text-jc-ink">dès 3,90 € à l&apos;unité</strong>, sans
           abonnement.
         </p>
 
@@ -175,7 +175,7 @@ export default async function CataloguePage() {
                           )}
                         </div>
                         <span className="text-sm font-semibold text-jc-ink tabular-nums shrink-0">
-                          4,90 €
+                          {(letter.priceCents / 100).toFixed(2).replace(".", ",")} €
                         </span>
                       </div>
 

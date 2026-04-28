@@ -117,7 +117,7 @@ export default async function Home() {
                 href="/catalogue"
                 className="inline-flex items-center gap-2 px-6 py-3.5 bg-jc-primary text-white font-medium rounded-jc hover:bg-jc-primary-hover transition-colors text-base no-underline"
               >
-                Choisir un courrier — 4,90 € <IconArrow />
+                Choisir un courrier — Dès 3,90 € <IconArrow />
               </Link>
               <a
                 href="#fonctionnement"
@@ -284,7 +284,7 @@ export default async function Home() {
             Tu as une démarche à faire ?
           </h2>
           <p className="text-[17px] text-jc-ink-soft mb-7 max-md:text-[15px]">
-            4,90 € le courrier. Pas d&apos;abonnement, pas de surprise.
+            Dès 3,90 € le courrier. Pas d&apos;abonnement, pas de surprise.
           </p>
           <Link
             href="/catalogue"
