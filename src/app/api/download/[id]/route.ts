@@ -2,7 +2,18 @@ import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase/server";
 import { generatePdfBuffer } from "@/lib/pdf";
 import { getLetterType } from "@/config/letter-types";
+import { mergePdfWithAttachments, type DbAttachment } from "@/lib/mailings/merge";
 
+/**
+ * Sert le PDF du courrier après paiement.
+ *
+ * Cohérence "PDF téléchargé = PDF posté à La Poste" (option A, validée
+ * 2026-04-28) :
+ *   - Si la letter a un mailing avec des pièces jointes, on retourne le PDF
+ *     mergé (courrier AFNOR + PJ) — strictement identique à ce qui est posté
+ *     côté MSB. Preuve juridique pour l'utilisateur.
+ *   - Sinon (mode PDF only ou mailing sans PJ), on retourne le courrier seul.
+ */
 export async function GET(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -37,7 +48,7 @@ export async function GET(
     );
   }
 
-  // Generate PDF with AFNOR layout
+  // Génération du PDF principal (norme AFNOR)
   const letterType = getLetterType(letter.type);
   const pdfBuffer = await generatePdfBuffer({
     text,
@@ -46,10 +57,33 @@ export async function GET(
     letterTitle: letterType?.title,
   });
 
-  // Return PDF as download
-  const filename = `courrier-${letter.type}-${letter.id.substring(0, 8)}.pdf`;
+  // Si un mailing existe pour cette letter avec des PJ, on merge.
+  // Le mailing peut être en pending/paid/submitted/in_transit/delivered/returned.
+  // On accepte tous les statuts sauf 'failed' (où la submission a échoué)
+  // pour rester cohérent avec ce que MSB a (ou aurait) reçu.
+  const { data: mailing } = await supabase
+    .from("mailings")
+    .select("status, attachments")
+    .eq("letter_id", letter.id)
+    .neq("status", "failed")
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
 
-  return new NextResponse(new Uint8Array(pdfBuffer), {
+  const attachments = ((mailing?.attachments ?? []) as DbAttachment[]).filter(
+    (a) => a && a.storage_path
+  );
+
+  const finalPdf =
+    attachments.length > 0
+      ? await mergePdfWithAttachments(pdfBuffer, attachments, supabase)
+      : pdfBuffer;
+
+  // Filename : suffixe -avec-pj si mergé
+  const suffix = attachments.length > 0 ? "-avec-pj" : "";
+  const filename = `courrier-${letter.type}-${letter.id.substring(0, 8)}${suffix}.pdf`;
+
+  return new NextResponse(new Uint8Array(finalPdf), {
     headers: {
       "Content-Type": "application/pdf",
       "Content-Disposition": `attachment; filename="${filename}"`,

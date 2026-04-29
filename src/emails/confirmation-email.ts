@@ -3,6 +3,11 @@
 
 import type { MailingMode } from "@/config/mailings";
 
+export interface AttachmentSummary {
+  name: string;
+  sizeBytes: number;
+}
+
 interface ConfirmationEmailData {
   letterTitle: string;
   letterId: string;
@@ -12,6 +17,18 @@ interface ConfirmationEmailData {
    * Si défini, JusteCourrier s'occupe de l'envoi → on adapte les conseils.
    */
   mailingMode?: MailingMode;
+  /**
+   * Liste des pièces jointes incluses dans l'envoi (uniquement pertinent
+   * quand mailingMode est défini). Affichées dans une section "Inclus dans
+   * l'envoi" pour transparence avec l'utilisateur.
+   */
+  attachments?: AttachmentSummary[];
+}
+
+function formatBytes(bytes: number): string {
+  if (bytes < 1024) return `${bytes} o`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} Ko`;
+  return `${(bytes / 1024 / 1024).toFixed(1)} Mo`;
 }
 
 // Sage brand tokens (hardcoded for email — no CSS variables in email clients)
@@ -32,9 +49,10 @@ export function renderConfirmationEmail(data: ConfirmationEmailData): {
   html: string;
   text: string;
 } {
-  const { letterTitle, letterId, downloadUrl, mailingMode } = data;
+  const { letterTitle, letterId, downloadUrl, mailingMode, attachments } = data;
   const shortRef = letterId.substring(0, 8).toUpperCase();
   const year = new Date().getFullYear();
+  const hasAttachments = mailingMode && attachments && attachments.length > 0;
 
   // ─── Texte adapté au mode d'envoi ────────────────────────────────────────
   const intro = mailingMode
@@ -147,6 +165,27 @@ export function renderConfirmationEmail(data: ConfirmationEmailData): {
               <!-- Divider -->
               <hr style="border:none;border-top:1px solid ${jc.line};margin:24px 0;" />
 
+              ${
+                hasAttachments
+                  ? `<!-- Inclus dans l'envoi -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:18px;">
+                <tr>
+                  <td style="background-color:#ffffff;border-radius:10px;padding:18px 22px;border:1px solid ${jc.line};">
+                    <p style="margin:0 0 4px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:${jc.accent};">Inclus dans l'envoi</p>
+                    <p style="margin:8px 0 8px;font-size:14px;color:${jc.inkSoft};line-height:1.5;">Le courrier généré + ${attachments!.length} pièce${attachments!.length > 1 ? "s" : ""} jointe${attachments!.length > 1 ? "s" : ""} :</p>
+                    ${attachments!
+                      .map(
+                        (a) =>
+                          `<p style="margin:0 0 4px;font-size:13px;color:${jc.ink};display:flex;justify-content:space-between;"><span>${escHtml(a.name)}</span><span style="color:${jc.inkMuted};">${formatBytes(a.sizeBytes)}</span></p>`
+                      )
+                      .join("")}
+                    <p style="margin:10px 0 0;font-size:12px;color:${jc.inkMuted};font-style:italic;">Le PDF téléchargeable contient l'ensemble (courrier + pièces jointes), strictement identique à ce qui sera posté à La Poste.</p>
+                  </td>
+                </tr>
+              </table>`
+                  : ""
+              }
+
               <!-- Conseils -->
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
@@ -188,12 +227,16 @@ export function renderConfirmationEmail(data: ConfirmationEmailData): {
 </html>`;
 
   // Version texte brut (clients mail sans HTML, délivrabilité)
+  const attachmentsText = hasAttachments
+    ? `\n\nInclus dans l'envoi :\nLe courrier généré + ${attachments!.length} pièce${attachments!.length > 1 ? "s" : ""} jointe${attachments!.length > 1 ? "s" : ""} :\n${attachments!.map((a) => `- ${a.name} (${formatBytes(a.sizeBytes)})`).join("\n")}\nLe PDF téléchargeable contient l'ensemble (courrier + pièces jointes), strictement identique à ce qui sera posté à La Poste.`
+    : "";
+
   const text = `JusteCourrier — ${headline}
 
 ${introText}
 
 ${mailingMode ? "Télécharger votre copie PDF" : "Télécharger votre PDF"} :
-${downloadUrl}
+${downloadUrl}${attachmentsText}
 
 ---
 ${conseilsTitle} :

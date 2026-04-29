@@ -88,6 +88,7 @@ export async function POST(req: NextRequest) {
 
     // 3. Si mailing_id présent : marquer le mailing comme payé + déclencher submission MSB
     let mailingMode: MailingMode | undefined;
+    let mailingAttachments: { name: string; sizeBytes: number }[] = [];
 
     if (mailingId) {
       const { data: mailingUpdate, error: mailingUpdateError } = await supabase
@@ -99,7 +100,7 @@ export async function POST(req: NextRequest) {
           stripe_payment_intent_id: paymentIntentId,
         })
         .eq("id", mailingId)
-        .select("mode")
+        .select("mode, attachments")
         .single();
 
       if (mailingUpdateError) {
@@ -110,6 +111,15 @@ export async function POST(req: NextRequest) {
         // Non-bloquant : le paiement Stripe est confirmé, on continue
       } else {
         mailingMode = mailingUpdate.mode as MailingMode;
+        // Snapshot des PJ pour les passer à l'email
+        const rawAttachments = (mailingUpdate.attachments ?? []) as Array<{
+          name: string;
+          size_bytes: number;
+        }>;
+        mailingAttachments = rawAttachments
+          .filter((a) => a && a.name)
+          .map((a) => ({ name: a.name, sizeBytes: a.size_bytes ?? 0 }));
+
         console.log(`Mailing ${mailingId} marked as paid (mode=${mailingMode})`);
 
         // Déclencher la soumission au provider postal en fire-and-forget.
@@ -184,10 +194,12 @@ export async function POST(req: NextRequest) {
           letterId,
           downloadUrl,
           mailingMode,
+          attachments: mailingAttachments.length > 0 ? mailingAttachments : undefined,
         });
         console.log(
           `Confirmation email sent to ${letter.email} for letter ${letterId}` +
-            (mailingMode ? ` (mode=${mailingMode})` : "")
+            (mailingMode ? ` (mode=${mailingMode})` : "") +
+            (mailingAttachments.length > 0 ? ` (${mailingAttachments.length} PJ)` : "")
         );
       } catch (emailError) {
         // Non-bloquant : on log l'erreur mais on ne fait pas échouer le webhook.

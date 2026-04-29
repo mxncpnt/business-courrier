@@ -4,102 +4,23 @@
  * Flow :
  *  1. Récupère le mailing + letter en DB
  *  2. Génère le PDF principal du courrier (via @react-pdf/renderer)
- *  3. Télécharge les pièces jointes depuis Supabase Storage
- *  4. Merge avec pdf-lib (PDF + JPG/PNG → PDF unique)
- *  5. Appelle provider.submitMailing()
- *  6. Update mailings.provider_mailing_id, status, submitted_at
+ *  3. Télécharge les pièces jointes depuis Supabase Storage et merge avec
+ *     pdf-lib (cf. `lib/mailings/merge.ts`)
+ *  4. Appelle provider.submitMailing()
+ *  5. Update mailings.provider_mailing_id, status, submitted_at
  *
  * Erreur non-bloquante : si submit échoue, on logge + on marque le mailing
  * comme `failed` mais on ne throw pas (le webhook Stripe doit retourner 200).
  * Phase 4.4 ajoutera un cron de retry sur les mailings paid sans submit OK.
  */
 
-import { PDFDocument } from "pdf-lib";
 import { createServiceClient } from "@/lib/supabase/server";
 import { getMailProvider } from "@/lib/mailings/mysendingbox";
+import { mergePdfWithAttachments, type DbAttachment } from "@/lib/mailings/merge";
 import { generatePdfBuffer } from "@/lib/pdf";
 import { getLetterType } from "@/config/letter-types";
 import type { MailingMode } from "@/config/mailings";
 import type { PostalAddress } from "@/lib/mailings/provider";
-
-const STORAGE_BUCKET = "mailings";
-
-interface DbAttachment {
-  name: string;
-  storage_path: string;
-  size_bytes: number;
-  mime_type: string;
-}
-
-type SupabaseClient = ReturnType<typeof createServiceClient>;
-
-/**
- * Merge le PDF principal avec les pièces jointes (PDF, JPEG, PNG).
- * Les images sont placées chacune sur une page A4 avec marges 50pt.
- *
- * Erreur sur une PJ → log + skip cette PJ, le merge continue avec les autres.
- */
-async function mergePdfWithAttachments(
-  primaryPdf: Buffer,
-  attachments: DbAttachment[],
-  supabase: SupabaseClient
-): Promise<Buffer> {
-  const merged = await PDFDocument.load(new Uint8Array(primaryPdf));
-
-  for (const att of attachments) {
-    try {
-      const { data, error } = await supabase.storage
-        .from(STORAGE_BUCKET)
-        .download(att.storage_path);
-      if (error || !data) {
-        console.error(`Failed to download attachment ${att.storage_path}:`, error);
-        continue;
-      }
-      const bytes = new Uint8Array(await data.arrayBuffer());
-
-      if (att.mime_type === "application/pdf") {
-        const attDoc = await PDFDocument.load(bytes);
-        const pages = await merged.copyPages(attDoc, attDoc.getPageIndices());
-        for (const page of pages) merged.addPage(page);
-      } else if (att.mime_type === "image/jpeg") {
-        const image = await merged.embedJpg(bytes);
-        addImagePage(merged, image);
-      } else if (att.mime_type === "image/png") {
-        const image = await merged.embedPng(bytes);
-        addImagePage(merged, image);
-      } else {
-        console.warn(`Unsupported attachment mime_type: ${att.mime_type}`);
-      }
-    } catch (err) {
-      console.error(`Error merging attachment ${att.storage_path}:`, err);
-      // Continue avec les PJ suivantes — non-bloquant
-    }
-  }
-
-  const out = await merged.save();
-  return Buffer.from(out);
-}
-
-type EmbeddedImage = Awaited<ReturnType<PDFDocument["embedJpg"]>>;
-
-/** Ajoute une page A4 (595 × 842 pt) avec l'image centrée et scalée pour rentrer. */
-function addImagePage(merged: PDFDocument, image: EmbeddedImage): void {
-  const PAGE_WIDTH = 595;
-  const PAGE_HEIGHT = 842;
-  const MARGIN = 50;
-  const maxWidth = PAGE_WIDTH - MARGIN * 2;
-  const maxHeight = PAGE_HEIGHT - MARGIN * 2;
-  const scale = Math.min(maxWidth / image.width, maxHeight / image.height, 1);
-  const w = image.width * scale;
-  const h = image.height * scale;
-  const page = merged.addPage([PAGE_WIDTH, PAGE_HEIGHT]);
-  page.drawImage(image, {
-    x: (PAGE_WIDTH - w) / 2,
-    y: (PAGE_HEIGHT - h) / 2,
-    width: w,
-    height: h,
-  });
-}
 
 /**
  * Soumet un mailing au provider postal.

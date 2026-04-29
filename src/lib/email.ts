@@ -1,5 +1,8 @@
 import { Resend } from "resend";
-import { renderConfirmationEmail } from "@/emails/confirmation-email";
+import {
+  renderConfirmationEmail,
+  type AttachmentSummary,
+} from "@/emails/confirmation-email";
 import type { MailingMode } from "@/config/mailings";
 
 // ---------------------------------------------------------------------------
@@ -44,6 +47,11 @@ interface SendConfirmationEmailParams {
    * Si défini, le contenu de l'email est adapté (sujet + texte).
    */
   mailingMode?: MailingMode;
+  /**
+   * Liste des PJ incluses dans l'envoi (pertinent uniquement si mailingMode
+   * est défini). Affichées dans une section "Inclus dans l'envoi".
+   */
+  attachments?: AttachmentSummary[];
 }
 
 // ---------------------------------------------------------------------------
@@ -59,7 +67,8 @@ interface SendConfirmationEmailParams {
 export async function sendConfirmationEmail(
   params: SendConfirmationEmailParams
 ): Promise<void> {
-  const { to, letterTitle, letterId, downloadUrl, mailingMode } = params;
+  const { to, letterTitle, letterId, downloadUrl, mailingMode, attachments } =
+    params;
 
   const resend = getResend();
   const { html, text } = renderConfirmationEmail({
@@ -67,6 +76,7 @@ export async function sendConfirmationEmail(
     letterId,
     downloadUrl,
     mailingMode,
+    attachments,
   });
 
   const subject = mailingMode

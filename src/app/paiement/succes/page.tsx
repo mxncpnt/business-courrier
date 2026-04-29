@@ -31,6 +31,7 @@ export default async function SuccessPage({
 
   let letter: Record<string, unknown> | null = null;
   let mailingMode: "simple" | "registered" | null = null;
+  let attachmentNames: { name: string; sizeBytes: number }[] = [];
 
   if (letter_id) {
     const supabase = createServiceClient();
@@ -44,7 +45,7 @@ export default async function SuccessPage({
     // Récupérer le mailing associé s'il existe (mode envoi physique commandé)
     const { data: mailing } = await supabase
       .from("mailings")
-      .select("mode")
+      .select("mode, attachments")
       .eq("letter_id", letter_id)
       .order("created_at", { ascending: false })
       .limit(1)
@@ -53,6 +54,15 @@ export default async function SuccessPage({
     if (mailing?.mode === "simple" || mailing?.mode === "registered") {
       mailingMode = mailing.mode;
     }
+
+    // Récupérer la liste des PJ (pour récap "Inclus dans l'envoi")
+    const rawAttachments = (mailing?.attachments ?? []) as Array<{
+      name: string;
+      size_bytes: number;
+    }>;
+    attachmentNames = rawAttachments
+      .filter((a) => a && a.name)
+      .map((a) => ({ name: a.name, sizeBytes: a.size_bytes ?? 0 }));
   }
 
   const letterType = letter?.type ? getLetterType(letter.type as string) : null;
@@ -83,7 +93,14 @@ export default async function SuccessPage({
     ? "Télécharger la copie PDF"
     : "Télécharger le PDF";
 
-  const nextStepsTitle = mailingMode ? "Et maintenant ?" : "Et maintenant ?";
+  const nextStepsTitle = "Et maintenant ?";
+
+  // Helper formatage taille fichier (cohérent avec AttachmentUploader)
+  function formatBytes(bytes: number): string {
+    if (bytes < 1024) return `${bytes} o`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} Ko`;
+    return `${(bytes / 1024 / 1024).toFixed(1)} Mo`;
+  }
 
   const nextSteps: string[] = mailingMode
     ? mailingMode === "registered"
@@ -242,6 +259,37 @@ export default async function SuccessPage({
             </>
           )}
         </div>
+
+        {/* ─── Inclus dans l'envoi (uniquement si mailing avec PJ) ─── */}
+        {mailingMode && attachmentNames.length > 0 && (
+          <div className="mt-5 bg-jc-bg-elev border border-jc-line rounded-jc p-5 text-left">
+            <p className="text-[11px] font-semibold tracking-[0.06em] uppercase text-jc-accent mb-2">
+              Inclus dans l&apos;envoi
+            </p>
+            <p className="text-[13px] text-jc-ink-soft mb-2.5">
+              Le courrier généré + {attachmentNames.length} pièce
+              {attachmentNames.length > 1 ? "s" : ""} jointe
+              {attachmentNames.length > 1 ? "s" : ""} :
+            </p>
+            <ul className="space-y-1">
+              {attachmentNames.map((att, i) => (
+                <li
+                  key={i}
+                  className="text-[13px] text-jc-ink flex justify-between gap-3"
+                >
+                  <span className="truncate">{att.name}</span>
+                  <span className="text-jc-ink-muted shrink-0 tabular-nums">
+                    {formatBytes(att.sizeBytes)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-3 text-[12px] text-jc-ink-muted italic">
+              Le PDF téléchargeable contient l&apos;ensemble (courrier + pièces
+              jointes), strictement identique à ce qui sera posté à La Poste.
+            </p>
+          </div>
+        )}
 
         {/* ─── Et maintenant ? ─── */}
         <div className="mt-7 bg-jc-surface rounded-jc p-5 text-left">
