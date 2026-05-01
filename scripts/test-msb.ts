@@ -18,7 +18,6 @@
 import { MySendingBoxProvider } from "../src/lib/mailings/mysendingbox";
 import type { PostalAddress } from "../src/lib/mailings/provider";
 import type { MailingMode } from "../src/config/mailings";
-import { createHmac } from "crypto";
 
 // ─── PDF minimal valide ───────────────────────────────────────────────────────
 // Un PDF 1 page avec du texte basique — suffit pour tester l'API MSB sandbox.
@@ -264,40 +263,42 @@ async function main() {
   // 5. verifyWebhookSignature — test unitaire
   // ───────────────────────────────────────────────────────────────────────────
 
-  section("5. verifyWebhookSignature");
+  section("5. verifyWebhookAuth (Basic Auth)");
 
-  const webhookSecret = process.env.MSB_WEBHOOK_SECRET;
-  if (!webhookSecret || webhookSecret === "...") {
-    warn("MSB_WEBHOOK_SECRET non configuré → test ignoré (à faire en Phase 4.4).");
-    warn("Ajoutez le secret depuis le dashboard MySendingBox → Webhooks.");
+  const webhookUser = process.env.MSB_WEBHOOK_USER;
+  const webhookPass = process.env.MSB_WEBHOOK_PASS;
+  if (!webhookUser || !webhookPass || webhookUser === "..." || webhookPass === "...") {
+    warn("MSB_WEBHOOK_USER ou MSB_WEBHOOK_PASS non configurés → test ignoré.");
+    warn("Configurez l'URL côté MSB sous la forme :");
+    warn("  https://${USER}:${PASS}@justecourrier.fr/api/mailings-webhook");
   } else {
-    const body = JSON.stringify({ id: "evt_test", type: "letter.status_updated" });
-    const correctSig = createHmac("sha256", webhookSecret).update(body, "utf8").digest("hex");
-    const wrongSig = "a".repeat(64); // 64 hex chars (256 bits) mais incorrect
+    const validBase64 = Buffer.from(`${webhookUser}:${webhookPass}`).toString("base64");
+    const correctHeader = `Basic ${validBase64}`;
+    const wrongHeader = `Basic ${Buffer.from("badguy:wrongpass").toString("base64")}`;
 
-    const providerWithSecret = new MySendingBoxProvider({ webhookSecret });
+    const providerWithAuth = new MySendingBoxProvider({ webhookUser, webhookPass });
 
     try {
-      const validResult = providerWithSecret.verifyWebhookSignature(body, correctSig);
+      const validResult = providerWithAuth.verifyWebhookAuth(correctHeader);
       if (validResult) {
-        ok("Signature HMAC-SHA256 valide → acceptée ✓");
+        ok("Basic Auth valide → acceptée ✓");
       } else {
-        fail("Signature valide → rejetée à tort");
+        fail("Basic Auth valide → rejetée à tort");
       }
     } catch (err) {
-      fail("verifyWebhookSignature (valide) a levé une exception", err);
+      fail("verifyWebhookAuth (valide) a levé une exception", err);
     }
 
     try {
-      const invalidResult = providerWithSecret.verifyWebhookSignature(body, wrongSig);
+      const invalidResult = providerWithAuth.verifyWebhookAuth(wrongHeader);
       if (!invalidResult) {
-        ok("Signature invalide → rejetée ✓");
+        ok("Basic Auth invalide → rejetée ✓");
       } else {
-        fail("Signature invalide → acceptée à tort");
+        fail("Basic Auth invalide → acceptée à tort");
       }
-    } catch (err) {
+    } catch {
       // timingSafeEqual peut lancer si longueurs différentes — attendu
-      ok("Signature invalide → exception levée (comportement correct)");
+      ok("Basic Auth invalide → exception levée (comportement correct)");
     }
   }
 

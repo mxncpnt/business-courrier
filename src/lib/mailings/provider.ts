@@ -94,12 +94,27 @@ export interface MailingEvent {
   providerMailingId: string;
   /** Statut unifié résultant de cet événement */
   status: MailingStatus;
-  /** Type d'événement brut côté provider */
+  /** Type d'événement brut côté provider (ex: "letter.distributed") */
   eventType: string;
   /** Date d'occurrence */
   occurredAt: string;
   /** Payload brut pour audit */
   rawPayload: unknown;
+  /**
+   * Numéro de suivi La Poste, présent dans l'objet letter à partir de
+   * `letter.sent` pour les LR/LRAR.
+   */
+  trackingNumber?: string;
+  /**
+   * URL de la preuve de dépôt (sous-objet `filing_proof` côté MSB).
+   * Renseigné lors de l'événement `letter.filing_proof`.
+   */
+  proofOfDepositUrl?: string;
+  /**
+   * URL de l'accusé de réception signé (sous-objet `delivery_proof` côté MSB).
+   * Renseigné lors de l'événement `letter.delivery_proof` pour les LRAR.
+   */
+  proofOfReceiptUrl?: string;
 }
 
 // ─── Interface du provider ───
@@ -127,14 +142,22 @@ export interface MailProvider {
   getMailingStatus(providerMailingId: string): Promise<MailingStatusResult>;
 
   /**
-   * Vérifie la signature d'un webhook entrant.
-   * Doit être appelé AVANT tout parsing pour éviter les injections.
+   * Vérifie que la requête webhook entrante est authentifiée par le provider.
+   *
+   * Mécanisme d'auth dépendant du provider :
+   *  - MySendingBox : Basic Auth via header `Authorization: Basic base64(user:pass)`
+   *    (config côté MSB via URL `https://user:pass@endpoint/...`)
+   *  - D'autres providers (Stripe, GitHub, etc.) utiliseraient HMAC ou Bearer
+   *
+   * À appeler AVANT tout parsing pour éviter le spoofing.
+   *
+   * @param authHeader Valeur du header `Authorization` (ou null si absent)
    */
-  verifyWebhookSignature(payload: string, signature: string): boolean;
+  verifyWebhookAuth(authHeader: string | null): boolean;
 
   /**
    * Parse un événement webhook en notre format unifié.
-   * À appeler après vérification de signature.
+   * À appeler après vérification d'auth.
    */
   parseWebhookEvent(rawPayload: unknown): MailingEvent;
 }

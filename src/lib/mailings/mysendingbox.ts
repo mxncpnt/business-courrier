@@ -27,10 +27,17 @@
  *   MSB_API_KEY_TEST     — clé sandbox
  *   MSB_API_KEY_LIVE     — clé production
  *   MSB_MODE             — "test" (défaut) ou "live"
- *   MSB_WEBHOOK_SECRET   — secret HMAC pour valider les webhooks (Phase 4.4)
+ *   MSB_WEBHOOK_USER     — username Basic Auth pour les webhooks entrants (Phase 4.4)
+ *   MSB_WEBHOOK_PASS     — password Basic Auth pour les webhooks entrants (Phase 4.4)
+ *
+ * Sécurité webhooks (vérifiée doc MSB 2026-05-01) :
+ *   MSB ne signe PAS les webhooks (pas de HMAC). La sécurité repose sur
+ *   l'URL configurée côté dashboard avec Basic Auth :
+ *     https://${MSB_WEBHOOK_USER}:${MSB_WEBHOOK_PASS}@justecourrier.fr/api/mailings-webhook
+ *   Notre endpoint vérifie le header `Authorization: Basic ...`.
  */
 
-import { createHmac, timingSafeEqual } from "crypto";
+import { timingSafeEqual } from "crypto";
 import type { MailingMode } from "@/config/mailings";
 import type {
   AddressValidationResult,
@@ -62,30 +69,35 @@ const MODE_TO_POSTAGE: Record<MailingMode, string> = {
   registered: "lrar",
 };
 
-// ─── Mapping statuts MSB → statuts JusteCourrier ────────────────────────────
+// ─── Mapping événements MSB → statuts JusteCourrier ─────────────────────────
 //
-// Le champ `status` de la réponse MSB est un objet { name, event_id, ... }.
-// On mappe sur `status.name` (format "letter.<event>") :
-//   letter.created          = créé, en attente d'envoi à l'imprimeur
-//   letter.waiting_upload   = en attente de fichier
-//   letter.in_print         = en cours d'impression
-//   letter.print_sent       = envoyé à CORUS (imprimeur La Poste)
-//   letter.sent             = déposé en bureau de poste
-//   letter.in_transit       = en transit (suivi)
-//   letter.delivered        = distribué
-//   letter.returned_to_sender = NPAI / refusé / non retiré
-//   letter.error            = erreur provider / adresse invalide
-//   letter.canceled         = annulé
+// Liste exhaustive des événements MSB d'après la doc officielle (vérifiée
+// 2026-05-01 sur https://www.mysendingbox.fr/guide/webhooks-api-courrier/) :
+//
+//   letter.created               = lettre créée
+//   letter.accepted              = acceptée par le système d'impression
+//   letter.filing_proof          = preuve de dépôt disponible (LR/LRAR)
+//   letter.sent                  = lettre envoyée (tracking_number dispo si LR/LRAR)
+//   letter.in_transit            = tracking event disponible (LR/LRAR)
+//   letter.waiting_to_be_withdrawn = en attente au guichet (LR/LRAR)
+//   letter.distributed           = reçue par le destinataire (LR/LRAR)
+//   letter.delivery_proof        = AR signé reçu (sous-objet delivery_proof)
+//   letter.returned_to_sender    = retournée à l'expéditeur (LR/LRAR)
+//   letter.wrong_address         = NPAI (si manage_returned_mail: true)
+//   letter.error                 = erreur (refus Poste, problème impression…)
+//   letter.canceled              = annulée
 
 const MSB_STATUS_MAP: Record<string, MailingStatus> = {
   "letter.created": "submitted",
-  "letter.waiting_upload": "submitted",
-  "letter.in_print": "submitted",
-  "letter.print_sent": "submitted",
+  "letter.accepted": "submitted",
+  "letter.filing_proof": "in_transit", // preuve dépôt → la lettre est physiquement à La Poste
   "letter.sent": "in_transit",
   "letter.in_transit": "in_transit",
-  "letter.delivered": "delivered",
+  "letter.waiting_to_be_withdrawn": "in_transit",
+  "letter.distributed": "delivered",
+  "letter.delivery_proof": "delivered", // AR signé → distribué
   "letter.returned_to_sender": "returned",
+  "letter.wrong_address": "returned",
   "letter.error": "failed",
   "letter.canceled": "failed",
 };
@@ -144,14 +156,47 @@ interface MsbLetterResponse {
   expected_delivery_date?: string;
 }
 
-interface MsbWebhookPayload {
+/**
+ * Structure réelle d'un webhook MSB (vérifiée doc 2026-05-01) :
+ *   { created_at, event: { _id, name, letter (id), category, ... }, letter: { _id, ... } }
+ *
+ * `event.name` contient le type d'événement (ex: "letter.distributed").
+ * `letter` contient la version complète de l'objet letter, avec :
+ *   - tracking_number (présent à partir de letter.sent pour LR/LRAR)
+ *   - filing_proof (présent à partir de letter.filing_proof — sous-objet avec file.url)
+ *   - delivery_proof (présent à partir de letter.delivery_proof — sous-objet avec file.url)
+ */
+interface MsbWebhookEvent {
   _id: string;
-  object: "event";
-  /** ex: "letter.created", "letter.sent", "letter.delivered" */
   name: string;
-  /** Timestamp ISO */
+  category: string;
+  description?: string;
+  letter: string;
   created_at: string;
-  letter: MsbLetterResponse;
+  updated_at?: string;
+  webhook_failed?: boolean;
+  webhook_called?: boolean;
+}
+
+/** Sous-objet preuve (filing_proof ou delivery_proof) côté MSB. */
+interface MsbProof {
+  _id?: string;
+  file?: { url: string };
+}
+
+interface MsbLetterWithExtras extends MsbLetterResponse {
+  tracking_number?: string;
+  filing_proof?: MsbProof;
+  delivery_proof?: MsbProof;
+  events?: Array<{ _id: string; name: string; created_at: string }>;
+}
+
+interface MsbWebhookPayload {
+  created_at: string;
+  event: MsbWebhookEvent;
+  letter: MsbLetterWithExtras;
+  /** Présent à `true` quand l'event vient du débogueur du dashboard MSB. */
+  debugger?: boolean;
 }
 
 interface MsbErrorResponse {
@@ -165,10 +210,16 @@ export class MySendingBoxProvider implements MailProvider {
   readonly name = "mysendingbox";
 
   private readonly apiKey: string;
-  private readonly webhookSecret: string | null;
+  private readonly webhookUser: string | null;
+  private readonly webhookPass: string | null;
   private readonly baseUrl = "https://api.mysendingbox.fr";
 
-  constructor(opts?: { apiKey?: string; webhookSecret?: string; mode?: "test" | "live" }) {
+  constructor(opts?: {
+    apiKey?: string;
+    webhookUser?: string;
+    webhookPass?: string;
+    mode?: "test" | "live";
+  }) {
     const mode = opts?.mode ?? (process.env.MSB_MODE === "live" ? "live" : "test");
     const apiKey =
       opts?.apiKey ??
@@ -180,10 +231,12 @@ export class MySendingBoxProvider implements MailProvider {
       );
     }
 
-    // Le webhook secret est optionnel au constructeur : il n'est requis qu'en Phase 4.4.
-    // On le stocke null si absent/placeholder, les méthodes concernées throwent explicitement.
-    const rawSecret = opts?.webhookSecret ?? process.env.MSB_WEBHOOK_SECRET;
-    this.webhookSecret = rawSecret && rawSecret !== "..." ? rawSecret : null;
+    // Webhook credentials : optionnels au constructeur, requis seulement pour
+    // verifyWebhookAuth (qui throw explicitement si absent/placeholder).
+    const rawUser = opts?.webhookUser ?? process.env.MSB_WEBHOOK_USER;
+    const rawPass = opts?.webhookPass ?? process.env.MSB_WEBHOOK_PASS;
+    this.webhookUser = rawUser && rawUser !== "..." ? rawUser : null;
+    this.webhookPass = rawPass && rawPass !== "..." ? rawPass : null;
     this.apiKey = apiKey;
   }
 
@@ -372,64 +425,87 @@ export class MySendingBoxProvider implements MailProvider {
     };
   }
 
-  // ─── Méthode 4 : verifyWebhookSignature ───────────────────────────────────
+  // ─── Méthode 4 : verifyWebhookAuth ────────────────────────────────────────
   //
-  // MSB signe les webhooks avec HMAC-SHA256(webhookSecret, rawBody).
-  // Le résultat est envoyé dans le header "Mysendingbox-Signature" en hexadécimal.
-  // À configurer en Phase 4.4 (enregistrement du webhook dans le dashboard MSB).
+  // MSB ne signe PAS les webhooks (vérifié doc 2026-05-01). La sécurité repose
+  // sur Basic Auth dans l'URL configurée côté dashboard MSB :
+  //   https://${MSB_WEBHOOK_USER}:${MSB_WEBHOOK_PASS}@justecourrier.fr/api/mailings-webhook
+  //
+  // Quand MSB POST sur l'URL, le navigateur/client envoie automatiquement un
+  // header `Authorization: Basic base64(user:pass)`. On le compare au tuple
+  // attendu côté serveur via `timingSafeEqual` (anti-timing-attack).
 
-  verifyWebhookSignature(payload: string, signature: string): boolean {
-    if (!this.webhookSecret) {
+  verifyWebhookAuth(authHeader: string | null): boolean {
+    if (!this.webhookUser || !this.webhookPass) {
       throw new Error(
-        "MSB_WEBHOOK_SECRET non configuré. " +
-          "Ajoutez le secret depuis le dashboard MySendingBox (Phase 4.4)."
+        "MSB_WEBHOOK_USER ou MSB_WEBHOOK_PASS non configurés. " +
+          "Ajoutez-les dans .env.local et Vercel, et configurez l'URL " +
+          "https://${USER}:${PASS}@justecourrier.fr/api/mailings-webhook " +
+          "dans le dashboard MySendingBox."
       );
     }
 
-    const expected = createHmac("sha256", this.webhookSecret)
-      .update(payload, "utf8")
-      .digest("hex");
+    if (!authHeader || !authHeader.startsWith("Basic ")) {
+      return false;
+    }
+
+    const expected = Buffer.from(`${this.webhookUser}:${this.webhookPass}`).toString("base64");
+    const provided = authHeader.slice("Basic ".length).trim();
+
+    // timingSafeEqual exige des buffers de même longueur ; on encode et on compare.
+    const expectedBuf = Buffer.from(expected);
+    const providedBuf = Buffer.from(provided);
+    if (expectedBuf.length !== providedBuf.length) return false;
 
     try {
-      // timingSafeEqual évite les attaques par timing side-channel
-      return timingSafeEqual(
-        Buffer.from(signature.toLowerCase(), "hex"),
-        Buffer.from(expected, "hex")
-      );
+      return timingSafeEqual(expectedBuf, providedBuf);
     } catch {
-      // Buffer.from lance si la chaîne hex est invalide ou de longueur différente
       return false;
     }
   }
 
   // ─── Méthode 5 : parseWebhookEvent ────────────────────────────────────────
+  //
+  // Structure du payload (vérifiée doc 2026-05-01) :
+  //   { created_at, event: { _id, name, letter: id, ... }, letter: { _id, ... } }
+  //
+  // Extraction des données pertinentes :
+  //   - providerEventId   = event._id (idempotence)
+  //   - providerMailingId = letter._id
+  //   - eventType         = event.name (ex: "letter.distributed")
+  //   - status            = mappé via MSB_STATUS_MAP
+  //   - trackingNumber    = letter.tracking_number (présent à partir de letter.sent)
+  //   - proofOfDepositUrl = letter.filing_proof.file.url (à letter.filing_proof)
+  //   - proofOfReceiptUrl = letter.delivery_proof.file.url (à letter.delivery_proof)
 
   parseWebhookEvent(rawPayload: unknown): MailingEvent {
     const payload = rawPayload as MsbWebhookPayload;
 
-    // Structure réelle du webhook MSB (vérifiée via réponse sandbox) :
-    //   payload._id         — ID de l'événement
-    //   payload.name        — ex: "letter.created", "letter.sent"
-    //   payload.created_at  — timestamp ISO de l'événement
-    //   payload.letter._id  — ID de la lettre
-    //   payload.letter.status.name — statut courant
-    if (!payload?._id || !payload?.letter?._id) {
+    if (!payload?.event?._id || !payload?.letter?._id) {
       throw new Error(
-        `MSB parseWebhookEvent: payload invalide — champs "_id" ou "letter._id" manquants. ` +
-          `Payload reçu : ${JSON.stringify(payload)}`
+        `MSB parseWebhookEvent: payload invalide — champs "event._id" ou "letter._id" manquants. ` +
+          `Payload reçu : ${JSON.stringify(payload).slice(0, 500)}`
       );
     }
 
-    const letterObj = payload.letter;
-    const status: MailingStatus = MSB_STATUS_MAP[payload.name] ?? "submitted";
+    const event = payload.event;
+    const letter = payload.letter;
+    const status: MailingStatus = MSB_STATUS_MAP[event.name] ?? "submitted";
 
     return {
-      providerEventId: payload._id,
-      providerMailingId: letterObj._id,
+      providerEventId: event._id,
+      providerMailingId: letter._id,
       status,
-      eventType: payload.name ?? "unknown",
-      occurredAt: payload.created_at ?? letterObj.updated_at ?? new Date().toISOString(),
+      eventType: event.name,
+      occurredAt:
+        event.created_at ??
+        payload.created_at ??
+        letter.updated_at ??
+        new Date().toISOString(),
       rawPayload,
+      trackingNumber: letter.tracking_number ?? undefined,
+      proofOfDepositUrl: letter.filing_proof?.file?.url,
+      proofOfReceiptUrl: letter.delivery_proof?.file?.url,
     };
   }
 }
