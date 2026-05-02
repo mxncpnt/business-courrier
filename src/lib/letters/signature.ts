@@ -24,23 +24,30 @@ const BUCKET = "signatures";
 /** Durée de vie des signed URLs pour le preview HTML (en secondes) — 1h. */
 const SIGNED_URL_TTL = 60 * 60;
 
-// Seuils pour le détourage de la signature (lib `sharp`). Calibrés pour des
-// signatures scannées au stylo noir/bleu sur papier blanc/légèrement teinté.
+// Paramètres du détourage signature.
 //
-// Algorithme :
-//   - Convertit en grayscale (canal unique 0=noir → 255=blanc)
-//   - Pour chaque pixel :
-//       * v ≥ HIGH (180)    : alpha = 0       → transparent (fond papier)
-//       * v ≤ LOW  (30)     : alpha = 255     → opaque (encre la plus sombre)
-//       * sinon             : alpha interpolé → bord adouci (anti-aliasing)
-//   - Sortie : PNG noir sur fond transparent
+// Algorithme : high-pass filter + threshold adaptatif local.
+//   1. Greyscale + normalize contraste
+//   2. Calcul d'un "fond local" estimé via blur Gaussien (sigma proportionnel
+//      à la taille image). Capture les variations lentes d'éclairage.
+//   3. Diff par pixel : `bg - src` → positif si pixel plus sombre que son
+//      voisinage. Capture les traits de stylo (variations rapides).
+//   4. Threshold sur le diff :
+//      * diff < DIFF_LOW (25)         : alpha = 0       (transparent)
+//      * diff ≥ DIFF_HIGH (80)        : alpha = 255     (encre opaque)
+//      * sinon                        : alpha interpolé (anti-aliasing)
 //
-// À recalibrer si on observe que la signature perd ses détails (HIGH trop
-// bas) ou que le fond reste visible (HIGH trop haut). Sur un scan classique
-// au stylo noir, 180 est un bon point.
+// Avantages vs threshold global naïf :
+//   - Robuste aux gradients d'éclairage (photo iPhone non uniforme, ombre)
+//   - Robuste aux fonds papiers teintés (jaune, beige, gris clair)
+//   - Préserve les traits fins (encre légèrement diluée reste visible)
+//
+// À recalibrer si :
+//   - Signature trop fine, perd des détails  → baisser DIFF_LOW
+//   - Tâches du fond visibles                → monter DIFF_LOW
 
-const SIGNATURE_THRESHOLD_HIGH = 180;
-const SIGNATURE_THRESHOLD_LOW = 30;
+const DIFF_LOW = 25;
+const DIFF_HIGH = 80;
 
 interface SignatureInfo {
   storagePath: string;
@@ -76,17 +83,12 @@ export async function getSignatureInfo(
 }
 
 /**
- * Télécharge la signature de l'user, applique un détourage (encre noire sur
- * fond transparent), et retourne un Buffer PNG utilisable par
- * `@react-pdf/renderer`.
+ * Télécharge la signature de l'user (déjà traitée à l'upload, fond transparent).
+ * Retourne null si l'user n'a pas de signature.
  *
- * Le traitement est fait à chaque appel (≈200ms par signature) plutôt qu'au
- * moment de l'upload. Avantages : on garde l'image source intacte côté
- * Storage (utile pour le preview HTML, et permet de re-traiter avec un
- * meilleur algo plus tard sans re-demander à l'user).
- *
- * Retourne null si l'user n'a pas de signature ou si le Storage/processing
- * échoue.
+ * Note : le traitement (détourage) est fait UNE FOIS à l'upload via
+ * `processSignatureForPdf` puis stocké tel quel. Cette fonction se contente
+ * de relire le PNG transparent.
  */
 export async function getSignatureBuffer(userId: string): Promise<Buffer | null> {
   const info = await getSignatureInfo(userId);
@@ -106,67 +108,73 @@ export async function getSignatureBuffer(userId: string): Promise<Buffer | null>
   }
 
   const arrayBuffer = await data.arrayBuffer();
-  const sourceBuffer = Buffer.from(arrayBuffer);
-
-  try {
-    return await processSignatureForPdf(sourceBuffer);
-  } catch (err) {
-    console.error(
-      `getSignatureBuffer: processing failed for ${info.storagePath}:`,
-      err
-    );
-    // Fallback : on renvoie l'image source non traitée plutôt que de perdre
-    // la signature complètement. Sera moche mais visible.
-    return sourceBuffer;
-  }
+  return Buffer.from(arrayBuffer);
 }
 
 /**
- * Détoure une signature scannée : fond papier (clair) → transparent, encre
- * (sombre) → noire opaque, bords interpolés (anti-aliasing).
+ * Détoure une signature scannée/photographiée : fond papier → transparent,
+ * encre → noire opaque, bords adoucis (anti-aliasing).
  *
- * Implémentation via `sharp.raw()` + manipulation pixel-par-pixel pour
- * construire un canal alpha à partir du grayscale.
+ * Algorithme high-pass + threshold adaptatif (résistant aux gradients
+ * d'éclairage et aux papiers teintés) :
+ *   1. Greyscale + normalise (étire le contraste sur 0-255)
+ *   2. Blur Gaussien sigma proportionnel à la taille → estime le "fond local"
+ *   3. Pour chaque pixel : `diff = bg - src` (positif si plus sombre que voisin)
+ *   4. Threshold sur `diff` → canal alpha (0/255 ou interpolation entre)
+ *   5. Sortie PNG RGBA (noir + alpha calculé)
+ *
+ * Performance : ~200-500ms pour une signature 1000×500. Appelé UNE FOIS à
+ * l'upload — pas à chaque génération PDF.
  */
 export async function processSignatureForPdf(input: Buffer): Promise<Buffer> {
-  // 1. Charger en grayscale + normaliser le contraste pour les scans pâles
-  const greyscale = sharp(input).greyscale().normalise();
-
-  // 2. Récupérer la matrice de pixels brute (1 octet/pixel)
-  const { data: greyData, info } = await greyscale
+  // 1. Image source en grayscale + contraste normalisé
+  const sourcePipeline = sharp(input).greyscale().normalise();
+  const { data: sourceData, info } = await sourcePipeline
     .raw()
     .toBuffer({ resolveWithObject: true });
+  const { width, height } = info;
 
-  // 3. Construire un buffer RGBA : pixels noirs + canal alpha selon le grey
-  const rgba = Buffer.alloc(info.width * info.height * 4);
-  for (let i = 0; i < greyData.length; i++) {
-    const v = greyData[i];
+  // 2. Estimation "fond local" : blur Gaussien avec sigma calibré sur la
+  //    plus petite dimension de l'image. ~3% de la taille = bon compromis
+  //    pour ne pas effacer les boucles fines de signature mais bien lisser
+  //    le gradient d'éclairage.
+  const blurSigma = Math.max(8, Math.min(width, height) * 0.03);
+  const blurredData = await sharp(input)
+    .greyscale()
+    .normalise()
+    .blur(blurSigma)
+    .raw()
+    .toBuffer();
+
+  // 3. Construire le buffer RGBA pixel-par-pixel
+  const rgba = Buffer.alloc(width * height * 4);
+  for (let i = 0; i < sourceData.length; i++) {
+    const src = sourceData[i];
+    const bg = blurredData[i];
+    // Différence : positif si le pixel est plus sombre que le fond local
+    const diff = bg - src;
+
     let alpha: number;
-    if (v >= SIGNATURE_THRESHOLD_HIGH) {
-      alpha = 0;
-    } else if (v <= SIGNATURE_THRESHOLD_LOW) {
-      alpha = 255;
+    if (diff < DIFF_LOW) {
+      alpha = 0; // pixel proche ou plus clair que voisinage = fond
+    } else if (diff >= DIFF_HIGH) {
+      alpha = 255; // beaucoup plus sombre = encre franche
     } else {
-      // Interpolation linéaire entre LOW et HIGH pour adoucir les bords
       alpha = Math.round(
-        (255 * (SIGNATURE_THRESHOLD_HIGH - v)) /
-          (SIGNATURE_THRESHOLD_HIGH - SIGNATURE_THRESHOLD_LOW)
+        (255 * (diff - DIFF_LOW)) / (DIFF_HIGH - DIFF_LOW)
       );
     }
+
     const idx = i * 4;
-    rgba[idx] = 0; // R (noir)
+    rgba[idx] = 0; // R noir
     rgba[idx + 1] = 0; // G
     rgba[idx + 2] = 0; // B
     rgba[idx + 3] = alpha;
   }
 
-  // 4. Reconstruire en PNG depuis le buffer RGBA brut
+  // 4. Encoder en PNG depuis le RGBA brut
   return await sharp(rgba, {
-    raw: {
-      width: info.width,
-      height: info.height,
-      channels: 4,
-    },
+    raw: { width, height, channels: 4 },
   })
     .png()
     .toBuffer();

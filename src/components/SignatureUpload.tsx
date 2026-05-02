@@ -196,8 +196,8 @@ export default function SignatureUpload({
           <p className="text-[12px] text-jc-ink-muted mt-3">
             <strong className="text-jc-ink">Astuce :</strong> signez sur une
             feuille blanche au stylo noir, photographiez la zone signée, puis
-            recadrez. Plus la signature est nette, mieux elle s&apos;intégrera
-            dans le PDF.
+            recadrez serré. Le fond sera automatiquement rendu transparent
+            (détourage) — pas besoin de PNG transparent ni de retouche.
           </p>
 
           {isReplacing && (

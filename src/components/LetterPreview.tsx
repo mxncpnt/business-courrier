@@ -164,10 +164,6 @@ export default function LetterPreview({
                           height: "28px",
                           maxWidth: "120px",
                           objectFit: "contain",
-                          // Multiply : le blanc devient transparent, l'encre
-                          // (sombre) reste sombre. Évite le carré gris/jaune
-                          // visible quand la signature a un fond non-blanc.
-                          mixBlendMode: "multiply",
                         }}
                       />
                     </div>

@@ -4,6 +4,7 @@ import { randomUUID } from "crypto";
 import { revalidatePath } from "next/cache";
 import { createServiceClient } from "@/lib/supabase/server";
 import { createAuthClient } from "@/lib/supabase/server-auth";
+import { processSignatureForPdf } from "@/lib/letters/signature";
 
 const BUCKET = "signatures";
 const MAX_BYTES = 1_048_576; // 1 Mo
@@ -67,16 +68,31 @@ export async function uploadSignatureImage(
 
   const oldPath = existingProfile?.signature_storage_path ?? null;
 
-  // Path : user_id/signature-{uuid}.{ext}. UUID pour invalider le cache CDN
-  // (les preview <img> auront un nouveau path à chaque upload).
-  const ext = file.type === "image/png" ? "png" : "jpg";
-  const newPath = `${user.id}/signature-${randomUUID()}.${ext}`;
+  // Path : user_id/signature-{uuid}.png. Toujours PNG car on traite l'image
+  // (détourage fond → transparent) avant de stocker. UUID pour invalider le
+  // cache CDN au remplacement.
+  const newPath = `${user.id}/signature-${randomUUID()}.png`;
 
-  const buffer = await file.arrayBuffer();
+  // Traitement : détourage du fond papier, encre noire sur transparent.
+  // On fait ça à l'upload (≈300ms) plutôt qu'à chaque génération PDF —
+  // gain de perf et même image pour preview HTML et PDF.
+  const sourceBuffer = Buffer.from(await file.arrayBuffer());
+  let processedBuffer: Buffer;
+  try {
+    processedBuffer = await processSignatureForPdf(sourceBuffer);
+  } catch (err) {
+    console.error("uploadSignatureImage: processing failed", err);
+    return {
+      ok: false,
+      error:
+        "Erreur lors du traitement de la signature. Vérifiez que l'image n'est pas corrompue.",
+    };
+  }
+
   const { error: uploadError } = await supabase.storage
     .from(BUCKET)
-    .upload(newPath, new Uint8Array(buffer), {
-      contentType: file.type,
+    .upload(newPath, new Uint8Array(processedBuffer), {
+      contentType: "image/png",
       upsert: false,
     });
 
