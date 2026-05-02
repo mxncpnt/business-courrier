@@ -94,16 +94,25 @@ export async function sendConfirmationEmail(
   const { to, letterTitle, letterId, downloadUrl, mailingMode, attachments } =
     params;
 
+  // En mode envoi physique, l'utilisateur doit aller sur /preview/[id] pour
+  // relire/éditer/confirmer l'envoi. Le CTA principal de l'email pointe
+  // donc vers cette page plutôt que vers le download direct.
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://justecourrier.fr";
+  const previewUrl = mailingMode
+    ? `${appUrl}/preview/${letterId}`
+    : undefined;
+
   const { html, text } = renderConfirmationEmail({
     letterTitle,
     letterId,
     downloadUrl,
+    previewUrl,
     mailingMode,
     attachments,
   });
 
   const subject = mailingMode
-    ? `Votre courrier part à La Poste — ${letterTitle}`
+    ? `Votre courrier est prêt à partir — ${letterTitle}`
     : `Votre courrier est prêt — ${letterTitle}`;
 
   await sendViaResend({ to, subject, html, text });

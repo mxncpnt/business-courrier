@@ -69,24 +69,27 @@ export default async function SuccessPage({
   const refId = letter_id ? `JC-${letter_id.substring(0, 12).toUpperCase()}` : "";
 
   // ─── Textes adaptés au mode d'envoi ───────────────────────────────────────
+  // Édition A2 (2026-05-02) : pour les modes envoi physique, le courrier
+  // n'est PAS envoyé immédiatement. L'utilisateur doit confirmer manuellement
+  // (ou attendre l'auto-submit cron à T+24h). On adapte le wording.
   const stampLines = mailingMode
     ? mailingMode === "registered"
-      ? ["Recommandé", "en route", "JC"]
-      : ["Lettre", "en route", "JC"]
+      ? ["Recommandé", "prêt", "JC"]
+      : ["Lettre", "prête", "JC"]
     : ["Courrier", "prêt", "JC"];
 
   const heading = mailingMode
     ? mailingMode === "registered"
-      ? "Ton recommandé part à La Poste."
-      : "Ton courrier part à La Poste."
+      ? "Ton recommandé est prêt à partir."
+      : "Ta lettre est prête à partir."
     : "Ton courrier est prêt.";
 
   const subtitle = mailingMode
-    ? `On l'imprime, on le met sous pli et on le dépose à La Poste sous 24h ouvrées. Une copie PDF a été envoyée à `
+    ? "Tu peux relire et modifier le texte avant l'envoi. Une copie PDF a été envoyée à "
     : "Le PDF a été envoyé à ";
 
   const subtitleSuffix = mailingMode
-    ? ". Tu peux la télécharger en archive ci-dessous."
+    ? ". Confirme l'envoi quand tu es prêt — sans action, l'envoi sera déclenché automatiquement dans les 24h."
     : ". Tu peux aussi le télécharger directement ci-dessous.";
 
   const downloadLabel = mailingMode
@@ -105,14 +108,14 @@ export default async function SuccessPage({
   const nextSteps: string[] = mailingMode
     ? mailingMode === "registered"
       ? [
-          "Le courrier sera imprimé et déposé à La Poste sous 24h ouvrées.",
-          "Tu recevras une notification à chaque étape : dépôt, distribution, AR signé.",
-          "L'accusé de réception signé scanné sera disponible dans ton espace dès retour de La Poste.",
+          "Relis et modifie le texte si besoin depuis la page de ton courrier.",
+          "Confirme l'envoi quand tu es prêt — ou laisse-nous le déclencher automatiquement dans les 24h.",
+          "Une fois envoyé, tu recevras une notification à chaque étape : dépôt, distribution, AR signé.",
         ]
       : [
-          "Le courrier sera imprimé et déposé à La Poste sous 24h ouvrées.",
-          "Distribution sous 3 jours ouvrés en France métropolitaine (lettre verte).",
-          "Tu recevras un email à la dépose pour confirmation.",
+          "Relis et modifie le texte si besoin depuis la page de ton courrier.",
+          "Confirme l'envoi quand tu es prêt — ou laisse-nous le déclencher automatiquement dans les 24h.",
+          "Distribution sous 3 jours ouvrés en France métropolitaine (lettre verte) à compter de la dépose.",
         ]
     : [
         "Imprime le PDF, signe-le à la main.",
@@ -244,18 +247,37 @@ export default async function SuccessPage({
 
           {letter_id && (
             <>
-              <a
-                href={`/api/download/${letter_id}`}
-                className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-jc-primary text-white font-medium rounded-jc hover:bg-jc-primary-hover transition-colors text-base no-underline"
-              >
-                <IconDownload /> {downloadLabel}
-              </a>
-              <Link
-                href={`/preview/${letter_id}`}
-                className="w-full flex items-center justify-center gap-2 px-6 py-2.5 border border-jc-line-strong text-jc-ink font-medium rounded-jc hover:bg-jc-surface transition-colors text-sm no-underline mt-2.5"
-              >
-                Voir et modifier le texte
-              </Link>
+              {/* CTA primaire — varie selon le mode :
+                   - Mode envoi : "Relire et confirmer l'envoi" → /preview/[id]
+                     (l'user va sur la page d'aperçu où il peut éditer et
+                     cliquer "Confirmer et envoyer à La Poste")
+                   - Mode PDF only : "Télécharger le PDF" en direct */}
+              {mailingMode ? (
+                <Link
+                  href={`/preview/${letter_id}`}
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-jc-primary text-white font-medium rounded-jc hover:bg-jc-primary-hover transition-colors text-base no-underline"
+                >
+                  Relire et confirmer l&apos;envoi
+                </Link>
+              ) : (
+                <a
+                  href={`/api/download/${letter_id}`}
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-jc-primary text-white font-medium rounded-jc hover:bg-jc-primary-hover transition-colors text-base no-underline"
+                >
+                  <IconDownload /> {downloadLabel}
+                </a>
+              )}
+
+              {/* Si mode envoi : le download devient secondaire (copie d'archive) */}
+              {mailingMode && (
+                <a
+                  href={`/api/download/${letter_id}`}
+                  className="w-full flex items-center justify-center gap-2 px-6 py-2.5 border border-jc-line-strong text-jc-ink font-medium rounded-jc hover:bg-jc-surface transition-colors text-sm no-underline mt-2.5"
+                >
+                  <IconDownload /> {downloadLabel}
+                </a>
+              )}
+
               <Link
                 href="/dashboard"
                 className="w-full flex items-center justify-center gap-2 px-6 py-2.5 border border-jc-line-strong text-jc-ink font-medium rounded-jc hover:bg-jc-surface transition-colors text-sm no-underline mt-2.5"

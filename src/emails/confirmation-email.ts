@@ -30,9 +30,16 @@ export interface AttachmentSummary {
 interface ConfirmationEmailData {
   letterTitle: string;
   letterId: string;
+  /** URL `/api/download/[id]` pour récupérer la copie PDF d'archive */
   downloadUrl: string;
   /** undefined = PDF only (l'utilisateur poste lui-même). */
   mailingMode?: MailingMode;
+  /**
+   * URL `/preview/[letterId]` (mode envoi uniquement). Si fourni avec
+   * `mailingMode`, le CTA principal de l'email devient "Relire et confirmer
+   * l'envoi" → previewUrl, et le download passe en CTA secondaire (lien texte).
+   */
+  previewUrl?: string;
   /** PJ incluses dans l'envoi — pertinent uniquement si mailingMode défini. */
   attachments?: AttachmentSummary[];
 }
@@ -41,28 +48,28 @@ export function renderConfirmationEmail(data: ConfirmationEmailData): {
   html: string;
   text: string;
 } {
-  const { letterTitle, letterId, downloadUrl, mailingMode, attachments } = data;
+  const { letterTitle, letterId, downloadUrl, previewUrl, mailingMode, attachments } = data;
   const shortRef = letterId.substring(0, 8).toUpperCase();
   const hasAttachments = mailingMode && attachments && attachments.length > 0;
 
   // ─── Texte adapté au mode d'envoi ────────────────────────────────────────
 
   const headline = mailingMode
-    ? "Votre courrier part à La Poste"
+    ? "Votre courrier est prêt à partir"
     : "Votre courrier est prêt";
 
   const subject = `${headline} — ${letterTitle}`;
 
   const introHtml = mailingMode
-    ? `Votre paiement a bien été reçu. Le courrier <strong style="color:${jc.ink};">${escHtml(letterTitle)}</strong> sera déposé à La Poste sous 24h ouvrées.${mailingMode === "registered" ? " L'accusé de réception signé vous sera envoyé dès distribution." : ""} Une copie PDF est disponible en archive.`
+    ? `Votre paiement a bien été reçu. Le courrier <strong style="color:${jc.ink};">${escHtml(letterTitle)}</strong> est prêt. Vous pouvez le relire et le modifier avant l'envoi à La Poste — confirmez l'envoi quand vous êtes prêt, ou laissez-nous le déclencher automatiquement dans les 24 heures.`
     : `Votre paiement a bien été reçu. Votre courrier <strong style="color:${jc.ink};">${escHtml(letterTitle)}</strong> est disponible en téléchargement.`;
 
   const introText = mailingMode
-    ? `Votre paiement a bien été reçu. Le courrier "${letterTitle}" sera déposé à La Poste sous 24h ouvrées.${mailingMode === "registered" ? " L'accusé de réception signé vous sera envoyé dès distribution." : ""} Une copie PDF est disponible en archive.`
+    ? `Votre paiement a bien été reçu. Le courrier "${letterTitle}" est prêt. Vous pouvez le relire et le modifier avant l'envoi à La Poste — confirmez l'envoi quand vous êtes prêt, ou laissez-nous le déclencher automatiquement dans les 24 heures.`
     : `Votre paiement a bien été reçu. Votre courrier "${letterTitle}" est disponible en téléchargement.`;
 
   const ctaLabel = mailingMode
-    ? "Télécharger ma copie (PDF)"
+    ? "Relire et confirmer l'envoi"
     : "Télécharger mon courrier (PDF)";
 
   // ─── Conseils (HTML + texte) ─────────────────────────────────────────────
@@ -73,31 +80,31 @@ export function renderConfirmationEmail(data: ConfirmationEmailData): {
     mailingMode === "registered"
       ? [
           [
-            `Le courrier sera <strong style="color:${jc.ink};">imprimé, mis sous pli et déposé à La Poste sous 24h ouvrées</strong>.`,
-            "Le courrier sera imprimé, mis sous pli et déposé à La Poste sous 24h ouvrées.",
+            `<strong style="color:${jc.ink};">Relisez et modifiez</strong> le texte si besoin sur la page de votre courrier.`,
+            "Relisez et modifiez le texte si besoin sur la page de votre courrier.",
           ],
           [
-            "Vous recevrez une notification email à chaque étape : dépôt, distribution, AR signé.",
-            "Vous recevrez une notification email à chaque étape : dépôt, distribution, AR signé.",
+            "Confirmez l'envoi quand vous êtes prêt — sans action, l'envoi sera déclenché automatiquement dans les 24 heures.",
+            "Confirmez l'envoi quand vous êtes prêt — sans action, l'envoi sera déclenché automatiquement dans les 24 heures.",
           ],
           [
-            "L'accusé de réception signé scanné sera disponible dans votre espace dès retour de La Poste.",
-            "L'accusé de réception signé scanné sera disponible dans votre espace dès retour de La Poste.",
+            "Une fois envoyé, vous recevrez une notification à chaque étape : dépôt, distribution, AR signé.",
+            "Une fois envoyé, vous recevrez une notification à chaque étape : dépôt, distribution, AR signé.",
           ],
         ]
       : mailingMode === "simple"
         ? [
             [
-              `Le courrier sera <strong style="color:${jc.ink};">imprimé, mis sous pli et déposé à La Poste sous 24h ouvrées</strong>.`,
-              "Le courrier sera imprimé, mis sous pli et déposé à La Poste sous 24h ouvrées.",
+              `<strong style="color:${jc.ink};">Relisez et modifiez</strong> le texte si besoin sur la page de votre courrier.`,
+              "Relisez et modifiez le texte si besoin sur la page de votre courrier.",
             ],
             [
-              "Distribution sous 3 jours ouvrés en France métropolitaine (lettre verte).",
-              "Distribution sous 3 jours ouvrés en France métropolitaine (lettre verte).",
+              "Confirmez l'envoi quand vous êtes prêt — sans action, l'envoi sera déclenché automatiquement dans les 24 heures.",
+              "Confirmez l'envoi quand vous êtes prêt — sans action, l'envoi sera déclenché automatiquement dans les 24 heures.",
             ],
             [
-              "Vous recevrez une notification email à la dépose.",
-              "Vous recevrez une notification email à la dépose.",
+              "Distribution sous 3 jours ouvrés en France métropolitaine (lettre verte) à compter de la dépose.",
+              "Distribution sous 3 jours ouvrés en France métropolitaine (lettre verte) à compter de la dépose.",
             ],
           ]
         : [
@@ -149,6 +156,17 @@ export function renderConfirmationEmail(data: ConfirmationEmailData): {
     : "";
 
   // ─── Composition HTML ────────────────────────────────────────────────────
+  // En mode envoi avec previewUrl, le CTA principal pointe vers /preview/[id]
+  // (relire/éditer/confirmer). Un lien texte secondaire offre la copie PDF.
+  // Sinon (PDF only ou previewUrl absent), CTA principal = download direct.
+
+  const ctaUrl = mailingMode && previewUrl ? previewUrl : downloadUrl;
+  const secondaryDownloadHtml =
+    mailingMode && previewUrl
+      ? `<p style="margin:-8px 0 24px;font-size:13px;color:${jc.inkMuted};text-align:center;">
+           ou <a href="${escHtml(downloadUrl)}" style="color:${jc.accent};">télécharger la copie PDF d'archive</a>
+         </p>`
+      : "";
 
   const contentHtml = `
     <p style="margin:0 0 16px;font-size:22px;font-weight:700;color:${jc.ink};font-family:Georgia,serif;">${escHtml(headline)}</p>
@@ -157,7 +175,8 @@ export function renderConfirmationEmail(data: ConfirmationEmailData): {
       ${introHtml}
     </p>
 
-    ${renderCtaButton({ label: ctaLabel, url: downloadUrl })}
+    ${renderCtaButton({ label: ctaLabel, url: ctaUrl })}
+    ${secondaryDownloadHtml}
 
     <hr style="border:none;border-top:1px solid ${jc.line};margin:24px 0;" />
 
@@ -174,12 +193,17 @@ export function renderConfirmationEmail(data: ConfirmationEmailData): {
 
   const html = renderEmailShell({ subject, contentHtml });
 
+  // Version texte : 2 URLs si mode envoi + previewUrl, sinon 1
+  const linksText =
+    mailingMode && previewUrl
+      ? `Relire et confirmer l'envoi :\n${previewUrl}\n\nOu télécharger la copie PDF d'archive :\n${downloadUrl}${attachmentsText}`
+      : `${mailingMode ? "Télécharger votre copie PDF" : "Télécharger votre PDF"} :\n${downloadUrl}${attachmentsText}`;
+
   const contentText = `JusteCourrier — ${headline}
 
 ${introText}
 
-${mailingMode ? "Télécharger votre copie PDF" : "Télécharger votre PDF"} :
-${downloadUrl}${attachmentsText}
+${linksText}
 
 ---
 ${conseilsTitle} :
