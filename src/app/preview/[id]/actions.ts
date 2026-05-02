@@ -3,7 +3,9 @@
 import { randomUUID } from "crypto";
 import { revalidatePath } from "next/cache";
 import { createServiceClient } from "@/lib/supabase/server";
+import { createAuthClient } from "@/lib/supabase/server-auth";
 import { getMailProvider } from "@/lib/mailings/mysendingbox";
+import { submitMailingToProvider } from "@/lib/mailings/submit";
 import { AFNOR_MAX_CHARS } from "@/lib/letters/text";
 import type {
   AddressValidationResult,
@@ -292,5 +294,70 @@ export async function resetLetterText(
   }
 
   revalidatePath(`/preview/${letterId}`);
+  return { ok: true };
+}
+
+// ─── 6. confirmMailingSend ───────────────────────────────────────────────────
+//
+// L'utilisateur confirme explicitement l'envoi à La Poste après paiement.
+// Déclenche `submitMailingToProvider` qui génère le PDF (avec final_text si
+// édité) et appelle l'API MSB. Le mailing passe de `paid` à `submitted`.
+//
+// Garde-fous :
+//   - Auth : on vérifie `auth.uid() = mailing.user_id` (anti-CSRF basique)
+//   - Status : on n'autorise la confirmation que si le mailing est `paid`.
+//     Si déjà submitted/in_transit/etc. → no-op idempotent (pas d'erreur,
+//     juste retour OK pour rafraîchir l'UI).
+//   - Si `submitMailingToProvider` échoue, le mailing passe à `failed` côté
+//     submit.ts. On retourne quand même `ok: true` car le mailing a été
+//     "tenté" — l'admin verra le mailing en `failed` et relancera.
+
+export async function confirmMailingSend(
+  mailingId: string
+): Promise<{ ok: true } | ActionError> {
+  // Vérification ownership via auth client
+  const auth = await createAuthClient();
+  const {
+    data: { user },
+  } = await auth.auth.getUser();
+  if (!user) {
+    return { ok: false, error: "Vous devez être connecté pour confirmer l'envoi." };
+  }
+
+  const supabase = createServiceClient();
+
+  const { data: mailing, error: findError } = await supabase
+    .from("mailings")
+    .select("id, status, user_id, letter_id")
+    .eq("id", mailingId)
+    .maybeSingle();
+
+  if (findError || !mailing) {
+    console.error("confirmMailingSend: mailing not found:", findError);
+    return { ok: false, error: "Courrier introuvable." };
+  }
+
+  if (mailing.user_id !== user.id) {
+    return { ok: false, error: "Accès refusé." };
+  }
+
+  // Idempotent : si déjà soumis ou en cours d'envoi, on retourne ok sans action
+  if (mailing.status !== "paid") {
+    revalidatePath(`/preview/${mailing.letter_id}`);
+    return { ok: true };
+  }
+
+  try {
+    await submitMailingToProvider(mailingId);
+  } catch (err) {
+    // submitMailingToProvider ne devrait pas throw (gère ses erreurs en interne
+    // et passe le mailing à `failed`). Filet de sécurité.
+    console.error(
+      `confirmMailingSend: unexpected throw from submitMailingToProvider(${mailingId}):`,
+      err
+    );
+  }
+
+  revalidatePath(`/preview/${mailing.letter_id}`);
   return { ok: true };
 }

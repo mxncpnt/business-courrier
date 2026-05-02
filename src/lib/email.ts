@@ -7,6 +7,7 @@ import { renderMailingDepositedEmail } from "@/emails/mailing-deposited-email";
 import { renderMailingDeliveredEmail } from "@/emails/mailing-delivered-email";
 import { renderMailingReceiptSignedEmail } from "@/emails/mailing-receipt-signed-email";
 import { renderMailingFailedEmail } from "@/emails/mailing-failed-email";
+import { renderMailingPendingConfirmEmail } from "@/emails/mailing-pending-confirm-email";
 import type { MailingMode } from "@/config/mailings";
 
 // ---------------------------------------------------------------------------
@@ -202,6 +203,30 @@ export async function sendMailingFailedEmail(
   await sendViaResend({
     to: params.to,
     subject: `Courrier non distribué — ${params.letterTitle}`,
+    html,
+    text,
+  });
+}
+
+interface SendMailingPendingConfirmEmailParams {
+  to: string;
+  letterTitle: string;
+  /** URL absolue vers `/preview/[letterId]` */
+  previewUrl: string;
+}
+
+/**
+ * Rappel envoyé à T+12h après paiement quand le mailing est toujours en
+ * attente de confirmation utilisateur (status='paid', pas encore submit).
+ * Déclenché par le cron `/api/cron/process-pending-mailings`.
+ */
+export async function sendMailingPendingConfirmEmail(
+  params: SendMailingPendingConfirmEmailParams
+): Promise<void> {
+  const { html, text } = renderMailingPendingConfirmEmail(params);
+  await sendViaResend({
+    to: params.to,
+    subject: `Votre courrier est prêt — confirmez l'envoi — ${params.letterTitle}`,
     html,
     text,
   });

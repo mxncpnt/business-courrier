@@ -5,10 +5,12 @@ import { createAuthClient } from "@/lib/supabase/server-auth";
 import { getLetterType } from "@/config/letter-types";
 import LetterPreview from "@/components/LetterPreview";
 import EditableLetterText from "@/components/EditableLetterText";
+import ConfirmMailingSend from "@/components/ConfirmMailingSend";
 import MailingChoice from "@/components/MailingChoice";
 import Logo from "@/components/Logo";
 import { IconCheck } from "@/components/Icons";
 import { getDisplayText } from "@/lib/letters/text";
+import type { MailingMode } from "@/config/mailings";
 
 export const metadata = {
   title: "Aperçu du courrier",
@@ -37,10 +39,12 @@ export default async function PreviewPage({
   const letterTitle = letterType?.title;
 
   // Mailing associé (si commande envoi physique). Utilisé pour verrouiller
-  // l'édition une fois que le courrier a été remis à La Poste.
+  // l'édition une fois que le courrier a été remis à La Poste, et pour
+  // afficher le bouton "Confirmer et envoyer à La Poste" quand le mailing
+  // est en attente de confirmation utilisateur (status='paid').
   const { data: mailing } = await supabase
     .from("mailings")
-    .select("status")
+    .select("id, status, mode")
     .eq("letter_id", letter.id)
     .maybeSingle();
   const LOCKED_STATUSES = new Set([
@@ -53,6 +57,8 @@ export default async function PreviewPage({
   const editingLocked = mailing
     ? LOCKED_STATUSES.has(mailing.status)
     : false;
+  // Mailing en attente de confirmation utilisateur post-paiement.
+  const awaitingConfirm = mailing?.status === "paid";
 
   // Texte affiché : édition utilisateur si présente, sinon texte IA.
   const displayText = getDisplayText(letter);
@@ -159,6 +165,17 @@ export default async function PreviewPage({
             currentText={displayText}
             generatedText={generatedText}
             isLocked={editingLocked}
+          />
+        )}
+
+        {/* Confirmation manuelle de l'envoi à La Poste — Édition A2.
+            Affiché uniquement si le mailing est en `paid` (ni encore submit
+            ni déjà submitted). Permet à l'user de relire/éditer puis de
+            déclencher lui-même l'envoi MSB. Sinon le cron auto-submit à T+24h. */}
+        {awaitingConfirm && mailing && (
+          <ConfirmMailingSend
+            mailingId={mailing.id}
+            mailingMode={mailing.mode as MailingMode}
           />
         )}
 

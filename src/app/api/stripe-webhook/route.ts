@@ -4,7 +4,6 @@ import { createServiceClient } from "@/lib/supabase/server";
 import { sendConfirmationEmail } from "@/lib/email";
 import { getLetterType } from "@/config/letter-types";
 import { createInvoice } from "@/lib/invoice";
-import { submitMailingToProvider } from "@/lib/mailings/submit";
 import {
   getMailingModeConfig,
   type MailingMode,
@@ -122,18 +121,11 @@ export async function POST(req: NextRequest) {
 
         console.log(`Mailing ${mailingId} marked as paid (mode=${mailingMode})`);
 
-        // Déclencher la soumission au provider postal en fire-and-forget.
-        // submitMailingToProvider gère ses propres erreurs (status=failed si KO)
-        // — on await mais on ne throw jamais (sécurité du webhook Stripe).
-        try {
-          await submitMailingToProvider(mailingId);
-        } catch (err) {
-          // Filet de sécurité, normalement submitMailingToProvider ne throw pas
-          console.error(
-            `Unexpected throw from submitMailingToProvider(${mailingId}):`,
-            err
-          );
-        }
+        // ⚠️ Édition A2 (2026-05-02) : la submission MSB N'EST PLUS déclenchée
+        // automatiquement ici. L'utilisateur garde la main sur son texte
+        // jusqu'à validation explicite (bouton "Confirmer et envoyer" sur
+        // /preview/[id]) ou auto-submit par le cron à T+24h
+        // (cf. /api/cron/process-pending-mailings).
       }
     }
 
