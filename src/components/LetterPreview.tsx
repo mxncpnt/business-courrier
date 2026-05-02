@@ -14,29 +14,12 @@ interface LetterPreviewProps {
   signatureUrl?: string | null;
 }
 
-// Mots-clés français signalant la formule de politesse — cohérent avec
-// `lib/pdf.ts`. Permet d'insérer la signature au même endroit que dans le PDF.
-const POLITESSE_KEYWORDS = [
-  "agréer",
-  "salutations distinguées",
-  "salutations cordiales",
-  "respectueuses salutations",
-  "considération distinguée",
-  "sentiments distingués",
-  "sentiments dévoués",
-  "sentiments respectueux",
-  "cordialement",
-  "bien à vous",
-  "bien cordialement",
-];
-
-function findPolitesseEndIndex(lines: string[]): number {
+// Index de la dernière ligne non-blank — c'est le nom typé du signataire.
+// Aligné à droite, et la signature manuscrite est placée juste après.
+// Cohérent avec `lib/pdf.ts`.
+function findLastNonBlankIndex(lines: string[]): number {
   for (let i = lines.length - 1; i >= 0; i--) {
-    const line = lines[i].toLowerCase();
-    if (line.trim() === "") continue;
-    if (POLITESSE_KEYWORDS.some((kw) => line.includes(kw))) {
-      return i;
-    }
+    if (lines[i].trim() !== "") return i;
   }
   return -1;
 }
@@ -132,61 +115,45 @@ export default function LetterPreview({
 
           {/* ─── Corps du courrier ─── */}
           <div className="text-[8px] leading-[1.6] text-gray-800">
-            {/* Visible portion + signature insérée après la formule de politesse */}
+            {/* Visible portion : dernière ligne non-blank (= nom du signataire)
+                alignée à droite, et signature manuscrite placée juste en-dessous,
+                également à droite. Cohérent avec le rendu PDF (`lib/pdf.ts`). */}
             {(() => {
-              const politesseIdx =
-                signatureUrl && isPaid ? findPolitesseEndIndex(lines) : -1;
+              const visibleLines = lines.slice(0, visibleCount);
+              const lastNonBlankIdx = findLastNonBlankIndex(visibleLines);
               const renderedLines: React.ReactNode[] = [];
 
               for (let i = 0; i < visibleCount; i++) {
                 const line = lines[i];
+                const isSignerName =
+                  line.trim() !== "" && i === lastNonBlankIdx;
                 renderedLines.push(
                   <p
                     key={`vis-${i}`}
-                    style={{ margin: line === "" ? "4px 0" : "0 0 3px" }}
+                    style={{
+                      margin: line === "" ? "4px 0" : "0 0 3px",
+                      textAlign: isSignerName ? "right" : undefined,
+                    }}
                   >
                     {line || " "}
                   </p>
                 );
-
-                if (signatureUrl && isPaid && i === politesseIdx) {
-                  renderedLines.push(
-                    <div
-                      key="signature"
-                      className="flex justify-end"
-                      style={{ margin: "2px 0" }}
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element -- signed URL Supabase, dynamique, pas optimisable par next/image */}
-                      <img
-                        src={signatureUrl}
-                        alt="Signature"
-                        style={{
-                          height: "28px",
-                          maxWidth: "120px",
-                          objectFit: "contain",
-                        }}
-                      />
-                    </div>
-                  );
-                }
               }
 
-              // Fallback : si signature présente mais formule non détectée,
-              // on l'ajoute à la fin (cohérent avec lib/pdf.ts).
-              if (signatureUrl && isPaid && politesseIdx === -1) {
+              if (signatureUrl && isPaid) {
                 renderedLines.push(
                   <div
-                    key="signature-end"
+                    key="signature"
                     className="flex justify-end"
-                    style={{ margin: "2px 0" }}
+                    style={{ marginTop: "4px" }}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element -- signed URL Supabase, dynamique, pas optimisable par next/image */}
                     <img
                       src={signatureUrl}
                       alt="Signature"
                       style={{
-                        maxHeight: "16px",
-                        maxWidth: "60px",
+                        height: "44px",
+                        maxWidth: "180px",
                         objectFit: "contain",
                       }}
                     />
