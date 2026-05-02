@@ -1,5 +1,5 @@
 import React from "react";
-import { renderToBuffer, Document, Page, Text, View, StyleSheet, Font } from "@react-pdf/renderer";
+import { renderToBuffer, Document, Image, Page, Text, View, StyleSheet, Font } from "@react-pdf/renderer";
 
 // Register a standard font for French characters
 Font.register({
@@ -118,6 +118,21 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
 
+  // Zone signature manuscrite (image PNG/JPG fournie par l'user)
+  // Insérée après la formule de politesse, alignée à droite. Hauteur fixe
+  // pour ne pas distordre le rapport selon la taille de l'image source.
+  signatureBlock: {
+    marginTop: mm(2),
+    marginBottom: mm(2),
+    flexDirection: "row",
+    justifyContent: "flex-end",
+  },
+  signatureImage: {
+    height: mm(20),
+    maxWidth: mm(60),
+    objectFit: "contain",
+  },
+
   // Footer
   footer: {
     position: "absolute",
@@ -135,10 +150,60 @@ interface GeneratePdfParams {
   letterId: string;
   formData?: Record<string, string>;
   letterTitle?: string;
+  /**
+   * Buffer binaire de la signature manuscrite de l'user (PNG ou JPG).
+   * Si fourni, insérée à droite après la formule de politesse détectée
+   * (heuristique : ligne contenant "agréer", "salutations distinguées",
+   * "cordialement"…). Sinon, à la fin du corps.
+   */
+  signatureBuffer?: Buffer;
+}
+
+// Mots-clés français signalant la formule de politesse en fin de courrier.
+// Servent à insérer la signature manuscrite JUSTE APRÈS cette formule, donc
+// AVANT la dernière ligne (typiquement le nom typé de l'expéditeur).
+const POLITESSE_KEYWORDS = [
+  "agréer",
+  "salutations distinguées",
+  "salutations cordiales",
+  "respectueuses salutations",
+  "considération distinguée",
+  "sentiments distingués",
+  "sentiments dévoués",
+  "sentiments respectueux",
+  "cordialement",
+  "bien à vous",
+  "bien cordialement",
+];
+
+/**
+ * Trouve l'index (dans le tableau de lignes) de la fin du paragraphe formule
+ * de politesse. Le rendu insérera la signature juste après cet index.
+ *
+ * Stratégie : scan inverse, on trouve la dernière ligne non-blank contenant
+ * un mot-clé de politesse, puis on remonte jusqu'à la fin du paragraphe
+ * (1ère blank line en remontant) — non, plutôt on descend jusqu'à la fin
+ * du paragraphe (1ère blank line vers le bas). La signature s'insère APRÈS
+ * cette blank line, donc avant le paragraphe suivant (le nom typé).
+ *
+ * Retourne -1 si pas de formule détectée → la signature sera ajoutée à la
+ * fin du corps.
+ */
+function findPolitesseEndIndex(lines: string[]): number {
+  for (let i = lines.length - 1; i >= 0; i--) {
+    const line = lines[i].toLowerCase();
+    if (line.trim() === "") continue;
+    if (POLITESSE_KEYWORDS.some((kw) => line.includes(kw))) {
+      // On a trouvé la formule. On retourne l'index de cette ligne — la
+      // signature s'insérera juste après (entre la formule et le nom typé).
+      return i;
+    }
+  }
+  return -1;
 }
 
 export async function generatePdfBuffer(params: GeneratePdfParams): Promise<Buffer> {
-  const { text, letterId, formData, letterTitle } = params;
+  const { text, letterId, formData, letterTitle, signatureBuffer } = params;
 
   // ─── Extract structured data from formData ───
   const senderName =
@@ -270,7 +335,26 @@ export async function generatePdfBuffer(params: GeneratePdfParams): Promise<Buff
     );
   }
 
-  // Body — render each line
+  // Body — render each line.
+  // Si l'user a une signature, on l'insère après la formule de politesse
+  // détectée (entre formule et nom typé). Si pas de formule détectée, on
+  // l'insère à la fin du corps. Format `data:image/{type};base64,...` requis
+  // par @react-pdf/renderer pour les buffers.
+  const politesseIdx = signatureBuffer ? findPolitesseEndIndex(lines) : -1;
+  const signatureDataUrl = signatureBuffer
+    ? `data:image/png;base64,${signatureBuffer.toString("base64")}`
+    : null;
+
+  const renderSignature = () =>
+    React.createElement(
+      View,
+      { key: "signature-block", style: styles.signatureBlock },
+      React.createElement(Image, {
+        src: signatureDataUrl as string,
+        style: styles.signatureImage,
+      })
+    );
+
   lines.forEach((line, i) => {
     const isBlank = line.trim() === "";
     children.push(
@@ -283,7 +367,19 @@ export async function generatePdfBuffer(params: GeneratePdfParams): Promise<Buff
         isBlank ? " " : line
       )
     );
+
+    // Insertion signature après la ligne formule de politesse détectée
+    if (signatureDataUrl && i === politesseIdx) {
+      children.push(renderSignature());
+    }
   });
+
+  // Fallback : si signature présente mais formule non détectée, on l'ajoute
+  // à la fin du corps. Permet de garantir que la signature s'imprime même
+  // sur des courriers atypiques.
+  if (signatureDataUrl && politesseIdx === -1) {
+    children.push(renderSignature());
+  }
 
   const doc = React.createElement(
     Document,

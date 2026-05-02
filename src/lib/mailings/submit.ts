@@ -19,6 +19,7 @@ import { getMailProvider } from "@/lib/mailings/mysendingbox";
 import { mergePdfWithAttachments, type DbAttachment } from "@/lib/mailings/merge";
 import { generatePdfBuffer } from "@/lib/pdf";
 import { getDisplayText } from "@/lib/letters/text";
+import { getSignatureBuffer } from "@/lib/letters/signature";
 import { getLetterType } from "@/config/letter-types";
 import type { MailingMode } from "@/config/mailings";
 import type { PostalAddress } from "@/lib/mailings/provider";
@@ -65,6 +66,11 @@ export async function submitMailingToProvider(mailingId: string): Promise<void> 
 
     const letterType = getLetterType(letter.type);
 
+    // Signature manuscrite globale de l'user (null si pas configurée)
+    const signatureBuffer = mailing.user_id
+      ? await getSignatureBuffer(mailing.user_id)
+      : null;
+
     // 3. Générer le PDF principal du courrier (norme AFNOR)
     // Utilise final_text si l'utilisateur a édité, sinon le texte IA.
     const pdfBuffer = await generatePdfBuffer({
@@ -72,6 +78,7 @@ export async function submitMailingToProvider(mailingId: string): Promise<void> 
       letterId: mailing.letter_id,
       formData: letter.form_data as Record<string, string> | undefined,
       letterTitle: letterType?.title,
+      signatureBuffer: signatureBuffer ?? undefined,
     });
 
     // 4. Merger avec les pièces jointes si présentes

@@ -5,6 +5,40 @@ interface LetterPreviewProps {
   isPaid: boolean;
   formData?: Record<string, string>;
   letterTitle?: string;
+  /**
+   * URL signée vers la signature manuscrite globale de l'user.
+   * Si fourni, affichée dans la zone signature du preview AFNOR (juste
+   * après la formule de politesse détectée). Doit pointer vers une image
+   * accessible par le navigateur (signed URL Supabase Storage).
+   */
+  signatureUrl?: string | null;
+}
+
+// Mots-clés français signalant la formule de politesse — cohérent avec
+// `lib/pdf.ts`. Permet d'insérer la signature au même endroit que dans le PDF.
+const POLITESSE_KEYWORDS = [
+  "agréer",
+  "salutations distinguées",
+  "salutations cordiales",
+  "respectueuses salutations",
+  "considération distinguée",
+  "sentiments distingués",
+  "sentiments dévoués",
+  "sentiments respectueux",
+  "cordialement",
+  "bien à vous",
+  "bien cordialement",
+];
+
+function findPolitesseEndIndex(lines: string[]): number {
+  for (let i = lines.length - 1; i >= 0; i--) {
+    const line = lines[i].toLowerCase();
+    if (line.trim() === "") continue;
+    if (POLITESSE_KEYWORDS.some((kw) => line.includes(kw))) {
+      return i;
+    }
+  }
+  return -1;
 }
 
 export default function LetterPreview({
@@ -12,6 +46,7 @@ export default function LetterPreview({
   isPaid,
   formData,
   letterTitle,
+  signatureUrl,
 }: LetterPreviewProps) {
   const lines = text.split("\n");
   // Show salutation + first paragraph only when not paid
@@ -97,15 +132,69 @@ export default function LetterPreview({
 
           {/* ─── Corps du courrier ─── */}
           <div className="text-[8px] leading-[1.6] text-gray-800">
-            {/* Visible portion */}
-            {lines.slice(0, visibleCount).map((line, i) => (
-              <p
-                key={i}
-                style={{ margin: line === "" ? "4px 0" : "0 0 3px" }}
-              >
-                {line || " "}
-              </p>
-            ))}
+            {/* Visible portion + signature insérée après la formule de politesse */}
+            {(() => {
+              const politesseIdx =
+                signatureUrl && isPaid ? findPolitesseEndIndex(lines) : -1;
+              const renderedLines: React.ReactNode[] = [];
+
+              for (let i = 0; i < visibleCount; i++) {
+                const line = lines[i];
+                renderedLines.push(
+                  <p
+                    key={`vis-${i}`}
+                    style={{ margin: line === "" ? "4px 0" : "0 0 3px" }}
+                  >
+                    {line || " "}
+                  </p>
+                );
+
+                if (signatureUrl && isPaid && i === politesseIdx) {
+                  renderedLines.push(
+                    <div
+                      key="signature"
+                      className="flex justify-end"
+                      style={{ margin: "2px 0" }}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element -- signed URL Supabase, dynamique, pas optimisable par next/image */}
+                      <img
+                        src={signatureUrl}
+                        alt="Signature"
+                        style={{
+                          maxHeight: "16px",
+                          maxWidth: "60px",
+                          objectFit: "contain",
+                        }}
+                      />
+                    </div>
+                  );
+                }
+              }
+
+              // Fallback : si signature présente mais formule non détectée,
+              // on l'ajoute à la fin (cohérent avec lib/pdf.ts).
+              if (signatureUrl && isPaid && politesseIdx === -1) {
+                renderedLines.push(
+                  <div
+                    key="signature-end"
+                    className="flex justify-end"
+                    style={{ margin: "2px 0" }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element -- signed URL Supabase, dynamique, pas optimisable par next/image */}
+                    <img
+                      src={signatureUrl}
+                      alt="Signature"
+                      style={{
+                        maxHeight: "16px",
+                        maxWidth: "60px",
+                        objectFit: "contain",
+                      }}
+                    />
+                  </div>
+                );
+              }
+              return renderedLines;
+            })()}
 
             {/* Blurred portion */}
             {!isPaid && visibleCount < lines.length && (

@@ -10,6 +10,7 @@ import MailingChoice from "@/components/MailingChoice";
 import Logo from "@/components/Logo";
 import { IconCheck } from "@/components/Icons";
 import { getDisplayText } from "@/lib/letters/text";
+import { getSignatureSignedUrl } from "@/lib/letters/signature";
 import type { MailingMode } from "@/config/mailings";
 
 export const metadata = {
@@ -63,6 +64,13 @@ export default async function PreviewPage({
   // Texte affiché : édition utilisateur si présente, sinon texte IA.
   const displayText = getDisplayText(letter);
   const generatedText = letter.generated_text ?? "";
+
+  // Signature manuscrite globale de l'user (URL signée temporaire pour le
+  // preview HTML AFNOR). Affichée uniquement quand isPaid (sinon le corps
+  // est flouté, pas d'enjeu).
+  const signatureUrl = letter.user_id
+    ? await getSignatureSignedUrl(letter.user_id)
+    : null;
 
   let user = null;
   try {
@@ -154,7 +162,32 @@ export default async function PreviewPage({
           isPaid={isPaid}
           formData={letter.form_data as Record<string, string> | undefined}
           letterTitle={letterTitle}
+          signatureUrl={signatureUrl}
         />
+
+        {/* Lien vers /profil pour ajouter/modifier sa signature */}
+        {isPaid && (
+          <p className="mt-4 text-center text-[13px] text-jc-ink-muted">
+            {signatureUrl ? (
+              <>
+                Signature appliquée à votre courrier.{" "}
+                <Link
+                  href="/profil"
+                  className="text-jc-accent hover:underline"
+                >
+                  Modifier ma signature →
+                </Link>
+              </>
+            ) : (
+              <Link
+                href="/profil"
+                className="text-jc-accent hover:underline"
+              >
+                ✍ Ajouter ma signature manuscrite →
+              </Link>
+            )}
+          </p>
+        )}
 
         {/* Édition du texte — visible uniquement quand le texte complet est
             affiché (isPaid). Avant paiement, le texte est flouté donc éditer

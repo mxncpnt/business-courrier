@@ -116,10 +116,10 @@ export default async function DashboardPage() {
             Guides
           </Link>
           <Link
-            href="/#fonctionnement"
+            href="/profil"
             className="text-jc-ink-soft text-sm font-medium no-underline hover:text-jc-ink transition-colors"
           >
-            Comment ça marche
+            Mon profil
           </Link>
         </nav>
 

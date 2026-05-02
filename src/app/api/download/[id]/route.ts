@@ -4,6 +4,7 @@ import { generatePdfBuffer } from "@/lib/pdf";
 import { getLetterType } from "@/config/letter-types";
 import { mergePdfWithAttachments, type DbAttachment } from "@/lib/mailings/merge";
 import { getDisplayText } from "@/lib/letters/text";
+import { getSignatureBuffer } from "@/lib/letters/signature";
 
 /**
  * Sert le PDF du courrier après paiement.
@@ -53,11 +54,16 @@ export async function GET(
 
   // Génération du PDF principal (norme AFNOR)
   const letterType = getLetterType(letter.type);
+  // Signature manuscrite globale de l'user (null si pas configurée)
+  const signatureBuffer = letter.user_id
+    ? await getSignatureBuffer(letter.user_id)
+    : null;
   const pdfBuffer = await generatePdfBuffer({
     text,
     letterId: letter.id,
     formData: letter.form_data as Record<string, string> | undefined,
     letterTitle: letterType?.title,
+    signatureBuffer: signatureBuffer ?? undefined,
   });
 
   // Si un mailing existe pour cette letter avec des PJ, on merge.
