@@ -161,9 +161,13 @@ export default function LetterPreview({
                         src={signatureUrl}
                         alt="Signature"
                         style={{
-                          maxHeight: "16px",
-                          maxWidth: "60px",
+                          height: "28px",
+                          maxWidth: "120px",
                           objectFit: "contain",
+                          // Multiply : le blanc devient transparent, l'encre
+                          // (sombre) reste sombre. Évite le carré gris/jaune
+                          // visible quand la signature a un fond non-blanc.
+                          mixBlendMode: "multiply",
                         }}
                       />
                     </div>

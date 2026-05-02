@@ -202,6 +202,34 @@ function findPolitesseEndIndex(lines: string[]): number {
   return -1;
 }
 
+/**
+ * Détecte le MIME type d'une image (PNG ou JPG) via ses magic bytes et
+ * construit le data URL base64 attendu par `@react-pdf/renderer`.
+ *
+ * Magic bytes :
+ *   - PNG : 89 50 4E 47 (premiers 4 octets)
+ *   - JPG : FF D8 FF (premiers 3 octets)
+ *
+ * Fallback PNG si format inconnu (très improbable car l'upload server-side
+ * ne laisse passer que PNG/JPG validés par MIME).
+ */
+function buildSignatureDataUrl(buffer: Buffer): string {
+  const isPng =
+    buffer.length >= 4 &&
+    buffer[0] === 0x89 &&
+    buffer[1] === 0x50 &&
+    buffer[2] === 0x4e &&
+    buffer[3] === 0x47;
+  const isJpg =
+    buffer.length >= 3 &&
+    buffer[0] === 0xff &&
+    buffer[1] === 0xd8 &&
+    buffer[2] === 0xff;
+
+  const mime = isPng ? "image/png" : isJpg ? "image/jpeg" : "image/png";
+  return `data:${mime};base64,${buffer.toString("base64")}`;
+}
+
 export async function generatePdfBuffer(params: GeneratePdfParams): Promise<Buffer> {
   const { text, letterId, formData, letterTitle, signatureBuffer } = params;
 
@@ -340,9 +368,13 @@ export async function generatePdfBuffer(params: GeneratePdfParams): Promise<Buff
   // détectée (entre formule et nom typé). Si pas de formule détectée, on
   // l'insère à la fin du corps. Format `data:image/{type};base64,...` requis
   // par @react-pdf/renderer pour les buffers.
+  //
+  // Important : détecter le format réel via les magic bytes — si on hardcode
+  // PNG alors que l'image est JPG, react-pdf rejette silencieusement le data
+  // URL malformé et la signature n'apparaît pas dans le PDF.
   const politesseIdx = signatureBuffer ? findPolitesseEndIndex(lines) : -1;
   const signatureDataUrl = signatureBuffer
-    ? `data:image/png;base64,${signatureBuffer.toString("base64")}`
+    ? buildSignatureDataUrl(signatureBuffer)
     : null;
 
   const renderSignature = () =>
