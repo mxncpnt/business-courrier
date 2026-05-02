@@ -24,10 +24,7 @@ import { uploadSignatureImage } from "@/app/profil/actions";
 
 const CANVAS_WIDTH = 600;
 const CANVAS_HEIGHT = 220;
-// Trait épais (4px) pour mieux résister au blur du pipeline de détourage
-// server-side. Sur un trait trop fin, le blur produit un "fond local" trop
-// sombre, ce qui rend la signature pâle après threshold.
-const STROKE_WIDTH = 4;
+const STROKE_WIDTH = 3;
 const STROKE_COLOR = "#000000";
 const BACKGROUND_COLOR = "#FFFFFF";
 
@@ -139,6 +136,10 @@ export default function SignaturePadCanvas() {
       const file = new File([blob], "signature.png", { type: "image/png" });
       const formData = new FormData();
       formData.append("file", file);
+      // Flag pour la server action : utilise le pipeline simplifié (threshold
+      // direct sans high-pass) car le canvas dessine déjà du noir pur sur
+      // blanc pur. Cf. processCanvasSignature dans lib/letters/signature.ts.
+      formData.append("source", "canvas");
 
       startTransition(async () => {
         const res = await uploadSignatureImage(formData);

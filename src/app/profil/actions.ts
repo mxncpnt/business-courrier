@@ -4,7 +4,10 @@ import { randomUUID } from "crypto";
 import { revalidatePath } from "next/cache";
 import { createServiceClient } from "@/lib/supabase/server";
 import { createAuthClient } from "@/lib/supabase/server-auth";
-import { processSignatureForPdf } from "@/lib/letters/signature";
+import {
+  processSignatureForPdf,
+  processCanvasSignature,
+} from "@/lib/letters/signature";
 
 const BUCKET = "signatures";
 const MAX_BYTES = 1_048_576; // 1 Mo
@@ -73,13 +76,22 @@ export async function uploadSignatureImage(
   // cache CDN au remplacement.
   const newPath = `${user.id}/signature-${randomUUID()}.png`;
 
-  // Traitement : détourage du fond papier, encre noire sur transparent.
-  // On fait ça à l'upload (≈300ms) plutôt qu'à chaque génération PDF —
-  // gain de perf et même image pour preview HTML et PDF.
+  // Traitement : détourage adapté à la source de l'image.
+  //   - 'canvas' : signature dessinée → noir pur sur blanc pur, threshold
+  //     simple sur la valeur de gris suffit (sans high-pass qui ferait
+  //     ressortir un contour creux sur les traits fins)
+  //   - 'image' (défaut) : photo/scan → high-pass + threshold adaptatif
+  //     pour gérer les gradients d'éclairage et papiers teintés
+  // Dans les deux cas : auto-crop + 4px padding.
+  const source = formData.get("source");
+  const isCanvas = source === "canvas";
+
   const sourceBuffer = Buffer.from(await file.arrayBuffer());
   let processedBuffer: Buffer;
   try {
-    processedBuffer = await processSignatureForPdf(sourceBuffer);
+    processedBuffer = isCanvas
+      ? await processCanvasSignature(sourceBuffer)
+      : await processSignatureForPdf(sourceBuffer);
   } catch (err) {
     console.error("uploadSignatureImage: processing failed", err);
     return {

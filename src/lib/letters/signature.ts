@@ -50,8 +50,8 @@ const SIGNED_URL_TTL = 60 * 60;
 //   - Signature trop fine, perd des détails  → baisser DIFF_LOW
 //   - Tâches du fond visibles                → monter DIFF_LOW
 
-const DIFF_LOW = 15;
-const DIFF_HIGH = 60;
+const DIFF_LOW = 25;
+const DIFF_HIGH = 80;
 /** Padding (en pixels) conservé autour de la signature après le crop. */
 const CROP_PADDING_PX = 4;
 
@@ -141,16 +141,12 @@ export async function processSignatureForPdf(input: Buffer): Promise<Buffer> {
   const { width, height } = info;
 
   // 2. Estimation "fond local" : blur Gaussien avec sigma calibré sur la
-  //    plus petite dimension de l'image. ~1% de la taille = compromis
-  //    entre :
-  //      - assez large pour lisser le gradient d'éclairage d'une photo
-  //      - assez petit pour ne PAS étaler les traits fins (signature sur
-  //        canvas dessine en 3-4px → si sigma est trop grand, le blur fait
-  //        baver le trait et le "fond local" devient gris au lieu de
-  //        rester clair, ce qui rend la diff trop faible et la signature
-  //        finale pâle)
-  //    Min 3 pour garantir un blur effectif même sur petites images.
-  const blurSigma = Math.max(3, Math.min(width, height) * 0.01);
+  //    plus petite dimension de l'image. ~3% de la taille = bon compromis
+  //    pour ne pas effacer les boucles fines de signature mais bien lisser
+  //    le gradient d'éclairage. Calibré pour les scans/photos papier.
+  //    Pour les signatures dessinées sur canvas (noir pur sur blanc pur),
+  //    on utilise un pipeline différent (`processCanvasSignature`).
+  const blurSigma = Math.max(8, Math.min(width, height) * 0.03);
   const blurredData = await sharp(input)
     .greyscale()
     .normalise()
@@ -211,6 +207,76 @@ export async function processSignatureForPdf(input: Buffer): Promise<Buffer> {
     // Si trim échoue (image entièrement transparente = aucun pixel d'encre
     // détecté), on retourne l'image non croppée plutôt que de crasher.
     console.warn("processSignatureForPdf: trim failed, returning uncropped:", err);
+    return detoured;
+  }
+}
+
+/**
+ * Pipeline simplifié pour les signatures dessinées sur canvas.
+ *
+ * Le canvas produit déjà du NOIR PUR sur BLANC PUR — pas besoin de high-pass
+ * ni de threshold adaptatif. On fait juste :
+ *   1. Threshold direct sur la valeur de gris :
+ *      * v < 100 → alpha = 255 (encre)
+ *      * v > 220 → alpha = 0   (blanc / transparent)
+ *      * sinon   → alpha interpolé (anti-aliasing du trait)
+ *   2. Auto-crop + padding (cohérent avec processSignatureForPdf)
+ *
+ * Pourquoi un pipeline distinct : appliquer le high-pass à un trait fin sur
+ * fond uniforme produit un "fond local" gris (le blur étale le trait), donc
+ * la diff src−bg reste faible et la signature ressort pâle/contour creux.
+ */
+export async function processCanvasSignature(input: Buffer): Promise<Buffer> {
+  const { data: greyData, info } = await sharp(input)
+    .greyscale()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  const { width, height } = info;
+
+  const ALPHA_HIGH_GREY = 100; // ≤ : pixel considéré encre, opacité max
+  const ALPHA_LOW_GREY = 220; // ≥ : pixel considéré fond, transparent
+
+  const rgba = Buffer.alloc(width * height * 4);
+  for (let i = 0; i < greyData.length; i++) {
+    const v = greyData[i];
+    let alpha: number;
+    if (v <= ALPHA_HIGH_GREY) {
+      alpha = 255;
+    } else if (v >= ALPHA_LOW_GREY) {
+      alpha = 0;
+    } else {
+      alpha = Math.round(
+        (255 * (ALPHA_LOW_GREY - v)) / (ALPHA_LOW_GREY - ALPHA_HIGH_GREY)
+      );
+    }
+
+    const idx = i * 4;
+    rgba[idx] = 0;
+    rgba[idx + 1] = 0;
+    rgba[idx + 2] = 0;
+    rgba[idx + 3] = alpha;
+  }
+
+  const detoured = await sharp(rgba, {
+    raw: { width, height, channels: 4 },
+  })
+    .png()
+    .toBuffer();
+
+  try {
+    return await sharp(detoured)
+      .trim({ threshold: 1 })
+      .extend({
+        top: CROP_PADDING_PX,
+        bottom: CROP_PADDING_PX,
+        left: CROP_PADDING_PX,
+        right: CROP_PADDING_PX,
+        background: { r: 0, g: 0, b: 0, alpha: 0 },
+      })
+      .png()
+      .toBuffer();
+  } catch (err) {
+    console.warn("processCanvasSignature: trim failed, returning uncropped:", err);
     return detoured;
   }
 }
