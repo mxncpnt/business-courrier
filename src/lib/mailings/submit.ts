@@ -18,6 +18,7 @@ import { createServiceClient } from "@/lib/supabase/server";
 import { getMailProvider } from "@/lib/mailings/mysendingbox";
 import { mergePdfWithAttachments, type DbAttachment } from "@/lib/mailings/merge";
 import { generatePdfBuffer } from "@/lib/pdf";
+import { getDisplayText } from "@/lib/letters/text";
 import { getLetterType } from "@/config/letter-types";
 import type { MailingMode } from "@/config/mailings";
 import type { PostalAddress } from "@/lib/mailings/provider";
@@ -54,7 +55,7 @@ export async function submitMailingToProvider(mailingId: string): Promise<void> 
     // 2. Récupérer la letter associée
     const { data: letter, error: letterError } = await supabase
       .from("letters")
-      .select("generated_text, type, form_data")
+      .select("generated_text, final_text, type, form_data")
       .eq("id", mailing.letter_id)
       .single();
 
@@ -65,8 +66,9 @@ export async function submitMailingToProvider(mailingId: string): Promise<void> 
     const letterType = getLetterType(letter.type);
 
     // 3. Générer le PDF principal du courrier (norme AFNOR)
+    // Utilise final_text si l'utilisateur a édité, sinon le texte IA.
     const pdfBuffer = await generatePdfBuffer({
-      text: letter.generated_text || "",
+      text: getDisplayText(letter),
       letterId: mailing.letter_id,
       formData: letter.form_data as Record<string, string> | undefined,
       letterTitle: letterType?.title,

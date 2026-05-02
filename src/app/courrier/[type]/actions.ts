@@ -103,10 +103,14 @@ export async function submitLetterForm(
       recipientAddress,
     });
 
-    // Update letter with generated text
+    // Update letter with generated text.
+    // On reset aussi `final_text` à NULL : si l'utilisateur avait édité le
+    // texte précédent, il a explicitement déclenché une régénération IA
+    // donc son édition antérieure n'a plus de sens. L'affichage retombe sur
+    // la nouvelle sortie IA.
     const { error: updateError } = await supabase
       .from("letters")
-      .update({ generated_text: generatedText })
+      .update({ generated_text: generatedText, final_text: null })
       .eq("id", letter.id);
 
     if (updateError) {

@@ -4,9 +4,11 @@ import { createServiceClient } from "@/lib/supabase/server";
 import { createAuthClient } from "@/lib/supabase/server-auth";
 import { getLetterType } from "@/config/letter-types";
 import LetterPreview from "@/components/LetterPreview";
+import EditableLetterText from "@/components/EditableLetterText";
 import MailingChoice from "@/components/MailingChoice";
 import Logo from "@/components/Logo";
 import { IconCheck } from "@/components/Icons";
+import { getDisplayText } from "@/lib/letters/text";
 
 export const metadata = {
   title: "Aperçu du courrier",
@@ -33,6 +35,28 @@ export default async function PreviewPage({
   const isPaid = letter.status === "paid" || letter.status === "delivered";
   const letterType = getLetterType(letter.type);
   const letterTitle = letterType?.title;
+
+  // Mailing associé (si commande envoi physique). Utilisé pour verrouiller
+  // l'édition une fois que le courrier a été remis à La Poste.
+  const { data: mailing } = await supabase
+    .from("mailings")
+    .select("status")
+    .eq("letter_id", letter.id)
+    .maybeSingle();
+  const LOCKED_STATUSES = new Set([
+    "submitted",
+    "in_transit",
+    "delivered",
+    "returned",
+    "failed",
+  ]);
+  const editingLocked = mailing
+    ? LOCKED_STATUSES.has(mailing.status)
+    : false;
+
+  // Texte affiché : édition utilisateur si présente, sinon texte IA.
+  const displayText = getDisplayText(letter);
+  const generatedText = letter.generated_text ?? "";
 
   let user = null;
   try {
@@ -120,11 +144,23 @@ export default async function PreviewPage({
 
         {/* Letter preview */}
         <LetterPreview
-          text={letter.generated_text || ""}
+          text={displayText}
           isPaid={isPaid}
           formData={letter.form_data as Record<string, string> | undefined}
           letterTitle={letterTitle}
         />
+
+        {/* Édition du texte — visible uniquement quand le texte complet est
+            affiché (isPaid). Avant paiement, le texte est flouté donc éditer
+            n'a pas de sens. */}
+        {isPaid && (
+          <EditableLetterText
+            letterId={letter.id}
+            currentText={displayText}
+            generatedText={generatedText}
+            isLocked={editingLocked}
+          />
+        )}
 
         {/* CTA */}
         {isPaid ? (

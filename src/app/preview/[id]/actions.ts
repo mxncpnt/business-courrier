@@ -1,8 +1,10 @@
 "use server";
 
 import { randomUUID } from "crypto";
+import { revalidatePath } from "next/cache";
 import { createServiceClient } from "@/lib/supabase/server";
 import { getMailProvider } from "@/lib/mailings/mysendingbox";
+import { AFNOR_MAX_CHARS } from "@/lib/letters/text";
 import type {
   AddressValidationResult,
   PostalAddress,
@@ -178,5 +180,117 @@ export async function removeAttachment(
     return { ok: false, error: "Erreur lors de la suppression du fichier." };
   }
 
+  return { ok: true };
+}
+
+// ─── 4. updateLetterText ─────────────────────────────────────────────────────
+//
+// Édite le texte du courrier (champ `final_text`). Garde `generated_text`
+// inchangé pour permettre `resetLetterText`.
+//
+// Verrouillage : on refuse l'édition si un mailing associé est déjà en envoi
+// (`submitted` / `in_transit` / `delivered` / `returned` / `failed`). Tant
+// que le mailing est en `pending` ou `paid`, l'édition reste possible.
+// Le découplage paiement/submission (commit A2) garantit que le mailing
+// ne passe pas automatiquement à `submitted` immédiatement après paiement.
+//
+// Pour mode PDF only (pas de mailing) : pas de verrouillage. L'user peut
+// éditer indéfiniment.
+
+const LOCKED_MAILING_STATUSES = new Set([
+  "submitted",
+  "in_transit",
+  "delivered",
+  "returned",
+  "failed",
+]);
+
+export async function updateLetterText(
+  letterId: string,
+  newText: string
+): Promise<{ ok: true } | ActionError> {
+  // Validation côté serveur (l'UI fait déjà ce check, mais défense en profondeur)
+  if (newText.length > AFNOR_MAX_CHARS) {
+    return {
+      ok: false,
+      error: `Le texte dépasse la limite (${newText.length} / ${AFNOR_MAX_CHARS} caractères). Réduis-le pour rester sur 1 page.`,
+    };
+  }
+
+  const supabase = createServiceClient();
+
+  // Vérifier si un mailing existe et son statut
+  const { data: mailing, error: mailingError } = await supabase
+    .from("mailings")
+    .select("status")
+    .eq("letter_id", letterId)
+    .maybeSingle();
+
+  if (mailingError) {
+    console.error("updateLetterText: mailing lookup failed:", mailingError);
+    return { ok: false, error: "Erreur lors de la vérification du statut d'envoi." };
+  }
+
+  if (mailing && LOCKED_MAILING_STATUSES.has(mailing.status)) {
+    return {
+      ok: false,
+      error:
+        "Le courrier a déjà été remis à La Poste, il n'est plus modifiable.",
+    };
+  }
+
+  const { error: updateError } = await supabase
+    .from("letters")
+    .update({ final_text: newText })
+    .eq("id", letterId);
+
+  if (updateError) {
+    console.error("updateLetterText: letter update failed:", updateError);
+    return { ok: false, error: "Erreur lors de l'enregistrement du texte." };
+  }
+
+  revalidatePath(`/preview/${letterId}`);
+  return { ok: true };
+}
+
+// ─── 5. resetLetterText ──────────────────────────────────────────────────────
+//
+// Reset `final_text = NULL` → l'affichage retombe sur `generated_text` (la
+// version IA originale). Mêmes contraintes de verrouillage que updateLetterText.
+
+export async function resetLetterText(
+  letterId: string
+): Promise<{ ok: true } | ActionError> {
+  const supabase = createServiceClient();
+
+  const { data: mailing, error: mailingError } = await supabase
+    .from("mailings")
+    .select("status")
+    .eq("letter_id", letterId)
+    .maybeSingle();
+
+  if (mailingError) {
+    console.error("resetLetterText: mailing lookup failed:", mailingError);
+    return { ok: false, error: "Erreur lors de la vérification du statut d'envoi." };
+  }
+
+  if (mailing && LOCKED_MAILING_STATUSES.has(mailing.status)) {
+    return {
+      ok: false,
+      error: "Le courrier a déjà été remis à La Poste, il n'est plus modifiable.",
+    };
+  }
+
+  const { error: updateError } = await supabase
+    .from("letters")
+    .update({ final_text: null })
+    .eq("id", letterId);
+
+  if (updateError) {
+    console.error("resetLetterText: letter update failed:", updateError);
+    return { ok: false, error: "Erreur lors de la réinitialisation." };
+  }
+
+  revalidatePath(`/preview/${letterId}`);
   return { ok: true };
 }

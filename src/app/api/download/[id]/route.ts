@@ -3,6 +3,7 @@ import { createServiceClient } from "@/lib/supabase/server";
 import { generatePdfBuffer } from "@/lib/pdf";
 import { getLetterType } from "@/config/letter-types";
 import { mergePdfWithAttachments, type DbAttachment } from "@/lib/mailings/merge";
+import { getDisplayText } from "@/lib/letters/text";
 
 /**
  * Sert le PDF du courrier après paiement.
@@ -40,7 +41,9 @@ export async function GET(
     );
   }
 
-  const text = letter.final_text || letter.generated_text;
+  // Utilise le helper centralisé : final_text (édition user) si défini,
+  // sinon generated_text (sortie IA). Cf. lib/letters/text.ts.
+  const text = getDisplayText(letter);
   if (!text) {
     return NextResponse.json(
       { error: "No content available" },
