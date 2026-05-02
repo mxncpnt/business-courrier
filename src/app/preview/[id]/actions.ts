@@ -6,7 +6,9 @@ import { createServiceClient } from "@/lib/supabase/server";
 import { createAuthClient } from "@/lib/supabase/server-auth";
 import { getMailProvider } from "@/lib/mailings/mysendingbox";
 import { submitMailingToProvider } from "@/lib/mailings/submit";
+import { countPagesInBuffer } from "@/lib/mailings/merge";
 import { AFNOR_MAX_CHARS } from "@/lib/letters/text";
+import { MAX_MERGED_PAGES, ESTIMATED_LETTER_PAGES } from "@/config/mailings";
 import type {
   AddressValidationResult,
   PostalAddress,
@@ -34,6 +36,13 @@ export interface AttachmentInfo {
   sizeBytes: number;
   /** MIME type */
   mimeType: string;
+  /**
+   * Nombre de pages qu'occupera la PJ dans le PDF mergé.
+   * - PDF : nombre de pages réel (parsé via pdf-lib à l'upload)
+   * - JPG/PNG : 1 page A4 (embed)
+   * Permet la limite totale `MAX_MERGED_PAGES` (cf. config/mailings.ts).
+   */
+  pagesCount: number;
 }
 
 export interface UploadAttachmentResult {
@@ -127,6 +136,37 @@ export async function uploadAttachment(
     };
   }
 
+  // ─── Vérification limite pages totales (courrier + PJ ≤ MAX_MERGED_PAGES) ──
+  // On compte d'abord les pages des PJ existantes (download chaque PDF + parse).
+  // Coût : ~50-100ms par PJ. Avec max 5 PJ → ~500ms maxi à l'upload.
+  const fileBuffer = await file.arrayBuffer();
+  const newFileBuf = Buffer.from(fileBuffer);
+  const newFilePages = await countPagesInBuffer(newFileBuf, file.type);
+
+  let existingPages = 0;
+  for (const f of existingFiles) {
+    const { data: existingBlob } = await supabase.storage
+      .from(STORAGE_BUCKET)
+      .download(`${letterId}/${f.name}`);
+    if (!existingBlob) continue;
+    const buf = Buffer.from(await existingBlob.arrayBuffer());
+    const mime = f.metadata?.mimetype ?? "application/octet-stream";
+    existingPages += await countPagesInBuffer(buf, mime);
+  }
+
+  const totalPages = ESTIMATED_LETTER_PAGES + existingPages + newFilePages;
+  if (totalPages > MAX_MERGED_PAGES) {
+    const remainingPagesQuota =
+      MAX_MERGED_PAGES - ESTIMATED_LETTER_PAGES - existingPages;
+    return {
+      ok: false,
+      error:
+        remainingPagesQuota <= 0
+          ? `Limite de ${MAX_MERGED_PAGES} pages atteinte (courrier + ${existingPages} page${existingPages > 1 ? "s" : ""} de PJ). Supprimez une PJ pour en ajouter une autre.`
+          : `Ce fichier (${newFilePages} page${newFilePages > 1 ? "s" : ""}) dépasse votre quota restant (${remainingPagesQuota} page${remainingPagesQuota > 1 ? "s" : ""}). Limite totale : ${MAX_MERGED_PAGES} pages (courrier + PJ).`,
+    };
+  }
+
   // Sanitize filename + ajoute UUID pour éviter collisions
   const safeName = file.name
     .replace(/[^a-zA-Z0-9._-]/g, "_")
@@ -134,7 +174,6 @@ export async function uploadAttachment(
   const storagePath = `${letterId}/${randomUUID()}-${safeName}`;
 
   // Upload via service client (bypass RLS)
-  const fileBuffer = await file.arrayBuffer();
   const { error: uploadError } = await supabase.storage
     .from(STORAGE_BUCKET)
     .upload(storagePath, new Uint8Array(fileBuffer), {
@@ -154,8 +193,63 @@ export async function uploadAttachment(
       storagePath,
       sizeBytes: file.size,
       mimeType: file.type,
+      pagesCount: newFilePages,
     },
   };
+}
+
+// ─── 2bis. listAttachments ───────────────────────────────────────────────────
+//
+// Liste les pièces jointes existantes pour une letter (post-refresh page,
+// retour navigation, etc.). Utilisé pour bootstrap le state du composant
+// `AttachmentUploader` avec leur `pagesCount` réel.
+//
+// Coût : 1 download par PJ + 1 parse pdf-lib. Acceptable au mount (≤500ms
+// pour 5 PJ). Pas appelé pendant l'upload (uploadAttachment a déjà tout
+// téléchargé).
+
+export async function listAttachments(
+  letterId: string
+): Promise<AttachmentInfo[]> {
+  const supabase = createServiceClient();
+
+  const { data: files, error } = await supabase.storage
+    .from(STORAGE_BUCKET)
+    .list(letterId, { limit: 100 });
+
+  if (error || !files) {
+    console.error("listAttachments: list failed", error);
+    return [];
+  }
+
+  const result: AttachmentInfo[] = [];
+  for (const f of files) {
+    const path = `${letterId}/${f.name}`;
+    // Reconstituer le nom original (uuid-name.ext → name.ext)
+    const originalName = f.name.replace(/^[0-9a-f-]{36}-/i, "");
+    const mime = f.metadata?.mimetype ?? "application/octet-stream";
+    const size = f.metadata?.size ?? 0;
+
+    // Compter les pages (download + parse)
+    let pagesCount = 1;
+    const { data: blob } = await supabase.storage
+      .from(STORAGE_BUCKET)
+      .download(path);
+    if (blob) {
+      const buf = Buffer.from(await blob.arrayBuffer());
+      pagesCount = await countPagesInBuffer(buf, mime);
+    }
+
+    result.push({
+      name: originalName,
+      storagePath: path,
+      sizeBytes: size,
+      mimeType: mime,
+      pagesCount,
+    });
+  }
+
+  return result;
 }
 
 // ─── 3. removeAttachment ─────────────────────────────────────────────────────

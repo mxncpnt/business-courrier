@@ -18,6 +18,21 @@
 
 export type MailingMode = "simple" | "registered";
 
+/**
+ * Limite du nombre de pages total du PDF mergé envoyé à La Poste
+ * (courrier + pièces jointes). Calibré pour rester dans un envoi standard
+ * MSB sans surcoût. À monétiser plus tard pour les envois > 5 pages
+ * (cf. backlog item 7).
+ *
+ * En pratique : courrier (≈1 page AFNOR) + jusqu'à 4 pages de PJ.
+ */
+export const MAX_MERGED_PAGES = 5;
+
+/** Estimation du nombre de pages pour le courrier généré (≈ toujours 1
+ * page tant que `final_text.length` ≤ AFNOR_MAX_CHARS). Utilisé pour
+ * réserver l'espace lors du calcul du quota PJ. */
+export const ESTIMATED_LETTER_PAGES = 1;
+
 export interface MailingModeConfig {
   /** Identifiant interne */
   mode: MailingMode;

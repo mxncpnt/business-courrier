@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   MAILING_MODES,
   getRecommendedMode,
@@ -11,7 +11,7 @@ import AddressEditor from "@/components/AddressEditor";
 import AttachmentUploader from "@/components/AttachmentUploader";
 import { IconCheck } from "@/components/Icons";
 import type { PostalAddress } from "@/lib/mailings/provider";
-import type { AttachmentInfo } from "@/app/preview/[id]/actions";
+import { listAttachments, type AttachmentInfo } from "@/app/preview/[id]/actions";
 
 /**
  * Mode étendu pour l'UI : "pdf" = pas d'envoi physique, l'utilisateur poste
@@ -77,8 +77,19 @@ export default function MailingChoice({
   );
   const [recipientValid, setRecipientValid] = useState(true);
 
-  // Pièces jointes (uploadées au fur et à mesure dans Storage)
+  // Pièces jointes (uploadées au fur et à mesure dans Storage). Bootstrap
+  // au mount via `listAttachments` pour récupérer les PJ déjà uploadées
+  // (cas refresh page) avec leur `pagesCount` exact.
   const [attachments, setAttachments] = useState<AttachmentInfo[]>([]);
+  useEffect(() => {
+    let cancelled = false;
+    listAttachments(letterId).then((list) => {
+      if (!cancelled && list.length > 0) setAttachments(list);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [letterId]);
 
   // Warn-no-block : checkbox d'acceptation du downgrade pour types critiques
   const [warnAccepted, setWarnAccepted] = useState(false);

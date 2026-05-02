@@ -28,6 +28,34 @@ export interface DbAttachment {
   mime_type: string;
 }
 
+/**
+ * Compte le nombre de pages qu'occupera un fichier dans le PDF mergé.
+ *
+ * Convention :
+ *   - PDF : nombre de pages réel (via pdf-lib)
+ *   - JPG/PNG : 1 page (le merge embed l'image sur 1 page A4)
+ *   - Erreur de parse : 1 page (fallback conservateur)
+ *
+ * Utilisé pour la limite `MAX_MERGED_PAGES` (cf. config/mailings.ts) :
+ * empêcher l'upload de PJ qui feraient déborder le total > 5 pages.
+ */
+export async function countPagesInBuffer(
+  buffer: Buffer,
+  mimeType: string
+): Promise<number> {
+  if (mimeType === "application/pdf") {
+    try {
+      const pdf = await PDFDocument.load(new Uint8Array(buffer));
+      return pdf.getPageCount();
+    } catch (err) {
+      console.warn("countPagesInBuffer: PDF parse failed:", err);
+      return 1;
+    }
+  }
+  // Image : 1 page A4 dans le merge
+  return 1;
+}
+
 type SupabaseClient = ReturnType<typeof createServiceClient>;
 type EmbeddedImage = Awaited<ReturnType<PDFDocument["embedJpg"]>>;
 

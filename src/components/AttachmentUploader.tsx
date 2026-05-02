@@ -6,11 +6,14 @@ import {
   removeAttachment,
   type AttachmentInfo,
 } from "@/app/preview/[id]/actions";
+import { MAX_MERGED_PAGES, ESTIMATED_LETTER_PAGES } from "@/config/mailings";
 
 const MAX_ATTACHMENTS = 5;
 const MAX_TOTAL_BYTES = 10 * 1024 * 1024;
 const ALLOWED_MIME_TYPES = ["application/pdf", "image/jpeg", "image/png"];
 const ACCEPT_ATTR = ALLOWED_MIME_TYPES.join(",");
+/** Quota pages PJ disponible = total max - estimation courrier (1) */
+const MAX_ATTACHMENT_PAGES = MAX_MERGED_PAGES - ESTIMATED_LETTER_PAGES;
 
 interface AttachmentUploaderProps {
   letterId: string;
@@ -43,9 +46,12 @@ export default function AttachmentUploader({
   const [dragOver, setDragOver] = useState(false);
 
   const totalBytes = attachments.reduce((sum, a) => sum + a.sizeBytes, 0);
+  const totalPages = attachments.reduce((sum, a) => sum + (a.pagesCount ?? 1), 0);
   const remainingBytes = MAX_TOTAL_BYTES - totalBytes;
   const remainingSlots = MAX_ATTACHMENTS - attachments.length;
-  const canAddMore = remainingSlots > 0 && remainingBytes > 0;
+  const remainingPages = MAX_ATTACHMENT_PAGES - totalPages;
+  const canAddMore =
+    remainingSlots > 0 && remainingBytes > 0 && remainingPages > 0;
 
   function handleFiles(files: FileList | null) {
     if (!files || files.length === 0) return;
@@ -130,8 +136,9 @@ export default function AttachmentUploader({
           </div>
           <div className="text-[12px] text-jc-ink-muted">
             PDF, JPEG ou PNG · max {formatBytes(remainingBytes)} restants ·{" "}
-            {remainingSlots} fichier{remainingSlots > 1 ? "s" : ""} possible
-            {remainingSlots > 1 ? "s" : ""}
+            <strong>{remainingPages}</strong> page{remainingPages > 1 ? "s" : ""}{" "}
+            disponible{remainingPages > 1 ? "s" : ""} ({totalPages}/
+            {MAX_ATTACHMENT_PAGES} utilisée{totalPages > 1 ? "s" : ""})
           </div>
         </div>
       )}
@@ -139,8 +146,9 @@ export default function AttachmentUploader({
       {!canAddMore && attachments.length > 0 && (
         <div className="text-[12px] text-jc-ink-muted italic mb-2">
           Limite atteinte ({attachments.length}/{MAX_ATTACHMENTS} fichiers,{" "}
-          {formatBytes(totalBytes)}/{formatBytes(MAX_TOTAL_BYTES)}). Supprime un
-          fichier pour en ajouter un autre.
+          {formatBytes(totalBytes)}/{formatBytes(MAX_TOTAL_BYTES)},{" "}
+          {totalPages}/{MAX_ATTACHMENT_PAGES} pages). Supprime une PJ pour en
+          ajouter une autre.
         </div>
       )}
 
@@ -168,6 +176,12 @@ export default function AttachmentUploader({
                 </div>
                 <div className="text-[11px] text-jc-ink-muted">
                   {formatBytes(att.sizeBytes)}
+                  {att.pagesCount != null && (
+                    <>
+                      {" · "}
+                      {att.pagesCount} page{att.pagesCount > 1 ? "s" : ""}
+                    </>
+                  )}
                 </div>
               </div>
               <button
