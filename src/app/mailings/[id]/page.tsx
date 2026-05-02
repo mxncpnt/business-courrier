@@ -267,7 +267,7 @@ export default async function MailingTrackingPage({
             {letterTitle}
           </h1>
           <p className="mt-2 text-[15px] text-jc-ink-soft">
-            Envoi {modeConfig.label.toLowerCase()} · Référence{" "}
+            Envoi {modeConfig.label} · Référence{" "}
             <strong className="text-jc-ink">{shortRef}</strong>
           </p>
         </div>
