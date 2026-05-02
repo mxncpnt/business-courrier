@@ -24,7 +24,10 @@ import { uploadSignatureImage } from "@/app/profil/actions";
 
 const CANVAS_WIDTH = 600;
 const CANVAS_HEIGHT = 220;
-const STROKE_WIDTH = 3;
+// Trait épais (4px) pour mieux résister au blur du pipeline de détourage
+// server-side. Sur un trait trop fin, le blur produit un "fond local" trop
+// sombre, ce qui rend la signature pâle après threshold.
+const STROKE_WIDTH = 4;
 const STROKE_COLOR = "#000000";
 const BACKGROUND_COLOR = "#FFFFFF";
 

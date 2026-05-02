@@ -50,8 +50,8 @@ const SIGNED_URL_TTL = 60 * 60;
 //   - Signature trop fine, perd des détails  → baisser DIFF_LOW
 //   - Tâches du fond visibles                → monter DIFF_LOW
 
-const DIFF_LOW = 25;
-const DIFF_HIGH = 80;
+const DIFF_LOW = 15;
+const DIFF_HIGH = 60;
 /** Padding (en pixels) conservé autour de la signature après le crop. */
 const CROP_PADDING_PX = 4;
 
@@ -141,10 +141,16 @@ export async function processSignatureForPdf(input: Buffer): Promise<Buffer> {
   const { width, height } = info;
 
   // 2. Estimation "fond local" : blur Gaussien avec sigma calibré sur la
-  //    plus petite dimension de l'image. ~3% de la taille = bon compromis
-  //    pour ne pas effacer les boucles fines de signature mais bien lisser
-  //    le gradient d'éclairage.
-  const blurSigma = Math.max(8, Math.min(width, height) * 0.03);
+  //    plus petite dimension de l'image. ~1% de la taille = compromis
+  //    entre :
+  //      - assez large pour lisser le gradient d'éclairage d'une photo
+  //      - assez petit pour ne PAS étaler les traits fins (signature sur
+  //        canvas dessine en 3-4px → si sigma est trop grand, le blur fait
+  //        baver le trait et le "fond local" devient gris au lieu de
+  //        rester clair, ce qui rend la diff trop faible et la signature
+  //        finale pâle)
+  //    Min 3 pour garantir un blur effectif même sur petites images.
+  const blurSigma = Math.max(3, Math.min(width, height) * 0.01);
   const blurredData = await sharp(input)
     .greyscale()
     .normalise()
