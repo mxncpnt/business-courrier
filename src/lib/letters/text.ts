@@ -36,24 +36,29 @@ export function isEdited(letter: LetterTextFields): boolean {
 
 // ─── Limites AFNOR (calibrées empiriquement sur le rendu PDF actuel) ────────
 //
-// Le PDF AFNOR utilise une zone corps de ~150mm × 170mm avec police 11pt
-// interligne 1.15. Espace réservé à l'en-tête expéditeur, fenêtre destinataire,
-// date+lieu, objet, formule de politesse et signature → il reste ~25 lignes
-// pour le corps. À 80 caractères par ligne moyens (largeur effective avec
-// des mots français), ça fait :
+// Recalibré 2026-05-02 après observation : un corps de ~1640 caractères
+// (avec 5-6 paragraphes courts) déborde sur 2 pages dans le PDF AFNOR
+// actuel. Cause : les zones non-éditables consomment beaucoup de place
+// verticale (en-tête expéditeur ~25mm, fenêtre destinataire ~30mm, date+
+// objet ~12mm, formule de politesse + signature ~20mm = ~90mm sur 247mm
+// disponibles), il reste ~155mm pour le corps. À ~5mm par ligne (interligne
+// 1.55) avec marges de paragraphe (10mm entre paragraphes), on tient ~22-25
+// lignes utiles. À 70 caractères par ligne (largeur effective police 10pt),
+// ça donne max ~1700 caractères avant débordement.
 //
-//   - Cible "rentre confortablement"      : 2000 caractères
-//   - Limite haute "ça passe encore"      : 2800 caractères
-//   - Hard cap "ça va déborder à coup sûr": 3500 caractères
+// Valeurs conservatrices pour MVP (à recalibrer si on revoit le générateur
+// PDF — typiquement réduire les marges/espacements gagnerait 200-300 chars) :
+//   - Cible "rentre confortablement"      : 1200 caractères
+//   - Limite haute "ça passe encore"      : 1500 caractères
+//   - Hard cap "ça va déborder à coup sûr": 1700 caractères
 //
-// Ces valeurs sont à recalibrer si on observe que le PDF déborde malgré tout.
-// Une marge de sécurité est gardée car la longueur de ligne réelle dépend des
-// mots (un texte en majuscules occupe plus, des paragraphes courts laissent
-// de l'espace blanc qui consomme de la place verticale).
+// Le compteur ne mesure QUE le corps éditable. Les zones fixes (expéditeur,
+// destinataire, objet, signature) sont déduites en amont via le calcul ci-
+// dessus.
 
-export const AFNOR_TARGET_CHARS = 2000;
-export const AFNOR_WARN_CHARS = 2800;
-export const AFNOR_MAX_CHARS = 3500;
+export const AFNOR_TARGET_CHARS = 1200;
+export const AFNOR_WARN_CHARS = 1500;
+export const AFNOR_MAX_CHARS = 1700;
 
 /**
  * Niveau d'avertissement à afficher selon la longueur du texte.

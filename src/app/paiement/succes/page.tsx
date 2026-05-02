@@ -258,7 +258,7 @@ export default async function SuccessPage({
               </Link>
               <Link
                 href="/dashboard"
-                className="w-full flex items-center justify-center gap-2 px-6 py-2 text-jc-ink-soft font-medium hover:text-jc-ink transition-colors text-sm no-underline mt-1"
+                className="w-full flex items-center justify-center gap-2 px-6 py-2.5 border border-jc-line-strong text-jc-ink font-medium rounded-jc hover:bg-jc-surface transition-colors text-sm no-underline mt-2.5"
               >
                 Voir mes courriers
               </Link>

@@ -11,27 +11,44 @@ Font.register({
 });
 
 // ─── AFNOR NF Z 11-001 layout ───
-// A4 = 210 x 297 mm
-// Margins: 20mm left, 15mm right, 20mm top, 20mm bottom
-// Recipient zone: starts ~105mm from left edge, ~50mm from top
+// A4 = 210 x 297 mm. Marges 20mm gauche, 15mm droite, 18mm haut/bas.
+//
+// Zone fenêtre enveloppe DL standard :
+//   - Adresse destinataire visible quand la lettre est pliée en 3
+//   - Position : top 45mm depuis bord supérieur de la feuille
+//   - Position : left 105mm depuis bord gauche (zone droite, ~50% page)
+//   - Largeur : 85mm, max 6 lignes de 38 caractères
+//
+// Le bloc destinataire est en `position: absolute` pour rester dans la zone
+// fenêtre quel que soit le contenu du bloc expéditeur (variable). Un wrapper
+// `headerZone` réserve la hauteur correspondante (~80mm) avant que le flow
+// reprenne avec date+objet+corps.
 
 const mm = (v: number) => `${v}mm`;
 
 const styles = StyleSheet.create({
   page: {
-    paddingTop: mm(20),
-    paddingBottom: mm(25),
+    paddingTop: mm(18),
+    paddingBottom: mm(18),
     paddingLeft: mm(20),
     paddingRight: mm(15),
     fontSize: 10,
     fontFamily: "Helvetica",
-    lineHeight: 1.55,
+    lineHeight: 1.5,
     color: "#1a1a1a",
+  },
+
+  // Wrapper pour zones expéditeur (flow) + destinataire (absolute).
+  // Hauteur ≈ 80mm pour couvrir la fenêtre enveloppe DL et laisser le flow
+  // reprendre proprement après.
+  headerZone: {
+    position: "relative",
+    minHeight: mm(72),
   },
 
   // Zone 1 — Expéditeur (haut gauche)
   sender: {
-    marginBottom: mm(8),
+    marginBottom: 0,
   },
   senderName: {
     fontWeight: "bold",
@@ -48,10 +65,15 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
 
-  // Zone 4 — Destinataire (décalé droite, fenêtre enveloppe)
+  // Zone 4 — Destinataire (fenêtre enveloppe, position absolue)
+  // top relatif au headerZone qui démarre à 18mm depuis le haut de la page,
+  // donc top: 27mm dans le wrapper place l'adresse à 45mm depuis le bord
+  // supérieur de la feuille (centre de la fenêtre DL standard).
   recipient: {
-    marginLeft: mm(85),
-    marginBottom: mm(10),
+    position: "absolute",
+    top: mm(27),
+    left: mm(85),
+    width: mm(80),
   },
   recipientName: {
     fontWeight: "bold",
@@ -63,30 +85,31 @@ const styles = StyleSheet.create({
     color: "#333",
   },
 
-  // Lieu et date
+  // Lieu et date — aligné à droite, juste sous le wrapper d'en-tête
   dateRow: {
     textAlign: "right",
     fontSize: 9,
     color: "#333",
-    marginBottom: mm(8),
+    marginTop: mm(2),
+    marginBottom: mm(5),
   },
 
   // Objet
   objectRow: {
     fontSize: 9,
-    marginBottom: mm(6),
+    marginBottom: mm(4),
   },
   objectLabel: {
     textDecoration: "underline",
   },
 
-  // Corps
+  // Corps — espacement compacté pour maximiser le contenu sur 1 page
   bodyLine: {
     fontSize: 10,
-    marginBottom: 2,
+    marginBottom: 1,
   },
   bodyParagraphGap: {
-    marginBottom: 10,
+    marginBottom: 6,
   },
 
   // Footer
@@ -151,6 +174,9 @@ export async function generatePdfBuffer(params: GeneratePdfParams): Promise<Buff
   // Build React elements
   const children: React.ReactElement[] = [];
 
+  // ── Wrapper en-tête : sender (flow) + recipient (position absolute) ──
+  const headerChildren: React.ReactElement[] = [];
+
   // Zone 1 — Sender
   if (senderName || senderStreet) {
     const senderChildren: React.ReactElement[] = [];
@@ -174,12 +200,12 @@ export async function generatePdfBuffer(params: GeneratePdfParams): Promise<Buff
         React.createElement(Text, { key: "se", style: styles.senderEmail }, senderEmail)
       );
     }
-    children.push(
+    headerChildren.push(
       React.createElement(View, { key: "sender", style: styles.sender }, ...senderChildren)
     );
   }
 
-  // Zone 4 — Recipient (indented right for envelope window)
+  // Zone 4 — Recipient (zone fenêtre enveloppe, position absolue)
   if (recipientName) {
     const recipientChildren: React.ReactElement[] = [];
     recipientChildren.push(
@@ -193,8 +219,21 @@ export async function generatePdfBuffer(params: GeneratePdfParams): Promise<Buff
         );
       });
     }
-    children.push(
+    headerChildren.push(
       React.createElement(View, { key: "recipient", style: styles.recipient }, ...recipientChildren)
+    );
+  }
+
+  // Push wrapper en-tête : la zone réserve ~72mm de hauteur, ce qui couvre
+  // la fenêtre enveloppe DL et permet au flow (date, objet, corps) de
+  // reprendre proprement en-dessous.
+  if (headerChildren.length > 0) {
+    children.push(
+      React.createElement(
+        View,
+        { key: "header-zone", style: styles.headerZone },
+        ...headerChildren
+      )
     );
   }
 
