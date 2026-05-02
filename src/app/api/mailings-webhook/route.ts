@@ -39,6 +39,19 @@ export async function POST(req: NextRequest) {
   // sécurité est configurée via Basic Auth dans l'URL du webhook côté MSB.
   const authHeader = req.headers.get("authorization");
 
+  // DEBUG TEMPORAIRE — à retirer après diagnostic
+  console.log("[MSB webhook DEBUG] req received", {
+    hasAuthHeader: !!authHeader,
+    authPrefix: authHeader ? authHeader.slice(0, 16) : "none",
+    bodyLength: rawBody.length,
+    bodyPrefix: rawBody.slice(0, 80),
+    envUser: process.env.MSB_WEBHOOK_USER ? `${process.env.MSB_WEBHOOK_USER.slice(0, 4)}***` : "MISSING",
+    envPassPresent: !!process.env.MSB_WEBHOOK_PASS,
+    envPassFirst3: process.env.MSB_WEBHOOK_PASS?.slice(0, 3) ?? "MISSING",
+    envPassLast3: process.env.MSB_WEBHOOK_PASS?.slice(-3) ?? "MISSING",
+    envPassLength: process.env.MSB_WEBHOOK_PASS?.length ?? 0,
+  });
+
   // ─── 1. Init du provider ────────────────────────────────────────────────
   let provider;
   try {

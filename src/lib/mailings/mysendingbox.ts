@@ -445,12 +445,30 @@ export class MySendingBoxProvider implements MailProvider {
       );
     }
 
-    if (!authHeader || !authHeader.startsWith("Basic ")) {
+    if (!authHeader) {
+      console.warn("[verifyWebhookAuth] no Authorization header");
+      return false;
+    }
+    if (!authHeader.startsWith("Basic ")) {
+      console.warn(
+        `[verifyWebhookAuth] header doesn't start with 'Basic ': prefix='${authHeader.slice(0, 16)}'`
+      );
       return false;
     }
 
     const expected = Buffer.from(`${this.webhookUser}:${this.webhookPass}`).toString("base64");
     const provided = authHeader.slice("Basic ".length).trim();
+
+    // DEBUG TEMPORAIRE — à retirer après diagnostic
+    console.log("[verifyWebhookAuth DEBUG]", {
+      providedFirst8: provided.slice(0, 8),
+      providedLast4: provided.slice(-4),
+      providedLength: provided.length,
+      expectedFirst8: expected.slice(0, 8),
+      expectedLast4: expected.slice(-4),
+      expectedLength: expected.length,
+      lengthMatch: provided.length === expected.length,
+    });
 
     // timingSafeEqual exige des buffers de même longueur ; on encode et on compare.
     const expectedBuf = Buffer.from(expected);
