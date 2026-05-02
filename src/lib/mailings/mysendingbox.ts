@@ -510,8 +510,8 @@ export class MySendingBoxProvider implements MailProvider {
   //   - eventType         = event.name (ex: "letter.distributed")
   //   - status            = mappé via MSB_STATUS_MAP
   //   - trackingNumber    = letter.tracking_number (présent à partir de letter.sent)
-  //   - proofOfDepositUrl = letter.filing_proof.file.url (à letter.filing_proof)
-  //   - proofOfReceiptUrl = letter.delivery_proof.file.url (à letter.delivery_proof)
+  //   - proofOfDepositUrl = letter.filing_proof.url (à letter.filing_proof)
+  //   - proofOfReceiptUrl = letter.delivery_proof.url (à letter.delivery_proof)
 
   parseWebhookEvent(rawPayload: unknown): MailingEvent {
     const payload = rawPayload as MsbWebhookPayload;
