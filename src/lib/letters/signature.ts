@@ -26,7 +26,7 @@ const SIGNED_URL_TTL = 60 * 60;
 
 // Paramètres du détourage signature.
 //
-// Algorithme : high-pass filter + threshold adaptatif local.
+// Algorithme : high-pass filter + threshold adaptatif local + auto-crop.
 //   1. Greyscale + normalize contraste
 //   2. Calcul d'un "fond local" estimé via blur Gaussien (sigma proportionnel
 //      à la taille image). Capture les variations lentes d'éclairage.
@@ -36,11 +36,15 @@ const SIGNED_URL_TTL = 60 * 60;
 //      * diff < DIFF_LOW (25)         : alpha = 0       (transparent)
 //      * diff ≥ DIFF_HIGH (80)        : alpha = 255     (encre opaque)
 //      * sinon                        : alpha interpolé (anti-aliasing)
+//   5. `sharp.trim()` : détecte les bords entièrement transparents et les
+//      coupe → l'image finale épouse les contours de la signature, sans
+//      marges blanches inutiles. Padding de 2px conservé pour l'esthétique.
 //
 // Avantages vs threshold global naïf :
 //   - Robuste aux gradients d'éclairage (photo iPhone non uniforme, ombre)
 //   - Robuste aux fonds papiers teintés (jaune, beige, gris clair)
 //   - Préserve les traits fins (encre légèrement diluée reste visible)
+//   - Compact : prend exactement la place de la signature, pas plus
 //
 // À recalibrer si :
 //   - Signature trop fine, perd des détails  → baisser DIFF_LOW
@@ -48,6 +52,8 @@ const SIGNED_URL_TTL = 60 * 60;
 
 const DIFF_LOW = 25;
 const DIFF_HIGH = 80;
+/** Padding (en pixels) conservé autour de la signature après le crop. */
+const CROP_PADDING_PX = 4;
 
 interface SignatureInfo {
   storagePath: string;
@@ -172,12 +178,35 @@ export async function processSignatureForPdf(input: Buffer): Promise<Buffer> {
     rgba[idx + 3] = alpha;
   }
 
-  // 4. Encoder en PNG depuis le RGBA brut
-  return await sharp(rgba, {
+  // 4. Encoder en PNG depuis le RGBA brut, puis auto-crop autour des pixels
+  //    visibles (alpha > 0). `trim` détecte les bords entièrement transparents
+  //    et les coupe — la signature occupera exactement sa propre bounding box.
+  //    Threshold = 1 : on coupe tout ce qui est totalement transparent, on
+  //    garde dès qu'un pixel a la moindre opacité (anti-aliasing préservé).
+  const detoured = await sharp(rgba, {
     raw: { width, height, channels: 4 },
   })
     .png()
     .toBuffer();
+
+  try {
+    return await sharp(detoured)
+      .trim({ threshold: 1 })
+      .extend({
+        top: CROP_PADDING_PX,
+        bottom: CROP_PADDING_PX,
+        left: CROP_PADDING_PX,
+        right: CROP_PADDING_PX,
+        background: { r: 0, g: 0, b: 0, alpha: 0 },
+      })
+      .png()
+      .toBuffer();
+  } catch (err) {
+    // Si trim échoue (image entièrement transparente = aucun pixel d'encre
+    // détecté), on retourne l'image non croppée plutôt que de crasher.
+    console.warn("processSignatureForPdf: trim failed, returning uncropped:", err);
+    return detoured;
+  }
 }
 
 /**
