@@ -1,0 +1,31 @@
+-- Migration 003 — GRANT SELECT sur public.letters pour le rôle authenticated
+--
+-- Découvert 2026-05-02 lors de la livraison de la page /mailings/[id] :
+-- la query Supabase faisait un join `letters!letter_id(type)` via le client
+-- auth (qui respecte RLS + grants), et échouait avec :
+--
+--   permission denied for table letters
+--
+-- Cause : la migration 001 avait créé la table letters avec RLS policies
+-- (auth.uid() = user_id) mais SANS le GRANT SELECT pour `authenticated`.
+-- Toutes les autres pages (dashboard, preview) lisaient letters via
+-- createServiceClient() qui bypass tout, donc le bug est resté caché.
+--
+-- La migration 002 (envoi postal) avait correctement grant les nouvelles
+-- tables (mailings, mailing_events). On rattrape ici le grant manquant
+-- pour letters côté authenticated. Le grant pour service_role existe déjà
+-- (default Supabase).
+--
+-- La RLS policy "Users can view own letters" reste en place et continue de
+-- restreindre la visibilité à `auth.uid() = user_id`. Le grant SELECT seul
+-- ne donne donc pas accès aux courriers d'autrui.
+--
+-- Pas de besoin de INSERT/UPDATE pour authenticated : la création de letter
+-- passe par /api/checkout (service role), et l'édition par les server actions
+-- du tunnel (service role aussi).
+
+grant select on public.letters to authenticated;
+
+-- Note : invoices a probablement le même problème mais on ne l'a pas
+-- encore croisé en lecture authenticated. À suivre si on construit une
+-- page authentifiée qui join invoices.
