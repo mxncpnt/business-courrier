@@ -227,6 +227,13 @@ export default async function DashboardPage() {
                         >
                           <IconDownload /> PDF
                         </a>
+                        <Link
+                          href={`/preview/${letter.id}`}
+                          className="inline-flex items-center gap-1.5 px-4 py-2 border border-jc-line-strong text-jc-ink text-sm font-medium rounded-jc-sm hover:bg-jc-surface transition-colors no-underline"
+                          title="Voir l'aperçu et modifier le texte"
+                        >
+                          Voir
+                        </Link>
                         {invoiceByLetter.has(letter.id) && (
                           <a
                             href={`/api/invoice?id=${invoiceByLetter.get(letter.id)!.id}`}
