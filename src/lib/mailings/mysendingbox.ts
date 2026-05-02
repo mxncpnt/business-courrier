@@ -71,23 +71,38 @@ const MODE_TO_POSTAGE: Record<MailingMode, string> = {
 
 // ─── Mapping événements MSB → statuts JusteCourrier ─────────────────────────
 //
-// Liste exhaustive des événements MSB d'après la doc officielle (vérifiée
-// 2026-05-01 sur https://www.mysendingbox.fr/guide/webhooks-api-courrier/) :
+// Liste exhaustive des événements MSB (vérifiée via dropdown du débogueur
+// MSB sandbox 2026-05-02) : papier + électronique (LRE).
 //
-//   letter.created               = lettre créée
+// Papier (utilisé par notre flow MVP) :
+//   letter.created               = créée
 //   letter.accepted              = acceptée par le système d'impression
 //   letter.filing_proof          = preuve de dépôt disponible (LR/LRAR)
-//   letter.sent                  = lettre envoyée (tracking_number dispo si LR/LRAR)
+//   letter.sent                  = envoyée (tracking_number dispo si LR/LRAR)
 //   letter.in_transit            = tracking event disponible (LR/LRAR)
 //   letter.waiting_to_be_withdrawn = en attente au guichet (LR/LRAR)
 //   letter.distributed           = reçue par le destinataire (LR/LRAR)
 //   letter.delivery_proof        = AR signé reçu (sous-objet delivery_proof)
 //   letter.returned_to_sender    = retournée à l'expéditeur (LR/LRAR)
+//   letter.return_to_sender_proof = preuve scannée du retour à l'expéditeur
 //   letter.wrong_address         = NPAI (si manage_returned_mail: true)
+//   letter.lost                  = lettre perdue
 //   letter.error                 = erreur (refus Poste, problème impression…)
 //   letter.canceled              = annulée
+//
+// Électronique / LRE (non utilisé au MVP, V2) — mapping defensive pour ne
+// pas masquer ces cas en fallback "submitted" :
+//   letter.electronic.accepted        = LRE acceptée
+//   letter.electronic.sent            = LRE envoyée au destinataire
+//   letter.electronic.waiting_download = en attente de téléchargement par destinataire
+//   letter.electronic.failed_tracking = échec du tracking LRE
+//   letter.electronic.not_distributed = LRE non distribuée
+//   letter.electronic.refused         = LRE refusée par destinataire
+//   letter.electronic.negligence      = LRE non récupérée (négligence destinataire)
+//   letter.electronic.locked          = LRE verrouillée
 
 const MSB_STATUS_MAP: Record<string, MailingStatus> = {
+  // ── Papier ──
   "letter.created": "submitted",
   "letter.accepted": "submitted",
   "letter.filing_proof": "in_transit", // preuve dépôt → la lettre est physiquement à La Poste
@@ -97,9 +112,20 @@ const MSB_STATUS_MAP: Record<string, MailingStatus> = {
   "letter.distributed": "delivered",
   "letter.delivery_proof": "delivered", // AR signé → distribué
   "letter.returned_to_sender": "returned",
+  "letter.return_to_sender_proof": "returned", // preuve du retour
   "letter.wrong_address": "returned",
+  "letter.lost": "failed",
   "letter.error": "failed",
   "letter.canceled": "failed",
+  // ── Électronique / LRE (V2 defensive mapping) ──
+  "letter.electronic.accepted": "submitted",
+  "letter.electronic.sent": "in_transit",
+  "letter.electronic.waiting_download": "in_transit",
+  "letter.electronic.failed_tracking": "failed",
+  "letter.electronic.not_distributed": "returned",
+  "letter.electronic.refused": "returned",
+  "letter.electronic.negligence": "returned",
+  "letter.electronic.locked": "failed",
 };
 
 // ─── Types internes (réponses MSB) ──────────────────────────────────────────
@@ -178,10 +204,19 @@ interface MsbWebhookEvent {
   webhook_called?: boolean;
 }
 
-/** Sous-objet preuve (filing_proof ou delivery_proof) côté MSB. */
+/**
+ * Sous-objet preuve (filing_proof ou delivery_proof) côté MSB.
+ * Structure réelle vérifiée via débogueur 2026-05-02 :
+ *   { url, _id, source, letter, type, path, originalname, ... }
+ * L'URL est directement sur le sous-objet (pas dans un sous-sous-objet `file`).
+ */
 interface MsbProof {
+  url?: string;
   _id?: string;
-  file?: { url: string };
+  source?: string;
+  type?: string;
+  path?: string;
+  originalname?: string;
 }
 
 interface MsbLetterWithExtras extends MsbLetterResponse {
@@ -504,8 +539,10 @@ export class MySendingBoxProvider implements MailProvider {
         new Date().toISOString(),
       rawPayload,
       trackingNumber: letter.tracking_number ?? undefined,
-      proofOfDepositUrl: letter.filing_proof?.file?.url,
-      proofOfReceiptUrl: letter.delivery_proof?.file?.url,
+      // Vrai chemin (vérifié débogueur 2026-05-02) : letter.filing_proof.url
+      // (pas letter.filing_proof.file.url comme initialement supposé)
+      proofOfDepositUrl: letter.filing_proof?.url,
+      proofOfReceiptUrl: letter.delivery_proof?.url,
     };
   }
 }
