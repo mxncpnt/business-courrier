@@ -120,7 +120,7 @@ export default async function ProfilPage() {
         <div className="max-w-[1200px] mx-auto">
           <div className="border-t border-jc-line pt-5 flex justify-between flex-wrap gap-2">
             <span>
-              © {new Date().getFullYear()} JusteCourrier · SIRET en cours
+              © {new Date().getFullYear()} JusteCourrier · SIRET 104 347 919 00011
             </span>
             <span>Édité en France</span>
           </div>
