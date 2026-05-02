@@ -3,20 +3,24 @@
 /**
  * Composant client de gestion de la signature manuscrite (page `/profil`).
  *
- * 3 états :
- *   - Aucune signature : drop zone PNG/JPG (max 1 Mo) avec aperçu pré-upload
- *   - Signature uploadée : preview de la signature actuelle + bouton
- *     "Remplacer" (rebascule en mode upload) + bouton "Supprimer"
+ * États :
+ *   - Aucune signature : 2 onglets "Importer une image" / "Dessiner ici"
+ *   - Signature uploadée : preview + boutons Remplacer / Supprimer
+ *
+ * Les 2 onglets utilisent la même server action `uploadSignatureImage` —
+ * l'image (uploadée OU dessinée sur le canvas) est traitée par le pipeline
+ * server-side (détourage + auto-crop) puis stockée en PNG transparent.
  *
  * Validation client-side (UX rapide) : MIME + taille. Le serveur revalide
  * de toute façon (cf. `/profil/actions.ts`).
- *
- * Le canvas pad sera ajouté en B2 (sous-onglet en plus du drop zone).
  */
 
 import { useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { uploadSignatureImage, removeSignature } from "@/app/profil/actions";
+import SignaturePadCanvas from "./SignaturePadCanvas";
+
+type UploadMode = "image" | "canvas";
 
 interface SignatureUploadProps {
   /** URL signée vers la signature actuelle (null si pas de signature) */
@@ -37,6 +41,7 @@ export default function SignatureUpload({
   const [error, setError] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [isReplacing, setIsReplacing] = useState(false);
+  const [mode, setMode] = useState<UploadMode>("image");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const showUploadZone = !currentSignatureUrl || isReplacing;
@@ -143,62 +148,99 @@ export default function SignatureUpload({
         </div>
       )}
 
-      {/* Drop zone */}
+      {/* Drop zone OU pad canvas */}
       {showUploadZone && (
         <div className="bg-jc-bg-elev rounded-jc-lg border border-jc-line p-5">
           <p className="text-[12px] uppercase tracking-[0.06em] text-jc-ink-muted mb-3">
             {isReplacing ? "Nouvelle signature" : "Ajouter une signature"}
           </p>
 
-          <div
-            onDragOver={(e) => {
-              e.preventDefault();
-              if (!isPending) setIsDragging(true);
-            }}
-            onDragLeave={() => setIsDragging(false)}
-            onDrop={(e) => {
-              e.preventDefault();
-              setIsDragging(false);
-              if (isPending) return;
-              const file = e.dataTransfer.files[0];
-              if (file) handleUpload(file);
-            }}
-            onClick={() => !isPending && inputRef.current?.click()}
-            className={`border-2 border-dashed rounded-jc-sm p-8 text-center cursor-pointer transition-colors ${
-              isDragging
-                ? "border-jc-primary bg-jc-accent-soft"
-                : "border-jc-line-strong hover:border-jc-primary hover:bg-white"
-            } ${isPending ? "opacity-50 cursor-wait" : ""}`}
-          >
-            <input
-              ref={inputRef}
-              type="file"
-              accept="image/png,image/jpeg"
-              className="hidden"
-              disabled={isPending}
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) handleUpload(file);
-                // Reset l'input pour permettre de re-uploader le même fichier
-                if (inputRef.current) inputRef.current.value = "";
+          {/* Onglets : Importer une image vs Dessiner sur le pad */}
+          <div className="flex gap-1 mb-4 border-b border-jc-line">
+            <button
+              type="button"
+              onClick={() => {
+                setError(null);
+                setMode("image");
               }}
-            />
-            <p className="text-[14px] text-jc-ink font-medium mb-1">
-              {isPending
-                ? "Upload en cours…"
-                : "Glisse une image ici, ou clique pour parcourir"}
-            </p>
-            <p className="text-[12px] text-jc-ink-muted">
-              PNG ou JPEG · max 1 Mo · idéalement avec fond transparent ou blanc
-            </p>
+              className={`px-4 py-2 text-[14px] font-medium border-b-2 transition-colors -mb-[1px] ${
+                mode === "image"
+                  ? "border-jc-primary text-jc-ink"
+                  : "border-transparent text-jc-ink-soft hover:text-jc-ink"
+              }`}
+            >
+              Importer une image
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setError(null);
+                setMode("canvas");
+              }}
+              className={`px-4 py-2 text-[14px] font-medium border-b-2 transition-colors -mb-[1px] ${
+                mode === "canvas"
+                  ? "border-jc-primary text-jc-ink"
+                  : "border-transparent text-jc-ink-soft hover:text-jc-ink"
+              }`}
+            >
+              Dessiner ici
+            </button>
           </div>
 
-          <p className="text-[12px] text-jc-ink-muted mt-3">
-            <strong className="text-jc-ink">Astuce :</strong> signez sur une
-            feuille blanche au stylo noir, photographiez la zone signée, puis
-            recadrez serré. Le fond sera automatiquement rendu transparent
-            (détourage) — pas besoin de PNG transparent ni de retouche.
-          </p>
+          {mode === "image" ? (
+            <>
+              <div
+                onDragOver={(e) => {
+                  e.preventDefault();
+                  if (!isPending) setIsDragging(true);
+                }}
+                onDragLeave={() => setIsDragging(false)}
+                onDrop={(e) => {
+                  e.preventDefault();
+                  setIsDragging(false);
+                  if (isPending) return;
+                  const file = e.dataTransfer.files[0];
+                  if (file) handleUpload(file);
+                }}
+                onClick={() => !isPending && inputRef.current?.click()}
+                className={`border-2 border-dashed rounded-jc-sm p-8 text-center cursor-pointer transition-colors ${
+                  isDragging
+                    ? "border-jc-primary bg-jc-accent-soft"
+                    : "border-jc-line-strong hover:border-jc-primary hover:bg-white"
+                } ${isPending ? "opacity-50 cursor-wait" : ""}`}
+              >
+                <input
+                  ref={inputRef}
+                  type="file"
+                  accept="image/png,image/jpeg"
+                  className="hidden"
+                  disabled={isPending}
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) handleUpload(file);
+                    if (inputRef.current) inputRef.current.value = "";
+                  }}
+                />
+                <p className="text-[14px] text-jc-ink font-medium mb-1">
+                  {isPending
+                    ? "Upload en cours…"
+                    : "Glisse une image ici, ou clique pour parcourir"}
+                </p>
+                <p className="text-[12px] text-jc-ink-muted">
+                  PNG ou JPEG · max 1 Mo · idéalement avec fond transparent ou blanc
+                </p>
+              </div>
+
+              <p className="text-[12px] text-jc-ink-muted mt-3">
+                <strong className="text-jc-ink">Astuce :</strong> signez sur une
+                feuille blanche au stylo noir, photographiez la zone signée, puis
+                recadrez serré. Le fond sera automatiquement rendu transparent
+                (détourage) — pas besoin de PNG transparent ni de retouche.
+              </p>
+            </>
+          ) : (
+            <SignaturePadCanvas />
+          )}
 
           {isReplacing && (
             <button
