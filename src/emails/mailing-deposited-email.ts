@@ -77,12 +77,12 @@ export function renderMailingDepositedEmail(data: MailingDepositedEmailData): {
   const bullets =
     mailingMode === "registered"
       ? [
-          "La preuve de dépôt PDF (jointe à ce mail via le bouton) fait foi de la date d'envoi.",
+          "La preuve de dépôt PDF (téléchargeable via le bouton ci-dessus) fait foi de la date d'envoi.",
           "Vous recevrez une notification automatique dès la remise au destinataire.",
           "L'accusé de réception signé scanné vous sera transmis par email dès retour.",
         ]
       : [
-          "La preuve de dépôt PDF est disponible en téléchargement.",
+          "La preuve de dépôt PDF est téléchargeable via le bouton ci-dessus.",
           "Aucun suivi de distribution n'est disponible pour la lettre verte (envoi non recommandé).",
           "Si le destinataire conteste la réception, conservez la preuve de dépôt comme élément de bonne foi.",
         ];
