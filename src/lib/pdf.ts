@@ -128,8 +128,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   signatureImage: {
-    height: mm(30),
-    maxWidth: mm(90),
+    height: mm(22),
+    maxWidth: mm(70),
     objectFit: "contain",
   },
   // Style spécifique pour la dernière ligne du corps = nom typé du signataire,

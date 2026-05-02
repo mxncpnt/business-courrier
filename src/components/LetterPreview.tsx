@@ -152,8 +152,8 @@ export default function LetterPreview({
                       src={signatureUrl}
                       alt="Signature"
                       style={{
-                        height: "44px",
-                        maxWidth: "180px",
+                        height: "32px",
+                        maxWidth: "140px",
                         objectFit: "contain",
                       }}
                     />
