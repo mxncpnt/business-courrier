@@ -47,7 +47,7 @@ export function renderMailingPendingConfirmEmail(
   const bullets = [
     "Vous pouvez relire et modifier le texte sur la page de votre courrier avant l'envoi.",
     "Cliquez sur 'Confirmer et envoyer' pour déclencher l'envoi immédiatement.",
-    "Sans action de votre part, l'envoi sera déclenché automatiquement dans les 12 prochaines heures.",
+    "Sans action de votre part, l'envoi sera déclenché automatiquement dans les prochaines heures.",
   ];
 
   const conseilsBodyHtml = bullets
