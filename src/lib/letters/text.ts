@@ -46,19 +46,22 @@ export function isEdited(letter: LetterTextFields): boolean {
 // lignes utiles. À 70 caractères par ligne (largeur effective police 10pt),
 // ça donne max ~1700 caractères avant débordement.
 //
-// Valeurs conservatrices pour MVP (à recalibrer si on revoit le générateur
-// PDF — typiquement réduire les marges/espacements gagnerait 200-300 chars) :
-//   - Cible "rentre confortablement"      : 1200 caractères
-//   - Limite haute "ça passe encore"      : 1500 caractères
-//   - Hard cap "ça va déborder à coup sûr": 1700 caractères
+// Valeurs MVP (à recalibrer après chaque modif du générateur PDF) :
+//   - Cible "rentre confortablement"      : 1500 caractères
+//   - Limite haute "ça passe encore"      : 1800 caractères
+//   - Hard cap "ça va déborder à coup sûr": 2000 caractères
+//
+// Mise à jour 2026-05-02 (post-compaction du layout AFNOR) : gain de ~25mm
+// verticaux après réduction des écarts entre destinataire / date / objet
+// (1 ligne d'écart au lieu de 3-4 lignes), permettant ~300 chars de plus.
 //
 // Le compteur ne mesure QUE le corps éditable. Les zones fixes (expéditeur,
 // destinataire, objet, signature) sont déduites en amont via le calcul ci-
 // dessus.
 
-export const AFNOR_TARGET_CHARS = 1200;
-export const AFNOR_WARN_CHARS = 1500;
-export const AFNOR_MAX_CHARS = 1700;
+export const AFNOR_TARGET_CHARS = 1500;
+export const AFNOR_WARN_CHARS = 1800;
+export const AFNOR_MAX_CHARS = 2000;
 
 /**
  * Niveau d'avertissement à afficher selon la longueur du texte.

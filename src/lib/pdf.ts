@@ -38,12 +38,14 @@ const styles = StyleSheet.create({
     color: "#1a1a1a",
   },
 
-  // Wrapper pour zones expéditeur (flow) + destinataire (absolute).
-  // Hauteur ≈ 80mm pour couvrir la fenêtre enveloppe DL et laisser le flow
-  // reprendre proprement après.
+  // Wrapper pour zones expéditeur (flow) + colonne droite (absolute).
+  // Hauteur réduite à ~55mm — l'expéditeur tient sur 4 lignes maxi (sender
+  // name + 3 lignes adresse + email = ~25mm), la fenêtre destinataire
+  // commence à 27mm dans le wrapper et fait ~22mm (destinataire + date
+  // collés à 1 ligne d'écart). Le flow reprend juste après.
   headerZone: {
     position: "relative",
-    minHeight: mm(72),
+    minHeight: mm(55),
   },
 
   // Zone 1 — Expéditeur (haut gauche)
@@ -65,15 +67,21 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
 
-  // Zone 4 — Destinataire (fenêtre enveloppe, position absolue)
-  // top relatif au headerZone qui démarre à 18mm depuis le haut de la page,
-  // donc top: 27mm dans le wrapper place l'adresse à 45mm depuis le bord
-  // supérieur de la feuille (centre de la fenêtre DL standard).
-  recipient: {
+  // Colonne droite — destinataire + date (fenêtre enveloppe AFNOR DL)
+  // Position : `right: 0` cale le bloc à 65mm du bord droit (largeur 65mm
+  // à partir du bord — donc commence à 145mm depuis bord gauche absolu,
+  // soit 130mm depuis paddingLeft). top 27mm dans le wrapper = 45mm depuis
+  // le bord supérieur de la feuille (centre fenêtre DL).
+  rightColumn: {
     position: "absolute",
     top: mm(27),
-    left: mm(85),
-    width: mm(80),
+    right: 0,
+    width: mm(65),
+  },
+
+  // Zone 4 — Destinataire (dans la colonne droite)
+  recipient: {
+    marginBottom: mm(5), // 1 ligne d'écart avant la date
   },
   recipientName: {
     fontWeight: "bold",
@@ -85,19 +93,17 @@ const styles = StyleSheet.create({
     color: "#333",
   },
 
-  // Lieu et date — aligné à droite, juste sous le wrapper d'en-tête
+  // Lieu et date — dans la colonne droite, juste sous le destinataire
   dateRow: {
-    textAlign: "right",
     fontSize: 9,
     color: "#333",
-    marginTop: mm(2),
-    marginBottom: mm(5),
   },
 
-  // Objet
+  // Objet — 1 ligne d'écart avant et après le bloc
   objectRow: {
     fontSize: 9,
-    marginBottom: mm(4),
+    marginTop: mm(5),
+    marginBottom: mm(5),
   },
   objectLabel: {
     textDecoration: "underline",
@@ -205,7 +211,10 @@ export async function generatePdfBuffer(params: GeneratePdfParams): Promise<Buff
     );
   }
 
-  // Zone 4 — Recipient (zone fenêtre enveloppe, position absolue)
+  // Colonne droite (absolute) — destinataire + date dans la fenêtre AFNOR
+  const dateText = senderCity ? `${senderCity}, le ${today}` : `Le ${today}`;
+  const rightColumnChildren: React.ReactElement[] = [];
+
   if (recipientName) {
     const recipientChildren: React.ReactElement[] = [];
     recipientChildren.push(
@@ -219,14 +228,26 @@ export async function generatePdfBuffer(params: GeneratePdfParams): Promise<Buff
         );
       });
     }
-    headerChildren.push(
+    rightColumnChildren.push(
       React.createElement(View, { key: "recipient", style: styles.recipient }, ...recipientChildren)
     );
   }
 
-  // Push wrapper en-tête : la zone réserve ~72mm de hauteur, ce qui couvre
-  // la fenêtre enveloppe DL et permet au flow (date, objet, corps) de
-  // reprendre proprement en-dessous.
+  rightColumnChildren.push(
+    React.createElement(Text, { key: "date", style: styles.dateRow }, dateText)
+  );
+
+  headerChildren.push(
+    React.createElement(
+      View,
+      { key: "right-column", style: styles.rightColumn },
+      ...rightColumnChildren
+    )
+  );
+
+  // Push wrapper en-tête : la zone réserve ~55mm de hauteur (expéditeur en
+  // flow + colonne droite en absolute). Le flow reprend ensuite avec objet
+  // et corps.
   if (headerChildren.length > 0) {
     children.push(
       React.createElement(
@@ -236,12 +257,6 @@ export async function generatePdfBuffer(params: GeneratePdfParams): Promise<Buff
       )
     );
   }
-
-  // Date
-  const dateText = senderCity ? `${senderCity}, le ${today}` : `Le ${today}`;
-  children.push(
-    React.createElement(Text, { key: "date", style: styles.dateRow }, dateText)
-  );
 
   // Object
   if (objectText) {
