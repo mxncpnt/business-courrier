@@ -1,7 +1,26 @@
-// Template email de confirmation après paiement — branding JusteCourrier / Sage.
-// Retourne { html, text } pour l'API Resend — aucune dépendance externe requise.
+/**
+ * Email de confirmation après paiement Stripe — déclenché depuis
+ * `/api/stripe-webhook` une fois `checkout.session.completed`.
+ *
+ * Couvre 3 cas :
+ *   - PDF only           : pas de mailing, conseils impression
+ *   - Lettre simple      : mailing.mode === "simple"
+ *   - LRAR               : mailing.mode === "registered"
+ *
+ * Le contenu (intro, CTA, conseils) est conditionné par `mailingMode`.
+ * Layout (header logo, footer copyright) factorisé dans `_layout.ts`.
+ */
 
 import type { MailingMode } from "@/config/mailings";
+import {
+  jc,
+  escHtml,
+  formatBytes,
+  renderCtaButton,
+  renderCallout,
+  renderEmailShell,
+  renderTextShell,
+} from "./_layout";
 
 export interface AttachmentSummary {
   name: string;
@@ -12,38 +31,11 @@ interface ConfirmationEmailData {
   letterTitle: string;
   letterId: string;
   downloadUrl: string;
-  /**
-   * Mode d'envoi commandé. undefined = PDF only (l'utilisateur poste lui-même).
-   * Si défini, JusteCourrier s'occupe de l'envoi → on adapte les conseils.
-   */
+  /** undefined = PDF only (l'utilisateur poste lui-même). */
   mailingMode?: MailingMode;
-  /**
-   * Liste des pièces jointes incluses dans l'envoi (uniquement pertinent
-   * quand mailingMode est défini). Affichées dans une section "Inclus dans
-   * l'envoi" pour transparence avec l'utilisateur.
-   */
+  /** PJ incluses dans l'envoi — pertinent uniquement si mailingMode défini. */
   attachments?: AttachmentSummary[];
 }
-
-function formatBytes(bytes: number): string {
-  if (bytes < 1024) return `${bytes} o`;
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} Ko`;
-  return `${(bytes / 1024 / 1024).toFixed(1)} Mo`;
-}
-
-// Sage brand tokens (hardcoded for email — no CSS variables in email clients)
-const jc = {
-  primary: "#13314F",
-  primaryHover: "#1B4670",
-  accent: "#C9722D",
-  accentSoft: "#F4E4D1",
-  ink: "#0F2235",
-  inkSoft: "#34465A",
-  inkMuted: "#6B7785",
-  bg: "#FAF8F4",
-  surface: "#F2EFE8",
-  line: "#E4DFD4",
-};
 
 export function renderConfirmationEmail(data: ConfirmationEmailData): {
   html: string;
@@ -51,187 +43,138 @@ export function renderConfirmationEmail(data: ConfirmationEmailData): {
 } {
   const { letterTitle, letterId, downloadUrl, mailingMode, attachments } = data;
   const shortRef = letterId.substring(0, 8).toUpperCase();
-  const year = new Date().getFullYear();
   const hasAttachments = mailingMode && attachments && attachments.length > 0;
 
   // ─── Texte adapté au mode d'envoi ────────────────────────────────────────
-  const intro = mailingMode
-    ? `Votre paiement a bien été reçu. Le courrier <strong style="color:${jc.ink};">${escHtml(letterTitle)}</strong> sera déposé à La Poste sous 24h ouvrées.${mailingMode === "registered" ? " L'accusé de réception signé vous sera envoyé dès distribution." : ""} Une copie PDF est disponible en archive.`
-    : `Votre paiement a bien été reçu. Votre courrier <strong style="color:${jc.ink};">${escHtml(letterTitle)}</strong> est disponible en téléchargement.`;
-
-  const ctaLabel = mailingMode
-    ? "Télécharger ma copie (PDF)"
-    : "Télécharger mon courrier (PDF)";
-
-  const conseilsTitle = mailingMode ? "Et maintenant ?" : "Conseils d'envoi";
-
-  const conseilsHtml = mailingMode
-    ? mailingMode === "registered"
-      ? `<p style="margin:8px 0 6px;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Le courrier sera <strong style="color:${jc.ink};">imprimé, mis sous pli et déposé à La Poste sous 24h ouvrées</strong>.</p>
-<p style="margin:0 0 6px;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Vous recevrez une notification email à chaque étape : dépôt, distribution, AR signé.</p>
-<p style="margin:0;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• L'accusé de réception signé scanné sera disponible dans votre espace dès retour de La Poste.</p>`
-      : `<p style="margin:8px 0 6px;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Le courrier sera <strong style="color:${jc.ink};">imprimé, mis sous pli et déposé à La Poste sous 24h ouvrées</strong>.</p>
-<p style="margin:0 0 6px;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Distribution sous 3 jours ouvrés en France métropolitaine (lettre verte).</p>
-<p style="margin:0;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Vous recevrez une notification email à la dépose.</p>`
-    : `<p style="margin:8px 0 6px;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Imprimez votre courrier et signez-le à la main avant envoi.</p>
-<p style="margin:0 0 6px;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Pour les mises en demeure et résiliations, privilégiez l'envoi en <strong style="color:${jc.ink};">lettre recommandée avec accusé de réception</strong>.</p>
-<p style="margin:0;font-size:14px;color:${jc.inkSoft};line-height:1.6;">• Conservez une copie du courrier et du récépissé d'envoi.</p>`;
-
-  const conseilsText = mailingMode
-    ? mailingMode === "registered"
-      ? `- Le courrier sera imprimé, mis sous pli et déposé à La Poste sous 24h ouvrées.
-- Vous recevrez une notification email à chaque étape : dépôt, distribution, AR signé.
-- L'accusé de réception signé scanné sera disponible dans votre espace dès retour de La Poste.`
-      : `- Le courrier sera imprimé, mis sous pli et déposé à La Poste sous 24h ouvrées.
-- Distribution sous 3 jours ouvrés en France métropolitaine (lettre verte).
-- Vous recevrez une notification email à la dépose.`
-    : `- Imprimez votre courrier et signez-le à la main avant envoi.
-- Pour les mises en demeure et résiliations, privilégiez l'envoi en lettre recommandée avec accusé de réception.
-- Conservez une copie du courrier et du récépissé d'envoi.`;
 
   const headline = mailingMode
     ? "Votre courrier part à La Poste"
     : "Votre courrier est prêt";
 
+  const subject = `${headline} — ${letterTitle}`;
+
+  const introHtml = mailingMode
+    ? `Votre paiement a bien été reçu. Le courrier <strong style="color:${jc.ink};">${escHtml(letterTitle)}</strong> sera déposé à La Poste sous 24h ouvrées.${mailingMode === "registered" ? " L'accusé de réception signé vous sera envoyé dès distribution." : ""} Une copie PDF est disponible en archive.`
+    : `Votre paiement a bien été reçu. Votre courrier <strong style="color:${jc.ink};">${escHtml(letterTitle)}</strong> est disponible en téléchargement.`;
+
   const introText = mailingMode
     ? `Votre paiement a bien été reçu. Le courrier "${letterTitle}" sera déposé à La Poste sous 24h ouvrées.${mailingMode === "registered" ? " L'accusé de réception signé vous sera envoyé dès distribution." : ""} Une copie PDF est disponible en archive.`
     : `Votre paiement a bien été reçu. Votre courrier "${letterTitle}" est disponible en téléchargement.`;
 
-  // Logo SVG inline (envelope + accent dot, matching Logo.tsx)
-  const logoSvg = `<svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="3" y="7" width="26" height="18" rx="1.5" stroke="#FFFFFF" stroke-width="1.6"/>
-    <path d="M3 8.5 L16 17 L29 8.5" stroke="#FFFFFF" stroke-width="1.6" stroke-linejoin="round"/>
-    <circle cx="22.5" cy="20.5" r="3" fill="${jc.accent}"/>
-  </svg>`;
+  const ctaLabel = mailingMode
+    ? "Télécharger ma copie (PDF)"
+    : "Télécharger mon courrier (PDF)";
 
-  const html = `<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Votre courrier est prêt — ${escHtml(letterTitle)}</title>
-</head>
-<body style="margin:0;padding:0;background-color:${jc.bg};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:${jc.bg};padding:40px 0;">
-    <tr>
-      <td align="center">
-        <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,34,53,0.08);max-width:600px;width:100%;">
+  // ─── Conseils (HTML + texte) ─────────────────────────────────────────────
 
-          <!-- Header -->
-          <tr>
-            <td style="background-color:${jc.primary};padding:24px 40px;">
-              <table cellpadding="0" cellspacing="0" style="width:100%;">
-                <tr>
-                  <td style="vertical-align:middle;width:38px;">
-                    ${logoSvg}
-                  </td>
-                  <td style="vertical-align:middle;padding-left:12px;">
-                    <span style="font-size:20px;font-weight:600;color:#ffffff;letter-spacing:-0.01em;font-family:Georgia,serif;">juste</span><span style="font-size:20px;font-weight:400;color:rgba(255,255,255,0.75);letter-spacing:-0.01em;font-family:Georgia,serif;">courrier</span>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
+  const conseilsTitle = mailingMode ? "Et maintenant ?" : "Conseils d'envoi";
 
-          <!-- Body -->
-          <tr>
-            <td style="padding:40px;">
+  const bullets =
+    mailingMode === "registered"
+      ? [
+          [
+            `Le courrier sera <strong style="color:${jc.ink};">imprimé, mis sous pli et déposé à La Poste sous 24h ouvrées</strong>.`,
+            "Le courrier sera imprimé, mis sous pli et déposé à La Poste sous 24h ouvrées.",
+          ],
+          [
+            "Vous recevrez une notification email à chaque étape : dépôt, distribution, AR signé.",
+            "Vous recevrez une notification email à chaque étape : dépôt, distribution, AR signé.",
+          ],
+          [
+            "L'accusé de réception signé scanné sera disponible dans votre espace dès retour de La Poste.",
+            "L'accusé de réception signé scanné sera disponible dans votre espace dès retour de La Poste.",
+          ],
+        ]
+      : mailingMode === "simple"
+        ? [
+            [
+              `Le courrier sera <strong style="color:${jc.ink};">imprimé, mis sous pli et déposé à La Poste sous 24h ouvrées</strong>.`,
+              "Le courrier sera imprimé, mis sous pli et déposé à La Poste sous 24h ouvrées.",
+            ],
+            [
+              "Distribution sous 3 jours ouvrés en France métropolitaine (lettre verte).",
+              "Distribution sous 3 jours ouvrés en France métropolitaine (lettre verte).",
+            ],
+            [
+              "Vous recevrez une notification email à la dépose.",
+              "Vous recevrez une notification email à la dépose.",
+            ],
+          ]
+        : [
+            [
+              "Imprimez votre courrier et signez-le à la main avant envoi.",
+              "Imprimez votre courrier et signez-le à la main avant envoi.",
+            ],
+            [
+              `Pour les mises en demeure et résiliations, privilégiez l'envoi en <strong style="color:${jc.ink};">lettre recommandée avec accusé de réception</strong>.`,
+              "Pour les mises en demeure et résiliations, privilégiez l'envoi en lettre recommandée avec accusé de réception.",
+            ],
+            [
+              "Conservez une copie du courrier et du récépissé d'envoi.",
+              "Conservez une copie du courrier et du récépissé d'envoi.",
+            ],
+          ];
 
-              <p style="margin:0 0 16px;font-size:22px;font-weight:700;color:${jc.ink};font-family:Georgia,serif;">${headline}</p>
+  const conseilsBodyHtml = bullets
+    .map(
+      ([html], idx) =>
+        `<p style="margin:${idx === 0 ? "8px 0 6px" : idx === bullets.length - 1 ? "0" : "0 0 6px"};font-size:14px;color:${jc.inkSoft};line-height:1.6;">• ${html}</p>`
+    )
+    .join("\n");
 
-              <p style="margin:0 0 24px;font-size:16px;color:${jc.inkSoft};line-height:1.6;">
-                ${intro}
-              </p>
+  const conseilsText = bullets.map(([, text]) => `- ${text}`).join("\n");
 
-              <!-- CTA -->
-              <table width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td align="center" style="padding:8px 0 32px;">
-                    <a href="${escHtml(downloadUrl)}"
-                       style="display:inline-block;background-color:${jc.primary};color:#ffffff;font-size:16px;font-weight:600;padding:14px 32px;border-radius:10px;text-decoration:none;">
-                      ${ctaLabel}
-                    </a>
-                  </td>
-                </tr>
-              </table>
+  // ─── Section "Inclus dans l'envoi" (PJ) ──────────────────────────────────
 
-              <p style="margin:0 0 4px;font-size:13px;color:${jc.inkMuted};">
-                Si le bouton ne fonctionne pas, copiez ce lien dans votre navigateur&nbsp;:
-              </p>
-              <p style="margin:0 0 24px;font-size:13px;color:${jc.accent};word-break:break-all;">
-                ${escHtml(downloadUrl)}
-              </p>
+  const attachmentsHtml = hasAttachments
+    ? `<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:18px;">
+        <tr>
+          <td style="background-color:#ffffff;border-radius:10px;padding:18px 22px;border:1px solid ${jc.line};">
+            <p style="margin:0 0 4px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:${jc.accent};">Inclus dans l'envoi</p>
+            <p style="margin:8px 0 8px;font-size:14px;color:${jc.inkSoft};line-height:1.5;">Le courrier généré + ${attachments!.length} pièce${attachments!.length > 1 ? "s" : ""} jointe${attachments!.length > 1 ? "s" : ""} :</p>
+            ${attachments!
+              .map(
+                (a) =>
+                  `<p style="margin:0 0 4px;font-size:13px;color:${jc.ink};display:flex;justify-content:space-between;"><span>${escHtml(a.name)}</span><span style="color:${jc.inkMuted};">${formatBytes(a.sizeBytes)}</span></p>`
+              )
+              .join("")}
+            <p style="margin:10px 0 0;font-size:12px;color:${jc.inkMuted};font-style:italic;">Le PDF téléchargeable contient l'ensemble (courrier + pièces jointes), strictement identique à ce qui sera posté à La Poste.</p>
+          </td>
+        </tr>
+      </table>`
+    : "";
 
-              <!-- Divider -->
-              <hr style="border:none;border-top:1px solid ${jc.line};margin:24px 0;" />
-
-              ${
-                hasAttachments
-                  ? `<!-- Inclus dans l'envoi -->
-              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:18px;">
-                <tr>
-                  <td style="background-color:#ffffff;border-radius:10px;padding:18px 22px;border:1px solid ${jc.line};">
-                    <p style="margin:0 0 4px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:${jc.accent};">Inclus dans l'envoi</p>
-                    <p style="margin:8px 0 8px;font-size:14px;color:${jc.inkSoft};line-height:1.5;">Le courrier généré + ${attachments!.length} pièce${attachments!.length > 1 ? "s" : ""} jointe${attachments!.length > 1 ? "s" : ""} :</p>
-                    ${attachments!
-                      .map(
-                        (a) =>
-                          `<p style="margin:0 0 4px;font-size:13px;color:${jc.ink};display:flex;justify-content:space-between;"><span>${escHtml(a.name)}</span><span style="color:${jc.inkMuted};">${formatBytes(a.sizeBytes)}</span></p>`
-                      )
-                      .join("")}
-                    <p style="margin:10px 0 0;font-size:12px;color:${jc.inkMuted};font-style:italic;">Le PDF téléchargeable contient l'ensemble (courrier + pièces jointes), strictement identique à ce qui sera posté à La Poste.</p>
-                  </td>
-                </tr>
-              </table>`
-                  : ""
-              }
-
-              <!-- Conseils -->
-              <table width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td style="background-color:${jc.bg};border-radius:10px;padding:20px 24px;border:1px solid ${jc.line};">
-                    <p style="margin:0 0 4px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:${jc.accent};">${conseilsTitle}</p>
-                    ${conseilsHtml}
-                  </td>
-                </tr>
-              </table>
-
-              <!-- Divider -->
-              <hr style="border:none;border-top:1px solid ${jc.line};margin:24px 0;" />
-
-              <p style="margin:0;font-size:13px;color:${jc.inkMuted};">
-                Référence de votre courrier&nbsp;: <strong style="color:${jc.ink};">${shortRef}</strong>
-              </p>
-
-            </td>
-          </tr>
-
-          <!-- Footer -->
-          <tr>
-            <td style="background-color:${jc.surface};padding:24px 40px;border-top:1px solid ${jc.line};">
-              <p style="margin:0 0 8px;font-size:12px;color:${jc.inkMuted};line-height:1.5;">
-                © ${year} JusteCourrier — Ce document est généré automatiquement par intelligence artificielle à titre informatif.
-                Il ne constitue pas un conseil juridique professionnel.
-              </p>
-              <p style="margin:0;font-size:12px;color:${jc.inkMuted};">
-                Pour toute question : <a href="mailto:contact@justecourrier.fr" style="color:${jc.accent};">contact@justecourrier.fr</a>
-              </p>
-            </td>
-          </tr>
-
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>`;
-
-  // Version texte brut (clients mail sans HTML, délivrabilité)
   const attachmentsText = hasAttachments
     ? `\n\nInclus dans l'envoi :\nLe courrier généré + ${attachments!.length} pièce${attachments!.length > 1 ? "s" : ""} jointe${attachments!.length > 1 ? "s" : ""} :\n${attachments!.map((a) => `- ${a.name} (${formatBytes(a.sizeBytes)})`).join("\n")}\nLe PDF téléchargeable contient l'ensemble (courrier + pièces jointes), strictement identique à ce qui sera posté à La Poste.`
     : "";
 
-  const text = `JusteCourrier — ${headline}
+  // ─── Composition HTML ────────────────────────────────────────────────────
+
+  const contentHtml = `
+    <p style="margin:0 0 16px;font-size:22px;font-weight:700;color:${jc.ink};font-family:Georgia,serif;">${escHtml(headline)}</p>
+
+    <p style="margin:0 0 24px;font-size:16px;color:${jc.inkSoft};line-height:1.6;">
+      ${introHtml}
+    </p>
+
+    ${renderCtaButton({ label: ctaLabel, url: downloadUrl })}
+
+    <hr style="border:none;border-top:1px solid ${jc.line};margin:24px 0;" />
+
+    ${attachmentsHtml}
+
+    ${renderCallout({ title: conseilsTitle, bodyHtml: conseilsBodyHtml })}
+
+    <hr style="border:none;border-top:1px solid ${jc.line};margin:24px 0;" />
+
+    <p style="margin:0;font-size:13px;color:${jc.inkMuted};">
+      Référence de votre courrier&nbsp;: <strong style="color:${jc.ink};">${shortRef}</strong>
+    </p>
+  `;
+
+  const html = renderEmailShell({ subject, contentHtml });
+
+  const contentText = `JusteCourrier — ${headline}
 
 ${introText}
 
@@ -242,19 +185,9 @@ ${downloadUrl}${attachmentsText}
 ${conseilsTitle} :
 ${conseilsText}
 
-Référence : ${shortRef}
+Référence : ${shortRef}`;
 
-© ${year} JusteCourrier — justecourrier.fr
-Ce document est généré automatiquement par IA à titre informatif. Il ne constitue pas un conseil juridique professionnel.
-Pour toute question : contact@justecourrier.fr`;
+  const text = renderTextShell({ contentText });
 
   return { html, text };
-}
-
-function escHtml(str: string): string {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
 }

@@ -17,7 +17,10 @@
  *   4. Update `mailings.status`, `last_event_at`, `last_event_status`,
  *      `tracking_number`, `proof_of_deposit_url`, `proof_of_receipt_url`,
  *      `delivered_at` si applicable.
- *   5. Phase 4.4 commit 6 : déclenche les emails Resend selon le statut.
+ *   5. Phase 4.4 commit 6 : déclenche l'email Resend correspondant selon
+ *      l'eventType (déposé / remis / AR signé / non distribué). Idempotence
+ *      garantie par l'unique constraint au point 3 — un retry MSB sort en
+ *      "idempotent skip" AVANT d'arriver ici.
  *
  * Configuration côté MSB :
  *   - Dashboard MSB → Paramètres → Webhook
@@ -31,6 +34,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase/server";
 import { getMailProvider } from "@/lib/mailings/mysendingbox";
+import { getLetterType } from "@/config/letter-types";
+import {
+  sendMailingDepositedEmail,
+  sendMailingDeliveredEmail,
+  sendMailingReceiptSignedEmail,
+  sendMailingFailedEmail,
+} from "@/lib/email";
 
 export async function POST(req: NextRequest) {
   const rawBody = await req.text();
@@ -89,10 +99,15 @@ export async function POST(req: NextRequest) {
 
   const supabase = createServiceClient();
 
-  // ─── 4. Récupérer le mailing concerné via provider_mailing_id ────────────
+  // ─── 4. Récupérer le mailing + lettre associée pour l'envoi des emails ──
+  // Join Supabase : on récupère aussi `letters.email` (destinataire de l'email)
+  // et `letters.type` (slug pour titre humain). Évite un round-trip DB.
   const { data: mailing, error: findError } = await supabase
     .from("mailings")
-    .select("id, status, delivered_at, mode, letter_id, user_id")
+    .select(
+      `id, status, delivered_at, mode, letter_id, user_id,
+       letters!letter_id(email, type)`
+    )
     .eq("provider_mailing_id", event.providerMailingId)
     .maybeSingle();
 
@@ -123,7 +138,8 @@ export async function POST(req: NextRequest) {
 
   if (insertError) {
     // 23505 = unique_violation : event déjà reçu, c'est le cas "retry MSB"
-    // → idempotent skip, on retourne 200 sans toucher au mailing
+    // → idempotent skip, on retourne 200 sans toucher au mailing NI envoyer
+    // d'email (c'est aussi notre garantie d'idempotence pour les emails).
     if (insertError.code === "23505") {
       console.log(
         `MSB webhook: duplicate event ${event.providerEventId} (mailing ${mailing.id}), idempotent skip`
@@ -181,8 +197,126 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // TODO Phase 4.4 commit 6 : déclencher email Resend selon event.status
-  // (delivered → email "Courrier distribué", returned → email "Non distribué")
+  // ─── 7. Notifications email (commit 6) ──────────────────────────────────
+  // Fire-and-forget : si un envoi échoue, log + continue. Le webhook répond
+  // toujours 200 à MSB pour éviter retries inutiles. L'idempotence est
+  // garantie au point 5 (un event en doublon a déjà court-circuité ici).
+  await dispatchMailingEmail({
+    eventType: event.eventType,
+    mailing,
+    event,
+  });
 
   return NextResponse.json({ received: true });
+}
+
+/**
+ * Dispatch l'email Resend approprié selon l'eventType.
+ *
+ * Mapping (cf. spec Phase 4.4 commit 6 dans project_envoi_postal.md) :
+ *   letter.filing_proof       → "Votre courrier est parti" (tous modes)
+ *   letter.distributed        → "Votre courrier a été remis" (registered uniquement)
+ *   letter.delivery_proof     → "Accusé de réception signé" (registered uniquement)
+ *   letter.returned_to_sender → "Courrier non distribué"
+ *   letter.wrong_address      → "Courrier non distribué"
+ *   autres                    → no-op (created/accepted/sent/in_transit/etc.)
+ */
+async function dispatchMailingEmail(opts: {
+  eventType: string;
+  mailing: {
+    id: string;
+    mode: string | null;
+    letters: { email: string | null; type: string } | { email: string | null; type: string }[] | null;
+  };
+  event: {
+    trackingNumber?: string;
+    proofOfDepositUrl?: string;
+    proofOfReceiptUrl?: string;
+  };
+}): Promise<void> {
+  const { eventType, mailing, event } = opts;
+
+  // Le join Supabase peut renvoyer un tableau ou un objet selon les versions.
+  // On normalise pour extraire la lettre liée (1-1 via foreign key).
+  const letter = Array.isArray(mailing.letters)
+    ? mailing.letters[0]
+    : mailing.letters;
+
+  if (!letter?.email) {
+    console.warn(
+      `MSB webhook: no recipient email for mailing ${mailing.id}, skipping notification`
+    );
+    return;
+  }
+
+  const letterType = getLetterType(letter.type);
+  const letterTitle = letterType?.title ?? letter.type.replace(/-/g, " ");
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://justecourrier.fr";
+  const mailingPageUrl = `${appUrl}/mailings/${mailing.id}`;
+
+  try {
+    switch (eventType) {
+      case "letter.filing_proof":
+        await sendMailingDepositedEmail({
+          to: letter.email,
+          letterTitle,
+          mailingMode: (mailing.mode === "registered" ? "registered" : "simple"),
+          trackingNumber: event.trackingNumber,
+          proofOfDepositUrl: event.proofOfDepositUrl,
+          mailingPageUrl,
+        });
+        break;
+
+      case "letter.distributed":
+        // Lettre verte : pas d'email "remis" (l'utilisateur a déjà reçu
+        // l'email "déposé", et MSB ne tracke pas la distribution lettre verte
+        // de toute façon — défensif).
+        if (mailing.mode === "registered") {
+          await sendMailingDeliveredEmail({
+            to: letter.email,
+            letterTitle,
+            mailingMode: "registered",
+            mailingPageUrl,
+          });
+        }
+        break;
+
+      case "letter.delivery_proof":
+        if (event.proofOfReceiptUrl) {
+          await sendMailingReceiptSignedEmail({
+            to: letter.email,
+            letterTitle,
+            proofOfReceiptUrl: event.proofOfReceiptUrl,
+            mailingPageUrl,
+          });
+        } else {
+          console.warn(
+            `MSB webhook: letter.delivery_proof received without proofOfReceiptUrl for mailing ${mailing.id}`
+          );
+        }
+        break;
+
+      case "letter.returned_to_sender":
+      case "letter.wrong_address":
+        await sendMailingFailedEmail({
+          to: letter.email,
+          letterTitle,
+          eventType,
+          mailingPageUrl,
+        });
+        break;
+
+      default:
+        // Pas d'email pour les autres événements (created, accepted, sent,
+        // in_transit, waiting_to_be_withdrawn, lost, error, canceled,
+        // return_to_sender_proof, electronic.*).
+        break;
+    }
+  } catch (err) {
+    // Log mais ne propage pas — webhook doit toujours répondre 200 à MSB
+    console.error(
+      `MSB webhook: email send failed for mailing ${mailing.id} (${eventType}):`,
+      err
+    );
+  }
 }

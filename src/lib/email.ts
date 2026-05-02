@@ -3,6 +3,10 @@ import {
   renderConfirmationEmail,
   type AttachmentSummary,
 } from "@/emails/confirmation-email";
+import { renderMailingDepositedEmail } from "@/emails/mailing-deposited-email";
+import { renderMailingDeliveredEmail } from "@/emails/mailing-delivered-email";
+import { renderMailingReceiptSignedEmail } from "@/emails/mailing-receipt-signed-email";
+import { renderMailingFailedEmail } from "@/emails/mailing-failed-email";
 import type { MailingMode } from "@/config/mailings";
 
 // ---------------------------------------------------------------------------
@@ -29,9 +33,32 @@ function getResend(): Resend {
 
 const FROM_ADDRESS = "JusteCourrier <noreply@justecourrier.fr>";
 
-// ---------------------------------------------------------------------------
-// Types
-// ---------------------------------------------------------------------------
+/**
+ * Wrapper centralisé sur `resend.emails.send` — uniformise le `from`,
+ * le mapping d'erreurs et le logging.
+ */
+async function sendViaResend(opts: {
+  to: string;
+  subject: string;
+  html: string;
+  text: string;
+}): Promise<void> {
+  const resend = getResend();
+  const { error } = await resend.emails.send({
+    from: FROM_ADDRESS,
+    to: opts.to,
+    subject: opts.subject,
+    html: opts.html,
+    text: opts.text,
+  });
+  if (error) {
+    throw new Error(`Resend error: ${JSON.stringify(error)}`);
+  }
+}
+
+// ===========================================================================
+// 1. Email de confirmation après paiement Stripe (existant)
+// ===========================================================================
 
 interface SendConfirmationEmailParams {
   /** Email du destinataire (acheteur du courrier) */
@@ -54,10 +81,6 @@ interface SendConfirmationEmailParams {
   attachments?: AttachmentSummary[];
 }
 
-// ---------------------------------------------------------------------------
-// Fonctions publiques
-// ---------------------------------------------------------------------------
-
 /**
  * Envoie l'email de confirmation après paiement Stripe.
  * Contient le lien de téléchargement du PDF.
@@ -70,7 +93,6 @@ export async function sendConfirmationEmail(
   const { to, letterTitle, letterId, downloadUrl, mailingMode, attachments } =
     params;
 
-  const resend = getResend();
   const { html, text } = renderConfirmationEmail({
     letterTitle,
     letterId,
@@ -83,15 +105,104 @@ export async function sendConfirmationEmail(
     ? `Votre courrier part à La Poste — ${letterTitle}`
     : `Votre courrier est prêt — ${letterTitle}`;
 
-  const { error } = await resend.emails.send({
-    from: FROM_ADDRESS,
-    to,
-    subject,
+  await sendViaResend({ to, subject, html, text });
+}
+
+// ===========================================================================
+// 2. Emails postaux MSB — déclenchés depuis /api/mailings-webhook
+// ===========================================================================
+
+interface SendMailingDepositedEmailParams {
+  to: string;
+  letterTitle: string;
+  mailingMode: MailingMode;
+  trackingNumber?: string;
+  proofOfDepositUrl?: string;
+  mailingPageUrl: string;
+}
+
+/**
+ * Sur événement MSB `letter.filing_proof` : confirme le dépôt à La Poste.
+ * Déclenché pour TOUS les modes (verte + lrar).
+ */
+export async function sendMailingDepositedEmail(
+  params: SendMailingDepositedEmailParams
+): Promise<void> {
+  const { html, text } = renderMailingDepositedEmail(params);
+  await sendViaResend({
+    to: params.to,
+    subject: `Votre courrier est parti — ${params.letterTitle}`,
     html,
     text,
   });
+}
 
-  if (error) {
-    throw new Error(`Resend error: ${JSON.stringify(error)}`);
-  }
+interface SendMailingDeliveredEmailParams {
+  to: string;
+  letterTitle: string;
+  /** "registered" requis — la fonction n'est pas appelée pour mode "simple". */
+  mailingMode: "registered";
+  mailingPageUrl: string;
+}
+
+/**
+ * Sur événement MSB `letter.distributed` : courrier remis au destinataire.
+ * Déclenché UNIQUEMENT pour mode `registered`.
+ */
+export async function sendMailingDeliveredEmail(
+  params: SendMailingDeliveredEmailParams
+): Promise<void> {
+  const { html, text } = renderMailingDeliveredEmail(params);
+  await sendViaResend({
+    to: params.to,
+    subject: `Votre courrier a été remis — ${params.letterTitle}`,
+    html,
+    text,
+  });
+}
+
+interface SendMailingReceiptSignedEmailParams {
+  to: string;
+  letterTitle: string;
+  proofOfReceiptUrl: string;
+  mailingPageUrl: string;
+}
+
+/**
+ * Sur événement MSB `letter.delivery_proof` : AR signé scanné disponible.
+ * LRAR uniquement.
+ */
+export async function sendMailingReceiptSignedEmail(
+  params: SendMailingReceiptSignedEmailParams
+): Promise<void> {
+  const { html, text } = renderMailingReceiptSignedEmail(params);
+  await sendViaResend({
+    to: params.to,
+    subject: `Accusé de réception signé — ${params.letterTitle}`,
+    html,
+    text,
+  });
+}
+
+interface SendMailingFailedEmailParams {
+  to: string;
+  letterTitle: string;
+  eventType: "letter.returned_to_sender" | "letter.wrong_address";
+  mailingPageUrl: string;
+}
+
+/**
+ * Sur événement MSB `letter.returned_to_sender` ou `letter.wrong_address` :
+ * courrier non distribué.
+ */
+export async function sendMailingFailedEmail(
+  params: SendMailingFailedEmailParams
+): Promise<void> {
+  const { html, text } = renderMailingFailedEmail(params);
+  await sendViaResend({
+    to: params.to,
+    subject: `Courrier non distribué — ${params.letterTitle}`,
+    html,
+    text,
+  });
 }
