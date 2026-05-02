@@ -34,6 +34,24 @@ const STATUS_BADGES: Record<string, { label: string; classes: string }> = {
   },
 };
 
+// Badge synthétique pour la colonne "Envoi" sur le dashboard.
+// Mapping aligné sur `mailings.status` (cf. /mailings/[id] pour la version riche).
+const MAILING_STATUS_BADGES: Record<
+  string,
+  { label: string; classes: string }
+> = {
+  pending: { label: "Envoi en attente", classes: "bg-jc-surface text-jc-ink-soft" },
+  paid: { label: "Envoi à venir", classes: "bg-jc-surface text-jc-ink-soft" },
+  submitted: { label: "Soumis", classes: "bg-blue-50 text-blue-700" },
+  in_transit: {
+    label: "En acheminement",
+    classes: "bg-jc-accent-soft text-jc-accent",
+  },
+  delivered: { label: "Distribué", classes: "bg-emerald-50 text-emerald-700" },
+  returned: { label: "Retourné", classes: "bg-orange-50 text-orange-700" },
+  failed: { label: "Échec d'envoi", classes: "bg-red-50 text-red-700" },
+};
+
 export const metadata = {
   title: "Mes courriers",
 };
@@ -63,6 +81,17 @@ export default async function DashboardPage() {
 
   const invoiceByLetter = new Map(
     (invoices ?? []).map((inv) => [inv.letter_id, inv])
+  );
+
+  // Récupérer les envois physiques (1 par letter max au MVP). Permet
+  // d'afficher le badge "Envoi" et le lien vers /mailings/[id] sur chaque card.
+  const { data: mailings } = await supabase
+    .from("mailings")
+    .select("id, letter_id, status, mode")
+    .eq("user_id", user.id);
+
+  const mailingByLetter = new Map(
+    (mailings ?? []).map((m) => [m.letter_id, m])
   );
 
   return (
@@ -153,6 +182,11 @@ export default async function DashboardPage() {
               const icon =
                 CAT_ICONS[letter.type] || letterType?.icon || "📄";
 
+              const mailing = mailingByLetter.get(letter.id);
+              const mailingBadge = mailing
+                ? MAILING_STATUS_BADGES[mailing.status]
+                : null;
+
               return (
                 <div
                   key={letter.id}
@@ -163,7 +197,7 @@ export default async function DashboardPage() {
                       {icon}
                     </div>
                     <div className="min-w-0">
-                      <div className="flex items-center gap-2.5 mb-0.5">
+                      <div className="flex items-center gap-2 mb-0.5 flex-wrap">
                         <p className="font-medium text-[15px] text-jc-ink truncate">
                           {letterType?.title ?? letter.type}
                         </p>
@@ -172,6 +206,13 @@ export default async function DashboardPage() {
                         >
                           {status.label}
                         </span>
+                        {mailingBadge && (
+                          <span
+                            className={`text-[11px] font-semibold px-2 py-0.5 rounded-full whitespace-nowrap ${mailingBadge.classes}`}
+                          >
+                            {mailingBadge.label}
+                          </span>
+                        )}
                       </div>
                       <p className="text-[13px] text-jc-ink-muted">{date}</p>
                     </div>
@@ -194,6 +235,14 @@ export default async function DashboardPage() {
                           >
                             Facture
                           </a>
+                        )}
+                        {mailing && (
+                          <Link
+                            href={`/mailings/${mailing.id}`}
+                            className="inline-flex items-center gap-1.5 px-4 py-2 border border-jc-line-strong text-jc-ink text-sm font-medium rounded-jc-sm hover:bg-jc-surface transition-colors no-underline"
+                          >
+                            Suivi
+                          </Link>
                         )}
                       </>
                     ) : (
