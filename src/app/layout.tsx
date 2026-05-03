@@ -50,9 +50,11 @@ export const metadata: Metadata = {
     description:
       "Résiliation, mise en demeure, réclamation, contestation… Remplis un formulaire, notre IA rédige un courrier professionnel adapté à ta situation. PDF dès 3,90 €, ou nous le déposons à La Poste pour toi en lettre verte (5,90 €) ou recommandé avec AR (11,90 €). Signature manuscrite incluse.",
   },
-  alternates: {
-    canonical: APP_URL,
-  },
+  // ⚠️ Pas de `alternates.canonical` ici : un canonical au niveau du root layout
+  // s'applique par défaut à TOUTES les pages enfants qui ne l'overrident pas et
+  // les fait toutes pointer vers la home → Google n'indexe que la home et ignore
+  // les pages produit/guides comme "duplicates". Chaque page doit définir son
+  // propre canonical via `export const metadata` ou `generateMetadata`.
   robots: {
     index: true,
     follow: true,

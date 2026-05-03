@@ -5,6 +5,7 @@ export const metadata = {
   title: "Politique de confidentialité",
   description:
     "Politique de confidentialité de JusteCourrier. Données collectées, finalités, droits des utilisateurs, cookies.",
+  alternates: { canonical: "/confidentialite" },
 };
 
 export default function ConfidentialitePage() {

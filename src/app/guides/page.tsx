@@ -9,6 +9,7 @@ export const metadata = {
   title: "Guides pratiques",
   description:
     "Guides juridiques et pratiques pour vos démarches administratives. Résiliation, contestation, mise en demeure : tout comprendre avant d'agir.",
+  alternates: { canonical: "/guides" },
 };
 
 export default async function GuidesPage() {

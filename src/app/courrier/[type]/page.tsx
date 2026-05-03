@@ -28,6 +28,9 @@ export async function generateMetadata({
   return {
     title: letterType.title,
     description: `${letterType.description} Courrier professionnel rédigé par IA, prêt à envoyer dès 3,90 €.`,
+    alternates: {
+      canonical: `/courrier/${type}`,
+    },
   };
 }
 

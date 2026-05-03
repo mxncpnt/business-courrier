@@ -11,6 +11,14 @@ import {
   IconDoc,
 } from "@/components/Icons";
 
+// Canonical explicite sur la home : sans ça, on hérite du root layout (qui n'a
+// plus de canonical par défaut). Mieux vaut être explicite que de laisser
+// Google inférer, surtout que les versions http:// et www. existent encore en
+// indexation et qu'on veut consolider sur l'apex https.
+export const metadata = {
+  alternates: { canonical: "/" },
+};
+
 // Icônes catalogue par slug
 const CAT_ICONS: Record<string, string> = {
   "resiliation-abonnement": "✂",

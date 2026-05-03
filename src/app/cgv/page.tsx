@@ -5,6 +5,7 @@ export const metadata = {
   title: "Conditions Générales de Vente",
   description:
     "Conditions générales de vente du service JusteCourrier. Prix, livraison, droit de rétractation, responsabilité.",
+  alternates: { canonical: "/cgv" },
 };
 
 export default function CGVPage() {

@@ -7,6 +7,7 @@ export const metadata = {
   title: "Catalogue des courriers",
   description:
     "10 modèles de courriers administratifs personnalisés par IA. Résiliation, contestation, réclamation, mise en demeure, demande de remboursement. Dès 3,90 € le courrier, ou envoi postal inclus à partir de 5,90 €.",
+  alternates: { canonical: "/catalogue" },
 };
 
 // Icônes catalogue par slug

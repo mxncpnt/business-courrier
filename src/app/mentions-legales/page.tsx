@@ -5,6 +5,7 @@ export const metadata = {
   title: "Mentions légales",
   description:
     "Mentions légales du site justecourrier.fr. Éditeur, hébergeur, propriété intellectuelle.",
+  alternates: { canonical: "/mentions-legales" },
 };
 
 export default function MentionsLegalesPage() {

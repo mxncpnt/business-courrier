@@ -7,6 +7,7 @@ export const metadata = {
   title: "Connexion",
   description:
     "Connectez-vous à votre espace JusteCourrier pour retrouver vos courriers et télécharger vos PDF.",
+  alternates: { canonical: "/connexion" },
 };
 
 export default async function ConnexionPage({
