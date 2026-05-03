@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { letterTypes } from "@/config/letter-types";
 import { createAuthClient } from "@/lib/supabase/server-auth";
+import { buildOrganization } from "@/lib/jsonld";
 import HeroLetter from "@/components/HeroLetter";
 import Logo from "@/components/Logo";
 import {
@@ -46,38 +47,8 @@ export default async function Home() {
   // 6 premiers courriers pour le preview catalogue
   const previewLetters = letterTypes.slice(0, 6);
 
-  // JSON-LD Organization — aide Google Knowledge Graph et les LLMs à
-  // identifier l'entité (nom commercial, raison sociale, services proposés,
-  // gamme de prix, contact). Affiché en script type=application/ld+json
-  // dans le head implicitement (Next.js extrait les <script type=ld+json>).
-  const organizationJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "JusteCourrier",
-    legalName: "Maxence Pinta — Entrepreneur individuel",
-    url: "https://justecourrier.fr",
-    // logo référence /opengraph-image.png (généré par src/app/opengraph-image.tsx)
-    // car aucun logo.png n'existait dans /public — l'ancienne URL retournait 404.
-    // TODO : créer un vrai logo carré (512×512) via app/icon.tsx pour mieux
-    // matcher la convention "logo doit être carré idéalement".
-    logo: "https://justecourrier.fr/opengraph-image",
-    image: "https://justecourrier.fr/opengraph-image",
-    email: "contact@justecourrier.fr",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "3 Rue Jean Giono",
-      postalCode: "34170",
-      addressLocality: "Castelnau-le-Lez",
-      addressCountry: "FR",
-    },
-    description:
-      "Service en ligne de génération et envoi de courriers administratifs et juridiques en France : résiliations, mises en demeure, réclamations, contestations. PDF dès 3,90 €, lettre verte 5,90 €, recommandé AR 11,90 €.",
-    areaServed: { "@type": "Country", name: "France" },
-    priceRange: "€",
-    taxID: "10434791900011",
-    naics: "6201Z",
-    foundingDate: "2026",
-  };
+  // JSON-LD Organization (cf. src/lib/jsonld.ts pour la définition centralisée)
+  const organizationJsonLd = buildOrganization();
 
   return (
     <div className="min-h-screen bg-jc-bg">

@@ -3,6 +3,11 @@ import Link from "next/link";
 import { guides, getGuide } from "@/config/guides";
 import { getLetterType } from "@/config/letter-types";
 import { createAuthClient } from "@/lib/supabase/server-auth";
+import {
+  buildArticle,
+  buildBreadcrumb,
+  buildFAQPage,
+} from "@/lib/jsonld";
 import Logo from "@/components/Logo";
 import { IconArrow } from "@/components/Icons";
 
@@ -60,47 +65,16 @@ export default async function GuidePage({
     // Not logged in
   }
 
-  // JSON-LD Article
-  // image : requis pour qu'Article soit éligible aux rich snippets Google
-  // (Article et NewsArticle). publisher.logo : Google attend un ImageObject
-  // avec une URL accessible (sans ça, le Article schema est marqué incomplet).
-  const articleLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: guide.title,
-    description: guide.description,
-    image: "https://justecourrier.fr/opengraph-image",
-    datePublished: guide.publishedAt,
-    dateModified: guide.updatedAt,
-    author: {
-      "@type": "Organization",
-      name: "JusteCourrier",
-      url: "https://justecourrier.fr",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "JusteCourrier",
-      url: "https://justecourrier.fr",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://justecourrier.fr/opengraph-image",
-      },
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `https://justecourrier.fr/guides/${guide.slug}`,
-    },
-  };
-
-  const breadcrumbLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Accueil", item: "https://justecourrier.fr" },
-      { "@type": "ListItem", position: 2, name: "Guides", item: "https://justecourrier.fr/guides" },
-      { "@type": "ListItem", position: 3, name: guide.title, item: `https://justecourrier.fr/guides/${guide.slug}` },
-    ],
-  };
+  // JSON-LD via builders centralisés (cf. src/lib/jsonld.ts).
+  // FAQPage est ajouté UNIQUEMENT si le guide a un champ faq rempli — Google
+  // marque comme spam un FAQPage vide ou avec des Q/R bidons.
+  const articleLd = buildArticle(guide);
+  const breadcrumbLd = buildBreadcrumb([
+    { name: "Accueil", path: "/" },
+    { name: "Guides", path: "/guides" },
+    { name: guide.title, path: `/guides/${guide.slug}` },
+  ]);
+  const faqLd = guide.faq && guide.faq.length > 0 ? buildFAQPage(guide.faq) : null;
 
   return (
     <div className="min-h-screen bg-jc-bg">
@@ -112,6 +86,12 @@ export default async function GuidePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
+      {faqLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+        />
+      )}
 
       {/* ─── Nav ─── */}
       <header className="flex items-center justify-between border-b border-jc-line bg-jc-bg px-8 py-[18px]">
@@ -215,6 +195,37 @@ export default async function GuidePage({
             ))}
           </section>
         ))}
+
+        {/* ─── FAQ ─── Visible dans le HTML ET référencée dans le JSON-LD
+            FAQPage. Google ne match le rich snippet que si les Q/R sont
+            réellement présentes dans la page (pas juste en JSON-LD). */}
+        {guide.faq && guide.faq.length > 0 && (
+          <section className="mt-12 pt-8 border-t border-jc-line">
+            <h2 className="text-[22px] font-display font-bold text-jc-ink mb-5 max-md:text-[19px]">
+              Questions fréquentes
+            </h2>
+            <div className="flex flex-col gap-3">
+              {guide.faq.map((item, i) => (
+                <details
+                  key={i}
+                  className="group bg-jc-bg-elev border border-jc-line rounded-jc px-4 py-3 [&_summary::-webkit-details-marker]:hidden"
+                >
+                  <summary className="flex items-start justify-between gap-3 cursor-pointer list-none">
+                    <h3 className="text-[15px] font-semibold text-jc-ink leading-snug">
+                      {item.q}
+                    </h3>
+                    <span className="text-jc-ink-muted text-xl leading-none shrink-0 transition-transform group-open:rotate-45">
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-3 text-[14px] leading-[1.7] text-jc-ink-soft">
+                    {item.a}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* ─── CTA Card ─── */}
         {relatedLetter && (

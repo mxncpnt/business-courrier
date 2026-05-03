@@ -1,7 +1,12 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getLetterType, getCategoryLabel, letterTypes } from "@/config/letter-types";
+import { guides } from "@/config/guides";
 import { createAuthClient } from "@/lib/supabase/server-auth";
+import {
+  buildProductWithAggregateOffer,
+  buildBreadcrumb,
+} from "@/lib/jsonld";
 import Logo from "@/components/Logo";
 import {
   IconArrow,
@@ -57,42 +62,23 @@ export default async function ProductPage({
     // Not logged in
   }
 
-  // JSON-LD structured data
-  // image : Google exige un champ image valide pour qu'un Product soit éligible
-  // aux rich snippets. On pointe vers /opengraph-image.png généré par Next via
-  // src/app/opengraph-image.tsx (1200×630 PNG).
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: letterType.title,
-    description: letterType.description,
-    image: "https://justecourrier.fr/opengraph-image",
-    url: `https://justecourrier.fr/courrier/${letterType.slug}`,
-    brand: { "@type": "Brand", name: "JusteCourrier" },
-    offers: {
-      "@type": "Offer",
-      price: (letterType.priceCents / 100).toFixed(2),
-      priceCurrency: "EUR",
-      availability: "https://schema.org/InStock",
-      url: `https://justecourrier.fr/courrier/${letterType.slug}/rediger`,
-      seller: {
-        "@type": "Organization",
-        name: "JusteCourrier",
-        url: "https://justecourrier.fr",
-      },
-    },
-    category: categoryLabel,
-  };
+  // JSON-LD via builders centralisés (cf. src/lib/jsonld.ts).
+  // - Product avec AggregateOffer (3 tiers : PDF / lettre verte / LRAR) →
+  //   débloque le rich snippet "à partir de 3,90 €" en SERP.
+  // - shippingDetails et hasMerchantReturnPolicy inclus dans le builder pour
+  //   résoudre les warnings facultatifs GSC.
+  const jsonLd = buildProductWithAggregateOffer(letterType);
+  const breadcrumbLd = buildBreadcrumb([
+    { name: "Accueil", path: "/" },
+    { name: categoryLabel, path: "/catalogue" },
+    { name: letterType.title, path: `/courrier/${letterType.slug}` },
+  ]);
 
-  const breadcrumbLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Accueil", item: "https://justecourrier.fr" },
-      { "@type": "ListItem", position: 2, name: categoryLabel, item: "https://justecourrier.fr/catalogue" },
-      { "@type": "ListItem", position: 3, name: letterType.title, item: `https://justecourrier.fr/courrier/${letterType.slug}` },
-    ],
-  };
+  // Guide pratique associé : surface le lien interne haut dans la page
+  // (sous les useCases, avant les bénéfices) → signal SEO contextuel fort.
+  const relatedGuide = guides.find(
+    (g) => g.relatedLetterSlug === letterType.slug
+  );
 
   return (
     <div className="min-h-screen bg-jc-bg">
@@ -210,6 +196,35 @@ export default async function ProductPage({
                 </li>
               ))}
             </ul>
+
+            {/* Guide pratique associé — placé volontairement haut dans la page
+                pour que Google traite le lien interne comme contextuel et non
+                navigationnel. */}
+            {relatedGuide && (
+              <Link
+                href={`/guides/${relatedGuide.slug}`}
+                className="mt-6 flex items-start gap-3 p-4 bg-jc-accent-soft border border-jc-accent/20 rounded-jc no-underline group hover:border-jc-accent/40 transition-colors"
+              >
+                <span className="shrink-0 text-jc-accent text-xl leading-none mt-0.5">
+                  📖
+                </span>
+                <div className="flex-1">
+                  <div className="text-[11px] font-semibold tracking-[0.08em] uppercase text-jc-accent mb-0.5">
+                    Guide pratique associé · {relatedGuide.readingTime}
+                  </div>
+                  <h4 className="text-[15px] font-semibold text-jc-ink leading-snug mb-1">
+                    {relatedGuide.title}
+                  </h4>
+                  <p className="text-[13px] text-jc-ink-soft leading-relaxed">
+                    {relatedGuide.description}
+                  </p>
+                  <span className="inline-flex items-center gap-1 mt-1.5 text-[13px] font-medium text-jc-accent group-hover:underline">
+                    Lire le guide complet
+                    <IconArrow />
+                  </span>
+                </div>
+              </Link>
+            )}
 
             {/* Ce que tu obtiens */}
             <h3 className="mt-9 mb-3 text-lg font-display font-bold text-jc-ink">

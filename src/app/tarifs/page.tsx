@@ -1,55 +1,35 @@
 import Link from "next/link";
 import Logo from "@/components/Logo";
 import { IconArrow, IconCheck, IconLock } from "@/components/Icons";
+import { buildPricingProduct, buildBreadcrumb } from "@/lib/jsonld";
 
 export const metadata = {
   title: "Tarifs",
   description:
     "Trois prix simples, sans abonnement : courrier PDF à 3,90 €, lettre simple postée à 5,90 €, recommandé avec accusé de réception à 11,90 €. Affranchissement refacturé au prix coûtant.",
-  alternates: { canonical: "https://justecourrier.fr/tarifs" },
+  alternates: { canonical: "/tarifs" },
 };
 
-// JSON-LD pour les 3 produits/offres
-const offersJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  itemListElement: [
-    {
-      "@type": "Offer",
-      position: 1,
-      name: "Courrier PDF (génération seule)",
-      price: "3.90",
-      priceCurrency: "EUR",
-      description:
-        "Génération du courrier au format PDF. L'utilisateur poste lui-même.",
-    },
-    {
-      "@type": "Offer",
-      position: 2,
-      name: "Lettre simple (génération + envoi)",
-      price: "5.90",
-      priceCurrency: "EUR",
-      description:
-        "Génération du courrier + envoi par lettre verte La Poste, distribution en J+3.",
-    },
-    {
-      "@type": "Offer",
-      position: 3,
-      name: "Recommandé avec AR (génération + envoi)",
-      price: "11.90",
-      priceCurrency: "EUR",
-      description:
-        "Génération du courrier + envoi en recommandé avec accusé de réception, valeur juridique opposable.",
-    },
-  ],
-};
+// JSON-LD via builders centralisés (cf. src/lib/jsonld.ts).
+// Migration 2026-05-03 : ItemList → Product + AggregateOffer pour débloquer
+// le rich snippet "à partir de 3,90 €" en SERP. shippingDetails et
+// hasMerchantReturnPolicy inclus dans le builder.
+const pricingProductLd = buildPricingProduct();
+const breadcrumbLd = buildBreadcrumb([
+  { name: "Accueil", path: "/" },
+  { name: "Tarifs", path: "/tarifs" },
+]);
 
 export default function TarifsPage() {
   return (
     <div className="min-h-screen bg-jc-bg">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(offersJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pricingProductLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
 
       {/* ─── Nav ─── */}

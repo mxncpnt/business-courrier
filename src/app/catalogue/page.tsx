@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { categories, letterTypes } from "@/config/letter-types";
 import { createAuthClient } from "@/lib/supabase/server-auth";
+import {
+  buildBreadcrumb,
+  buildCollectionPage,
+  getCatalogueItems,
+} from "@/lib/jsonld";
 import Logo from "@/components/Logo";
 
 export const metadata = {
@@ -9,6 +14,22 @@ export const metadata = {
     "10 modèles de courriers administratifs personnalisés par IA. Résiliation, contestation, réclamation, mise en demeure, demande de remboursement. Dès 3,90 € le courrier, ou envoi postal inclus à partir de 5,90 €.",
   alternates: { canonical: "/catalogue" },
 };
+
+// JSON-LD via builders centralisés (cf. src/lib/jsonld.ts).
+// CollectionPage + ItemList : aide Google à comprendre que /catalogue est un
+// hub de produits (pas une page unitaire) et améliore le linking interne.
+const collectionLd = buildCollectionPage({
+  name: "Catalogue des courriers JusteCourrier",
+  description:
+    "10 modèles de courriers administratifs personnalisés par IA : résiliation, contestation, réclamation, mise en demeure, demande de remboursement.",
+  path: "/catalogue",
+  itemListName: "Modèles de courriers",
+  itemListItems: getCatalogueItems(),
+});
+const breadcrumbLd = buildBreadcrumb([
+  { name: "Accueil", path: "/" },
+  { name: "Catalogue", path: "/catalogue" },
+]);
 
 // Icônes catalogue par slug
 const CAT_ICONS: Record<string, string> = {
@@ -36,6 +57,14 @@ export default async function CataloguePage() {
 
   return (
     <div className="min-h-screen bg-jc-bg">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       {/* ─── Nav ─── */}
       <header className="flex items-center justify-between border-b border-jc-line bg-jc-bg px-8 py-[18px]">
         <Link href="/" className="no-underline">

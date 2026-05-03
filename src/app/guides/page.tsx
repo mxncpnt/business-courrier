@@ -2,6 +2,7 @@ import Link from "next/link";
 import { guides } from "@/config/guides";
 import { getLetterType } from "@/config/letter-types";
 import { createAuthClient } from "@/lib/supabase/server-auth";
+import { buildBreadcrumb, buildCollectionPage } from "@/lib/jsonld";
 import Logo from "@/components/Logo";
 import { IconArrow } from "@/components/Icons";
 
@@ -11,6 +12,23 @@ export const metadata = {
     "Guides juridiques et pratiques pour vos démarches administratives. Résiliation, contestation, mise en demeure : tout comprendre avant d'agir.",
   alternates: { canonical: "/guides" },
 };
+
+// JSON-LD via builders centralisés (cf. src/lib/jsonld.ts)
+const collectionLd = buildCollectionPage({
+  name: "Guides pratiques JusteCourrier",
+  description:
+    "Guides juridiques et pratiques pour vos démarches administratives. Résiliation, contestation, mise en demeure : tout comprendre avant d'agir.",
+  path: "/guides",
+  itemListName: "Guides pratiques",
+  itemListItems: guides.map((g) => ({
+    name: g.title,
+    path: `/guides/${g.slug}`,
+  })),
+});
+const breadcrumbLd = buildBreadcrumb([
+  { name: "Accueil", path: "/" },
+  { name: "Guides", path: "/guides" },
+]);
 
 export default async function GuidesPage() {
   let user = null;
@@ -24,6 +42,14 @@ export default async function GuidesPage() {
 
   return (
     <div className="min-h-screen bg-jc-bg">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       {/* ─── Nav ─── */}
       <header className="flex items-center justify-between border-b border-jc-line bg-jc-bg px-8 py-[18px]">
         <Link href="/" className="no-underline">
