@@ -38,8 +38,40 @@ export default async function Home() {
   // 6 premiers courriers pour le preview catalogue
   const previewLetters = letterTypes.slice(0, 6);
 
+  // JSON-LD Organization — aide Google Knowledge Graph et les LLMs à
+  // identifier l'entité (nom commercial, raison sociale, services proposés,
+  // gamme de prix, contact). Affiché en script type=application/ld+json
+  // dans le head implicitement (Next.js extrait les <script type=ld+json>).
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "JusteCourrier",
+    legalName: "Maxence Pinta — Entrepreneur individuel",
+    url: "https://justecourrier.fr",
+    logo: "https://justecourrier.fr/logo.png",
+    email: "contact@justecourrier.fr",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "3 Rue Jean Giono",
+      postalCode: "34170",
+      addressLocality: "Castelnau-le-Lez",
+      addressCountry: "FR",
+    },
+    description:
+      "Service en ligne de génération et envoi de courriers administratifs et juridiques en France : résiliations, mises en demeure, réclamations, contestations. PDF dès 3,90 €, lettre verte 5,90 €, recommandé AR 11,90 €.",
+    areaServed: { "@type": "Country", name: "France" },
+    priceRange: "€",
+    taxID: "10434791900011",
+    naics: "6201Z",
+    foundingDate: "2026",
+  };
+
   return (
     <div className="min-h-screen bg-jc-bg">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
       {/* ─── Nav ─── */}
       <header className="flex items-center justify-between border-b border-jc-line bg-jc-bg px-8 py-[18px]">
         <Link href="/" className="no-underline">
@@ -182,8 +214,8 @@ export default async function Home() {
               },
               {
                 n: "03",
-                t: "Télécharge ton PDF",
-                d: "Aperçu avant paiement, puis téléchargement immédiat. Prêt à envoyer en LRAR.",
+                t: "Télécharge ou laisse-nous l'envoyer",
+                d: "Aperçu avant paiement. Récupère le PDF, ou choisis qu'on l'imprime et le dépose à La Poste pour toi (lettre verte 5,90 € ou recommandé AR 11,90 €).",
               },
             ].map((step) => (
               <div
@@ -270,8 +302,8 @@ export default async function Home() {
             },
             {
               icon: <IconDoc />,
-              t: "PDF prêt à envoyer",
-              d: "Format A4, mise en page AFNOR. Imprime-le, signe-le, envoie-le en recommandé.",
+              t: "PDF envoyé par toi ou pour toi",
+              d: "Format A4, mise en page AFNOR, avec ta signature manuscrite si tu en as ajouté une. Tu peux l'imprimer toi-même, ou nous laisser le déposer à La Poste.",
             },
           ].map((item) => (
             <div key={item.t}>

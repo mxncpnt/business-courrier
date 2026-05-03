@@ -6,7 +6,15 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/dashboard", "/preview/", "/paiement/", "/api/", "/auth/"],
+        disallow: [
+          "/dashboard",
+          "/preview/",
+          "/paiement/",
+          "/profil",
+          "/mailings/",
+          "/api/",
+          "/auth/",
+        ],
       },
     ],
     sitemap: "https://justecourrier.fr/sitemap.xml",
