@@ -63,8 +63,13 @@ export default async function OpenGraphImage() {
           </div>
         </div>
 
+        {/* Satori (next/og) exige `display: flex` sur tout div à >1 enfant.
+            Pour le retour à la ligne, on utilise deux <div> enfants d'un
+            wrapper flex column plutôt qu'un <br/> qui créerait 3 nœuds. */}
         <div
           style={{
+            display: "flex",
+            flexDirection: "column",
             fontSize: "78px",
             color: "#0F2235",
             fontWeight: 600,
@@ -73,9 +78,8 @@ export default async function OpenGraphImage() {
             maxWidth: "950px",
           }}
         >
-          Ton courrier administratif,
-          <br />
-          simple et juste.
+          <div>Ton courrier administratif,</div>
+          <div>simple et juste.</div>
         </div>
 
         <div
