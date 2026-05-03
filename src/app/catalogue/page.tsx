@@ -2,7 +2,6 @@ import Link from "next/link";
 import { categories, letterTypes } from "@/config/letter-types";
 import { createAuthClient } from "@/lib/supabase/server-auth";
 import Logo from "@/components/Logo";
-import { IconArrow } from "@/components/Icons";
 
 export const metadata = {
   title: "Catalogue des courriers",
@@ -104,30 +103,6 @@ export default async function CataloguePage() {
           <strong className="text-jc-ink">dès 3,90 € à l&apos;unité</strong>, sans
           abonnement.
         </p>
-
-        {/* Barre de recherche (cosmétique) */}
-        <div className="flex items-center gap-2.5 px-3.5 py-2.5 border border-jc-line-strong rounded-jc bg-jc-bg-elev max-w-[480px]">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            className="text-jc-ink-muted shrink-0"
-          >
-            <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.8" />
-            <path
-              d="m20 20-3.5-3.5"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-            />
-          </svg>
-          <input
-            type="text"
-            placeholder="Rechercher un type de courrier…"
-            className="flex-1 bg-transparent border-none outline-none text-[15px] text-jc-ink placeholder:text-jc-ink-muted font-body"
-          />
-        </div>
       </section>
 
       {/* ─── Catégories ─── */}

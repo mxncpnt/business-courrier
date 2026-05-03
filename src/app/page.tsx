@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { categories, letterTypes } from "@/config/letter-types";
+import { letterTypes } from "@/config/letter-types";
 import { createAuthClient } from "@/lib/supabase/server-auth";
 import HeroLetter from "@/components/HeroLetter";
 import Logo from "@/components/Logo";
@@ -119,12 +119,6 @@ export default async function Home() {
               >
                 Choisir un courrier — Dès 3,90 € <IconArrow />
               </Link>
-              <a
-                href="#fonctionnement"
-                className="inline-flex items-center gap-2 px-6 py-3.5 border border-jc-line-strong text-jc-ink font-medium rounded-jc hover:bg-jc-surface transition-colors text-base no-underline"
-              >
-                Voir un exemple
-              </a>
             </div>
 
             {/* Sous-CTA — pousse le LRAR en différenciation prix */}
