@@ -61,11 +61,15 @@ export default async function GuidePage({
   }
 
   // JSON-LD Article
+  // image : requis pour qu'Article soit éligible aux rich snippets Google
+  // (Article et NewsArticle). publisher.logo : Google attend un ImageObject
+  // avec une URL accessible (sans ça, le Article schema est marqué incomplet).
   const articleLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: guide.title,
     description: guide.description,
+    image: "https://justecourrier.fr/opengraph-image.png",
     datePublished: guide.publishedAt,
     dateModified: guide.updatedAt,
     author: {
@@ -77,6 +81,10 @@ export default async function GuidePage({
       "@type": "Organization",
       name: "JusteCourrier",
       url: "https://justecourrier.fr",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://justecourrier.fr/opengraph-image.png",
+      },
     },
     mainEntityOfPage: {
       "@type": "WebPage",

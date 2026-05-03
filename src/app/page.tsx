@@ -56,7 +56,12 @@ export default async function Home() {
     name: "JusteCourrier",
     legalName: "Maxence Pinta — Entrepreneur individuel",
     url: "https://justecourrier.fr",
-    logo: "https://justecourrier.fr/logo.png",
+    // logo référence /opengraph-image.png (généré par src/app/opengraph-image.tsx)
+    // car aucun logo.png n'existait dans /public — l'ancienne URL retournait 404.
+    // TODO : créer un vrai logo carré (512×512) via app/icon.tsx pour mieux
+    // matcher la convention "logo doit être carré idéalement".
+    logo: "https://justecourrier.fr/opengraph-image.png",
+    image: "https://justecourrier.fr/opengraph-image.png",
     email: "contact@justecourrier.fr",
     address: {
       "@type": "PostalAddress",

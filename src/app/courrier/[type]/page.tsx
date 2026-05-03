@@ -58,11 +58,15 @@ export default async function ProductPage({
   }
 
   // JSON-LD structured data
+  // image : Google exige un champ image valide pour qu'un Product soit éligible
+  // aux rich snippets. On pointe vers /opengraph-image.png généré par Next via
+  // src/app/opengraph-image.tsx (1200×630 PNG).
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: letterType.title,
     description: letterType.description,
+    image: "https://justecourrier.fr/opengraph-image.png",
     url: `https://justecourrier.fr/courrier/${letterType.slug}`,
     brand: { "@type": "Brand", name: "JusteCourrier" },
     offers: {
