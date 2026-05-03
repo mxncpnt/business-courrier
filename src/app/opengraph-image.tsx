@@ -1,11 +1,16 @@
 import { ImageResponse } from "next/og";
 
-// Convention Next.js App Router : ce fichier génère automatiquement
-// /opengraph-image.png à la racine du site, utilisé pour :
+// Convention Next.js App Router : ce fichier génère automatiquement une image
+// servie à `/opengraph-image` (PNG content-type, **SANS extension .png** depuis
+// Next 16 — `/opengraph-image.png` retourne 404). Utilisé pour :
 //   - les partages OG (Facebook, X, LinkedIn, Slack, Discord…)
 //   - les images des JSON-LD (Product, Article, Organization)
-// Avant ce fichier : /logo.png était référencé dans Organization mais 404, et
-// les JSON-LD Product/Article n'avaient pas d'image → erreurs critiques GSC.
+//
+// IMPORTANT : dans les JSON-LD, toujours référencer `https://justecourrier.fr/opengraph-image`
+// SANS `.png`. Sinon Google récupère un 404 et le rich snippet est invalidé.
+//
+// Vérifier post-deploy : `curl -I https://justecourrier.fr/opengraph-image`
+// doit retourner 200 + content-type: image/png.
 
 export const alt = "JusteCourrier — Ton courrier administratif, simple et juste";
 export const size = { width: 1200, height: 630 };

@@ -60,8 +60,8 @@ export default async function Home() {
     // car aucun logo.png n'existait dans /public — l'ancienne URL retournait 404.
     // TODO : créer un vrai logo carré (512×512) via app/icon.tsx pour mieux
     // matcher la convention "logo doit être carré idéalement".
-    logo: "https://justecourrier.fr/opengraph-image.png",
-    image: "https://justecourrier.fr/opengraph-image.png",
+    logo: "https://justecourrier.fr/opengraph-image",
+    image: "https://justecourrier.fr/opengraph-image",
     email: "contact@justecourrier.fr",
     address: {
       "@type": "PostalAddress",

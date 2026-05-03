@@ -66,7 +66,7 @@ export default async function ProductPage({
     "@type": "Product",
     name: letterType.title,
     description: letterType.description,
-    image: "https://justecourrier.fr/opengraph-image.png",
+    image: "https://justecourrier.fr/opengraph-image",
     url: `https://justecourrier.fr/courrier/${letterType.slug}`,
     brand: { "@type": "Brand", name: "JusteCourrier" },
     offers: {

@@ -69,7 +69,7 @@ export default async function GuidePage({
     "@type": "Article",
     headline: guide.title,
     description: guide.description,
-    image: "https://justecourrier.fr/opengraph-image.png",
+    image: "https://justecourrier.fr/opengraph-image",
     datePublished: guide.publishedAt,
     dateModified: guide.updatedAt,
     author: {
@@ -83,7 +83,7 @@ export default async function GuidePage({
       url: "https://justecourrier.fr",
       logo: {
         "@type": "ImageObject",
-        url: "https://justecourrier.fr/opengraph-image.png",
+        url: "https://justecourrier.fr/opengraph-image",
       },
     },
     mainEntityOfPage: {
