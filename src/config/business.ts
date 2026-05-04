@@ -10,9 +10,8 @@ export const business = {
   // Identité
   name: "Maxence Pinta",
   tradeName: "JusteCourrier",
-  legalForm: "Entrepreneur individuel — micro-entreprise",
+  legalForm: "Entrepreneur individuel",
   siret: "10434791900011",
-  apeCode: "6201Z", // Programmation informatique
 
   // Adresse (domiciliation)
   address: {

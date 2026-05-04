@@ -72,9 +72,8 @@ export default function MentionsLegalesPage() {
               Le site <strong>JusteCourrier</strong> est édité par :
             </p>
             <ul className="list-none pl-0 space-y-1 mt-2">
-              <li>Maxence Pinta — Entrepreneur individuel (micro-entreprise)</li>
+              <li>Maxence Pinta — Entrepreneur individuel</li>
               <li>SIRET : 104 347 919 00011</li>
-              <li>Code APE : 6201Z (programmation informatique)</li>
               <li>Adresse : 3 Rue Jean Giono, 34170 Castelnau-le-Lez, France</li>
               <li>Email : contact@justecourrier.fr</li>
               <li>TVA non applicable, art. 293 B du CGI (franchise en base)</li>
