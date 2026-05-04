@@ -135,27 +135,6 @@ export function buildProductWithAggregateOffer(letterType: LetterType) {
     },
   } as const;
 
-  const shippingFR = (transitMin: number, transitMax: number) => ({
-    "@type": "OfferShippingDetails",
-    shippingRate: { "@type": "MonetaryAmount", value: 0, currency: "EUR" },
-    shippingDestination: { "@type": "DefinedRegion", addressCountry: "FR" },
-    deliveryTime: {
-      "@type": "ShippingDeliveryTime",
-      handlingTime: {
-        "@type": "QuantitativeValue",
-        minValue: 0,
-        maxValue: 1,
-        unitCode: "DAY",
-      },
-      transitTime: {
-        "@type": "QuantitativeValue",
-        minValue: transitMin,
-        maxValue: transitMax,
-        unitCode: "DAY",
-      },
-    },
-  });
-
   return {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -200,6 +179,34 @@ export function buildProductWithAggregateOffer(letterType: LetterType) {
           shippingDetails: shippingFR(1, 3),
         },
       ],
+    },
+  };
+}
+
+/**
+ * Helper interne : OfferShippingDetails minimaliste pour la France, transit
+ * variable selon le tier. Réutilisé par buildProductWithAggregateOffer et
+ * buildPricingProduct pour cohérence.
+ */
+function shippingFR(transitMin: number, transitMax: number) {
+  return {
+    "@type": "OfferShippingDetails",
+    shippingRate: { "@type": "MonetaryAmount", value: 0, currency: "EUR" },
+    shippingDestination: { "@type": "DefinedRegion", addressCountry: "FR" },
+    deliveryTime: {
+      "@type": "ShippingDeliveryTime",
+      handlingTime: {
+        "@type": "QuantitativeValue",
+        minValue: 0,
+        maxValue: 1,
+        unitCode: "DAY",
+      },
+      transitTime: {
+        "@type": "QuantitativeValue",
+        minValue: transitMin,
+        maxValue: transitMax,
+        unitCode: "DAY",
+      },
     },
   };
 }
@@ -252,6 +259,7 @@ export function buildPricingProduct() {
             "Génération du courrier au format PDF. L'utilisateur poste lui-même.",
           price: "3.90",
           url: url("/catalogue"),
+          shippingDetails: shippingFR(0, 0),
         },
         {
           ...offerBase,
@@ -261,6 +269,7 @@ export function buildPricingProduct() {
             "Génération du courrier et envoi par lettre verte La Poste, distribution en J+3.",
           price: "5.90",
           url: url("/catalogue"),
+          shippingDetails: shippingFR(2, 4),
         },
         {
           ...offerBase,
@@ -270,6 +279,7 @@ export function buildPricingProduct() {
             "Génération du courrier et envoi en recommandé avec accusé de réception, valeur juridique opposable.",
           price: "11.90",
           url: url("/catalogue"),
+          shippingDetails: shippingFR(1, 3),
         },
       ],
     },
