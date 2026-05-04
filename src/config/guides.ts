@@ -251,6 +251,182 @@ Enfin, rappelons que la trêve hivernale (1er novembre au 31 mars) interdit tout
       },
     ],
   },
+
+  // ─── Guide 4 : Résiliation Free Mobile (loi Chatel) ───
+  {
+    slug: "resilier-free-mobile-loi-chatel",
+    title: "Résilier son forfait Free Mobile : guide complet",
+    metaTitle: "Résilier Free Mobile (loi Chatel) — Procédure et modèle de lettre",
+    description:
+      "Comment résilier votre forfait Free Mobile : loi Chatel, délais, frais, portabilité du numéro (RIO), motifs légitimes, modèle de lettre recommandée.",
+    relatedLetterSlug: "resiliation-abonnement",
+    publishedAt: "2026-05-04",
+    updatedAt: "2026-05-04",
+    readingTime: "5 min",
+    sections: [
+      {
+        heading: "Ce que la loi Chatel change pour votre résiliation",
+        body: `La loi Chatel du 3 janvier 2008 (codifiée aux articles L.224-28 et suivants du Code de la consommation) protège les consommateurs des contrats à reconduction tacite. Elle s'applique pleinement aux forfaits Free Mobile.
+
+Concrètement, Free doit vous informer par écrit, entre 3 mois et 1 mois avant la date de reconduction de votre engagement, de votre droit à ne pas reconduire le contrat. Si Free ne respecte pas ce délai d'information, vous pouvez résilier à tout moment et sans frais à compter de la date de reconduction tacite.
+
+Pour les forfaits avec engagement de 12 ou 24 mois, la loi Chatel s'applique également pendant l'engagement initial. Au-delà de la moitié de l'engagement (mois 13 pour un engagement 24 mois), vous pouvez résilier en ne payant que 25 % des mensualités restantes (article L.224-39 du Code de la consommation, dit "loi Chatel-Hamon").
+
+Pour les forfaits Free sans engagement (le cas le plus courant chez Free Mobile), vous pouvez résilier à tout moment moyennant un préavis de 10 jours, sans frais, conformément à l'article L.224-33 du Code de la consommation.`,
+      },
+      {
+        heading: "Les motifs légitimes de résiliation anticipée",
+        body: `Si vous êtes encore engagé, certains motifs vous permettent de résilier sans pénalités, même hors période Chatel-Hamon.
+
+Le déménagement à l'étranger ou dans une zone non couverte par Free Mobile (4G/5G) est un motif légitime, à condition de le prouver par un justificatif de domicile. Pour vérifier la couverture, utilisez la carte de couverture officielle de l'Arcep (monreseaumobile.arcep.fr).
+
+Le surendettement avéré, constaté par une décision de la commission de surendettement, ouvre droit à la résiliation sans frais (article L.224-39-1).
+
+L'invalidité ou la perte d'autonomie certifiée par un médecin permet également de mettre fin au contrat. Joignez un certificat médical détaillant l'incapacité d'utiliser un téléphone mobile.
+
+Le décès du titulaire libère les ayants droit de l'engagement sur présentation de l'acte de décès. La résiliation doit être demandée dans les 6 mois.
+
+Une hausse tarifaire non prévue au contrat ouvre droit à résiliation sans frais dans un délai de 4 mois après notification, conformément à l'article L.224-33. Free doit vous informer par écrit au moins 1 mois avant l'application de la hausse.`,
+      },
+      {
+        heading: "La procédure pas-à-pas pour résilier",
+        body: `La résiliation doit être faite par écrit. La voie la plus sûre est le courrier recommandé avec accusé de réception adressé au service client Free Mobile (Service Résiliation, 75371 Paris CEDEX 08).
+
+Avant d'envoyer, récupérez votre code RIO (Relevé d'Identité Opérateur) en composant le 3179 gratuitement depuis votre ligne Free. Ce code à 12 caractères vous permet de conserver votre numéro chez le nouvel opérateur grâce à la portabilité. Sans RIO, vous perdez votre numéro.
+
+Votre courrier doit contenir vos identifiants client Free, votre numéro de ligne, la date de souscription et le motif de résiliation (sans frais ou avec engagement). Précisez si vous demandez la portabilité du numéro et indiquez votre code RIO.
+
+Le délai de préavis est de 10 jours à compter de la réception du courrier par Free, ou de la date de portabilité demandée par le nouvel opérateur (si vous portez votre numéro, c'est lui qui déclenche la résiliation auprès de Free).
+
+Une fois la résiliation effective, Free dispose de 10 jours pour vous restituer tout solde créditeur (avance, dépôt de garantie). Vous recevrez une dernière facture incluant le pro rata du dernier mois et, le cas échéant, les frais de résiliation anticipée.`,
+      },
+      {
+        heading: "Que faire si Free refuse ou facture des frais indus ?",
+        body: `Si Free refuse votre résiliation ou facture des frais que vous estimez injustifiés, contestez par écrit dans les 30 jours.
+
+Première étape : envoyez une mise en demeure par LRAR au service client en rappelant les références légales applicables (loi Chatel, articles L.224-28 et suivants du Code de la consommation, ou loi Chatel-Hamon pour les engagements). Demandez le remboursement et un délai de 15 jours pour régulariser.
+
+Si Free ne répond pas, saisissez le médiateur des communications électroniques (mediateur-telecom.fr). La saisine est gratuite, en ligne, et le médiateur rend un avis dans les 3 mois. Free suit l'avis dans 80 % des cas environ.
+
+En cas d'échec de la médiation, vous pouvez saisir le juge des contentieux de la protection (compétent jusqu'à 10 000 €). La procédure est rapide (3-6 mois) et vous pouvez être assisté gratuitement par une association de consommateurs (UFC-Que Choisir, CLCV, AFOC).
+
+Si Free continue à prélever après la résiliation effective, faites opposition à votre banque. La directive DSP2 vous permet de récupérer les sommes indûment prélevées dans les 8 semaines suivant le débit, sans frais.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Quel est le délai de préavis pour résilier Free Mobile ?",
+        a: "Pour un forfait Free Mobile sans engagement (cas le plus courant), le préavis est de 10 jours à compter de la réception de votre lettre par Free. Si vous portez votre numéro chez un autre opérateur, c'est ce dernier qui déclenche la résiliation auprès de Free et le délai dépend de la portabilité (3 jours ouvrés en pratique). Pour un forfait avec engagement, la résiliation prend effet à la fin de la période d'engagement, sauf motif légitime ou loi Chatel-Hamon (résiliation au-delà de la moitié de l'engagement avec 25 % des mensualités restantes à payer).",
+      },
+      {
+        q: "Free peut-il me facturer des frais de résiliation ?",
+        a: "Pour un forfait sans engagement, aucun frais de résiliation n'est dû — c'est interdit par la loi (article L.224-33 du Code de la consommation). Pour un forfait avec engagement, Free peut facturer les mensualités restantes jusqu'à la fin de l'engagement, ou 25 % de ces mensualités si vous résiliez après la moitié de la période (loi Chatel-Hamon). En cas de motif légitime (déménagement à l'étranger, invalidité, surendettement, hausse tarifaire non prévue), aucun frais n'est dû. Toute facturation hors de ce cadre est contestable.",
+      },
+      {
+        q: "Comment conserver mon numéro Free quand je change d'opérateur ?",
+        a: "Demandez votre code RIO (Relevé d'Identité Opérateur) en composant le 3179 gratuitement depuis votre ligne Free. Vous recevez le code par SMS instantanément. Communiquez ce code à votre nouvel opérateur lors de la souscription : il s'occupe de la portabilité auprès de Free et déclenche la résiliation. Le numéro est porté en 1 à 3 jours ouvrés. Pendant ce délai, votre ligne Free reste active. La portabilité est gratuite et sans coupure de service. N'envoyez PAS de lettre de résiliation à Free dans ce cas : la portabilité tient lieu de résiliation automatique.",
+      },
+      {
+        q: "Free a augmenté le tarif de mon forfait, puis-je résilier sans frais ?",
+        a: "Oui, à condition que la hausse n'ait pas été prévue au contrat (clause d'indexation par exemple). Free doit vous notifier la hausse au moins 1 mois avant son application, par tout support durable (email, SMS, courrier). Vous disposez alors de 4 mois après cette notification pour résilier sans frais et sans pénalité, même si vous êtes encore en période d'engagement (article L.224-33 du Code de la consommation). Mentionnez explicitement ce motif dans votre lettre et joignez la copie de la notification de hausse reçue de Free.",
+      },
+      {
+        q: "Que faire si Free continue à me prélever après ma résiliation ?",
+        a: "Premier réflexe : faites opposition au prélèvement auprès de votre banque (gratuit depuis la directive DSP2). Vous pouvez demander le remboursement des sommes prélevées indûment dans les 8 semaines suivant le débit. Parallèlement, envoyez une mise en demeure par LRAR à Free demandant la cessation immédiate des prélèvements et le remboursement des sommes indues, avec un délai de 15 jours. Si Free ne s'exécute pas, saisissez le médiateur des communications électroniques (mediateur-telecom.fr), gratuit, qui rend un avis sous 3 mois. En cas de blocage persistant, le juge des contentieux de la protection est compétent jusqu'à 10 000 €.",
+      },
+      {
+        q: "Quelle différence entre résilier Free Mobile et résilier la Freebox ?",
+        a: "Free Mobile (forfait téléphonique) et Freebox (offre internet/TV/téléphone fixe) sont deux abonnements distincts, gérés par deux services différents chez Free. Résilier l'un n'entraîne pas la résiliation de l'autre. Pour la Freebox, l'adresse est différente (Free, 75371 Paris CEDEX 16) et les frais peuvent inclure la restitution du matériel (Freebox, télécommande, câbles). Le délai de préavis Freebox est aussi de 10 jours. Si vous résiliez les deux, envoyez deux courriers séparés en LRAR pour avoir des preuves distinctes.",
+      },
+    ],
+  },
+
+  // ─── Guide 5 : Mise en demeure travaux artisan ───
+  {
+    slug: "mise-en-demeure-travaux-artisan",
+    title: "Mise en demeure d'un artisan pour travaux non terminés",
+    metaTitle: "Mise en demeure travaux artisan — Lettre type et procédure",
+    description:
+      "Votre artisan ne finit pas le chantier ou bâcle les travaux ? Guide complet : cadre juridique (article 1217 du Code civil), mise en demeure, délais, recours.",
+    relatedLetterSlug: "mise-en-demeure-executer",
+    publishedAt: "2026-05-04",
+    updatedAt: "2026-05-04",
+    readingTime: "6 min",
+    sections: [
+      {
+        heading: "Quand peut-on mettre en demeure un artisan ?",
+        body: `La mise en demeure est l'étape formelle qui transforme un retard ou une malfaçon en faute contractuelle ouvrant droit à des recours. Elle doit être envoyée dès que les délais convenus sont dépassés ou que les travaux livrés ne correspondent pas à ce qui a été commandé.
+
+Trois situations classiques justifient une mise en demeure d'artisan : abandon de chantier (l'artisan ne revient plus malgré ses promesses), travaux inachevés malgré un acompte ou paiement intégral versé, et malfaçons identifiables (carrelage mal posé, fuites, défauts visibles à la livraison).
+
+Avant d'envoyer la mise en demeure, vérifiez que les délais convenus sont bien dépassés. Un devis signé mentionne généralement une date de fin de chantier (ou un délai de réalisation). Sans date précise, la jurisprudence retient un délai "raisonnable" qui dépend de la nature des travaux : quelques semaines pour de la peinture, plusieurs mois pour une rénovation lourde.
+
+La mise en demeure doit être précédée d'au moins une relance amiable (appel, email, SMS). Sans cette relance, un juge peut considérer que vous n'avez pas cherché de solution amiable. Conservez les preuves : captures d'écran de SMS, copies d'emails, journal d'appels.`,
+      },
+      {
+        heading: "Le cadre juridique applicable",
+        body: `L'article 1217 du Code civil, depuis la réforme de 2016, vous offre cinq options en cas de manquement contractuel d'un prestataire : refuser ou suspendre l'exécution de votre paiement, exiger l'exécution forcée (forcer l'artisan à terminer), obtenir une réduction du prix, demander la résolution du contrat (annulation), ou demander des dommages-intérêts en réparation du préjudice.
+
+Pour la plupart des litiges artisans, l'option la plus adaptée est l'exécution forcée (article 1221) ou la résolution du contrat avec restitution des sommes versées (article 1224). Le choix dépend de l'avancement des travaux, de la confiance encore accordée à l'artisan, et de l'urgence à finir.
+
+Si les travaux sont déjà partiellement payés et que l'artisan a abandonné, vous pouvez aussi demander la résolution unilatérale du contrat (article 1226). Cette résolution se fait par notification écrite à l'artisan, après une mise en demeure infructueuse, et vous libère du contrat sans avoir à saisir un juge — mais vous risquez une contestation devant le tribunal si l'artisan refuse.
+
+Pour les chantiers de gros œuvre (extension, surélévation, structure), la garantie décennale (article 1792 du Code civil) couvre pendant 10 ans les désordres compromettant la solidité ou rendant l'ouvrage impropre à sa destination. L'artisan doit en avoir une attestation valide à la date du chantier.`,
+      },
+      {
+        heading: "Que doit contenir votre mise en demeure",
+        body: `Pour avoir une valeur juridique opposable, la mise en demeure doit être complète et précise.
+
+Identifiez clairement les parties (vos coordonnées, celles de l'artisan avec son SIRET et son adresse de siège), faites référence au contrat ou au devis signé (numéro, date, montant), et résumez les faits chronologiquement (date de signature, échéances convenues, paiements effectués, événements de chantier).
+
+Décrivez précisément les manquements constatés : travaux non commencés, partiellement réalisés, mal exécutés. Soyez factuel : "le carrelage de la salle de bains présente 3 fissures visibles à hauteur d'homme" est plus solide que "le carrelage est mal posé". Joignez si possible des photos datées.
+
+Exigez explicitement l'exécution des prestations manquantes ou la correction des malfaçons, en fixant un délai raisonnable. Pour des travaux mineurs (1 jour de pose), 8 à 15 jours suffisent. Pour reprendre un chantier abandonné, 15 à 30 jours sont défendables. Mentionnez la date butoir précise ("avant le [date] inclus").
+
+Annoncez les conséquences en cas d'inaction : saisine de la juridiction compétente, demande de résolution du contrat, dommages-intérêts pour le préjudice subi (frais de second artisan, retard d'emménagement, surcoûts). L'envoi doit obligatoirement se faire en lettre recommandée avec accusé de réception.`,
+      },
+      {
+        heading: "Si l'artisan ne réagit pas : recours pratiques",
+        body: `Sans réponse satisfaisante au délai imparti, plusieurs voies s'ouvrent à vous selon le montant du litige et la complexité des malfaçons.
+
+Pour un litige inférieur à 5 000 €, la conciliation est obligatoire avant toute saisine du juge depuis le décret n° 2019-1333 (sauf exceptions). Le conciliateur de justice (gratuit, présent dans toutes les communes) peut être saisi en ligne sur conciliateurs.fr. Il rapproche les parties dans un délai de 3 mois.
+
+Pour un litige entre 5 000 € et 10 000 €, le juge des contentieux de la protection est compétent. Vous pouvez vous représenter seul (ministère d'avocat non obligatoire) ou être assisté gratuitement par une association de consommateurs (UFC-Que Choisir, CLCV).
+
+Au-delà de 10 000 €, le tribunal judiciaire est compétent et l'avocat est obligatoire au-delà de 10 000 € en première instance. Avant la saisine, une expertise judiciaire (référé-expertise) est souvent demandée pour faire constater les malfaçons par un expert assermenté. Coût : 1 500 à 4 000 € avancés par le demandeur, remboursés par la partie perdante.
+
+Pour les artisans inscrits à la Chambre de Métiers et de l'Artisanat (CMA), vous pouvez aussi saisir le service de médiation de la CMA — gratuit, plus rapide que le tribunal, mais l'avis n'est pas contraignant.
+
+Si l'artisan a une assurance responsabilité civile professionnelle (obligatoire) ou une garantie décennale, vous pouvez actionner l'assurance directement. L'attestation d'assurance doit avoir été remise au début du chantier ; sans elle, c'est une faute de l'artisan en soi.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Combien de temps attendre avant d'envoyer la mise en demeure ?",
+        a: "Tout dépend de ce qui était convenu. Si le devis fixe une date de fin précise, vous pouvez envoyer la mise en demeure dès le lendemain du dépassement. Si le devis fixe seulement un délai approximatif (« sous 4 semaines »), attendez 1 à 2 semaines après l'échéance pour laisser une marge. Sans délai écrit, la jurisprudence retient un délai « raisonnable » qui varie : quelques semaines pour des travaux courts, plusieurs mois pour une rénovation lourde. Avant la mise en demeure formelle, prévoyez toujours au moins une relance amiable (email ou SMS), conservée comme preuve : sans cela un juge peut vous reprocher de ne pas avoir cherché de solution amiable.",
+      },
+      {
+        q: "Quel délai accorder à l'artisan dans la mise en demeure ?",
+        a: "Le délai doit être proportionné aux travaux à reprendre. Pour des finitions mineures (joints, peinture, ajustement), 8 à 15 jours sont suffisants. Pour reprendre un chantier abandonné nécessitant plusieurs jours de présence, accordez 15 à 30 jours. Pour des malfaçons techniques nécessitant le retour d'un sous-traitant ou la commande de matériaux, 30 à 60 jours peuvent se justifier. Mentionnez explicitement la date butoir (« avant le [date] inclus »). Un délai trop court (< 8 jours) peut être jugé abusif et fragiliser votre démarche. Un délai trop long (> 90 jours) affaiblit l'effet de la mise en demeure.",
+      },
+      {
+        q: "Que faire si l'artisan refuse de venir terminer les travaux ?",
+        a: "S'il refuse explicitement (par écrit ou en présence de témoins), vous pouvez prononcer la résolution du contrat par notification écrite (article 1226 du Code civil) : le contrat est éteint, l'artisan doit restituer les sommes versées, et vous êtes libre de faire intervenir un autre artisan. La résolution unilatérale est possible « aux risques et périls » du créancier — l'artisan peut la contester devant le juge. Pour sécuriser, faites constater l'abandon par huissier (procès-verbal de constat, environ 200-400 €). Vous pouvez ensuite engager un autre artisan et demander en justice la différence de prix au premier, plus les éventuels surcoûts (article 1222).",
+      },
+      {
+        q: "L'artisan peut-il refacturer plus pour terminer les travaux ?",
+        a: "Non. Le devis signé fait foi sur le prix total convenu : l'artisan doit terminer les travaux pour ce prix, sauf si un avenant écrit a été signé pour des prestations supplémentaires. Toute facturation hors devis sans accord préalable est contestable. Si l'artisan invoque une erreur d'estimation pour exiger un supplément, c'est sa responsabilité contractuelle : un professionnel est tenu d'un devoir de conseil et d'une obligation d'estimer correctement. En revanche, si vous demandez vous-même des modifications en cours de chantier (changement de matériau, ajout de prestations), un avenant est nécessaire et le supplément est légitime.",
+      },
+      {
+        q: "Comment prouver que les travaux ne sont pas conformes ?",
+        a: "Plusieurs niveaux de preuve, par ordre de force croissante. Niveau 1 : photos datées des malfaçons, prises sous différents angles, avec si possible une référence d'échelle (mètre, pièce reconnaissable). Niveau 2 : devis ou diagnostic d'un autre artisan qualifié constatant les défauts et chiffrant la reprise — coût 100-300 €, puissant pour la négociation amiable. Niveau 3 : constat d'huissier (procès-verbal officiel, force probante devant le juge), 200-400 €. Niveau 4 : expertise judiciaire ordonnée par le juge en référé, 1 500-4 000 € (avancés puis remboursés par la partie perdante). Pour des défauts techniques majeurs (étanchéité, structure), passez directement au niveau 3 ou 4.",
+      },
+      {
+        q: "Quand engager une expertise judiciaire ?",
+        a: "L'expertise judiciaire est utile quand les malfaçons sont techniques (humidité, étanchéité, structure, chauffage), contestées par l'artisan, et que le coût de réparation est supérieur à 5 000 €. Procédure : saisir le juge des référés du tribunal judiciaire (« référé-expertise », article 145 du Code de procédure civile). Le juge nomme un expert assermenté qui examine le chantier en présence des parties. L'expertise dure 4 à 8 mois et coûte 1 500 à 4 000 € avancés par le demandeur (puis remboursés par la partie perdante). Le rapport d'expert a une force probante très élevée devant le juge du fond et règle souvent le litige sans procès. Pour des litiges < 5 000 €, c'est disproportionné : préférez un constat d'huissier ou un diagnostic d'artisan.",
+      },
+    ],
+  },
 ];
 
 export function getGuide(slug: string): Guide | undefined {
