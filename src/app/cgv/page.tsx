@@ -224,15 +224,39 @@ export default function CGVPage() {
               ouvrés.
             </p>
             <p className="mt-2">
-              Conformément aux articles L. 616-1 et R. 616-1 du Code de la
-              consommation, en cas de litige non résolu, le Client peut recourir
-              gratuitement au service de médiation de la consommation. Le
-              médiateur compétent est :{" "}
-              <span className="text-amber-600 font-medium">
-                [À COMPLÉTER — choisir un médiateur de la consommation]
-              </span>
-              .
+              Conformément aux dispositions du Code de la consommation
+              concernant « le processus de médiation des litiges de la
+              consommation » (articles L. 616-1 et R. 616-1), après nous avoir
+              sollicités et à défaut de réponse vous satisfaisant, le Client a
+              la possibilité de recourir gratuitement à une procédure de
+              médiation de la consommation auprès de :
             </p>
+            <address className="mt-2 not-italic bg-jc-bg-elev border border-jc-line rounded-jc-sm p-4 text-[14px] leading-[1.6]">
+              <strong className="text-jc-ink">CM2C</strong> — Centre de la
+              Médiation de la Consommation de Conciliateurs de Justice
+              <br />
+              49 rue de Ponthieu, 75008 Paris
+              <br />
+              Téléphone : 01 89 47 00 14
+              <br />
+              Site :{" "}
+              <a
+                href="https://www.cm2c.net/declarer-un-litige.php"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-jc-accent hover:underline"
+              >
+                cm2c.net/declarer-un-litige.php
+              </a>
+              <br />
+              Email :{" "}
+              <a
+                href="mailto:litiges@cm2c.net"
+                className="text-jc-accent hover:underline"
+              >
+                litiges@cm2c.net
+              </a>
+            </address>
           </section>
 
           <section>
