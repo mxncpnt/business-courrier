@@ -74,11 +74,13 @@ export default async function ProductPage({
     { name: letterType.title, path: `/courrier/${letterType.slug}` },
   ]);
 
-  // Guide pratique associé : surface le lien interne haut dans la page
+  // Guides pratiques associés : surface le maillage interne haut dans la page
   // (sous les useCases, avant les bénéfices) → signal SEO contextuel fort.
-  const relatedGuide = guides.find(
-    (g) => g.relatedLetterSlug === letterType.slug
-  );
+  // Limité à 3 pour ne pas diluer le PageRank distribué et garder un bloc
+  // lisible. Au-delà, le maillage devient spammy aux yeux de Google.
+  const relatedGuides = guides
+    .filter((g) => g.relatedLetterSlug === letterType.slug)
+    .slice(0, 3);
 
   return (
     <div className="min-h-screen bg-jc-bg">
@@ -197,33 +199,43 @@ export default async function ProductPage({
               ))}
             </ul>
 
-            {/* Guide pratique associé — placé volontairement haut dans la page
-                pour que Google traite le lien interne comme contextuel et non
-                navigationnel. */}
-            {relatedGuide && (
-              <Link
-                href={`/guides/${relatedGuide.slug}`}
-                className="mt-6 flex items-start gap-3 p-4 bg-jc-accent-soft border border-jc-accent/20 rounded-jc no-underline group hover:border-jc-accent/40 transition-colors"
-              >
-                <span className="shrink-0 text-jc-accent text-xl leading-none mt-0.5">
-                  📖
-                </span>
-                <div className="flex-1">
-                  <div className="text-[11px] font-semibold tracking-[0.08em] uppercase text-jc-accent mb-0.5">
-                    Guide pratique associé · {relatedGuide.readingTime}
-                  </div>
-                  <h4 className="text-[15px] font-semibold text-jc-ink leading-snug mb-1">
-                    {relatedGuide.title}
-                  </h4>
-                  <p className="text-[13px] text-jc-ink-soft leading-relaxed">
-                    {relatedGuide.description}
-                  </p>
-                  <span className="inline-flex items-center gap-1 mt-1.5 text-[13px] font-medium text-jc-accent group-hover:underline">
-                    Lire le guide complet
-                    <IconArrow />
-                  </span>
+            {/* Guides pratiques associés — placés volontairement haut dans la
+                page pour que Google traite les liens internes comme contextuels
+                et non navigationnels. Max 3 (slice plus haut) : au-delà, on
+                dilue le PageRank et le bloc devient bruyant pour l'utilisateur. */}
+            {relatedGuides.length > 0 && (
+              <div className="mt-6">
+                <div className="text-[11px] font-semibold tracking-[0.08em] uppercase text-jc-accent mb-2">
+                  {relatedGuides.length === 1
+                    ? "Guide pratique associé"
+                    : "Guides pratiques associés"}
                 </div>
-              </Link>
+                <div className="flex flex-col gap-2">
+                  {relatedGuides.map((guide) => (
+                    <Link
+                      key={guide.slug}
+                      href={`/guides/${guide.slug}`}
+                      className="flex items-start gap-3 p-3.5 bg-jc-accent-soft border border-jc-accent/20 rounded-jc no-underline group hover:border-jc-accent/40 transition-colors"
+                    >
+                      <span className="shrink-0 text-jc-accent text-lg leading-none mt-0.5">
+                        📖
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-[14px] font-semibold text-jc-ink leading-snug mb-0.5">
+                          {guide.title}
+                        </h4>
+                        <p className="text-[12.5px] text-jc-ink-soft leading-relaxed">
+                          {guide.description}
+                        </p>
+                        <span className="inline-flex items-center gap-1 mt-1 text-[12.5px] font-medium text-jc-accent group-hover:underline">
+                          Lire le guide · {guide.readingTime}
+                          <IconArrow />
+                        </span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             )}
 
             {/* Ce que tu obtiens */}
