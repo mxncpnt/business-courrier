@@ -223,9 +223,9 @@ export default async function ProductPage({
                         📖
                       </span>
                       <div className="flex-1 min-w-0">
-                        <h4 className="text-[14px] font-semibold text-jc-ink leading-snug mb-0.5">
+                        <h3 className="text-[14px] font-semibold text-jc-ink leading-snug mb-0.5">
                           {guide.title}
-                        </h4>
+                        </h3>
                         <p className="text-[12.5px] text-jc-ink-soft leading-relaxed">
                           {guide.description}
                         </p>
@@ -267,9 +267,9 @@ export default async function ProductPage({
                   key={benefit.t}
                   className="bg-jc-bg-elev border border-jc-line rounded-jc p-3.5"
                 >
-                  <h4 className="text-sm font-semibold text-jc-ink mb-1">
+                  <h3 className="text-sm font-semibold text-jc-ink mb-1">
                     {benefit.t}
-                  </h4>
+                  </h3>
                   <p className="text-[13px] text-jc-ink-soft">{benefit.d}</p>
                 </div>
               ))}
