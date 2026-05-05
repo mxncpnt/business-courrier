@@ -9,6 +9,7 @@ import {
   buildFAQPage,
 } from "@/lib/jsonld";
 import Logo from "@/components/Logo";
+import GuideBody from "@/components/GuideBody";
 import { IconArrow } from "@/components/Icons";
 
 export function generateStaticParams() {
@@ -179,20 +180,14 @@ export default async function GuidePage({
           {guide.description}
         </p>
 
-        {/* Sections */}
+        {/* Sections — body parsé via GuideBody (markdown minimal :
+            **bold**, listes "- item", paragraphes \n\n) */}
         {guide.sections.map((section, i) => (
           <section key={i} className="mb-8">
             <h2 className="text-[22px] font-display font-bold text-jc-ink mb-3 max-md:text-[19px]">
               {section.heading}
             </h2>
-            {section.body.split("\n\n").map((paragraph, j) => (
-              <p
-                key={j}
-                className="text-[15px] leading-[1.7] text-jc-ink-soft mb-3"
-              >
-                {paragraph}
-              </p>
-            ))}
+            <GuideBody body={section.body} />
           </section>
         ))}
 
