@@ -25,11 +25,18 @@ export const SITE_URL = "https://justecourrier.fr";
 export const SITE_NAME = "JusteCourrier";
 
 /**
- * URL de l'OG image générée par `src/app/opengraph-image.tsx`.
+ * URL de l'OG image générée par `src/app/opengraph-image.tsx` (1200×630 paysage).
  * ⚠️ Next 16 sert l'image SANS extension `.png` — la version `.png` retourne 404.
- * Référencée dans Product/Article/Organization comme `image`.
+ * Référencée dans Product/Article/Organization comme `image` (visuel principal).
  */
 export const OG_IMAGE_URL = `${SITE_URL}/opengraph-image`;
+
+/**
+ * URL de l'icône carrée 512×512 générée par `src/app/icon.tsx`.
+ * Utilisée comme `logo` (qui doit être carré idéalement) dans les schemas
+ * Organization et Article.publisher. Convention Next 16 : pas d'extension.
+ */
+export const ICON_URL = `${SITE_URL}/icon`;
 
 const PUBLISHER = {
   "@type": "Organization" as const,
@@ -37,7 +44,7 @@ const PUBLISHER = {
   url: SITE_URL,
   logo: {
     "@type": "ImageObject" as const,
-    url: OG_IMAGE_URL,
+    url: ICON_URL,
   },
 };
 
@@ -60,7 +67,7 @@ export function buildOrganization() {
     name: SITE_NAME,
     legalName: "Maxence Pinta — Entrepreneur individuel",
     url: SITE_URL,
-    logo: OG_IMAGE_URL,
+    logo: ICON_URL,
     image: OG_IMAGE_URL,
     email: "contact@justecourrier.fr",
     address: {
