@@ -9,7 +9,7 @@ import {
   buildFAQPage,
 } from "@/lib/jsonld";
 import Logo from "@/components/Logo";
-import GuideBody from "@/components/GuideBody";
+import GuideBody, { parseInline } from "@/components/GuideBody";
 import { IconArrow } from "@/components/Icons";
 
 export function generateStaticParams() {
@@ -214,7 +214,7 @@ export default async function GuidePage({
                     </span>
                   </summary>
                   <p className="mt-3 text-[14px] leading-[1.7] text-jc-ink-soft">
-                    {item.a}
+                    {parseInline(item.a)}
                   </p>
                 </details>
               ))}

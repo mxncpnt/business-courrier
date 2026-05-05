@@ -325,6 +325,10 @@ export function buildArticle(guide: Guide) {
  * Schema FAQPage à inclure SEUL et UNIQUEMENT s'il y a des Q/R structurées
  * (sinon Google marque comme spam). Génère le rich snippet "Personnes ont
  * aussi posé ces questions" / accordion FAQ en SERP.
+ *
+ * Note : on strip le markdown `**bold**` du `text` parce que Google ne
+ * l'interprète pas et l'afficherait en clair dans le rich snippet.
+ * Le rendu HTML visible côté page passe lui par parseInline (cf. GuideBody).
  */
 export function buildFAQPage(faqs: { q: string; a: string }[]) {
   return {
@@ -332,13 +336,18 @@ export function buildFAQPage(faqs: { q: string; a: string }[]) {
     "@type": "FAQPage",
     mainEntity: faqs.map((f) => ({
       "@type": "Question",
-      name: f.q,
+      name: stripMarkdown(f.q),
       acceptedAnswer: {
         "@type": "Answer",
-        text: f.a,
+        text: stripMarkdown(f.a),
       },
     })),
   };
+}
+
+/** Retire le markdown bold `**texte**` → `texte`. Pas d'autre transformation. */
+function stripMarkdown(text: string): string {
+  return text.replace(/\*\*([^*]+)\*\*/g, "$1");
 }
 
 // ─── Builders : pages liste (/catalogue, /guides) ──────────────────────────

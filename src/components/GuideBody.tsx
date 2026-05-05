@@ -3,8 +3,9 @@ import React from "react";
 /**
  * Parse une portion de texte et interprète le bold inline `**texte**`.
  * Renvoie un fragment React avec <strong> aux bons endroits.
+ * Exporté pour réutilisation dans la FAQ et tout autre rendu inline.
  */
-function parseInline(text: string): React.ReactNode {
+export function parseInline(text: string): React.ReactNode {
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
   return parts.map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
