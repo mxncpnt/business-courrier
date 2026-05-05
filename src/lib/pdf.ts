@@ -10,19 +10,18 @@ Font.register({
   ],
 });
 
-// ─── AFNOR NF Z 11-001 layout ───
-// A4 = 210 x 297 mm. Marges 20mm gauche, 15mm droite, 18mm haut/bas.
+// ─── AFNOR NF Z 11-001 + zone fenêtre MSB ───
+// A4 = 210 x 297 mm. Paddings page : 20mm gauche, 15mm droite, 18mm haut/bas.
 //
-// Zone fenêtre enveloppe DL standard :
-//   - Adresse destinataire visible quand la lettre est pliée en 3
-//   - Position : top 45mm depuis bord supérieur de la feuille
-//   - Position : left 105mm depuis bord gauche (zone droite, ~50% page)
-//   - Largeur : 85mm, max 6 lignes de 38 caractères
+// Zone destinataire MSB (toujours visible enveloppe à fenêtre) :
+//   - top 40mm, left 103mm, width 97mm, height 37mm (bornes absolues)
+//   - = top 22mm, left 83mm relatifs au headerZone (compense paddings 18/20)
 //
-// Le bloc destinataire est en `position: absolute` pour rester dans la zone
-// fenêtre quel que soit le contenu du bloc expéditeur (variable). Un wrapper
-// `headerZone` réserve la hauteur correspondante (~80mm) avant que le flow
-// reprenne avec date+objet+corps.
+// Le bloc destinataire est en `position: absolute` calé sur la zone MSB.
+// La date sort de cette zone et part dans le flow normal sous le headerZone,
+// alignée à droite (convention AFNOR), pour ne pas consommer de hauteur dans
+// la fenêtre. headerZone réserve 65mm minHeight pour laisser passer la zone
+// destinataire (22+37=59mm) + 6mm de respiration avant la date.
 
 const mm = (v: number) => `${v}mm`;
 
@@ -38,14 +37,13 @@ const styles = StyleSheet.create({
     color: "#1a1a1a",
   },
 
-  // Wrapper pour zones expéditeur (flow) + colonne droite (absolute).
-  // Hauteur réduite à ~55mm — l'expéditeur tient sur 4 lignes maxi (sender
-  // name + 3 lignes adresse + email = ~25mm), la fenêtre destinataire
-  // commence à 27mm dans le wrapper et fait ~22mm (destinataire + date
-  // collés à 1 ligne d'écart). Le flow reprend juste après.
+  // Wrapper expéditeur (flow) + zone destinataire (absolute).
+  // minHeight 59mm = top zone destinataire (22mm) + height MSB (37mm).
+  // Le bottom du headerZone tombe pile sur le bottom de la zone fenêtre
+  // (= 77mm absolu). La date suit ensuite dans le flow avec marginTop 5mm.
   headerZone: {
     position: "relative",
-    minHeight: mm(55),
+    minHeight: mm(59),
   },
 
   // Zone 1 — Expéditeur (haut gauche)
@@ -67,21 +65,22 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
 
-  // Colonne droite — destinataire + date (fenêtre enveloppe AFNOR DL)
-  // Position : `right: 0` cale le bloc à 65mm du bord droit (largeur 65mm
-  // à partir du bord — donc commence à 145mm depuis bord gauche absolu,
-  // soit 130mm depuis paddingLeft). top 27mm dans le wrapper = 45mm depuis
-  // le bord supérieur de la feuille (centre fenêtre DL).
-  rightColumn: {
+  // Zone destinataire — calée exactement sur la zone fenêtre MSB
+  // (top 40mm, left 103mm, width 97mm, height 37mm en absolu sur la page).
+  // En relatif au headerZone (qui hérite des paddings 18/20) :
+  //   top : 40 - 18 = 22mm
+  //   left : 103 - 20 = 83mm
+  //   width : 97mm
+  // 97mm de largeur ≈ 61 chars en 9pt / 50 chars en 10pt bold → wrap rare.
+  recipientZone: {
     position: "absolute",
-    top: mm(27),
-    right: 0,
-    width: mm(65),
+    top: mm(22),
+    left: mm(83),
+    width: mm(97),
   },
 
-  // Zone 4 — Destinataire (dans la colonne droite)
   recipient: {
-    marginBottom: mm(5), // 1 ligne d'écart avant la date
+    // pas de marginBottom — la date a été déplacée hors de cette zone.
   },
   recipientName: {
     fontWeight: "bold",
@@ -93,10 +92,18 @@ const styles = StyleSheet.create({
     color: "#333",
   },
 
-  // Lieu et date — dans la colonne droite, juste sous le destinataire
+  // Lieu et date — flow normal après le headerZone, alignée verticalement
+  // sur le bord gauche de la zone destinataire (x = 103mm absolu, donc
+  // marginLeft 83mm relatif au paddingLeft 20mm de la page). marginTop 5mm
+  // = 1 ligne d'écart sous la zone fenêtre MSB (qui finit à 77mm absolu).
+  // → date à y ≈ 82mm absolu, x ≈ 103mm absolu.
   dateRow: {
     fontSize: 9,
     color: "#333",
+    textAlign: "left",
+    marginLeft: mm(83),
+    marginTop: mm(5),
+    marginBottom: mm(5),
   },
 
   // Objet — 1 ligne d'écart avant et après le bloc
@@ -281,10 +288,9 @@ export async function generatePdfBuffer(params: GeneratePdfParams): Promise<Buff
     );
   }
 
-  // Colonne droite (absolute) — destinataire + date dans la fenêtre AFNOR
   const dateText = senderCity ? `${senderCity}, le ${today}` : `Le ${today}`;
-  const rightColumnChildren: React.ReactElement[] = [];
 
+  // Zone destinataire (absolute) — calée sur la fenêtre MSB
   if (recipientName) {
     const recipientChildren: React.ReactElement[] = [];
     recipientChildren.push(
@@ -298,26 +304,20 @@ export async function generatePdfBuffer(params: GeneratePdfParams): Promise<Buff
         );
       });
     }
-    rightColumnChildren.push(
-      React.createElement(View, { key: "recipient", style: styles.recipient }, ...recipientChildren)
+    headerChildren.push(
+      React.createElement(
+        View,
+        { key: "recipient-zone", style: styles.recipientZone },
+        React.createElement(View, { key: "recipient", style: styles.recipient }, ...recipientChildren)
+      )
     );
   }
 
-  rightColumnChildren.push(
-    React.createElement(Text, { key: "date", style: styles.dateRow }, dateText)
-  );
-
-  headerChildren.push(
-    React.createElement(
-      View,
-      { key: "right-column", style: styles.rightColumn },
-      ...rightColumnChildren
-    )
-  );
-
-  // Push wrapper en-tête : la zone réserve ~55mm de hauteur (expéditeur en
-  // flow + colonne droite en absolute). Le flow reprend ensuite avec objet
-  // et corps.
+  // Push wrapper en-tête : minHeight 59mm = bottom du headerZone tombe pile
+  // sur le bottom de la zone fenêtre MSB (77mm absolu). La date suit en
+  // flow avec marginTop 5mm + marginLeft 83mm → atterrit à (x=103mm,
+  // y=82mm absolu), 5mm sous la fenêtre, alignée sur le bord gauche de la
+  // zone destinataire.
   if (headerChildren.length > 0) {
     children.push(
       React.createElement(
@@ -327,6 +327,11 @@ export async function generatePdfBuffer(params: GeneratePdfParams): Promise<Buff
       )
     );
   }
+
+  // Date — sous la zone fenêtre, alignée sur l'axe vertical du destinataire
+  children.push(
+    React.createElement(Text, { key: "date", style: styles.dateRow }, dateText)
+  );
 
   // Object
   if (objectText) {

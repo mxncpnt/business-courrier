@@ -101,7 +101,9 @@ export default function LetterPreview({
             )}
           </div>
 
-          {/* ─── Lieu et date (aligné droite) ─── */}
+          {/* ─── Lieu et date (sous le destinataire, aligné droite pour
+              approximer le bord gauche de la zone destinataire — l'aperçu
+              HTML n'est pas pixel-perfect avec le PDF) ─── */}
           <div className="text-[8px] text-gray-800 text-right mb-[4%]">
             {senderCity ? `${senderCity}, le ${today}` : `Le ${today}`}
           </div>
