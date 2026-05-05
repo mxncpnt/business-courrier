@@ -39,24 +39,26 @@ export default async function Icon() {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Corps de l'enveloppe : intérieur en jc-primary */}
+          {/* Corps de l'enveloppe : intérieur en jc-bg (beige), contour en jc-primary (bleu) */}
           <rect
             x="3"
             y="7"
             width="26"
             height="18"
             rx="1.5"
-            fill="#13314F"
+            fill="#FAF8F4"
+            stroke="#13314F"
+            strokeWidth="1.6"
           />
-          {/* Rabat triangulaire : tracé en clair pour ressortir sur le primary */}
+          {/* Rabat triangulaire : tracé en jc-primary pour rester cohérent avec le contour */}
           <path
             d="M3 8.5 L16 17 L29 8.5"
-            stroke="#FAF8F4"
+            stroke="#13314F"
             strokeWidth="1.6"
             strokeLinejoin="round"
             fill="none"
           />
-          {/* Cachet accent (notification visuelle) */}
+          {/* Sceau accent en bas-droite */}
           <circle cx="22.5" cy="20.5" r="3" fill="#C9722D" />
         </svg>
       </div>
