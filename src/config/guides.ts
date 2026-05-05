@@ -427,6 +427,476 @@ Si l'artisan a une assurance responsabilité civile professionnelle (obligatoire
       },
     ],
   },
+
+  // ─── Guide 6 : Mise en demeure restitution caution location ───
+  {
+    slug: "mise-en-demeure-restitution-caution-location",
+    title: "Mise en demeure pour restitution du dépôt de garantie",
+    metaTitle: "Caution non rendue — Mise en demeure du propriétaire (modèle 2026)",
+    description:
+      "Votre propriétaire ne vous a pas rendu le dépôt de garantie ? Délais légaux, intérêts de retard 10 %, mise en demeure, recours. Modèle de lettre LRAR.",
+    relatedLetterSlug: "mise-en-demeure-payer",
+    publishedAt: "2026-05-05",
+    updatedAt: "2026-05-05",
+    readingTime: "5 min",
+    sections: [
+      {
+        heading: "Les délais légaux de restitution du dépôt de garantie",
+        body: `Le dépôt de garantie (souvent appelé « caution » à tort) doit être restitué au locataire dans des délais fixés par la loi du 6 juillet 1989 (article 22).
+
+Si l'état des lieux de sortie est conforme à l'état des lieux d'entrée (aucune dégradation), le délai de restitution est de **1 mois** à compter de la remise des clés. Si l'état des lieux de sortie fait apparaître des différences (dégradations imputables au locataire, impayés), le délai passe à **2 mois**.
+
+Pour les locations en copropriété, le propriétaire peut conserver une provision équivalente à 20 % du dépôt en attendant l'arrêté annuel des comptes de copropriété, mais doit restituer le solde dans le délai de 2 mois et le reste maximum un mois après l'arrêté des comptes.
+
+Ces délais courent à partir de la **remise des clés**, pas de la date d'état des lieux de sortie. Conservez la preuve de la remise (reçu signé par le bailleur ou son mandataire, ou envoi en LRAR si remise impossible). Sans preuve de remise, le délai ne démarre pas et le propriétaire peut prétendre que vous occupiez encore les lieux.`,
+      },
+      {
+        heading: "Les intérêts de retard automatiques (10 % du loyer mensuel)",
+        body: `Sanction prévue par l'article 22 de la loi de 1989 : passé le délai légal, le propriétaire vous doit **10 % du loyer mensuel hors charges par mois de retard entamé**, automatiquement et sans formalité.
+
+Exemple concret : loyer hors charges 800 €. Restitution due 2 mois après la remise des clés. Le propriétaire restitue avec 3 mois de retard. Vous avez droit à 800 × 10 % × 3 = 240 € d'intérêts de retard, en plus du dépôt de garantie initial.
+
+Cette pénalité s'applique **dès le premier jour de retard**, pas à compter d'une mise en demeure. Mais en pratique, sans mise en demeure formelle, le propriétaire ignore généralement cette pénalité — d'où l'importance de la lettre.
+
+Attention : la pénalité ne s'applique pas si le retard est imputable au locataire (par exemple si vous n'avez pas communiqué votre nouvelle adresse au propriétaire). Communiquez toujours votre adresse de réexpédition par écrit le jour de la remise des clés, dans le procès-verbal d'état des lieux ou par LRAR.`,
+      },
+      {
+        heading: "Que doit contenir votre mise en demeure",
+        body: `Votre courrier doit être précis et chiffré pour avoir une force juridique opposable.
+
+Mentionnez vos coordonnées complètes, l'adresse du logement loué, la référence du bail (date de signature, durée), la date de l'état des lieux de sortie et la date de remise des clés (preuve à l'appui si contestée).
+
+Indiquez le montant du dépôt de garantie initial, les éventuelles retenues légitimes que vous acceptez (en vous basant sur l'état des lieux de sortie), et le solde dû. Ajoutez le calcul des intérêts de retard 10 % du loyer hors charges par mois entamé depuis la fin du délai légal.
+
+Citez les textes : article 22 de la loi du 6 juillet 1989, et article 1342 du Code civil pour la mise en demeure de payer une dette.
+
+Fixez un délai de paiement de 15 jours à compter de la réception. Annoncez les conséquences en cas de non-paiement : saisine du juge des contentieux de la protection (procédure simplifiée jusqu'à 10 000 €), commandement de payer par commissaire de justice, et publication éventuelle de l'incident sur des plateformes spécialisées.
+
+L'envoi se fait obligatoirement en lettre recommandée avec accusé de réception.`,
+      },
+      {
+        heading: "Les recours si le propriétaire ne paie toujours pas",
+        body: `Sans réponse au délai imparti, plusieurs voies sont ouvertes selon votre situation et le montant en jeu.
+
+**Conciliation** (obligatoire pour les litiges inférieurs à 5 000 € depuis le décret n° 2019-1333) : saisir un conciliateur de justice via conciliateurs.fr. Gratuit, délai de traitement 1-3 mois. Le conciliateur écoute les deux parties et propose un accord. Sans accord, il délivre un constat d'échec qui ouvre la saisine judiciaire.
+
+**Saisine du juge des contentieux de la protection** : compétent jusqu'à 10 000 €. Vous pouvez vous représenter seul (avocat non obligatoire) ou être assisté gratuitement par une association de consommateurs (CLCV, ADIL, AFOC). Procédure 4-8 mois, coût modeste.
+
+**Tribunal judiciaire** au-delà de 10 000 € : avocat obligatoire en première instance, procédure 6-18 mois. À ce stade, c'est rare pour une caution standard sauf si le bail prévoit un dépôt de 2-3 mois de loyer pour un logement très onéreux.
+
+**ADIL (Agence départementale d'information sur le logement)** : présente dans chaque département, gratuite, fournit conseil juridique et modèles de courriers spécialisés. Excellent réflexe avant d'engager toute procédure.
+
+Si le propriétaire est en faillite ou insolvable, la dette devient compliquée à recouvrer. Vérifiez sur infogreffe.fr ou societe.com s'il s'agit d'une SCI ou d'un investisseur en société. En cas de personne physique, un commandement de payer par commissaire de justice peut être suivi d'une saisie sur salaire ou compte bancaire après jugement.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Sous quel délai le propriétaire doit-il rendre la caution ?",
+        a: "1 mois si l'état des lieux de sortie est conforme à celui d'entrée, 2 mois s'il y a des différences (dégradations, retenues sur charges). Délai à compter de la remise des clés, pas de la signature de l'état des lieux. Pour les copropriétés, 20 % maximum peut être conservé jusqu'à l'arrêté annuel des comptes. Article 22 de la loi du 6 juillet 1989. Au-delà du délai, la pénalité de 10 % du loyer hors charges par mois entamé s'applique automatiquement.",
+      },
+      {
+        q: "Le propriétaire peut-il garder la caution sans justification ?",
+        a: "Non. Toute retenue sur le dépôt de garantie doit être justifiée par des pièces (devis de réparation, factures de remise en état, justificatifs d'impayés). Sans justificatif, le propriétaire doit restituer la totalité. Le devis ou la facture doit correspondre à des dégradations constatées dans l'état des lieux de sortie ET non présentes à l'état des lieux d'entrée — la vétusté normale ne justifie aucune retenue (article 7 d) de la loi de 1989). Si le propriétaire produit des justificatifs douteux (facture sans détail, devis non accepté), contestez-les point par point dans votre mise en demeure.",
+      },
+      {
+        q: "Combien d'intérêts de retard puis-je réclamer ?",
+        a: "10 % du loyer mensuel hors charges par mois de retard entamé, automatiquement, sans démarche préalable. Exemple : loyer 700 €, restitution due au 1er février, payée le 20 avril → 3 mois de retard entamés (février, mars, avril) → 700 × 10 % × 3 = 210 €. Cette pénalité s'ajoute au dépôt de garantie. Elle ne s'applique pas si le retard est imputable au locataire (adresse de réexpédition non communiquée par exemple). Article 22 alinéa 4 de la loi du 6 juillet 1989, modifié par la loi ALUR de 2014.",
+      },
+      {
+        q: "Que faire si le propriétaire conteste l'état des lieux de sortie ?",
+        a: "Si vous n'avez pas signé l'état des lieux de sortie ou s'il a été établi sans vous, demandez par LRAR un état des lieux contradictoire ou un constat d'huissier. Si l'état des lieux de sortie a été signé sous pression ou avec des réserves, mentionnez ces réserves dans votre mise en demeure. En cas de désaccord persistant, le juge tranche au vu des pièces (photos datées, témoignages, état des lieux d'entrée). Conseil : prenez systématiquement des photos datées de chaque pièce le jour de la sortie, et demandez à un proche d'être témoin de l'état des lieux.",
+      },
+      {
+        q: "Que faire si le propriétaire est une SCI ou une société ?",
+        a: "La procédure est la même mais la mise en demeure doit être adressée au siège social de la société (et non à l'adresse du propriétaire personne physique si différente). Identifiez la société via son numéro SIREN sur infogreffe.fr ou societe.com. Si la SCI est en liquidation, déclarez votre créance dans les 2 mois suivant la publication au BODACC. Si la société est en règlement amiable, contactez le mandataire judiciaire. Dans tous les cas, le dépôt de garantie est une dette personnelle de la société, pas du gérant — sauf en cas de faute de gestion caractérisée (article L.223-22 Code de commerce pour les SARL).",
+      },
+      {
+        q: "L'agence immobilière peut-elle conserver mon dépôt ?",
+        a: "Non. L'agence agit comme mandataire du propriétaire. Elle doit transférer le dépôt au propriétaire (ou le restituer au locataire selon le mandat). Si l'agence fait obstacle à la restitution, la responsabilité revient au propriétaire bailleur — c'est lui que vous devez mettre en demeure. Vous pouvez en parallèle alerter la chambre des huissiers ou la FNAIM si l'agence est adhérente. Pour les agences gérant un compte séquestre, demandez le relevé du compte avec dates de mouvement : c'est votre preuve que les fonds sont disponibles et indûment retenus.",
+      },
+    ],
+  },
+
+  // ─── Guide 7 : Réclamation vol annulé règlement 261/2004 ───
+  {
+    slug: "reclamation-vol-annule-reglement-261-2004",
+    title: "Vol annulé ou retardé : votre indemnisation jusqu'à 600 €",
+    metaTitle: "Indemnisation vol annulé — Règlement européen 261/2004 (2026)",
+    description:
+      "Votre vol a été annulé ou retardé de plus de 3 heures ? Le règlement européen 261/2004 prévoit jusqu'à 600 € d'indemnité. Procédure, délais, modèle de lettre.",
+    relatedLetterSlug: "reclamation-service-client",
+    publishedAt: "2026-05-05",
+    updatedAt: "2026-05-05",
+    readingTime: "6 min",
+    sections: [
+      {
+        heading: "Quand le règlement 261/2004 s'applique",
+        body: `Le règlement européen n° 261/2004 protège les passagers aériens en cas d'annulation, de retard important ou de surréservation (refus d'embarquement). Il s'applique à tous les vols au départ d'un aéroport de l'Union européenne, et aux vols à l'arrivée dans l'UE opérés par une compagnie européenne.
+
+Concrètement : un vol Paris-New York opéré par Air France entre dans le règlement (départ UE). Un vol New York-Paris opéré par Delta n'y entre pas (compagnie hors UE, vol vers l'UE — règle inversée). Un Paris-New York opéré par Delta entre dans le règlement (départ UE quelle que soit la compagnie).
+
+Trois situations ouvrent droit à indemnisation :
+- **Annulation du vol** sans information du passager au moins 14 jours avant la date prévue
+- **Retard à l'arrivée de plus de 3 heures** (et non au départ)
+- **Refus d'embarquement involontaire** (surbooking)
+
+Le retard se mesure à l'arrivée en porte (pas l'atterrissage). Si vous arrivez 2h59 après l'heure prévue, vous n'avez droit à rien. À 3h00, vous avez droit à l'indemnisation forfaitaire pleine. C'est binaire.`,
+      },
+      {
+        heading: "Le montant de votre indemnité",
+        body: `L'indemnisation est forfaitaire et dépend de la distance du vol, calculée selon la méthode dite de la grande orthodromique entre les deux aéroports.
+
+**250 €** : vol intra-européen ≤ 1 500 km (ex: Paris-Madrid, Paris-Berlin, Lyon-Rome).
+
+**400 €** : vol intra-européen > 1 500 km (ex: Paris-Athènes, Paris-Helsinki) ou vol UE↔non-UE entre 1 500 et 3 500 km (ex: Paris-Tunis, Paris-Casablanca).
+
+**600 €** : vol UE↔non-UE > 3 500 km (ex: Paris-New York, Paris-Pékin, Paris-Dubaï).
+
+Pour les retards de 3h-4h sur les vols longs (3 500 km +), l'indemnité peut être réduite de 50 % à 300 € (article 7 §2). Au-delà de 4h, plein tarif.
+
+L'indemnisation est due **par passager**, indépendamment du prix du billet payé. Une famille de 4 personnes sur un Paris-New York annulé peut prétendre à 4 × 600 = 2 400 €.
+
+Cette indemnité s'ajoute au remboursement du billet ou au réacheminement (article 8) et à la prise en charge des repas et hébergement pendant l'attente (article 9). Ne confondez pas indemnité forfaitaire et remboursement.`,
+      },
+      {
+        heading: "Les exceptions : circonstances extraordinaires",
+        body: `La compagnie peut refuser l'indemnisation en invoquant des circonstances extraordinaires, mais celles-ci sont strictement encadrées par la jurisprudence.
+
+**Sont des circonstances extraordinaires** : terrorisme, conditions météorologiques rendant le vol impossible (orages violents, neige bloquant la piste), grève du contrôle aérien (externe à la compagnie), instabilité politique, problème de sécurité avéré.
+
+**Ne sont PAS des circonstances extraordinaires** (la jurisprudence est claire) : panne technique de l'avion (arrêt CJUE Wallentin-Hermann, 2008), grève du personnel propre à la compagnie (arrêt Krüsemann, 2018), retard en cascade dû à un vol précédent retardé, oiseau aspiré dans le réacteur si lié à un défaut de maintenance.
+
+Si la compagnie invoque des circonstances extraordinaires, exigez par écrit la justification précise et conservez tous les documents (notamment les communications de la compagnie pendant l'événement). Une grève annoncée 7 jours à l'avance n'est plus considérée comme extraordinaire car la compagnie a le temps de réorganiser ses opérations.
+
+Conseil pratique : avant d'envoyer votre réclamation, vérifiez le statut du vol sur Flightradar24 pour voir si les autres vols ont décollé normalement le même jour. Si oui, l'argument "météo" tombe.`,
+      },
+      {
+        heading: "La procédure pour obtenir votre indemnité",
+        body: `Étape 1 — Réclamation à la compagnie. Adressez votre demande directement à la compagnie aérienne par LRAR (ou via le formulaire en ligne dédié + email confirmation). Joignez : copie de la carte d'embarquement ou de la confirmation de réservation, justificatif de l'annulation/retard, calcul de l'indemnité due. Donnez un délai de 30 jours.
+
+Étape 2 — Saisine de l'autorité de tutelle si refus. En France, c'est la **DGAC** (Direction générale de l'aviation civile) via passager.aviation.gouv.fr. Gratuit, traitement 2-4 mois. La DGAC peut exiger l'indemnisation et, en cas de manquement, sanctionner la compagnie. Pour les vols au départ d'un autre pays UE, saisissez l'autorité du pays concerné (la liste est sur le site de la Commission européenne).
+
+Étape 3 — Saisine du juge si nécessaire. Compétence du juge des contentieux de la protection jusqu'à 10 000 € (vous pouvez vous représenter seul). La prescription est de **5 ans** en France pour ce type de créance (article L.110-4 du Code de commerce).
+
+Alternative : les sites spécialisés (AirHelp, Flightright, RefundMyTicket) prennent 25-30 % d'indemnité comme commission. Utiles si vous voulez zéro effort, mais vous perdez ¼ de l'indemnité. Avec un courrier de mise en demeure et la DGAC, la procédure est gratuite et fonctionne dans 80 % des cas.
+
+Conservez vos preuves jusqu'à obtention du paiement : carte d'embarquement, communications de la compagnie, photos de l'écran d'affichage à l'aéroport, témoignages d'autres passagers.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Combien de temps puis-je réclamer après le vol ?",
+        a: "5 ans en France, à compter de la date prévue du vol (article L.110-4 du Code de commerce, applicable aux créances commerciales). Cette prescription est plus longue que ce que prétendent souvent les compagnies aériennes (qui parlent de 2 ans pour décourager les réclamations tardives). Plus vite vous agissez, plus vous avez de chances d'obtenir gain de cause : les preuves (cartes d'embarquement, communications) sont plus accessibles dans les premiers mois. En pratique, agissez dans les 6 mois pour maximiser vos chances.",
+      },
+      {
+        q: "La compagnie m'a proposé un bon d'achat, dois-je accepter ?",
+        a: "Non, sauf si le bon d'achat est explicitement présenté en plus de l'indemnité forfaitaire. Le règlement 261/2004 prévoit une indemnité en numéraire (article 7 §3) : la compagnie ne peut pas vous imposer un avoir à la place. Si on vous propose un bon de 250-600 €, demandez par écrit si c'est en remplacement de l'indemnité forfaitaire — si oui, refusez et exigez le paiement en argent. Si la compagnie persiste, saisissez la DGAC qui rappellera à l'ordre. Acceptez les bons d'achat uniquement s'ils sont en plus de l'indemnité, en compensation des désagréments supplémentaires.",
+      },
+      {
+        q: "Mon vol était en correspondance, suis-je couvert ?",
+        a: "Oui, à condition que les deux vols aient été achetés dans une seule réservation (même billet). Si vol Paris-Doha-Singapour acheté en un seul billet, et que vous arrivez à Singapour avec 4h de retard à cause d'une annulation à Doha, l'indemnité s'applique sur la distance totale Paris-Singapour (donc 600 €). Si les vols sont achetés séparément (billet 1 Paris-Doha + billet 2 Doha-Singapour), chaque vol est traité indépendamment et seul le tronçon UE est couvert. Achetez toujours les correspondances en un seul billet pour bénéficier de la couverture complète.",
+      },
+      {
+        q: "Que faire si la compagnie me dit que c'est de la météo ?",
+        a: "Vérifiez d'abord sur Flightradar24 ou FlightStats si d'autres vols ont décollé normalement le même jour à la même heure. Si oui, l'argument météo tombe. Demandez ensuite à la compagnie une justification écrite précise (type d'événement météo, période exacte, mesures prises). Sans justification documentée, refusez. Saisissez la DGAC qui dispose des historiques météo officiels. La jurisprudence retient que seules les conditions météo rendant le vol impossible (et non simplement gênant) constituent des circonstances extraordinaires. Un orage de 30 minutes qui retarde un vol de 4h ne suffit pas si les autres avions ont décollé.",
+      },
+      {
+        q: "Puis-je cumuler indemnité et remboursement du billet ?",
+        a: "Oui pour une annulation. L'indemnité forfaitaire (250/400/600 €) est indépendante du remboursement du billet (article 8) ou du réacheminement. Si votre vol est annulé, vous avez droit au remboursement intégral du billet OU au réacheminement vers la destination (article 8 §1) ET à l'indemnité forfaitaire (article 7) ET à la prise en charge des repas et hébergement pendant l'attente (article 9). Trois compensations cumulatives. Pour un retard simple, seules l'indemnité et la prise en charge s'appliquent (vous arrivez quand même à destination).",
+      },
+      {
+        q: "Et pour les bagages perdus ou endommagés ?",
+        a: "Le règlement 261/2004 ne couvre pas les bagages. C'est la Convention de Montréal de 1999 qui s'applique : indemnisation jusqu'à environ 1 600 € par passager (1 288 droits de tirage spéciaux DTS, valeur révisée tous les 5 ans). Délais : déclaration immédiate à l'arrivée auprès du comptoir bagages de la compagnie (PIR, Property Irregularity Report) ; réclamation écrite dans les 7 jours pour bagages endommagés, 21 jours pour bagages retardés ou perdus. Conservez le PIR, les billets et les justificatifs des achats de remplacement. Sans PIR fait sur place, l'indemnisation est presque impossible à obtenir.",
+      },
+    ],
+  },
+
+  // ─── Guide 8 : Résiliation bail locataire zone tendue ───
+  {
+    slug: "resilier-bail-locataire-zone-tendue",
+    title: "Résilier son bail en zone tendue : préavis 1 mois",
+    metaTitle: "Résiliation bail zone tendue — Préavis 1 mois locataire (2026)",
+    description:
+      "En zone tendue, le préavis du locataire est réduit à 1 mois. Liste des communes concernées, motifs, procédure, modèle de lettre LRAR.",
+    relatedLetterSlug: "resiliation-bail",
+    publishedAt: "2026-05-05",
+    updatedAt: "2026-05-05",
+    readingTime: "5 min",
+    sections: [
+      {
+        heading: "Qu'est-ce qu'une « zone tendue » et pourquoi ça change tout",
+        body: `La zone tendue est un statut réglementaire défini par le décret n° 2013-392 du 10 mai 2013, modifié plusieurs fois depuis. Elle vise les communes où la demande de logement est largement supérieure à l'offre, créant des tensions sur les loyers et la disponibilité.
+
+Conséquence pratique pour le locataire : en zone tendue, le préavis de départ est réduit de 3 mois (régime classique) à **1 mois** (article 15-I de la loi du 6 juillet 1989), sans avoir à justifier d'un motif particulier. C'est un droit automatique pour tout locataire d'un logement vide situé dans une commune classée.
+
+Pour les locations meublées, le préavis est de 1 mois en zone tendue ET hors zone tendue — la zone tendue n'a pas d'effet supplémentaire.
+
+Pour les locations vides, l'écart est massif : avec un préavis de 3 mois sur un loyer de 1 000 €, vous payez 3 000 € pour un logement que vous quittez. Avec 1 mois, c'est 1 000 €. Économie typique de 2 000 € pour un déménagement.
+
+La zone tendue concerne aujourd'hui 28 agglomérations principales de plus de 50 000 habitants : Paris et toute l'Île-de-France, Lyon, Marseille, Toulouse, Bordeaux, Lille, Nice, Strasbourg, Nantes, Rennes, Montpellier, Grenoble, Annecy, Toulon, Aix-en-Provence, etc. La liste exacte est consultable sur service-public.fr et change avec les décrets de révision.`,
+      },
+      {
+        heading: "Comment vérifier que votre logement est en zone tendue",
+        body: `La vérification se fait commune par commune. Le simulateur officiel est sur service-public.fr (« Mon logement est-il situé en zone tendue ? »). Vous saisissez le code postal et la commune, et le résultat est immédiat et opposable.
+
+Attention : la zone tendue se mesure au niveau de la commune, pas du quartier ou de l'arrondissement. Tout Paris est en zone tendue, mais Marne-la-Vallée peut l'être ou pas selon les communes membres. Vérifiez précisément la commune où se situe le logement loué.
+
+Si la commune est classée, joignez la copie d'écran du simulateur service-public.fr à votre courrier de résiliation comme preuve. Le propriétaire ne peut pas contester la qualification, c'est un statut légal et public.
+
+Si la commune n'est pas classée mais que vous remplissez l'un des motifs de réduction de préavis (mutation professionnelle à plus de 70 km, perte d'emploi, premier emploi, attribution de logement social, état de santé justifiant un changement de logement), le préavis tombe aussi à 1 mois, mais sur justificatif (article 15-I de la loi de 1989).`,
+      },
+      {
+        heading: "Le contenu et l'envoi de votre lettre de résiliation",
+        body: `Votre lettre doit clairement énoncer votre intention de résilier, mentionner explicitement la zone tendue comme fondement du préavis 1 mois, et identifier la date de prise d'effet.
+
+Coordonnées complètes (vous et le bailleur ou son mandataire), adresse précise du logement loué, références du bail (date de signature, durée), et date de remise prévue des clés.
+
+Phrase clé à inclure : « Je vous informe de mon intention de résilier le bail signé le [date] pour le logement situé [adresse]. Conformément à l'article 15-I de la loi du 6 juillet 1989, le préavis applicable est réduit à 1 mois, ce logement étant situé dans la commune de [nom], classée en zone tendue par le décret n° 2013-392 du 10 mai 2013 modifié. La résiliation prendra effet le [date de réception + 1 mois]. »
+
+Joignez la capture d'écran du simulateur service-public.fr en pièce jointe. C'est facultatif mais ça évite toute discussion.
+
+Envoi obligatoirement en lettre recommandée avec accusé de réception OU remise en main propre contre récépissé daté et signé par le bailleur. L'envoi par email simple ou SMS n'est pas valide juridiquement (sauf clause contraire au bail, rare).
+
+Le préavis court à partir de la réception du courrier par le bailleur (date de l'AR signé). Pas de la date d'envoi. Si l'AR met 5 jours à être réceptionné, vous avez 5 jours de préavis en plus à payer.`,
+      },
+      {
+        heading: "Les pièges fréquents et leurs solutions",
+        body: `**Le bailleur conteste la zone tendue.** Sans fondement : la qualification est légale et opposable. Renvoyez la capture du simulateur officiel et rappelez l'article 15-I de la loi de 1989. En cas de blocage, saisissez l'ADIL de votre département (gratuit) qui contactera le bailleur pour rappeler la règle.
+
+**Le bailleur exige le paiement de 3 mois.** Refusez et payez uniquement le mois de préavis dû. Si le bailleur retient sur le dépôt de garantie les 2 mois de loyer supplémentaires qu'il prétendait dus, c'est une retenue abusive. Mettez en demeure pour restitution intégrale du dépôt + 10 % de pénalité par mois de retard (article 22 de la loi de 1989).
+
+**Le bailleur refuse de faire l'état des lieux dans le délai du préavis.** L'état des lieux doit avoir lieu le jour de la remise des clés, au plus tard. Si le bailleur tarde, fixez un rendez-vous par LRAR ou faites établir un état des lieux par huissier (200-400 €, refacturable au bailleur si retenue contestée). À défaut d'état des lieux contradictoire, le logement est présumé restitué en bon état.
+
+**Vous voulez partir avant la fin du préavis.** Possible si vous trouvez un nouveau locataire que le bailleur accepte (la « convention de cession de bail »), ou si vous payez le solde du préavis tout en remettant les clés plus tôt. Le bailleur ne peut pas vous obliger à occuper le logement pendant le préavis.
+
+**Le bail prévoit un préavis de 3 mois en zone tendue.** Cette clause est nulle (article 4 de la loi de 1989) : aucune clause du bail ne peut déroger aux règles légales protectrices du locataire. Ignorez la clause et invoquez la loi.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Comment savoir si ma commune est en zone tendue ?",
+        a: "Utilisez le simulateur officiel sur service-public.fr (« Mon logement est-il situé en zone tendue ? »). Saisissez le code postal et la commune, le résultat est immédiat. La liste actuelle couvre 28 agglomérations principales : Paris et l'Île-de-France entière, Lyon, Marseille, Toulouse, Bordeaux, Lille, Nice, Strasbourg, Nantes, Rennes, Montpellier, Grenoble, Annecy, Toulon, Aix-en-Provence et leurs communes périphériques. La qualification est commune par commune (pas quartier par quartier), et elle évolue avec les décrets de révision. Imprimez ou capturez la page de résultat comme preuve à joindre à votre lettre.",
+      },
+      {
+        q: "Le préavis 1 mois est-il automatique ou faut-il un motif ?",
+        a: "Automatique en zone tendue. Vous n'avez aucun motif à fournir, contrairement aux cas hors zone tendue qui exigent un justificatif (mutation, perte d'emploi, état de santé, etc.). Le simple fait que la commune soit classée suffit. Indiquez-le clairement dans votre lettre en citant l'article 15-I de la loi du 6 juillet 1989 et le décret n° 2013-392 du 10 mai 2013 modifié. Si le bail prévoit un préavis plus long (3 mois par exemple), cette clause est nulle et inopposable — la loi prévaut.",
+      },
+      {
+        q: "À partir de quand court le délai de préavis ?",
+        a: "À partir de la réception du courrier par le bailleur, pas de l'envoi. Pour un envoi en LRAR, c'est la date de l'accusé de réception signé qui fait foi. Si vous remettez le courrier en main propre contre récépissé, c'est la date du récépissé. Si vous envoyez en LRAR un lundi mais que le bailleur signe l'AR le vendredi suivant, le préavis démarre le vendredi. Conséquence : vous payez 5 jours de loyer supplémentaires. Pour minimiser ce risque, envoyez tôt dans la semaine et au début du mois si possible.",
+      },
+      {
+        q: "Puis-je partir avant la fin du préavis ?",
+        a: "Oui, mais vous devez payer le solde du préavis sauf accord du bailleur ou présentation d'un nouveau locataire qu'il accepte. Concrètement, vous pouvez remettre les clés à tout moment pendant le préavis sans avancer la fin du paiement. Si vous trouvez un remplaçant, demandez au bailleur de signer une « convention de cession de bail » qui transfère la location et libère votre engagement. Le bailleur n'est pas obligé d'accepter mais c'est dans son intérêt (pas d'interruption de loyer). Sans accord, vous payez jusqu'à la fin du préavis.",
+      },
+      {
+        q: "Que faire si le bailleur prétend que mon logement n'est pas en zone tendue ?",
+        a: "Imprimez la page du simulateur officiel service-public.fr montrant le statut « zone tendue » de votre commune. Renvoyez par LRAR au bailleur en citant l'article 15-I de la loi du 6 juillet 1989 et le décret n° 2013-392 du 10 mai 2013. Si le bailleur persiste, saisissez gratuitement l'ADIL (Agence départementale d'information sur le logement) de votre département. L'ADIL est neutre, gratuite, et son intervention suffit dans 90 % des cas à régler le différend. En dernier recours, le juge des contentieux de la protection (gratuit pour les litiges < 5 000 €) tranchera.",
+      },
+      {
+        q: "Le préavis 1 mois s'applique-t-il aussi en location meublée ?",
+        a: "Le préavis de 1 mois s'applique aux locations meublées partout en France, zone tendue ou pas (article 25-8 de la loi de 1989, régime spécifique aux meublés). La zone tendue n'apporte donc aucun avantage supplémentaire en meublé. Le préavis 3 mois ne concerne que les locations vides hors zone tendue. Pour les meublés étudiants (baux de 9 mois non reconductibles), il n'y a pas de préavis : le bail prend fin automatiquement à l'échéance prévue. Vérifiez bien la nature de votre contrat (vide, meublé, meublé étudiant) avant de calculer votre préavis.",
+      },
+    ],
+  },
+
+  // ─── Guide 9 : Mise en demeure livraison non effectuée e-commerce ───
+  {
+    slug: "mise-en-demeure-livraison-non-effectuee-ecommerce",
+    title: "Commande non livrée : mise en demeure du vendeur",
+    metaTitle: "Livraison non effectuée — Mise en demeure et remboursement (2026)",
+    description:
+      "Votre commande n'a pas été livrée dans les délais ? Article L.216-1 du Code de la consommation, mise en demeure, remboursement, recours.",
+    relatedLetterSlug: "mise-en-demeure-executer",
+    publishedAt: "2026-05-05",
+    updatedAt: "2026-05-05",
+    readingTime: "5 min",
+    sections: [
+      {
+        heading: "Vos droits en cas de retard de livraison",
+        body: `L'article L.216-1 du Code de la consommation impose au vendeur professionnel de livrer le bien dans le délai indiqué, et à défaut de mention, dans un délai maximum de 30 jours après la conclusion du contrat.
+
+Si le vendeur n'a pas livré dans le délai annoncé, vous avez le droit de :
+- **Lui enjoindre de livrer dans un délai supplémentaire raisonnable** (généralement 15 jours)
+- **Si la livraison n'intervient pas dans ce nouveau délai, résilier le contrat unilatéralement** par lettre recommandée (article L.216-2)
+- **Exiger le remboursement intégral des sommes versées** (article L.216-3) sous 14 jours à compter de la dénonciation, avec **intérêts de retard automatiques** au taux légal majoré au-delà.
+
+Important : la résiliation est de droit, sans intervention du juge. Le vendeur ne peut pas s'y opposer si la procédure est correctement suivie (mise en demeure préalable + délai supplémentaire respecté).
+
+Cas particulier : si vous avez précisé que la date de livraison était une condition essentielle (cadeau anniversaire, robe de mariée, événement précis), la résiliation peut être demandée immédiatement sans mise en demeure préalable (article L.216-2 §2). Conservez une preuve écrite de cette mention au moment de la commande.`,
+      },
+      {
+        heading: "La mise en demeure : étape clé",
+        body: `Pour activer vos droits, vous devez d'abord mettre le vendeur en demeure de livrer dans un délai supplémentaire raisonnable. Sans cette étape formelle, la résiliation unilatérale n'est pas valable.
+
+Votre courrier doit contenir :
+- L'identification de la commande (numéro, date, montant total payé)
+- Le rappel du délai de livraison initial annoncé et de son dépassement
+- L'enjonction explicite de livrer dans un nouveau délai (8 à 15 jours selon la nature du bien — 15 jours pour un meuble, 8 jours pour un bien standard)
+- La mention que, à défaut, vous résilierez le contrat et exigerez le remboursement intégral
+- La date butoir précise (« avant le [date] inclus »)
+- La référence aux articles L.216-1 à L.216-3 du Code de la consommation
+
+L'envoi se fait obligatoirement en lettre recommandée avec accusé de réception. Un email peut être valide si le vendeur l'a expressément accepté comme moyen de communication formel (rare en pratique).
+
+Conseil pratique : envoyez aussi une copie au service client par email pour accélérer une éventuelle réponse, mais l'envoi LRAR reste seul opposable juridiquement.
+
+Si la commande a été passée via une plateforme (Amazon, Cdiscount, FNAC marketplace), envoyez la mise en demeure au **vendeur direct** (lisible sur la facture), pas à la plateforme. La plateforme est intermédiaire, pas vendeur, sauf en marketplace gérée intégralement par elle.`,
+      },
+      {
+        heading: "Si le vendeur ne répond pas : la résiliation unilatérale",
+        body: `Sans livraison ni réponse à la fin du délai supplémentaire, envoyez une seconde lettre LRAR notifiant la résiliation du contrat et l'exigence de remboursement.
+
+Le vendeur dispose alors de **14 jours** à compter de la réception de cette dénonciation pour rembourser intégralement (article L.216-3). Au-delà, des intérêts de retard sont dus au taux légal majoré : taux légal × 1,5 entre J+1 et J+10, taux légal × 2 entre J+11 et J+30, taux légal × 5 au-delà de J+30 (article L.216-3 alinéa 3).
+
+Le remboursement doit se faire par le **même moyen de paiement** que l'achat initial (carte bancaire si vous avez payé par carte, virement si virement, etc.), sauf accord contraire. Le vendeur ne peut pas vous imposer un avoir à la place du remboursement en numéraire.
+
+Si vous avez payé par carte bancaire, en parallèle de la procédure, demandez à votre banque une **rétrofacturation** (chargeback). C'est un droit prévu par les contrats Visa et Mastercard. Délai pour réclamer : généralement 120 jours après la date de transaction. La banque enquête, et si la livraison n'a effectivement pas eu lieu, elle vous rembourse en débitant le commerçant.
+
+Si le vendeur conteste la résiliation et refuse de rembourser, saisissez le tribunal compétent (juge des contentieux de la protection jusqu'à 10 000 €, gratuit, sans avocat obligatoire).`,
+      },
+      {
+        heading: "Les autres recours et alternatives",
+        body: `**Médiateur de la consommation.** Tout vendeur professionnel doit adhérer à un médiateur de consommation et indiquer ses coordonnées dans ses CGV. La saisine est gratuite, en ligne, et le médiateur rend un avis dans 90 jours. Cet avis n'est pas contraignant mais suivi dans 80 % des cas. Avant de saisir le médiateur, vous devez avoir tenté de régler le litige directement avec le vendeur (votre LRAR fait office de tentative).
+
+**SignalConso (DGCCRF).** Plateforme officielle pour signaler une pratique commerciale problématique. Pas un service de recouvrement individuel mais utile pour alerter l'administration et déclencher une éventuelle enquête. Plus le commerçant cumule de signalements, plus il a de chances d'être sanctionné. URL : signal.conso.gouv.fr.
+
+**Centre européen des consommateurs France (CEC).** Si le vendeur est basé dans un autre pays de l'UE (achat sur un site allemand, italien, etc.), le CEC France vous accompagne gratuitement et peut intervenir avec son homologue dans le pays du vendeur. URL : europe-consommateurs.eu/fr.
+
+**Tribunal compétent.** Pour les litiges < 5 000 €, conciliation préalable obligatoire (gratuite, conciliateur de justice). Au-delà, juge des contentieux de la protection (jusqu'à 10 000 €) ou tribunal judiciaire (au-delà).
+
+**Pour les achats sur AliExpress, Amazon Marketplace, Etsy, etc.** : utilisez d'abord la procédure de protection acheteur de la plateforme (souvent efficace pour les petits montants). En parallèle, gardez la mise en demeure et la procédure légale en réserve si la plateforme rejette votre demande.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Quel est le délai légal de livraison en e-commerce ?",
+        a: "Le délai annoncé sur le site lors de la commande, ou à défaut, 30 jours maximum à compter de la conclusion du contrat (article L.216-1 du Code de la consommation). Si le vendeur indique « livraison sous 5 jours », c'est ce délai qui s'applique. S'il n'indique aucun délai précis (« sous quelques semaines »), c'est 30 jours par défaut. Pour les commandes en pré-commande ou sur stock fournisseur, le délai annoncé peut être plus long mais doit être explicite et accepté avant la commande.",
+      },
+      {
+        q: "Combien de temps attendre avant d'envoyer une mise en demeure ?",
+        a: "Dès le lendemain du dépassement du délai de livraison annoncé. Vous pouvez envoyer la mise en demeure tout de suite, ou laisser quelques jours (3-7 jours) au vendeur pour s'expliquer après une relance amiable. Au-delà de 15 jours de retard, n'attendez plus : envoyez la mise en demeure formelle avec délai supplémentaire de 8-15 jours. Plus vous laissez traîner, plus le vendeur peut prétendre que vous avez tacitement accepté le retard.",
+      },
+      {
+        q: "Puis-je obtenir un remboursement même si le bien arrive plus tard ?",
+        a: "Oui, à condition de l'avoir formellement annoncé dans votre mise en demeure et que le délai supplémentaire que vous avez fixé soit dépassé sans livraison. Si le bien arrive après votre dénonciation de résiliation, vous pouvez le refuser à la livraison (refus de prendre possession du colis) et exiger le remboursement intégral plus les frais éventuels. Si vous l'acceptez par mégarde, vous risquez de perdre votre droit de résilier — d'où l'importance de surveiller les livraisons après la dénonciation.",
+      },
+      {
+        q: "Le vendeur peut-il imposer un avoir à la place du remboursement ?",
+        a: "Non. L'article L.216-3 impose un remboursement par le même moyen de paiement que l'achat initial. Le vendeur ne peut pas vous imposer un avoir, un bon d'achat ou une carte cadeau. Vous pouvez accepter un avoir si cela vous arrange, mais c'est votre choix. En cas de tentative d'imposition, refusez par écrit et exigez le remboursement en numéraire. Si le vendeur persiste, saisissez le médiateur ou directement le juge — c'est une infraction au Code de la consommation passible d'amende administrative.",
+      },
+      {
+        q: "Que faire si le vendeur est à l'étranger (UE ou hors UE) ?",
+        a: "Pour un vendeur dans l'UE, contactez gratuitement le Centre européen des consommateurs France (europe-consommateurs.eu/fr). Le CEC traite avec son homologue dans le pays du vendeur et obtient souvent une résolution amiable. Pour un vendeur hors UE (Chine, États-Unis, etc.), les recours juridiques sont compliqués : privilégiez la rétrofacturation auprès de votre banque (carte bancaire) ou la procédure de protection acheteur de la plateforme (PayPal, AliExpress, Amazon). Pour les achats > 100 €, vérifiez avant la commande si le vendeur a une représentation en Europe — sinon, considérez le risque comme élevé.",
+      },
+      {
+        q: "Et si la commande arrive endommagée ou non conforme ?",
+        a: "C'est un cas différent du retard de livraison. Vous bénéficiez de la garantie légale de conformité (article L.217-3 du Code de la consommation) : 2 ans à compter de la réception. Vous pouvez exiger la réparation, le remplacement, ou en cas d'impossibilité, le remboursement intégral. Refusez la livraison si possible ou émettez des réserves écrites détaillées sur le bordereau de livraison (auprès du transporteur). Photographiez le colis et le contenu dès l'ouverture. Envoyez une mise en demeure dans les 15 jours en exigeant la solution choisie. La charge de la preuve incombe au vendeur les 24 premiers mois (présomption d'antériorité du défaut).",
+      },
+    ],
+  },
+
+  // ─── Guide 10 : Contestation décision CAF ───
+  {
+    slug: "contestation-decision-caf",
+    title: "Contester une décision CAF : RAPO et délais",
+    metaTitle: "Contester décision CAF — Recours amiable obligatoire (2026)",
+    description:
+      "Refus d'aide, indu CAF, prime d'activité contestée ? Procédure du recours administratif préalable obligatoire (RAPO), délais, modèle de lettre.",
+    relatedLetterSlug: "contestation-decision",
+    publishedAt: "2026-05-05",
+    updatedAt: "2026-05-05",
+    readingTime: "6 min",
+    sections: [
+      {
+        heading: "Quels types de décisions CAF peut-on contester",
+        body: `La Caisse d'allocations familiales (CAF) prend chaque jour des milliers de décisions concernant les prestations sociales : RSA, prime d'activité, APL/ALF/ALS, allocations familiales, complément familial, prestation d'accueil du jeune enfant (PAJE), allocation de soutien familial (ASF), etc.
+
+Toute décision défavorable peut être contestée :
+- **Refus d'attribution** d'une aide demandée
+- **Réduction du montant** par rapport à votre droit calculé
+- **Suspension** ou interruption d'une aide en cours
+- **Demande de remboursement d'indu** (somme jugée trop perçue)
+- **Sanction** pour fraude ou fausse déclaration
+- **Calcul de quotient familial** ou ressources contesté
+
+La CAF est tenue de motiver sa décision par écrit (article L.211-2 du Code des relations entre le public et l'administration). Si vous recevez une notification sans explication ou avec une motivation vague (« vos ressources dépassent le plafond »), exigez la motivation détaillée. C'est un droit.
+
+Conservez systématiquement toutes les notifications CAF, courriers, captures d'écran de votre espace personnel caf.fr. Ces pièces sont la base de votre dossier de contestation.`,
+      },
+      {
+        heading: "Le RAPO : recours préalable obligatoire",
+        body: `Avant de saisir le juge, vous devez impérativement passer par le **Recours Administratif Préalable Obligatoire** (RAPO) auprès de la CAF. C'est obligatoire pour toutes les décisions CAF (article L.142-4 du Code de la sécurité sociale).
+
+**Délai pour exercer le RAPO** : **2 mois** à compter de la notification de la décision contestée. Au-delà, la décision devient définitive et vous perdez tout recours. Le délai court à compter de la date de réception affichée sur la lettre, pas de sa date d'envoi.
+
+**Forme** : lettre recommandée avec accusé de réception adressée au directeur de la CAF de votre département (l'adresse figure sur la décision contestée). Vous pouvez aussi déposer le recours via votre espace personnel caf.fr (rubrique « Mes démarches » → « Contester une décision »), mais le LRAR reste recommandé pour preuve.
+
+**Contenu** :
+- Vos coordonnées (nom, prénom, numéro allocataire à 7 chiffres)
+- Référence de la décision contestée (date, type de prestation, numéro de dossier si fourni)
+- Motifs de contestation détaillés et chiffrés (« vous avez retenu un revenu de X €, alors que mon avis fiscal montre Y €, soit une différence de Z € qui me fait basculer en dessous du plafond »)
+- Pièces justificatives (avis d'imposition, fiches de paie, certificats médicaux, contrat de bail, etc.)
+- Demande explicite (révision de la décision, paiement de l'indu inversé, restitution des sommes prélevées)
+
+La CAF a **2 mois pour répondre** au RAPO (article L.142-4-1). Sans réponse à 2 mois, c'est un rejet implicite — vous pouvez alors saisir le juge.`,
+      },
+      {
+        heading: "Cas spécifique : la contestation d'indu",
+        body: `Un indu CAF est une somme que la CAF estime vous avoir versée à tort et qu'elle réclame en remboursement. Les indus sont fréquents : changement de situation non déclaré, erreur de saisie, recalcul rétroactif après réception de l'avis fiscal de l'année précédente.
+
+**La contestation suspend-elle le recouvrement ?** Non, par principe. La CAF peut commencer à prélever sur vos prestations en cours dès la notification de l'indu, même si vous contestez. Pour suspendre le recouvrement, vous devez **expressément demander le sursis à exécution** dans votre RAPO et apporter des éléments crédibles de bonne foi.
+
+**Pouvez-vous demander la remise ou la réduction de l'indu ?** Oui, en plus de la contestation au fond. Si l'indu est vraiment dû mais que vous êtes en situation financière difficile, demandez une **remise gracieuse** (totale) ou une **réduction** (partielle). La CAF examine au cas par cas selon vos ressources et charges. Joignez votre avis d'imposition, vos quittances de loyer, vos factures fixes.
+
+**Plan d'apurement** : si la dette est due et que vous ne pouvez pas la rembourser en une fois, demandez un échéancier de paiement (24 mois maximum en règle générale, jusqu'à 60 mois en cas de difficultés graves). La demande se fait en parallèle du RAPO ou indépendamment.
+
+**Indu et fraude** : si la CAF qualifie l'indu de fraude (déclaration incomplète volontaire), des pénalités s'ajoutent (article L.114-17 du Code de la sécurité sociale) et le recouvrement peut aller jusqu'au pénal. Contestez fermement la qualification de fraude si l'erreur est de bonne foi (oubli, malentendu, complexité administrative).`,
+      },
+      {
+        heading: "Si le RAPO échoue : saisir le juge",
+        body: `Si la CAF rejette votre RAPO (rejet explicite ou rejet implicite à 2 mois sans réponse), vous pouvez saisir le **pôle social du tribunal judiciaire** dans les **2 mois** suivant la notification du rejet (ou la fin du délai de réponse si rejet implicite).
+
+**Procédure** : gratuite, sans avocat obligatoire. Vous remplissez un formulaire CERFA (n° 16001) ou rédigez librement votre requête. La saisine peut se faire par courrier au greffe du tribunal compétent (votre département de résidence) ou en ligne.
+
+**Pièces à joindre** : copie de la décision CAF contestée, copie du RAPO, copie de la réponse CAF (ou preuve d'absence de réponse), tous les justificatifs au fond.
+
+**Délai d'audience** : 6 à 12 mois en moyenne. Vous pouvez être assisté gratuitement par un défenseur des droits, une association de défense des allocataires (AC ! Agir contre le chômage, ATD Quart Monde, Secours Catholique), ou un avocat (aide juridictionnelle possible selon ressources).
+
+**Décision du juge** : confirme ou annule la décision CAF. Si annulation, la CAF doit recalculer et vous verser les sommes dues, voire les intérêts de retard. Vous pouvez aussi demander des dommages-intérêts si la décision a causé un préjudice (impayés de loyer entraînant procédure d'expulsion par exemple).
+
+**Appel** : possible dans le mois suivant la décision du tribunal. La cour d'appel statue en dernier ressort sur le fond. Pour les questions de pur droit, un pourvoi en cassation reste possible.
+
+**Médiateur de la CAF** : alternative au juge dans certains cas. Chaque CAF dispose d'un médiateur saisissable gratuitement quand le RAPO a échoué et avant le tribunal. Ses avis ne sont pas contraignants mais souvent suivis. Démarche utile pour les litiges modestes ou les situations humainement complexes.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Quel est le délai pour contester une décision CAF ?",
+        a: "2 mois à compter de la notification de la décision (article L.142-4 du Code de la sécurité sociale). Le délai court à partir de la date de réception du courrier, pas de son envoi. Au-delà, la décision devient définitive et le recours est irrecevable. Pour les notifications par voie électronique sur caf.fr, le délai démarre à la date de mise à disposition du document dans votre espace personnel. Conservez l'enveloppe ou la capture d'écran de la notification — la date est essentielle pour calculer le délai. Si vous êtes hospitalisé ou empêché de recevoir le courrier, le délai peut être prolongé sur preuve.",
+      },
+      {
+        q: "Le RAPO est-il vraiment obligatoire ?",
+        a: "Oui, pour toute contestation d'une décision CAF. Si vous saisissez directement le juge sans avoir fait de RAPO préalable, votre requête sera déclarée irrecevable. Le RAPO est une étape de filtrage qui permet à la CAF de revoir sa position avant un contentieux. Statistiquement, environ 40 % des RAPO aboutissent à une révision favorable, ce qui évite le recours au juge. Faites-le sérieusement avec tous les arguments et pièces — c'est souvent le seul tour pour résoudre votre litige rapidement et gratuitement.",
+      },
+      {
+        q: "La CAF peut-elle continuer à me prélever pendant la contestation ?",
+        a: "Oui, par défaut. Le RAPO ne suspend pas automatiquement le recouvrement de l'indu. Pour obtenir un sursis, demandez explicitement le « sursis à exécution » dans votre lettre de RAPO en exposant des arguments de fond crédibles (la CAF ne l'accorde que si vos arguments paraissent sérieux et que le préjudice du recouvrement immédiat serait disproportionné). En cas de refus de sursis, vous pouvez demander un échéancier de paiement parallèlement à la contestation au fond, pour étaler la dette sur 24-60 mois. Conservez vos prestations courantes en parallèle.",
+      },
+      {
+        q: "Que faire si la CAF ne répond pas à mon RAPO ?",
+        a: "L'absence de réponse à 2 mois vaut rejet implicite (article L.142-4-1 du Code de la sécurité sociale). Vous pouvez alors saisir le pôle social du tribunal judiciaire dans les 2 mois suivants. Comptez le délai à partir du jour suivant l'expiration des 2 mois de la CAF. Conservez votre AR du RAPO comme preuve de la date de saisine. La CAF peut vous répondre tardivement entre-temps : si la réponse est défavorable, le délai pour saisir le juge repart à compter de la nouvelle notification (et non du rejet implicite antérieur). En cas de doute sur le délai, saisissez le juge dès la fin du délai de 2 mois pour ne pas être hors délai.",
+      },
+      {
+        q: "Comment demander une remise gracieuse d'indu ?",
+        a: "La remise gracieuse (totale ou partielle) est différente de la contestation au fond. Vous reconnaissez devoir l'indu mais demandez à la CAF de l'effacer ou de le réduire en raison de votre situation financière. Argumentez avec : avis d'imposition, quittances de loyer, charges fixes, situation familiale (enfants à charge, parent isolé, etc.). La CAF examine au cas par cas. Critères favorables : revenus très modestes, dettes par ailleurs, événement familial difficile (séparation, décès), erreur initiale partagée avec la CAF (mauvaise information donnée par un agent par exemple). Les remises gracieuses sont accordées dans environ 25 % des demandes correctement étayées.",
+      },
+      {
+        q: "Puis-je me faire aider gratuitement pour contester ?",
+        a: "Oui, plusieurs options gratuites. **Le défenseur des droits** (defenseurdesdroits.fr) traite les litiges avec les administrations dont la CAF — saisine en ligne, pas de RAPO préalable nécessaire pour le défenseur des droits. **Les associations de lutte contre la précarité** (Secours Catholique, ATD Quart Monde, Restos du Cœur) ont souvent des juristes bénévoles. **Les permanences juridiques gratuites** en mairie ou maison de justice et du droit (MJD) — informations en mairie. **L'aide juridictionnelle** pour saisir le juge, si vos ressources sont inférieures aux plafonds (environ 1 200 €/mois pour une personne seule). Demande à faire au tribunal judiciaire avec le formulaire CERFA n° 16146.",
+      },
+    ],
+  },
 ];
 
 export function getGuide(slug: string): Guide | undefined {
