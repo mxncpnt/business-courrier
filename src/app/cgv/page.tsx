@@ -315,9 +315,9 @@ export default function CGVPage() {
               </p>
             </div>
             <div>
-              <h5 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
+              <h3 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
                 Service
-              </h5>
+              </h3>
               <div className="flex flex-col gap-1">
                 <Link href="/catalogue" className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors">Catalogue</Link>
                 <Link href="/guides" className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors">Guides juridiques</Link>
@@ -325,9 +325,9 @@ export default function CGVPage() {
               </div>
             </div>
             <div>
-              <h5 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
+              <h3 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
                 Société
-              </h5>
+              </h3>
               <div className="flex flex-col gap-1">
                 <Link href="/mentions-legales" className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors">Mentions légales</Link>
                 <Link href="/cgv" className="text-jc-ink-soft no-underline py-1 hover:text-jc-ink transition-colors">CGV</Link>
@@ -335,9 +335,9 @@ export default function CGVPage() {
               </div>
             </div>
             <div>
-              <h5 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
+              <h3 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
                 Contact
-              </h5>
+              </h3>
               <div className="flex flex-col gap-1">
                 <span className="text-jc-ink-soft py-1">contact@justecourrier.fr</span>
                 <span className="text-jc-ink-soft py-1">Aide &amp; FAQ</span>

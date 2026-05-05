@@ -67,6 +67,8 @@ export default function TarifsPage() {
         </Link>
       </header>
 
+      <main>
+
       {/* ─── Breadcrumb ─── */}
       <div className="px-8 pt-5 max-w-[1100px] mx-auto">
         <nav className="text-[13px] text-jc-ink-muted flex items-center gap-1.5">
@@ -455,6 +457,8 @@ export default function TarifsPage() {
       </section>
 
       {/* ─── Footer ─── */}
+      </main>
+
       <footer className="border-t border-jc-line px-8 pt-12 pb-7 text-[13px] text-jc-ink-muted">
         <div className="max-w-[1200px] mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr] gap-8 pb-8">
@@ -466,9 +470,9 @@ export default function TarifsPage() {
               </p>
             </div>
             <div>
-              <h5 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
+              <h3 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
                 Service
-              </h5>
+              </h3>
               <div className="flex flex-col gap-1">
                 <Link
                   href="/catalogue"
@@ -491,9 +495,9 @@ export default function TarifsPage() {
               </div>
             </div>
             <div>
-              <h5 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
+              <h3 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
                 Société
-              </h5>
+              </h3>
               <div className="flex flex-col gap-1">
                 <Link
                   href="/mentions-legales"
@@ -516,9 +520,9 @@ export default function TarifsPage() {
               </div>
             </div>
             <div>
-              <h5 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
+              <h3 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
                 Contact
-              </h5>
+              </h3>
               <div className="flex flex-col gap-1">
                 <span className="text-jc-ink-soft py-1">
                   contact@justecourrier.fr

@@ -71,6 +71,8 @@ export default async function ProfilPage() {
         </Link>
       </header>
 
+      <main>
+
       {/* ─── Content ─── */}
       <section className="px-6 md:px-8 pt-10 pb-20 max-w-[720px] mx-auto">
         {/* Header */}
@@ -116,6 +118,8 @@ export default async function ProfilPage() {
       </section>
 
       {/* ─── Footer compact ─── */}
+      </main>
+
       <footer className="border-t border-jc-line px-8 pt-12 pb-7 text-[13px] text-jc-ink-muted">
         <div className="max-w-[1200px] mx-auto">
           <div className="border-t border-jc-line pt-5 flex justify-between flex-wrap gap-2">

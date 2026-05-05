@@ -188,6 +188,8 @@ export default async function SuccessPage({
         </div>
       </header>
 
+      <main>
+
       {/* ─── Content ─── */}
       <section className="px-6 md:px-20 pt-[72px] pb-24 max-w-[720px] mx-auto text-center">
         {/* Stamp */}
@@ -357,6 +359,8 @@ export default async function SuccessPage({
       </section>
 
       {/* ─── Footer ─── */}
+      </main>
+
       <footer className="border-t border-jc-line px-8 pt-12 pb-7 text-[13px] text-jc-ink-muted">
         <div className="max-w-[1200px] mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr] gap-8 pb-8">
@@ -368,9 +372,9 @@ export default async function SuccessPage({
               </p>
             </div>
             <div>
-              <h5 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
+              <h3 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
                 Service
-              </h5>
+              </h3>
               <div className="flex flex-col gap-1">
                 <Link
                   href="/catalogue"
@@ -393,9 +397,9 @@ export default async function SuccessPage({
               </div>
             </div>
             <div>
-              <h5 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
+              <h3 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
                 Société
-              </h5>
+              </h3>
               <div className="flex flex-col gap-1">
                 <Link
                   href="/mentions-legales"
@@ -418,9 +422,9 @@ export default async function SuccessPage({
               </div>
             </div>
             <div>
-              <h5 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
+              <h3 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
                 Contact
-              </h5>
+              </h3>
               <div className="flex flex-col gap-1">
                 <span className="text-jc-ink-soft py-1">
                   contact@justecourrier.fr

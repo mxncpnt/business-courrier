@@ -14,7 +14,10 @@
   --jc-line: #E4DFD4;
   --jc-line-strong: #C8C0AF;
   --jc-ink-soft: #34465A;
-  --jc-ink-muted: #6B7785;
+  /* Ink-muted foncé pour atteindre le ratio WCAG AA 4.5:1 sur jc-bg.
+     Avant : #6B7785 (ratio 4.3:1, juste insuffisant — Lighthouse fail).
+     Après : #525E6C (ratio ~5.5:1, marge confortable). */
+  --jc-ink-muted: #525E6C;
 
   /* Système */
   --jc-success: #2F6B45;

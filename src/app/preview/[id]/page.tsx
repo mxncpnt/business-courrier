@@ -252,9 +252,9 @@ export default async function PreviewPage({
               </p>
             </div>
             <div>
-              <h5 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
+              <h3 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
                 Service
-              </h5>
+              </h3>
               <div className="flex flex-col gap-1">
                 <Link
                   href="/catalogue"
@@ -277,9 +277,9 @@ export default async function PreviewPage({
               </div>
             </div>
             <div>
-              <h5 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
+              <h3 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
                 Société
-              </h5>
+              </h3>
               <div className="flex flex-col gap-1">
                 <Link
                   href="/mentions-legales"
@@ -302,9 +302,9 @@ export default async function PreviewPage({
               </div>
             </div>
             <div>
-              <h5 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
+              <h3 className="text-xs font-semibold tracking-[0.06em] uppercase text-jc-ink mb-3">
                 Contact
-              </h5>
+              </h3>
               <div className="flex flex-col gap-1">
                 <span className="text-jc-ink-soft py-1">
                   contact@justecourrier.fr
