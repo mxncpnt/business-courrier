@@ -403,11 +403,14 @@ export class MySendingBoxProvider implements MailProvider {
     // Notre route /api/mailings-webhook gère déjà cet event. Sans ce flag
     // (default false), MSB n'envoie jamais ce webhook.
     form.append("manage_returned_mail", "true");
-    // Adresse expéditeur imprimée (pour permettre le retour en cas de NPAI sur
-    // LR/LRAR : sans ça, courrier non distribuable = poubelle La Poste).
-    // ⚠️ À valider en sandbox : risque de doublon avec notre PDF AFNOR qui a
-    // déjà l'expéditeur en haut-gauche. Si MSB l'écrase ou le duplique, ajuster.
-    form.append("print_sender_address", "true");
+    // print_sender_address NON activé (laissé au default false) : testé en
+    // sandbox 2026-05-06 → MSB écrase l'adresse expéditeur de notre PDF AFNOR
+    // avec sa propre version, créant un conflit visuel. Pour les LR/LRAR,
+    // l'adresse expéditeur apparaît dans tous les cas sur le bordereau de
+    // dépôt généré par La Poste, donc le retour en cas de NPAI reste possible.
+    // Pour les lettres simples (verte), le risque NPAI = poubelle est accepté
+    // (pas de preuve juridique de toute façon, et `manage_returned_mail`
+    // assure la notification user).
     // Description = ID interne pour corrélation (visible dans le dashboard MSB)
     form.append("description", `JC-${internalMailingId}`);
 
