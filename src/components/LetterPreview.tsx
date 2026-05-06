@@ -132,7 +132,11 @@ export default function LetterPreview({
                   <p
                     key={`vis-${i}`}
                     style={{
-                      margin: line === "" ? "4px 0" : "0 0 3px",
+                      margin: line === "" ? "0" : "0 0 3px",
+                      // Ligne vide réduite (hauteur 0.5em ≈ moitié d'une ligne
+                      // pleine) — matche le PDF qui réduit le fontSize à 6.
+                      height: line === "" ? "0.5em" : undefined,
+                      lineHeight: line === "" ? 1 : undefined,
                       textAlign: isSignerName ? "right" : "justify",
                     }}
                   >
@@ -172,7 +176,9 @@ export default function LetterPreview({
                     key={i}
                     className="select-none"
                     style={{
-                      margin: line === "" ? "4px 0" : "0 0 3px",
+                      margin: line === "" ? "0" : "0 0 3px",
+                      height: line === "" ? "0.5em" : undefined,
+                      lineHeight: line === "" ? 1 : undefined,
                       textAlign: "justify",
                       filter: "blur(3.5px)",
                       WebkitUserSelect: "none",

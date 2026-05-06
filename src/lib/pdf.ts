@@ -131,8 +131,12 @@ const styles = StyleSheet.create({
     textAlign: "justify",
     marginBottom: 1,
   },
+  // Ligne vide entre paragraphes — hauteur réduite par rapport au flow
+  // standard (avant : fontSize hérité 10pt × 1.5 + marginBottom 6pt ≈ 7.4mm).
+  // fontSize 6 + marginBottom 0 → ligne vide ≈ 6pt × 1.5 = 3.2mm.
   bodyParagraphGap: {
-    marginBottom: 6,
+    fontSize: 6,
+    marginBottom: 0,
   },
 
   // Zone signature manuscrite (image PNG/JPG fournie par l'user)
