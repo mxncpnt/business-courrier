@@ -116,10 +116,9 @@ export default function LetterPreview({
           )}
 
           {/* ─── Corps du courrier ─── */}
-          <div className="text-[8px] leading-[1.6] text-gray-800">
+          <div className="text-[8px] leading-[1.6] text-gray-700">
             {/* Visible portion : dernière ligne non-blank (= nom du signataire)
-                alignée à droite, et signature manuscrite placée juste en-dessous,
-                également à droite. Cohérent avec le rendu PDF (`lib/pdf.ts`). */}
+                alignée à droite, autres lignes justifiées (matche le PDF). */}
             {(() => {
               const visibleLines = lines.slice(0, visibleCount);
               const lastNonBlankIdx = findLastNonBlankIndex(visibleLines);
@@ -134,7 +133,7 @@ export default function LetterPreview({
                     key={`vis-${i}`}
                     style={{
                       margin: line === "" ? "4px 0" : "0 0 3px",
-                      textAlign: isSignerName ? "right" : undefined,
+                      textAlign: isSignerName ? "right" : "justify",
                     }}
                   >
                     {line || " "}
@@ -174,6 +173,7 @@ export default function LetterPreview({
                     className="select-none"
                     style={{
                       margin: line === "" ? "4px 0" : "0 0 3px",
+                      textAlign: "justify",
                       filter: "blur(3.5px)",
                       WebkitUserSelect: "none",
                       userSelect: "none",

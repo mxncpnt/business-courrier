@@ -10,18 +10,22 @@ Font.register({
   ],
 });
 
-// ─── AFNOR NF Z 11-001 + zone fenêtre MSB ───
+// ─── AFNOR NF Z 11-001 + zone fenêtre MSB (avec marges de sécurité) ───
 // A4 = 210 x 297 mm. Paddings page : 20mm gauche, 15mm droite, 18mm haut/bas.
 //
-// Zone destinataire MSB (toujours visible enveloppe à fenêtre) :
-//   - top 40mm, left 103mm, width 97mm, height 37mm (bornes absolues)
-//   - = top 22mm, left 83mm relatifs au headerZone (compense paddings 18/20)
+// Zone fenêtre MSB stricte : top 40mm, left 103mm, width 97mm, height 37mm
+// → bornes [103, 200] × [40, 77].
 //
-// Le bloc destinataire est en `position: absolute` calé sur la zone MSB.
-// La date sort de cette zone et part dans le flow normal sous le headerZone,
-// alignée à droite (convention AFNOR), pour ne pas consommer de hauteur dans
-// la fenêtre. headerZone réserve 65mm minHeight pour laisser passer la zone
-// destinataire (22+37=59mm) + 6mm de respiration avant la date.
+// Notre zone destinataire applique 5mm de marge interne sur 2 bords pour
+// laisser du jeu (le destinataire n'utilise jamais toute la fenêtre) :
+//   top 45mm (40 + 5), left 108mm (103 + 5), bord droit 200mm, bord bas 77mm
+//   → width 92mm, height 32mm
+//   → relatif au headerZone : top 27mm, left 88mm, width 92mm
+//
+// La date suit dans le flow sous le headerZone, alignée à 108mm (= bord
+// gauche destinataire) avec marginTop 7mm → atterrit à y=84mm absolu
+// (= 7mm sous le bord bas zone fenêtre). headerZone minHeight 59mm pour
+// que son bottom tombe sur le bord bas de la zone fenêtre (77mm).
 
 const mm = (v: number) => `${v}mm`;
 
@@ -65,18 +69,19 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
 
-  // Zone destinataire — calée exactement sur la zone fenêtre MSB
-  // (top 40mm, left 103mm, width 97mm, height 37mm en absolu sur la page).
-  // En relatif au headerZone (qui hérite des paddings 18/20) :
-  //   top : 40 - 18 = 22mm
-  //   left : 103 - 20 = 83mm
-  //   width : 97mm
-  // 97mm de largeur ≈ 61 chars en 9pt / 50 chars en 10pt bold → wrap rare.
+  // Zone destinataire — 5mm de marge sur bords gauche+haut pour sécuriser.
+  // Position absolue : top 45mm, left 108mm, width 92mm (bord droit reste
+  // à 200mm, bord bas reste à 77mm — marge interne avec la zone MSB stricte).
+  // Relatif au headerZone (qui hérite des paddings 18/20) :
+  //   top : 45 - 18 = 27mm
+  //   left : 108 - 20 = 88mm
+  //   width : 92mm (200 - 108)
+  // 92mm de largeur ≈ 58 chars en 9pt / 47 chars en 10pt bold → wrap rare.
   recipientZone: {
     position: "absolute",
-    top: mm(22),
-    left: mm(83),
-    width: mm(97),
+    top: mm(27),
+    left: mm(88),
+    width: mm(92),
   },
 
   recipient: {
@@ -93,17 +98,18 @@ const styles = StyleSheet.create({
   },
 
   // Lieu et date — flow normal après le headerZone, alignée verticalement
-  // sur le bord gauche de la zone destinataire (x = 103mm absolu, donc
-  // marginLeft 83mm relatif au paddingLeft 20mm de la page). marginTop 5mm
-  // = 1 ligne d'écart sous la zone fenêtre MSB (qui finit à 77mm absolu).
-  // → date à y ≈ 82mm absolu, x ≈ 103mm absolu.
+  // sur le bord gauche de la zone destinataire (x = 108mm absolu).
+  // marginLeft 88mm = 108 - 20 (paddingLeft).
+  // marginTop 7mm → atterrit à y = 18 (paddingTop) + 59 (headerZone) + 7 = 84mm absolu.
+  // marginBottom 0 : seul l'espacement marginTop de l'objet (5mm) sépare
+  // la date du bloc objet (1 ligne d'écart, pas 2).
   dateRow: {
     fontSize: 9,
     color: "#333",
     textAlign: "left",
-    marginLeft: mm(83),
-    marginTop: mm(5),
-    marginBottom: mm(5),
+    marginLeft: mm(88),
+    marginTop: mm(7),
+    marginBottom: 0,
   },
 
   // Objet — 1 ligne d'écart avant et après le bloc
@@ -116,9 +122,13 @@ const styles = StyleSheet.create({
     textDecoration: "underline",
   },
 
-  // Corps — espacement compacté pour maximiser le contenu sur 1 page
+  // Corps — taille et couleur alignées sur les lignes d'adresse (9pt #333).
+  // textAlign justify : @react-pdf justifie les lignes intermédiaires d'un
+  // paragraphe qui wrap (la dernière reste à gauche, comportement classique).
   bodyLine: {
-    fontSize: 10,
+    fontSize: 9,
+    color: "#333",
+    textAlign: "justify",
     marginBottom: 1,
   },
   bodyParagraphGap: {
@@ -140,9 +150,11 @@ const styles = StyleSheet.create({
     objectFit: "contain",
   },
   // Style spécifique pour la dernière ligne du corps = nom typé du signataire,
-  // aligné à droite (cohérent avec la signature manuscrite juste en-dessous)
+  // aligné à droite (cohérent avec la signature manuscrite juste en-dessous).
+  // Taille/couleur alignées sur le reste du corps (9pt #333).
   bodyLineSignerName: {
-    fontSize: 10,
+    fontSize: 9,
+    color: "#333",
     marginBottom: 1,
     textAlign: "right",
   },

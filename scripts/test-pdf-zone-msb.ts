@@ -1,7 +1,9 @@
 // Génère 2 PDFs (cas standard + cas-limite) pour vérifier que le bloc
 // destinataire reste dans la zone fenêtre MSB :
-//   - top 40mm, left 103mm, width 97mm, height 37mm
-//   - bornes : x ∈ [103, 200], y ∈ [40, 77] depuis le bord page A4
+//   - zone MSB stricte : top 40mm, left 103mm, width 97mm, height 37mm
+//   - notre zone applicative : top 45mm, left 108mm, width 92mm, height 32mm
+//     (5mm de marge interne sur bord gauche + bord haut)
+//   - bornes effectives destinataire : x ∈ [108, 200], y ∈ [45, 77]
 //
 // La mesure de position se fait dans un script Python séparé (pdfminer.six)
 // pour éviter d'ajouter pdfjs-dist en dépendance Node.
@@ -62,7 +64,9 @@ async function main() {
       formData: c.formData,
       letterTitle: "Test zone destinataire MSB",
     });
-    const out = `/tmp/test-zone-msb-${c.name}.pdf`;
+    // Sortie dans le dossier Cowork (visible par Claude via le mount + le user
+    // peut l'ouvrir d'un double-clic depuis Finder)
+    const out = `/Users/max/Documents/Cowork/Business-courrier/test-zone-msb-${c.name}.pdf`;
     writeFileSync(out, buf);
     console.log(`OK ${c.name} -> ${out}`);
   }
