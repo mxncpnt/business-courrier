@@ -85,6 +85,17 @@ function addImagePage(merged: PDFDocument, image: EmbeddedImage): void {
  * Merge le PDF principal avec les pièces jointes (PDF, JPEG, PNG).
  * Erreur sur une PJ → log + skip cette PJ, le merge continue avec les autres.
  *
+ * **Page blanche d'alignement duplex** : si le courrier fait exactement 1 page
+ * et qu'il y a au moins une PJ, on insère une page blanche A4 entre le courrier
+ * et les PJ. MSB imprime par défaut en recto-verso ; cette page blanche
+ * "consomme" le verso de la feuille 1 pour que les PJ démarrent toujours sur
+ * un recto (feuille 2). Si le courrier fait 2 pages, l'alignement est naturel
+ * (recto-verso de la feuille 1) et aucune page blanche n'est nécessaire.
+ *
+ * Cette page blanche n'est PAS comptée dans la limite `MAX_MERGED_PAGES = 5`
+ * (la limite est vérifiée à l'upload PJ sur l'estimation `ESTIMATED_LETTER_PAGES
+ * + existingPages`, pas sur le merge final).
+ *
  * @param primaryPdf Buffer du PDF principal (courrier AFNOR)
  * @param attachments Liste des PJ depuis le snapshot DB (mailings.attachments jsonb)
  * @param supabase Client Supabase pour télécharger les PJ depuis Storage. Si non
@@ -97,6 +108,12 @@ export async function mergePdfWithAttachments(
 ): Promise<Buffer> {
   const sb = supabase ?? createServiceClient();
   const merged = await PDFDocument.load(new Uint8Array(primaryPdf));
+
+  // Page blanche d'alignement duplex : seulement si courrier 1p + au moins 1 PJ.
+  // A4 = 595.28 × 841.89 pt (210mm × 297mm).
+  if (merged.getPageCount() === 1 && attachments.length > 0) {
+    merged.addPage([595.28, 841.89]);
+  }
 
   for (const att of attachments) {
     try {
