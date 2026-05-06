@@ -43,11 +43,22 @@ export default async function PreviewPage({
   // l'édition une fois que le courrier a été remis à La Poste, et pour
   // afficher le bouton "Confirmer et envoyer à La Poste" quand le mailing
   // est en attente de confirmation utilisateur (status='paid').
-  const { data: mailing } = await supabase
+  //
+  // Robustesse : on prend le PLUS RÉCENT mailing (= celui qui correspond au
+  // dernier checkout). Il peut arriver qu'on ait des mailings orphelins en
+  // status='pending' (double-clic checkout, retour navigateur, session
+  // Stripe abandonnée). Sans ce tri, `.maybeSingle()` échouait sur 2 rows
+  // et le bouton "Confirmer et envoyer" disparaissait silencieusement.
+  // Bug observé prod 2026-05-06 sur lettre simple — fix défensif.
+  const { data: mailings } = await supabase
     .from("mailings")
-    .select("id, status, mode")
+    .select("id, status, mode, stripe_checkout_session_id")
     .eq("letter_id", letter.id)
-    .maybeSingle();
+    .order("created_at", { ascending: false })
+    .limit(2);
+  // On préfère un mailing payé/soumis sur un pending orphelin
+  const mailing =
+    mailings?.find((m) => m.status !== "pending") ?? mailings?.[0] ?? null;
   const LOCKED_STATUSES = new Set([
     "submitted",
     "in_transit",
