@@ -126,6 +126,18 @@ export async function POST(req: NextRequest) {
         mime_type: a.mimeType,
       }));
 
+    // Si un mailing pending existe déjà pour cette letter (= checkout
+    // initié plusieurs fois — double-clic, retour navigateur, session
+    // Stripe abandonnée), on le supprime avant d'en créer un nouveau.
+    // Évite l'orphelin qui faisait disparaître le bouton "Confirmer et
+    // envoyer" sur /preview/[id] (bug observé prod 2026-05-06).
+    await supabase
+      .from("mailings")
+      .delete()
+      .eq("letter_id", letterId)
+      .eq("status", "pending")
+      .is("stripe_checkout_session_id", null);
+
     // Créer le mailings row en pending
     const { data: mailing, error: mailingError } = await supabase
       .from("mailings")
