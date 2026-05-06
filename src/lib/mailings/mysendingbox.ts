@@ -399,6 +399,15 @@ export class MySendingBoxProvider implements MailProvider {
     // pour que les PJ démarrent toujours sur un recto. Économie côté MSB
     // (~2x moins de feuilles) à confirmer sur la facturation réelle.
     form.append("both_sides", "true");
+    // Notification webhook si NPAI (adresse fausse) — `letter.wrong_address`.
+    // Notre route /api/mailings-webhook gère déjà cet event. Sans ce flag
+    // (default false), MSB n'envoie jamais ce webhook.
+    form.append("manage_returned_mail", "true");
+    // Adresse expéditeur imprimée (pour permettre le retour en cas de NPAI sur
+    // LR/LRAR : sans ça, courrier non distribuable = poubelle La Poste).
+    // ⚠️ À valider en sandbox : risque de doublon avec notre PDF AFNOR qui a
+    // déjà l'expéditeur en haut-gauche. Si MSB l'écrase ou le duplique, ajuster.
+    form.append("print_sender_address", "true");
     // Description = ID interne pour corrélation (visible dans le dashboard MSB)
     form.append("description", `JC-${internalMailingId}`);
 
