@@ -394,7 +394,11 @@ export class MySendingBoxProvider implements MailProvider {
     form.append("postage_type", MODE_TO_POSTAGE[mode]);
     // MSB attend "bw" (noir et blanc) ou "color" — pas un booléen
     form.append("color", "bw");
-    form.append("both_sides", "false");
+    // Impression recto-verso (duplex) — décidé 2026-05-06.
+    // Cohérent avec la page blanche d'alignement insérée par lib/mailings/merge.ts
+    // pour que les PJ démarrent toujours sur un recto. Économie côté MSB
+    // (~2x moins de feuilles) à confirmer sur la facturation réelle.
+    form.append("both_sides", "true");
     // Description = ID interne pour corrélation (visible dans le dashboard MSB)
     form.append("description", `JC-${internalMailingId}`);
 
