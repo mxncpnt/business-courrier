@@ -6,6 +6,7 @@ import { createServiceClient } from "@/lib/supabase/server";
 import { createAuthClient } from "@/lib/supabase/server-auth";
 import { generateLetter } from "@/lib/claude";
 import { getLetterType } from "@/config/letter-types";
+import { isTestEnv } from "@/lib/env-mode";
 
 const baseSchema = z.object({
   sender_firstname: z.string().min(1, "Prénom requis"),
@@ -81,6 +82,7 @@ export async function submitLetterForm(
       type: letterTypeSlug,
       form_data: rawData,
       status: "draft",
+      is_test: isTestEnv(),
       ...(userId ? { user_id: userId } : {}),
     })
     .select("id")

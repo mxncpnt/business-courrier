@@ -1,5 +1,6 @@
 import { createServiceClient } from "@/lib/supabase/server";
 import { formatInvoiceNumber } from "@/config/business";
+import { isTestEnv } from "@/lib/env-mode";
 
 interface CreateInvoiceParams {
   letterId: string;
@@ -48,6 +49,7 @@ export async function createInvoice(params: CreateInvoiceParams) {
       amount_cents: params.amountCents,
       stripe_payment_intent_id: params.stripePaymentIntentId ?? null,
       paid_at: params.paidAt,
+      is_test: isTestEnv(),
     })
     .select()
     .single();

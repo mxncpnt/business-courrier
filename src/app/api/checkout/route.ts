@@ -4,6 +4,7 @@ import { createServiceClient } from "@/lib/supabase/server";
 import { createAuthClient } from "@/lib/supabase/server-auth";
 import { getLetterType } from "@/config/letter-types";
 import { MAILING_MODES, type MailingMode } from "@/config/mailings";
+import { isTestEnv } from "@/lib/env-mode";
 import type { PostalAddress } from "@/lib/mailings/provider";
 import type { AttachmentInfo } from "@/app/preview/[id]/actions";
 
@@ -157,6 +158,8 @@ export async function POST(req: NextRequest) {
         status: "pending",
         // Pièces jointes
         attachments: safeAttachments,
+        // Tag environnement (test/live) pour filtrage admin
+        is_test: isTestEnv(),
       })
       .select("id")
       .single();

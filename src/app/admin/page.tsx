@@ -11,7 +11,13 @@ export const metadata = {
   robots: "noindex, nofollow",
 };
 
-export default async function AdminPage() {
+type EnvFilter = "live" | "test" | "all";
+
+interface AdminPageProps {
+  searchParams: Promise<{ env?: string }>;
+}
+
+export default async function AdminPage({ searchParams }: AdminPageProps) {
   // ─── Auth + admin check ───
   const authClient = await createAuthClient();
   const {
@@ -21,6 +27,19 @@ export default async function AdminPage() {
   if (!user || !(business.adminEmails as readonly string[]).includes(user.email ?? "")) {
     redirect("/");
   }
+
+  // ─── Filtre env (test/live/all) — default live ───
+  // Source de vérité = colonne `is_test` sur les tables business (tagged à
+  // l'insert via lib/env-mode.ts → isTestEnv()).
+  //   isTestValue === null → pas de filtre (mode "all")
+  //   isTestValue === true → uniquement les enregistrements is_test = true
+  //   isTestValue === false → uniquement live (default)
+  const sp = await searchParams;
+  const envParam = sp.env;
+  const envFilter: EnvFilter =
+    envParam === "test" || envParam === "all" ? envParam : "live";
+  const isTestValue: boolean | null =
+    envFilter === "all" ? null : envFilter === "test";
 
   const supabase = createServiceClient();
 
@@ -42,6 +61,34 @@ export default async function AdminPage() {
     1
   ).toISOString();
 
+  // Construction des requêtes — on applique conditionnellement le filtre
+  // is_test selon envFilter. Quand isTestValue est null (mode "all"), on
+  // saute le .eq.
+  const allLettersQ = supabase
+    .from("letters")
+    .select("id, status, created_at")
+    .order("created_at", { ascending: false });
+  const paidLettersQ = supabase
+    .from("payments")
+    .select("amount_cents, created_at, letter_id, status")
+    .eq("status", "succeeded");
+  const invoicesQ = supabase
+    .from("invoices")
+    .select(
+      "id, invoice_number, customer_name, customer_email, description, amount_cents, paid_at, letter_id"
+    )
+    .order("paid_at", { ascending: false })
+    .limit(50);
+  const recentOrdersQ = supabase
+    .from("letters")
+    .select("id, type, status, email, created_at, paid_at, user_id")
+    .order("created_at", { ascending: false })
+    .limit(20);
+  const customersQ = supabase
+    .from("letters")
+    .select("user_id", { count: "exact", head: true })
+    .not("user_id", "is", null);
+
   const [
     { data: allLetters },
     { data: paidLetters },
@@ -49,35 +96,11 @@ export default async function AdminPage() {
     { data: recentOrders },
     { count: totalCustomers },
   ] = await Promise.all([
-    // Total courriers
-    supabase
-      .from("letters")
-      .select("id, status, created_at")
-      .order("created_at", { ascending: false }),
-    // Courriers payés avec montants
-    supabase
-      .from("payments")
-      .select("amount_cents, created_at, letter_id, status")
-      .eq("status", "succeeded"),
-    // Factures
-    supabase
-      .from("invoices")
-      .select(
-        "id, invoice_number, customer_name, customer_email, description, amount_cents, paid_at, letter_id"
-      )
-      .order("paid_at", { ascending: false })
-      .limit(50),
-    // Commandes récentes (20 dernières)
-    supabase
-      .from("letters")
-      .select("id, type, status, email, created_at, paid_at, user_id")
-      .order("created_at", { ascending: false })
-      .limit(20),
-    // Clients uniques
-    supabase
-      .from("letters")
-      .select("user_id", { count: "exact", head: true })
-      .not("user_id", "is", null),
+    isTestValue === null ? allLettersQ : allLettersQ.eq("is_test", isTestValue),
+    isTestValue === null ? paidLettersQ : paidLettersQ.eq("is_test", isTestValue),
+    isTestValue === null ? invoicesQ : invoicesQ.eq("is_test", isTestValue),
+    isTestValue === null ? recentOrdersQ : recentOrdersQ.eq("is_test", isTestValue),
+    isTestValue === null ? customersQ : customersQ.eq("is_test", isTestValue),
   ]);
 
   // ─── Stats ───
@@ -129,13 +152,20 @@ export default async function AdminPage() {
 
       <section className="px-6 md:px-8 pt-10 pb-20 max-w-[1100px] mx-auto">
         {/* ─── Header ─── */}
-        <div className="mb-8">
+        <div className="mb-6">
           <span className="text-xs font-semibold tracking-[0.08em] uppercase text-red-500 font-body">
             Administration
           </span>
           <h1 className="mt-2 text-[28px] sm:text-[36px] font-display font-bold text-jc-ink">
             Tableau de bord
           </h1>
+        </div>
+
+        {/* ─── Toggle Test/Live/Tous ─── */}
+        <div className="mb-8 inline-flex items-center gap-1 p-1 bg-jc-surface rounded-jc-sm border border-jc-line">
+          <EnvTab href="/admin" label="Live" active={envFilter === "live"} />
+          <EnvTab href="/admin?env=test" label="Test" active={envFilter === "test"} />
+          <EnvTab href="/admin?env=all" label="Tous" active={envFilter === "all"} />
         </div>
 
         {/* ─── KPI Cards ─── */}
@@ -304,6 +334,29 @@ export default async function AdminPage() {
 }
 
 // ─── Components ───
+
+function EnvTab({
+  href,
+  label,
+  active,
+}: {
+  href: string;
+  label: string;
+  active: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`px-3 py-1.5 text-xs font-semibold rounded-jc-sm transition-colors no-underline ${
+        active
+          ? "bg-jc-bg text-jc-ink shadow-sm"
+          : "text-jc-ink-muted hover:text-jc-ink"
+      }`}
+    >
+      {label}
+    </Link>
+  );
+}
 
 function KpiCard({ label, value }: { label: string; value: string }) {
   return (

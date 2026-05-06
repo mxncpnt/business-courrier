@@ -4,6 +4,7 @@ import { createServiceClient } from "@/lib/supabase/server";
 import { sendConfirmationEmail } from "@/lib/email";
 import { getLetterType } from "@/config/letter-types";
 import { createInvoice } from "@/lib/invoice";
+import { isTestEnv } from "@/lib/env-mode";
 import {
   getMailingModeConfig,
   type MailingMode,
@@ -76,6 +77,7 @@ export async function POST(req: NextRequest) {
         stripe_payment_intent_id: paymentIntentId,
         amount_cents: amountCents,
         status: "succeeded",
+        is_test: isTestEnv(),
       })
       .select("id")
       .single();
