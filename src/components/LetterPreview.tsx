@@ -117,11 +117,12 @@ export default function LetterPreview({
 
           {/* ─── Corps du courrier ─── */}
           <div className="text-[8px] leading-[1.6] text-gray-700">
-            {/* Visible portion : dernière ligne non-blank (= nom du signataire)
-                alignée à droite, autres lignes justifiées (matche le PDF). */}
+            {/* Visible portion : seul le vrai nom du signataire (= dernière
+                ligne non-blank du courrier complet) est aligné à droite. Sinon
+                la dernière ligne de la portion visible serait marquée à tort
+                comme signataire et alignée droite avant la zone floutée. */}
             {(() => {
-              const visibleLines = lines.slice(0, visibleCount);
-              const lastNonBlankIdx = findLastNonBlankIndex(visibleLines);
+              const lastNonBlankIdx = findLastNonBlankIndex(lines);
               const renderedLines: React.ReactNode[] = [];
 
               for (let i = 0; i < visibleCount; i++) {
