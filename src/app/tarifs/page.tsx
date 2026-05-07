@@ -6,7 +6,7 @@ import { buildPricingProduct, buildBreadcrumb } from "@/lib/jsonld";
 export const metadata = {
   title: "Tarifs",
   description:
-    "Trois prix simples, sans abonnement : courrier PDF à 3,90 €, lettre simple postée à 5,90 €, recommandé avec accusé de réception à 11,90 €. Affranchissement refacturé au prix coûtant.",
+    "Trois prix simples sans abonnement : PDF 3,90 €, lettre simple postée 5,90 €, recommandé AR 11,90 €. Affranchissement au prix coûtant.",
   alternates: { canonical: "/tarifs" },
 };
 

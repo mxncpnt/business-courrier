@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s — JusteCourrier",
   },
   description:
-    "Résiliation, mise en demeure, réclamation, contestation… Remplis un formulaire, notre IA rédige un courrier professionnel adapté à ta situation. PDF dès 3,90 €, ou nous le déposons à La Poste pour toi en lettre verte (5,90 €) ou recommandé avec AR (11,90 €). Signature manuscrite incluse.",
+    "Résiliation, mise en demeure, réclamation… Notre IA rédige le courrier, on le poste pour toi. PDF 3,90 €, envoi 5,90 € ou recommandé AR 11,90 €.",
   metadataBase: new URL(APP_URL),
   openGraph: {
     type: "website",
@@ -42,13 +42,13 @@ export const metadata: Metadata = {
     siteName: "JusteCourrier",
     title: "JusteCourrier — Ton courrier administratif, simple et juste",
     description:
-      "Résiliation, mise en demeure, réclamation, contestation… Remplis un formulaire, notre IA rédige un courrier professionnel adapté à ta situation. PDF dès 3,90 €, ou nous le déposons à La Poste pour toi en lettre verte (5,90 €) ou recommandé avec AR (11,90 €). Signature manuscrite incluse.",
+      "Résiliation, mise en demeure, réclamation… Notre IA rédige le courrier, on le poste pour toi. PDF 3,90 €, envoi 5,90 € ou recommandé AR 11,90 €.",
   },
   twitter: {
     card: "summary_large_image",
     title: "JusteCourrier — Ton courrier administratif, simple et juste",
     description:
-      "Résiliation, mise en demeure, réclamation, contestation… Remplis un formulaire, notre IA rédige un courrier professionnel adapté à ta situation. PDF dès 3,90 €, ou nous le déposons à La Poste pour toi en lettre verte (5,90 €) ou recommandé avec AR (11,90 €). Signature manuscrite incluse.",
+      "Résiliation, mise en demeure, réclamation… Notre IA rédige le courrier, on le poste pour toi. PDF 3,90 €, envoi 5,90 € ou recommandé AR 11,90 €.",
   },
   // ⚠️ Pas de `alternates.canonical` ici : un canonical au niveau du root layout
   // s'applique par défaut à TOUTES les pages enfants qui ne l'overrident pas et

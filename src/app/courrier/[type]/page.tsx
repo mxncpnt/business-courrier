@@ -30,9 +30,14 @@ export async function generateMetadata({
   const letterType = getLetterType(type);
   if (!letterType) return {};
 
+  // SEO/CTR : title.absolute pour skipper le template "%s — JusteCourrier" du
+  // root layout, et y inclure différenciateur (Lettre IA) + prix (3,90 €) qui
+  // boostent le CTR en SERP. Cible <60 chars ; description <160 chars.
   return {
-    title: letterType.title,
-    description: `${letterType.description} Courrier professionnel rédigé par IA, prêt à envoyer dès 3,90 €.`,
+    title: {
+      absolute: `${letterType.title} · Lettre IA dès 3,90 €`,
+    },
+    description: `${letterType.description} Courrier rédigé par IA, conforme AFNOR. PDF 3,90 €, envoi La Poste dès 5,90 €.`,
     alternates: {
       canonical: `/courrier/${type}`,
     },
