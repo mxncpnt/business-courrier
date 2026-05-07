@@ -26,7 +26,10 @@ export async function generateMetadata({
   if (!guide) return {};
 
   return {
-    title: guide.metaTitle,
+    // title.absolute pour skipper le template "%s — JusteCourrier" du root
+    // layout : les metaTitle des guides incluent déjà leur propre suffixe
+    // descriptif (ex: "— Modèle et procédure"), pas besoin du suffixe marque.
+    title: { absolute: guide.metaTitle },
     description: guide.description,
     alternates: {
       canonical: `/guides/${slug}`,
