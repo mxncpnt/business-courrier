@@ -897,6 +897,580 @@ La CAF a **2 mois pour répondre** au RAPO (article L.142-4-1). Sans réponse à
       },
     ],
   },
+
+  // ─── Guide 11 : Contester un PV de stationnement ───
+  {
+    slug: "contester-pv-stationnement",
+    title: "Contester un PV de stationnement : procédure complète",
+    metaTitle: "Contester un PV de stationnement — Procédure et lettre type",
+    description:
+      "Délai 45 jours, OMP, FPS, CCSP : procédure complète pour contester un PV de stationnement. Motifs valables, lettre recommandée, recours.",
+    relatedLetterSlug: "contestation-amende",
+    publishedAt: "2026-05-15",
+    updatedAt: "2026-05-15",
+    readingTime: "6 min",
+    sections: [
+      {
+        heading: "PV classique ou FPS : deux régimes différents",
+        body: `Avant de contester, identifiez le type d'amende reçue. Depuis la dépénalisation du stationnement payant en 2018, deux régimes coexistent et leurs procédures de contestation sont radicalement différentes.
+
+**Le PV classique** (amende forfaitaire, 35 €) concerne les infractions au stationnement gênant, dangereux, abusif ou interdit (zone bleue, livraison, handicapé, trottoir, passage piéton). Il relève du Code de la route et se conteste auprès de **l'Officier du Ministère Public (OMP)** dans un délai de **45 jours** à compter de l'envoi de l'avis ou de l'apposition sur le pare-brise.
+
+**Le FPS** (Forfait Post-Stationnement, 17 à 75 € selon les villes) concerne le défaut ou l'insuffisance de paiement du stationnement payant. Il est émis par la commune ou son délégataire (Streeteo, Indigo, etc.) et relève du Code général des collectivités territoriales. Le recours se fait en deux étapes : **RAPO** (Recours Administratif Préalable Obligatoire) auprès de la commune dans un délai de **1 mois**, puis si rejet, saisine de la **Commission du Contentieux du Stationnement Payant (CCSP)** à Limoges.
+
+Le numéro d'amende et le formulaire de contestation joint au PV indiquent toujours quel régime s'applique. En cas de doute, regardez si l'amende est libellée "Forfait post-stationnement" (= FPS) ou "Amende forfaitaire" (= PV classique).`,
+      },
+      {
+        heading: "Les motifs recevables pour contester",
+        body: `Tous les motifs ne sont pas recevables. La jurisprudence a fixé une liste limitative des arguments qui peuvent annuler une amende.
+
+**Motifs valables couramment retenus** :
+- **Erreur de plaque d'immatriculation** sur le PV (faute de saisie de l'agent)
+- **Vol ou cession du véhicule** au moment des faits, justifié par le récépissé de plainte ou le certificat de cession
+- **Défaut de signalisation** : signalisation absente, illisible ou contradictoire (panneaux à vérifier sur place et à photographier)
+- **Force majeure** : panne mécanique attestée par dépanneur, urgence médicale attestée par hospitalisation
+- **Erreur sur le lieu** mentionné sur le PV (rue inexistante, numéro qui n'existe pas)
+- **Stationnement régulier non détecté** : ticket horodateur valide non vu par l'agent, abonnement résident en cours
+
+**Motifs systématiquement rejetés** :
+- "Je n'ai pas vu le panneau" (vous êtes responsable de votre véhicule)
+- "C'était juste 5 minutes" (la durée n'a pas d'incidence)
+- "Quelqu'un d'autre conduisait" (sauf cession formelle ou vol)
+- "L'horodateur ne fonctionnait pas" (sauf preuve photo + appel signalé)
+- Motifs financiers ("je n'ai pas les moyens")
+
+Joignez systématiquement vos preuves : photos datées du panneau, du véhicule, du ticket, du contexte. Sans preuve photographique, votre contestation a peu de chances d'aboutir.`,
+      },
+      {
+        heading: "La procédure pas-à-pas pour contester",
+        body: `**Pour un PV classique (amende forfaitaire)** :
+
+1. Récupérez le numéro de l'avis (en haut du PV) et l'avis d'amende (envoyé par courrier 5 à 10 jours après les faits).
+2. Rédigez votre **requête en exonération** ou **requête en annulation** sur formulaire bleu joint au PV, ou par courrier libre adressé à l'**OMP** (adresse au verso du PV).
+3. Important : **ne payez pas avant de contester**. Le paiement vaut reconnaissance et éteint le droit de contester (article 529-2 du Code de procédure pénale).
+4. Envoyez le tout en **lettre recommandée avec accusé de réception** dans le délai de 45 jours. Joignez vos pièces justificatives (photos, preuves) en copies.
+5. L'OMP a 1 an pour répondre. Trois issues : classement (annulation), maintien de l'amende, ou transmission au tribunal de police pour jugement.
+
+**Pour un FPS** (procédure plus complexe) :
+
+1. **Étape 1** : déposer un **RAPO** auprès de l'autorité émettrice (commune ou délégataire) dans le mois suivant l'avis. Souvent en ligne sur ant.gouv.fr ou directement sur le site de la mairie. Joindre le formulaire fourni avec le FPS et les justificatifs.
+2. **Étape 2** : si rejet ou silence pendant 1 mois (= rejet implicite), saisine de la **CCSP** à Limoges (https://www.ccsp.fr) dans un mois supplémentaire. **Attention** : il faut **payer le FPS d'abord** ou justifier d'une demande de remise gracieuse acceptée pour que la CCSP examine le dossier (article R.2333-120-15 CGCT). Cette obligation de paiement préalable a été contestée mais reste en vigueur.
+3. La CCSP rend une décision dans 6 à 12 mois. Si vous gagnez, le FPS est remboursé.`,
+      },
+      {
+        heading: "Les pièges courants et les recours en cas d'échec",
+        body: `**Piège 1 — Le délai de 45 jours qui court depuis l'envoi**, pas depuis la réception. Si l'avis met 10 jours à arriver chez vous, vous avez en réalité 35 jours pour contester. Agissez vite. La date qui fait foi est la date de l'enveloppe ou du cachet de la Poste.
+
+**Piège 2 — La majoration automatique en cas de retard**. Sans contestation ni paiement à 45 jours, l'amende passe à **75 €** (forfait majoré). Au-delà de 60 jours, la procédure de recouvrement par le Trésor public démarre, avec frais supplémentaires.
+
+**Piège 3 — La saisie sur compte bancaire** sans préavis. À défaut de paiement, le Trésor public peut saisir directement votre compte au bout de quelques mois (avis à tiers détenteur, ATD). Pour bloquer cette saisie, il faut contester en référé devant le juge de l'exécution.
+
+**Recours après échec de la première contestation** :
+- Pour un PV classique : si l'OMP rejette, le dossier est transmis au **tribunal de police** qui jugera en audience publique. Vous pouvez vous y présenter seul ou avec un avocat (non obligatoire). Le juge peut classer, condamner à l'amende initiale, ou aggraver jusqu'à 750 €.
+- Pour un FPS : si la CCSP rejette, vous pouvez faire un **pourvoi en cassation** auprès du Conseil d'État dans les 2 mois. Procédure réservée aux questions de droit, avocat au Conseil d'État obligatoire (3 000 à 8 000 €). Disproportionné pour la plupart des FPS.
+
+En dernier recours, **le défenseur des droits** peut être saisi gratuitement (defenseurdesdroits.fr) pour les litiges avec une administration. Son intervention est non contraignante mais peut débloquer un dossier en 3-6 mois.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Quel est le délai pour contester un PV ?",
+        a: "**45 jours** pour un PV classique (amende forfaitaire) à compter de l'envoi de l'avis ou de l'apposition sur le pare-brise (article 529-2 du Code de procédure pénale). **1 mois** pour un FPS (forfait post-stationnement) à compter de la notification, pour déposer le RAPO. Au-delà, l'amende devient définitive et fait l'objet d'une majoration (75 € pour le PV classique). Calculez le délai sur la date d'envoi figurant sur l'enveloppe ou la date d'apposition mentionnée sur le PV, pas sur la date de réception. Pour gagner du temps, déposez votre contestation en ligne via ant.gouv.fr (PV classique) ou sur le portail de la commune (FPS).",
+      },
+      {
+        q: "Faut-il payer l'amende avant de contester ?",
+        a: "**PV classique : NON, surtout pas.** Le paiement éteint votre droit de contester (article 529-2 du Code de procédure pénale). Une fois payé, l'amende est purgée et toute contestation devient irrecevable. Les sites officiels affichent souvent un encart \"contester\" à côté du paiement, suivez ce lien. **FPS : OUI, malheureusement.** Le paiement préalable est obligatoire pour saisir la CCSP au stade 2 (article R.2333-120-15 CGCT). Au stade 1 (RAPO auprès de la commune), pas de paiement préalable. C'est une particularité critiquée du FPS : vous devez avancer la somme même en contestation.",
+      },
+      {
+        q: "Mon véhicule a été volé : comment éviter le PV ?",
+        a: "Joignez à votre contestation une copie du **récépissé de plainte pour vol** déposée à la gendarmerie ou au commissariat. La date de la plainte doit être antérieure ou contemporaine aux faits du PV. Si la plainte est déposée après les faits, ajoutez tout élément qui établit que vous n'aviez plus le contrôle du véhicule au moment des faits (témoins, traceur GPS, etc.). L'OMP classe systématiquement le dossier dans ce cas. Si le voleur a pris d'autres PV, contestez chacun d'eux avec la même preuve, en mentionnant chaque numéro d'amende dans une lettre groupée par LRAR.",
+      },
+      {
+        q: "J'ai vendu ma voiture mais reçois encore des PV : que faire ?",
+        a: "Joignez à votre contestation la **déclaration de cession** (CERFA 15776) signée par les deux parties et la copie du certificat de cession remis à l'ANTS dans les 15 jours suivant la vente (article R.322-4 du Code de la route). Si vous n'avez pas fait cette déclaration dans les délais, vous restez juridiquement responsable, mais l'OMP accepte généralement la contestation si vous prouvez la cession effective (chèque, témoins, contrat). Conseil pour le futur : faites toujours la cession en ligne sur ants.gouv.fr le jour même de la vente. Conservez la confirmation par email pendant 5 ans.",
+      },
+      {
+        q: "Que faire si la signalisation était illisible ou inexistante ?",
+        a: "**Photographiez immédiatement** la signalisation litigieuse sous plusieurs angles, avec horodatage (smartphone par défaut). Notez l'heure, la météo, la luminosité (si en panneau effacé/dégradé). Joignez ces photos à votre contestation. Argumentez en citant l'article R.411-25 du Code de la route qui impose une signalisation conforme aux normes (instruction interministérielle sur la signalisation routière, IISR). Si possible, repassez sur les lieux 24-48 h plus tard pour constater que la signalisation est effectivement défaillante (à dater aussi). La preuve photo précoce et datée est décisive : sans elle, l'OMP rejette systématiquement.",
+      },
+      {
+        q: "Si la CCSP me donne raison, comment récupérer mon argent ?",
+        a: "Le remboursement est automatique mais lent. Après décision favorable de la CCSP, la commune ou son délégataire dispose de **2 mois** pour vous rembourser. Le virement arrive sur le compte que vous avez utilisé pour payer le FPS, ou sur un IBAN que la CCSP vous demandera. Si vous ne recevez rien après 3 mois, relancez la commune par LRAR avec copie de la décision CCSP. En l'absence de paiement à 6 mois, vous pouvez saisir le tribunal administratif pour faire exécuter la décision (demande d'astreinte). Le coût n'est pas remboursable.",
+      },
+    ],
+  },
+
+  // ─── Guide 12 : Réclamation France Travail / indu ───
+  {
+    slug: "reclamation-france-travail-indu",
+    title: "Réclamation France Travail : indu, suspension, refus",
+    metaTitle: "Réclamation France Travail (Pôle emploi) — Indu et suspension",
+    description:
+      "Contester un indu, une suspension ou un refus France Travail (Pôle emploi) : médiateur, délai 2 mois, recours. Modèle de lettre 2026.",
+    relatedLetterSlug: "reclamation-administration",
+    publishedAt: "2026-05-15",
+    updatedAt: "2026-05-15",
+    readingTime: "5 min",
+    sections: [
+      {
+        heading: "Quand contester une décision France Travail",
+        body: `Depuis le 1er janvier 2024, Pôle emploi est devenu **France Travail** suite à la loi du 18 décembre 2023. Les procédures de recours restent largement inchangées mais les coordonnées et formulaires ont évolué.
+
+Vous pouvez contester toute décision défavorable :
+- **Notification d'indu** : France Travail vous réclame le remboursement d'allocations jugées trop perçues
+- **Suspension d'allocation** : interruption pour absence à un rendez-vous, défaut de réponse à une convocation, ou radiation
+- **Refus d'inscription** ou **refus d'ouverture de droits** : motif d'inéligibilité contesté
+- **Calcul d'allocation contesté** : montant inférieur à votre droit calculé
+- **Refus de formation** ou de prestation
+- **Sanction pour manquement** (radiation 1 à 4 mois selon la gravité)
+
+Les indus sont la cause de réclamation la plus fréquente. Causes courantes : changement de situation non déclaré ou déclaré tardivement (reprise d'activité, déménagement, modification du foyer), erreur de saisie de France Travail, recalcul rétroactif suite à une régularisation fiscale.
+
+**Avant toute contestation formelle**, vérifiez la motivation de la décision dans la notification écrite (l'agent doit motiver, article L.211-2 du Code des relations entre le public et l'administration). Si la motivation est vague ou absente, exigez-la par écrit avant d'argumenter sur le fond.`,
+      },
+      {
+        heading: "Le recours gracieux interne (étape obligatoire)",
+        body: `Avant de saisir un juge, vous devez d'abord exercer un **recours gracieux** auprès du directeur de votre agence France Travail. C'est la procédure de réclamation interne.
+
+**Délai** : 2 mois à compter de la notification de la décision contestée. Au-delà, la décision devient définitive.
+
+**Forme** : courrier libre par lettre recommandée avec accusé de réception adressé au directeur de l'agence France Travail mentionnée sur la décision (l'adresse figure sur la notification). Vous pouvez aussi déposer le recours dans votre espace personnel sur france-travail.fr (rubrique "Mes échanges" → "Faire une réclamation"), mais le LRAR reste recommandé pour preuve opposable.
+
+**Contenu** :
+- Vos coordonnées complètes (nom, prénom, identifiant France Travail à 7 chiffres)
+- Référence et date de la décision contestée
+- Motifs détaillés de contestation, pièce par pièce
+- Chiffrage du préjudice (montant de l'indu contesté, journées d'allocation suspendues)
+- Pièces justificatives en copies (avis fiscal, fiches de paie, certificats médicaux, justificatifs déménagement, etc.)
+- Demande explicite (annulation de l'indu, remise gracieuse, restitution des sommes, recalcul)
+
+France Travail a **2 mois pour répondre**. Sans réponse à 2 mois, c'est un rejet implicite et le délai pour saisir le médiateur ou le juge démarre.`,
+      },
+      {
+        heading: "Le médiateur de France Travail",
+        body: `Si le recours gracieux est rejeté ou sans réponse, vous pouvez saisir le **médiateur de France Travail** avant d'aller en justice. C'est une étape facultative mais souvent efficace.
+
+**Quand saisir** : dans les 2 mois suivant la réponse défavorable au recours gracieux, ou après expiration du délai de 2 mois sans réponse.
+
+**Comment saisir** : via le formulaire en ligne sur france-travail.fr (rubrique "Aide & contact" → "Le médiateur"), ou par courrier au médiateur de la région concernée. Saisine gratuite et sans formalisme particulier.
+
+**Délai de traitement** : 60 à 90 jours en moyenne. Le médiateur instruit le dossier de manière indépendante de l'agence et peut proposer une solution amiable. Son avis n'est pas contraignant mais France Travail le suit dans environ 70 % des cas.
+
+**Spécificité indu** : le médiateur peut proposer une **remise gracieuse** (totale ou partielle) si l'indu est dû mais que vous êtes en situation financière difficile. Joignez votre avis d'imposition, votre quittance de loyer, vos charges fixes pour étayer.
+
+Pendant la médiation, le **recouvrement de l'indu n'est pas suspendu** automatiquement. Vous pouvez demander un sursis exceptionnel mais il n'est pas garanti. À défaut, vous pouvez demander un échéancier de paiement (24 à 60 mois) en parallèle de la médiation pour éviter une saisie.`,
+      },
+      {
+        heading: "Le tribunal administratif et le défenseur des droits",
+        body: `Si le médiateur échoue ou si vous voulez aller plus vite, deux voies restent ouvertes : la justice administrative et le défenseur des droits.
+
+**Tribunal administratif** : compétent pour la plupart des décisions France Travail. Saisine dans les 2 mois suivant la décision défavorable (ou rejet du recours gracieux si exercé). Procédure gratuite, avocat non obligatoire en première instance pour les litiges de droit social. Délai d'audience : 8 à 18 mois en moyenne.
+
+Pour les **litiges relatifs au montant de l'allocation** ou à la durée d'indemnisation (et non au principe), c'est le **conseil des prud'hommes** qui est compétent, et non le tribunal administratif. Vérifiez la voie de recours indiquée sur votre notification — c'est obligatoire pour France Travail (article R.421-5 du Code de justice administrative).
+
+**Aide juridictionnelle** : si vos ressources sont inférieures aux plafonds (~1 200 €/mois pour une personne seule en 2026), vous pouvez bénéficier de l'aide juridictionnelle totale ou partielle pour être assisté gratuitement par un avocat. Demande sur le formulaire CERFA 16146.
+
+**Défenseur des droits** : alternative gratuite et plus rapide. Saisine en ligne sur defenseurdesdroits.fr, sans recours préalable obligatoire. Le défenseur enquête, contacte France Travail et peut obtenir une révision en 3-6 mois. Son avis n'est pas contraignant mais France Travail collabore généralement.
+
+**Associations spécialisées** : APEIS (Association pour l'Emploi, l'Information et la Solidarité), Solidaires, AC ! Agir contre le chômage. Conseil juridique gratuit et accompagnement dans la procédure.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Quel est le délai pour contester une décision France Travail ?",
+        a: "**2 mois** à compter de la notification de la décision pour exercer le recours gracieux auprès du directeur d'agence (article R.421-1 du Code de justice administrative). Au-delà, la décision devient définitive et toute contestation est irrecevable. Pour saisir ensuite le tribunal administratif ou le défenseur des droits, vous avez à nouveau **2 mois** à compter du rejet (explicite ou implicite après 2 mois de silence). Le délai court à partir de la date de réception du courrier, pas de son envoi. Conservez l'enveloppe ou la capture d'écran de la notification pour prouver la date.",
+      },
+      {
+        q: "Le recours gracieux suspend-il le recouvrement de l'indu ?",
+        a: "Non, par défaut. France Travail peut commencer à prélever sur vos allocations en cours dès la notification de l'indu, même si vous contestez. Pour suspendre le recouvrement, vous devez **demander expressément le sursis à exécution** dans votre lettre de recours et apporter des éléments crédibles (situation financière difficile, arguments de fond solides). En parallèle, vous pouvez demander un **plan d'apurement** (échéancier de 24 à 60 mois) pour étaler la dette et éviter une saisie sur compte. Les deux demandes peuvent se cumuler.",
+      },
+      {
+        q: "Comment demander une remise gracieuse de l'indu ?",
+        a: "La remise gracieuse est différente de la contestation au fond : vous reconnaissez devoir l'indu mais demandez à France Travail de l'effacer ou de le réduire en raison de votre situation. Critères favorables : revenus très faibles, dettes par ailleurs, événement difficile (séparation, deuil), erreur initiale partagée avec France Travail (mauvaise information donnée par un agent). Joignez votre avis d'imposition, vos quittances de loyer, vos relevés bancaires des 3 derniers mois. Le médiateur de France Travail est plus favorable aux remises que le directeur d'agence — saisissez-le après un premier rejet.",
+      },
+      {
+        q: "France Travail prétend que je n'ai pas justifié ma recherche d'emploi : que faire ?",
+        a: "Conservez **toutes vos preuves** de recherche : captures d'écran d'envoi de candidatures, accusés de réception d'emails, lettres de motivation envoyées, attestations de visite chez des employeurs, captures de votre tableau de bord France Travail. La sanction pour manquement (radiation 1 à 4 mois selon la gravité, article L.5412-1 du Code du travail) doit être motivée précisément. Si la motivation est vague (\"recherche insuffisante\"), exigez par écrit le détail des manquements reprochés. Le défenseur des droits a fait jurisprudence pour rappeler que France Travail doit motiver concrètement, pas juste invoquer une formule type.",
+      },
+      {
+        q: "Puis-je continuer à toucher mes allocations pendant la contestation ?",
+        a: "**Indu** : oui, vos allocations en cours continuent, mais France Travail peut prélever 30 à 100 % sur celles-ci pour récupérer l'indu (article L.5422-5 du Code du travail). Vous pouvez demander un plafonnement de la retenue à 30 % via le médiateur. **Suspension** : non, la suspension prend effet immédiatement à la notification. Vous devez attendre l'issue de la contestation pour récupérer les sommes (rétroactivement si la suspension est annulée). **Radiation** : idem, effet immédiat. Pour limiter le préjudice, sollicitez en parallèle le RSA (CAF) pour la durée de la suspension/radiation, ainsi que le FSL (fonds de solidarité logement) si vous risquez un impayé.",
+      },
+      {
+        q: "Si le médiateur me donne raison mais France Travail refuse, que faire ?",
+        a: "L'avis du médiateur n'est pas contraignant. Si France Travail rejette malgré tout, deux options : saisir le **tribunal administratif** dans les 2 mois (en joignant l'avis du médiateur comme pièce maîtresse — il a une force probante élevée pour le juge), ou saisir le **défenseur des droits** qui peut intervenir directement auprès de la direction nationale de France Travail. Le défenseur a obtenu plusieurs revirements dans des dossiers où le médiateur avait été ignoré. Saisine gratuite en ligne sur defenseurdesdroits.fr, accompagnée des copies de toutes les pièces (décision contestée, recours gracieux, réponse, avis du médiateur, refus).",
+      },
+    ],
+  },
+
+  // ─── Guide 13 : Mise en demeure assurance refus indemnisation ───
+  {
+    slug: "mise-en-demeure-assurance-refus-indemnisation",
+    title: "Mise en demeure d'une assurance qui refuse d'indemniser",
+    metaTitle: "Mise en demeure assurance — Refus d'indemniser sinistre (2026)",
+    description:
+      "Votre assurance refuse d'indemniser ou tarde sur un sinistre ? Mise en demeure, délai 15 jours, médiateur, prescription 2 ans. Modèle de lettre.",
+    relatedLetterSlug: "mise-en-demeure-executer",
+    publishedAt: "2026-05-15",
+    updatedAt: "2026-05-15",
+    readingTime: "6 min",
+    sections: [
+      {
+        heading: "Les motifs de refus d'indemnisation et leur légalité",
+        body: `Toute assurance peut refuser d'indemniser un sinistre, mais le refus doit être motivé et juridiquement fondé. Tous les motifs ne sont pas légaux.
+
+**Motifs légalement valables** :
+- **Exclusion contractuelle** clairement stipulée dans la police (ex: exclusion catastrophes naturelles non décrétées, exclusion vol sans effraction)
+- **Fausse déclaration intentionnelle** au moment de la souscription (article L.113-8 du Code des assurances) — entraîne la nullité du contrat
+- **Aggravation de risque non déclarée** (article L.113-2 alinéa 3) — peut entraîner réduction proportionnelle de l'indemnité
+- **Prescription du sinistre** (2 ans depuis l'événement, article L.114-1)
+- **Défaut de paiement de prime** au moment du sinistre (article L.113-3)
+- **Faute intentionnelle ou dolosive** de l'assuré (article L.113-1 alinéa 2)
+
+**Motifs souvent invoqués mais juridiquement contestables** :
+- **Clause d'exclusion non lisible ou rédigée en petits caractères** : nulle si pas en caractères très apparents (article L.112-4)
+- **Exclusion par renvoi à un document non joint** : inopposable si l'assuré n'a pas eu connaissance du document
+- **Délai de déclaration dépassé** (5 jours pour vol, 10 jours pour catastrophe naturelle) : la perte du droit n'est encourue que si l'assureur prouve un préjudice du fait du retard (article L.113-2)
+- **Refus pour "absence de causalité"** sans expertise contradictoire
+
+Avant de contester, **demandez le motif détaillé par écrit** si la lettre de refus est vague. C'est un droit (article L.113-12-2 du Code des assurances pour les contrats d'assurance vie, applicable par analogie).`,
+      },
+      {
+        heading: "La réclamation interne préalable obligatoire",
+        body: `La plupart des contrats d'assurance imposent une procédure de réclamation interne avant toute action contentieuse. Cette étape est cruciale et permet souvent de débloquer la situation sans procédure.
+
+**Identifiez le service réclamation** : ses coordonnées doivent figurer dans votre contrat ou sur le site de l'assureur (souvent rubrique "Réclamation" ou "Médiation"). Pour les grands groupes (AXA, Generali, Macif, MAIF...), une adresse email dédiée existe.
+
+**Contenu de votre réclamation** :
+- Identification complète (numéro de contrat, numéro de sinistre)
+- Rappel chronologique des faits
+- Reprise du motif de refus de l'assureur
+- Réfutation point par point avec arguments juridiques (citez les articles du Code des assurances)
+- Pièces justificatives (constat amiable, devis, factures, photos, témoignages, certificats médicaux)
+- Demande chiffrée et précise (indemnisation X €, expertise contradictoire, etc.)
+- Délai imparti (15 à 30 jours raisonnable)
+
+**Forme** : lettre recommandée avec accusé de réception au siège social de l'assureur OU au service réclamation indiqué au contrat. Le siège social est souvent plus efficace car la lettre remonte directement à la direction. Doublure email à l'agent gestionnaire pour traçabilité interne.
+
+L'assureur a **10 jours pour accuser réception** et **2 mois maximum pour répondre** sur le fond (engagement déontologique de la profession, article 101 du Code de bonne conduite FFA). Sans réponse à 2 mois, vous pouvez saisir le médiateur.`,
+      },
+      {
+        heading: "Le médiateur de l'assurance",
+        body: `Si la réclamation interne échoue ou reste sans réponse pendant 2 mois, vous pouvez saisir gratuitement la **Médiation de l'Assurance** (médiateur indépendant agréé).
+
+**URL** : mediation-assurance.org. Saisine en ligne via formulaire ou par courrier postal (12 rue de Saint-Pétersbourg 75008 Paris).
+
+**Conditions de recevabilité** :
+- Vous avez exercé une réclamation préalable auprès de l'assureur
+- Réponse défavorable ou silence de plus de 2 mois
+- Litige inférieur à un certain plafond (variable selon l'assureur, souvent 250 000 €)
+- Pas de procédure judiciaire en cours sur le même litige
+
+**Pièces à fournir** : copies de la police d'assurance, déclaration de sinistre, lettres de refus de l'assureur, votre réclamation préalable et la réponse, devis et factures, photos, expertises éventuelles.
+
+**Délai de traitement** : **3 mois** en moyenne, jusqu'à 6 mois pour les dossiers complexes. Le médiateur instruit le dossier de manière indépendante, peut demander des compléments aux deux parties, et rend un **avis motivé**.
+
+**Force de l'avis** : l'avis n'est pas contraignant juridiquement, mais les assureurs membres de la médiation s'engagent à le suivre dans la majorité des cas. Statistiquement, **70 % des avis favorables à l'assuré sont appliqués** par l'assureur. Si l'assureur refuse l'avis, le médiateur informe la profession et l'assuré peut saisir le juge avec l'avis comme pièce favorable.
+
+Pendant la médiation, **la prescription est suspendue** (article L.114-2 du Code des assurances). Cela vous protège du risque de forclusion pendant les 6 mois d'instruction.`,
+      },
+      {
+        heading: "Le tribunal et l'expertise judiciaire",
+        body: `Si la médiation échoue ou si vous voulez aller plus vite, le recours au juge est la dernière étape.
+
+**Tribunal compétent** :
+- Litige inférieur à 5 000 € → conciliation préalable obligatoire (gratuite, conciliateur de justice)
+- Litige entre 5 000 € et 10 000 € → juge des contentieux de la protection (TJ), gratuit, avocat non obligatoire
+- Litige supérieur à 10 000 € → tribunal judiciaire, avocat obligatoire en première instance
+
+**Prescription** : votre action contre l'assureur se prescrit par **2 ans** à compter du sinistre (article L.114-1 du Code des assurances). C'est un délai très court par rapport aux autres litiges civils. La prescription est suspendue pendant la médiation et interrompue par toute mise en demeure, lettre recommandée d'objection, ou citation en justice.
+
+**L'expertise contradictoire** : si l'assureur conteste l'origine ou le montant du sinistre, demandez une **expertise contradictoire** où votre expert et celui de l'assureur examinent ensemble le dossier. Si désaccord persistant, le juge peut nommer un **tiers expert** ou ordonner une **expertise judiciaire** en référé.
+
+L'expertise judiciaire (référé-expertise) coûte 2 000 à 5 000 € avancés par le demandeur (puis remboursés par la partie perdante), mais son rapport a une force probante très élevée et règle souvent le litige sans procès au fond.
+
+**Contre-expertise privée** : à 500-1 500 €, faire intervenir un expert indépendant que vous payez vous-même. Utile pour étayer votre dossier en réclamation interne et médiation, sans aller au tribunal. Beaucoup de cabinets d'expertise (cabinets ALP, BCA, etc.) acceptent ce type de mission.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Mon assurance refuse de me rembourser : combien de temps pour contester ?",
+        a: "**2 ans** à compter du jour où vous avez eu connaissance du refus, conformément à l'article L.114-1 du Code des assurances. C'est un délai court qui peut surprendre : pour les autres litiges civils, le délai est de 5 ans. Cette prescription biennale est interrompue par toute mise en demeure (lettre recommandée), saisine du médiateur, ou action en justice. Elle est suspendue pendant la médiation. Plus vite vous agissez, plus vous avez de chances de réunir les preuves (constats, témoins, devis). Au-delà de 2 ans, vous perdez tout droit, même si l'assureur a tort sur le fond.",
+      },
+      {
+        q: "L'assureur invoque une exclusion : peut-il toujours s'en prévaloir ?",
+        a: "Non, pas toujours. L'article L.112-4 du Code des assurances impose que les **clauses d'exclusion soient rédigées en caractères très apparents** (gras, encadrés, taille supérieure au reste du contrat). À défaut, la clause est inopposable à l'assuré. De même, une clause par renvoi à un document non joint au contrat est nulle si l'assuré n'a pas eu connaissance du document (article L.112-2). Lisez votre contrat à la loupe : la clause invoquée respecte-t-elle ces critères ? Si non, citez l'article L.112-4 dans votre contestation. Cas typique : exclusions des conditions générales en petits caractères, ou exclusions imprimées dans le bas de la page sans mise en évidence.",
+      },
+      {
+        q: "Combien de temps l'assureur a-t-il pour me répondre ?",
+        a: "Pas de délai légal universel, mais des engagements déontologiques. Pour la **réclamation interne**, les engagements de la profession (Charte FFSA / France Assureurs) imposent un accusé de réception sous 10 jours et une réponse au fond sous **2 mois**. Pour le **traitement du sinistre** lui-même, l'article L.113-5 du Code des assurances impose à l'assureur d'exécuter ses obligations dans le délai prévu au contrat ou \"sans délai injustifié\". En pratique, après votre déclaration de sinistre, l'assureur a 30 jours pour proposer une indemnisation chiffrée ou demander des éléments complémentaires. Au-delà, votre mise en demeure peut faire courir des intérêts moratoires.",
+      },
+      {
+        q: "L'expertise contradictoire est-elle obligatoire ?",
+        a: "Non, mais fortement recommandée en cas de désaccord chiffré. La plupart des contrats prévoient cette clause. Vous nommez votre expert (cabinet ALP, BCA Expertises, ou expert d'assuré indépendant), l'assureur nomme le sien. Les deux examinent ensemble le sinistre et tentent de s'entendre sur le montant. **Si désaccord** : un tiers expert peut être désigné d'un commun accord (souvent par tirage au sort sur une liste de cabinets agréés), ou le juge peut ordonner une expertise judiciaire. **Coût** : votre expert est à votre charge (500-1 500 €), parfois remboursable si la garantie \"frais d'expertise\" est incluse au contrat (vérifiez vos conditions générales section \"Garanties annexes\").",
+      },
+      {
+        q: "Que faire si la médiation échoue ?",
+        a: "Vous gardez deux voies. **1. Saisir le juge** : la voie classique. Tribunal compétent selon le montant : conciliateur de justice (< 5 000 €), juge des contentieux de la protection (5 000 € - 10 000 €), tribunal judiciaire (au-delà). Joignez l'avis du médiateur comme pièce maîtresse — un avis favorable a une force probante élevée devant le juge. **2. Saisir l'ACPR** (Autorité de contrôle prudentiel et de résolution) si vous estimez que l'assureur a violé ses obligations professionnelles. L'ACPR ne tranche pas votre litige individuel mais peut sanctionner l'assureur si elle constate un manquement systémique. Saisine gratuite sur le site de la Banque de France.",
+      },
+      {
+        q: "Puis-je résilier mon contrat à cause du refus d'indemnisation ?",
+        a: "Oui, et dans certains cas avec remboursement de la prime. **Cas 1 — Manquement grave de l'assureur** : si l'assureur a manqué à ses obligations contractuelles (refus injustifié, mauvaise foi caractérisée), vous pouvez résilier pour faute en lettre recommandée avec mise en demeure préalable de 15 jours. Précédent jurisprudentiel : Cass. civ. 2e, 18 mars 2010 n° 09-65.165. **Cas 2 — Hausse tarifaire après sinistre** : si l'assureur augmente la prime suite à votre sinistre, vous pouvez résilier dans les 30 jours après notification (article L.113-4 du Code des assurances). **Cas 3 — Résiliation à échéance** : possible 2 mois avant l'échéance annuelle, ou à tout moment après 1 an d'adhésion (loi Hamon, article L.113-15-2). Dans tous les cas, formalisez par LRAR et conservez la preuve d'envoi.",
+      },
+    ],
+  },
+
+  // ─── Guide 14 : Résilier sa mutuelle santé (loi 2019) ───
+  {
+    slug: "resilier-mutuelle-sante-loi-2019",
+    title: "Résilier sa mutuelle santé à tout moment (loi 14/07/2019)",
+    metaTitle: "Résilier sa mutuelle santé — Loi 2019, après 1 an, sans frais",
+    description:
+      "Depuis la loi du 14 juillet 2019, vous pouvez résilier votre mutuelle santé après 1 an d'adhésion, à tout moment et sans frais. Procédure, modèle.",
+    relatedLetterSlug: "resiliation-abonnement",
+    publishedAt: "2026-05-15",
+    updatedAt: "2026-05-15",
+    readingTime: "5 min",
+    sections: [
+      {
+        heading: "Ce que la loi du 14 juillet 2019 a changé",
+        body: `La loi n° 2019-733 du 14 juillet 2019 (dite \"loi Bourquin santé\" ou \"résiliation infra-annuelle\") a profondément modifié les règles de résiliation des contrats de complémentaire santé.
+
+**Avant la loi** : pour résilier, il fallait respecter une fenêtre de 2 mois avant la date d'échéance annuelle, sans quoi le contrat se reconduisait tacitement pour un an. Si vous ratiez la fenêtre, vous étiez prisonnier 12 mois de plus.
+
+**Depuis la loi** (entrée en vigueur le 1er décembre 2020) : tout assuré peut résilier son contrat de complémentaire santé **à tout moment, sans frais ni pénalité, après la première année d'adhésion**. La règle est codifiée à l'article L.113-15-2 du Code des assurances.
+
+Conditions cumulatives à respecter :
+- **12 mois d'ancienneté minimum** sur votre contrat actuel (compté de date à date depuis la prise d'effet)
+- Lettre recommandée ou notification équivalente (recommandé électronique, déclaration via espace personnel si l'assureur l'autorise)
+- **Préavis de 1 mois** : la résiliation prend effet 1 mois après la réception de votre demande par l'assureur
+
+Le préavis ne peut pas être réduit conventionnellement à votre désavantage. Une clause au contrat imposant un préavis plus long que 1 mois est nulle (article L.113-15-2 alinéa 2).
+
+**Ce qui n'est PAS concerné par cette loi** : les contrats collectifs obligatoires d'entreprise (votre adhésion via votre employeur), les contrats Madelin pour TNS, les contrats responsables encadrés. Pour ces cas, les règles classiques s'appliquent (résiliation à échéance annuelle).`,
+      },
+      {
+        heading: "Vérifier que vous remplissez les conditions",
+        body: `Avant d'envoyer votre lettre, vérifiez méthodiquement que vous êtes bien éligible.
+
+**Date d'ancienneté** : prenez votre contrat ou votre dernière facture/échéancier. La date à retenir est celle de **prise d'effet** du contrat, pas celle de la signature ou de la dernière échéance annuelle. Si vous avez changé de niveau de garantie en cours de contrat (passage d'une formule à l'autre chez le même assureur), l'ancienneté part en général de la prise d'effet initiale, sauf si l'assureur considère le changement comme un nouveau contrat (cas rare, à vérifier).
+
+**Type de contrat** :
+- **Contrat individuel** (vous l'avez souscrit vous-même) → loi 2019 applicable ✅
+- **Contrat collectif facultatif** (ex: groupement professionnel auquel vous adhérez librement) → loi 2019 applicable ✅
+- **Contrat collectif obligatoire** (mutuelle d'entreprise) → loi 2019 PAS applicable ❌
+- **Contrat Madelin** (TNS, indépendants) → loi 2019 PAS applicable ❌
+
+Si vous bénéficiez d'une mutuelle d'entreprise obligatoire et souhaitez résilier votre mutuelle individuelle (que vous aviez en plus), c'est un **motif légitime** de résiliation à tout moment, indépendamment de la loi 2019, sur preuve de l'adhésion à la mutuelle d'entreprise (article L.113-12 du Code des assurances). Joignez votre attestation employeur.
+
+**Préparation du nouveau contrat** : si vous résiliez pour changer d'assureur, le nouveau contrat doit prendre effet **dès le lendemain de la fin de l'ancien** pour éviter une rupture de couverture. Demandez à votre nouvel assureur de gérer la résiliation à votre place — c'est un service prévu par la loi (le nouvel assureur effectue les démarches en votre nom).`,
+      },
+      {
+        heading: "La procédure pas-à-pas",
+        body: `Trois manières de résilier, par ordre de sécurité juridique :
+
+**1. Lettre recommandée avec accusé de réception** (méthode la plus sûre)
+
+Adressez votre lettre au siège social de votre mutuelle (adresse au verso de votre carte de tiers payant ou sur le site). Contenu obligatoire :
+- Vos coordonnées complètes
+- Numéro de contrat ou d'adhérent
+- Date de prise d'effet du contrat
+- Demande explicite de résiliation
+- Référence à l'article L.113-15-2 du Code des assurances
+- Date de prise d'effet souhaitée (au minimum 1 mois après la réception)
+
+Conservez l'AR signé. Le préavis court à compter de cette date.
+
+**2. Notification via votre nouvel assureur** (méthode déléguée)
+
+Si vous changez d'assureur, signez votre nouveau contrat et demandez au nouvel assureur de gérer la résiliation. Il transmet la demande au siège de l'ancien assureur, fournit les documents nécessaires, et coordonne la prise d'effet pour éviter la rupture de garantie. Service gratuit prévu par la loi.
+
+**3. Recommandé électronique ou espace personnel** (méthode rapide mais moins sûre)
+
+Certaines mutuelles (Harmonie, Macif, MAIF) permettent la résiliation directement depuis votre espace en ligne via un formulaire dédié. Conservez la confirmation par email. Le recommandé électronique (AR24, MerciFacteur) a la même valeur juridique que le LRAR papier (article 1369 du Code civil).
+
+**Délai et fin du contrat** : le contrat prend fin **1 mois après la réception** de votre demande. La mutuelle vous rembourse au prorata les cotisations versées d'avance (si vous payez à l'année). En cas de prélèvements indus après la fin du contrat, vous pouvez faire opposition à votre banque sans frais (directive DSP2).`,
+      },
+      {
+        heading: "Les pièges fréquents et les recours",
+        body: `**Piège 1 — La mutuelle prétend que vous n'avez pas 12 mois d'ancienneté**. Vérifiez la date sur votre tableau de garanties initial. Si l'argument est faux, renvoyez une LRAR avec preuve datée. La mauvaise foi de la mutuelle est sanctionnable.
+
+**Piège 2 — La mutuelle exige un \"motif légitime\"**. Faux. Depuis la loi 2019, aucun motif n'est requis après 12 mois. Toute exigence de motif est illégale. Citez l'article L.113-15-2.
+
+**Piège 3 — Frais de dossier ou pénalités**. Interdits par la loi (article L.113-15-2 alinéa 3 : \"sans frais ni pénalités\"). Si la mutuelle prétend en facturer, ils sont nuls. Demandez le remboursement par LRAR.
+
+**Piège 4 — La mutuelle continue de prélever après la fin**. Faites opposition à votre banque (gratuit, directive DSP2) et demandez le remboursement par LRAR avec mise en demeure de 15 jours. Sans réponse, saisissez le médiateur de l'assurance (mediation-assurance.org).
+
+**Piège 5 — Augmentation tarifaire en cours d'année**. Si la mutuelle augmente votre cotisation hors indexation contractuelle, c'est un motif de résiliation supplémentaire **à tout moment dans les 30 jours suivant la notification**, indépendamment de la loi 2019 (article L.113-4 du Code des assurances). Conservez la notification de hausse et joignez-la à votre lettre.
+
+**Recours en cas de blocage** :
+1. **Médiateur de l'assurance** (gratuit, mediation-assurance.org). Délai 3-6 mois. Avis non contraignant mais souvent suivi.
+2. **ACPR** (Autorité de contrôle prudentiel) pour signaler un comportement irrégulier de l'assureur. Pas un recours individuel mais peut déclencher une enquête.
+3. **Tribunal** : conciliateur de justice gratuit pour les petits litiges, juge des contentieux de la protection au-delà.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Combien de temps après mon adhésion puis-je résilier ?",
+        a: "**Après 12 mois pleins d'ancienneté** sur votre contrat de complémentaire santé. Le décompte se fait de date à date, à partir de la prise d'effet initiale (pas de la signature, ni du dernier renouvellement). Avant 12 mois, la résiliation reste possible uniquement à la date d'échéance annuelle (avec préavis de 2 mois) ou pour motif légitime (changement de situation : mariage, déménagement, retraite, adhésion à une mutuelle d'entreprise obligatoire). La loi du 14 juillet 2019 ne s'applique qu'aux contrats individuels et collectifs facultatifs ; les mutuelles d'entreprise obligatoires et les contrats Madelin restent soumis aux règles classiques.",
+      },
+      {
+        q: "Quel est le préavis pour résilier après la loi 2019 ?",
+        a: "**1 mois** à compter de la réception de votre lettre par l'assureur (article L.113-15-2 alinéa 2 du Code des assurances). Ce préavis est un **plafond légal** : aucune clause contractuelle ne peut imposer un préavis plus long. La date qui fait foi est celle de l'AR signé par la mutuelle (ou la date de réception électronique si vous utilisez un canal en ligne). Si vous voulez que la résiliation soit effective au 30 juin par exemple, envoyez votre lettre avant le 25 mai pour tenir compte des délais postaux. Pendant le préavis, vous restez couvert et payez normalement la cotisation.",
+      },
+      {
+        q: "Y a-t-il des frais ou pénalités à la résiliation ?",
+        a: "Non, aucun. La loi 2019 prévoit explicitement que la résiliation se fait \"sans frais ni pénalités\" (article L.113-15-2 alinéa 3). Toute facturation de frais de dossier, de pénalités forfaitaires, ou de retenue sur cotisations est illégale et nulle de plein droit. Si votre mutuelle vous facture des frais, demandez par LRAR le remboursement intégral en citant cet article. La mutuelle doit aussi vous rembourser au **prorata temporis** les cotisations payées d'avance pour la période postérieure à la résiliation effective (article L.113-15-2 alinéa 4).",
+      },
+      {
+        q: "Comment éviter une rupture de couverture santé ?",
+        a: "Souscrivez votre nouveau contrat **avant** d'envoyer la résiliation, et faites en sorte que le nouvel assureur prenne effet le lendemain de la fin de l'ancien. Idéalement, **demandez au nouvel assureur de gérer la résiliation à votre place** : il transmet la demande au siège de l'ancien assureur et coordonne les dates pour éviter le trou de couverture. Service gratuit prévu par la loi 2019. À défaut, calculez : si votre lettre est reçue le 5 mai par exemple, la résiliation prend effet le 5 juin. Le nouveau contrat doit donc démarrer le 6 juin au plus tard. Évitez tout chevauchement (vous paieriez 2 cotisations) et tout trou (vous seriez sans couverture).",
+      },
+      {
+        q: "Que faire si ma mutuelle refuse de résilier ou tarde à répondre ?",
+        a: "**Première étape** : renvoyez une seconde LRAR avec mise en demeure de 15 jours et menace de saisir le médiateur. Mentionnez l'article L.113-15-2 et le préavis de 1 mois qui court depuis votre première lettre. **Deuxième étape** si pas de retour** : saisir le médiateur de l'assurance (mediation-assurance.org), gratuit, délai 3-6 mois. Avis non contraignant mais suivi dans 70 % des cas. **Troisième étape** : opposition aux prélèvements via votre banque (gratuit depuis la directive DSP2, recevable sur 8 semaines) et action devant le juge des contentieux de la protection. Conservez tous les courriers et AR comme preuves.",
+      },
+      {
+        q: "Puis-je résilier ma mutuelle d'entreprise obligatoire ?",
+        a: "Non, en règle générale. La mutuelle d'entreprise obligatoire (article L.911-7 du Code de la sécurité sociale) est imposée aux salariés du secteur privé et n'est pas soumise à la loi du 14 juillet 2019. **Cas où la résiliation devient possible** : départ de l'entreprise (démission, licenciement, retraite — vous bénéficiez alors de la portabilité jusqu'à 12 mois), conjoint déjà couvert par une mutuelle d'entreprise obligatoire (dispense possible sur justificatif), passage à temps très partiel, ou bénéficiaire de la CSS (Complémentaire Santé Solidaire). En revanche, vous pouvez résilier votre **mutuelle individuelle complémentaire** (que vous aviez gardée en plus) à tout moment sur preuve d'adhésion à la mutuelle d'entreprise (motif légitime, article L.113-12).",
+      },
+    ],
+  },
+
+  // ─── Guide 15 : Opposition à prélèvement bancaire non autorisé ───
+  {
+    slug: "opposition-prelevement-bancaire-non-autorise",
+    title: "Opposition à prélèvement bancaire : remboursement et procédure",
+    metaTitle: "Opposition prélèvement bancaire — Remboursement non autorisé",
+    description:
+      "Prélèvement non autorisé sur votre compte ? Article L.133-18 Code monétaire : remboursement sous 1 jour ouvré. Procédure, recours, modèle.",
+    relatedLetterSlug: "demande-remboursement",
+    publishedAt: "2026-05-15",
+    updatedAt: "2026-05-15",
+    readingTime: "5 min",
+    sections: [
+      {
+        heading: "Les types d'opposition à connaître",
+        body: `Tous les prélèvements ne se contestent pas de la même manière. Avant d'agir, identifiez précisément votre situation.
+
+**Prélèvement futur à bloquer (avant qu'il soit débité)** :
+- **Révocation du mandat SEPA** : vous retirez l'autorisation donnée au créancier de prélever. Démarche auprès du créancier directement (LRAR) **et** auprès de votre banque. Effet à compter de la prochaine échéance.
+- **Refus de prélèvement** : vous refusez un prélèvement annoncé mais pas encore présenté. Banque et créancier doivent être informés au moins 1 jour ouvré avant l'échéance.
+
+**Prélèvement déjà débité à se faire rembourser** (cas le plus fréquent) :
+- **Prélèvement non autorisé** : vous n'avez jamais signé de mandat avec ce créancier. Remboursement intégral immédiat (article L.133-18 du Code monétaire et financier). Délai pour réclamer : 13 mois après la date de débit.
+- **Prélèvement autorisé mais contesté** : vous aviez un mandat mais le montant ou la cause sont incorrects (résiliation antérieure non prise en compte, changement de tarif non notifié, double prélèvement). Remboursement sous 8 semaines (article L.133-25). Délai pour réclamer : 8 semaines après la date de débit.
+- **Prélèvement frauduleux** : utilisation détournée de votre IBAN par un tiers malveillant. Procédure d'opposition + plainte à la police + déclaration à votre banque dans les 13 mois.
+
+Ces trois cas ont des **régimes juridiques différents** et il est crucial de bien qualifier votre situation pour utiliser la bonne procédure et le bon délai.`,
+      },
+      {
+        heading: "Le remboursement légal sous J+1",
+        body: `Pour un **prélèvement non autorisé** (vous n'avez jamais signé de mandat ou le mandat a été révoqué avant le prélèvement), l'article L.133-18 du Code monétaire et financier est très protecteur : votre banque doit vous **rembourser immédiatement, au plus tard à la fin du jour ouvré suivant votre signalement**.
+
+**Délai pour signaler à votre banque** :
+- Prélèvement non autorisé : **13 mois maximum** après la date de débit (article L.133-24)
+- Prélèvement autorisé mais contesté : **8 semaines** maximum après la date de débit (article L.133-25)
+
+**Forme du signalement** :
+- Idéalement par LRAR au siège de votre banque + email à votre conseiller
+- Ou directement dans votre application mobile (rubrique \"Contester un prélèvement\" / \"Opposition\")
+
+**Effet du remboursement** :
+- Banque vous recrédite immédiatement le montant
+- Banque se retourne contre le créancier pour récupérer la somme
+- Si le créancier prouve que le mandat était valide, la banque peut éventuellement vous rétracter le remboursement et engager une procédure (cas rare)
+
+**Pas de frais ni pénalités** : la directive DSP2 (Directive Services de Paiement 2) interdit toute facturation de frais d'opposition, frais de dossier ou pénalités sur ces opérations. Les frais éventuels de découvert résultant du prélèvement contesté doivent aussi être remboursés.
+
+**Cas particulier des prélèvements professionnels (B2B)** : pour les comptes professionnels avec mandat B2B (relations commerciales), les délais sont raccourcis et la contestation est plus difficile. Vérifiez votre convention de compte pro.`,
+      },
+      {
+        heading: "Comment formaliser la demande",
+        body: `**Étape 1 — Signalement à la banque (priorité absolue)**
+
+Contactez votre banque immédiatement après avoir constaté le prélèvement contesté. Trois canaux possibles :
+
+- **Application mobile** : rubrique \"Opposition\" ou \"Contester un prélèvement\". Le plus rapide. Fournit un horodatage immédiat.
+- **Conseiller en agence** : signalement de visu, demandez un récépissé daté. Utile pour les dossiers complexes.
+- **LRAR au siège de la banque** : la voie la plus formelle. Indispensable si la banque tarde ou refuse les autres canaux.
+
+Contenu du signalement :
+- Date et montant exact du prélèvement contesté
+- Nom du créancier (figurant sur votre relevé)
+- Référence du mandat SEPA si visible
+- Motif clair : \"prélèvement non autorisé\" ou \"prélèvement contesté car [raison]\"
+- Demande explicite de remboursement immédiat (article L.133-18)
+- Pièces : copie du relevé de compte mentionnant le prélèvement, copie du mandat révoqué si applicable
+
+**Étape 2 — Lettre au créancier en parallèle**
+
+Important : votre banque vous remboursera, mais le créancier peut continuer à prélever si vous n'agissez pas en parallèle. Envoyez-lui une **LRAR de mise en demeure** :
+- Demande de cessation immédiate des prélèvements
+- Révocation du mandat SEPA
+- Demande de remboursement des sommes indument prélevées (s'il en reste)
+- Délai de 15 jours
+- Mention de l'article 1343-5 du Code civil (mise en demeure)
+
+**Étape 3 — Conservation des preuves**
+
+Gardez précieusement : les relevés bancaires faisant apparaître les prélèvements, les copies de tous les courriers échangés, les confirmations de virement de remboursement, et toute communication avec le créancier (emails, captures SMS, journaux d'appels).`,
+      },
+      {
+        heading: "Si la banque refuse : recours",
+        body: `Très rare mais possible. La banque peut refuser le remboursement si elle considère que le mandat était valide. Dans ce cas :
+
+**Recours 1 — Service réclamation de la banque**
+
+Adressez une réclamation écrite au service réclamation (coordonnées dans la convention de compte ou sur le site de la banque). Délai de réponse imposé par la directive DSP2 : **15 jours ouvrables** (réponse rapide) ou **35 jours** (cas complexe avec justification). Sans réponse satisfaisante, passez au recours suivant.
+
+**Recours 2 — Médiateur bancaire**
+
+Tout établissement bancaire en France a un médiateur indépendant. Saisine gratuite, en ligne, après avoir épuisé le recours interne. Délai : **90 jours**. L'avis n'est pas contraignant mais les banques le suivent à environ 80 %.
+
+Médiateurs principaux :
+- Médiateur de la Fédération bancaire française (banques privées) : lemediateur.fbf.fr
+- Médiateur de l'AFB (Association française des banques) : afb.fr
+- Médiateurs spécifiques : LCL, BNP Paribas, Société Générale, Crédit Agricole, Crédit Mutuel ont chacun leur médiateur dédié
+
+Pendant la médiation, **la prescription est suspendue** et vous ne pouvez pas agir en justice sur le même litige.
+
+**Recours 3 — ACPR**
+
+L'Autorité de contrôle prudentiel et de résolution surveille les banques. Si vous estimez que votre banque viole systématiquement la directive DSP2 ou le Code monétaire, signalez-le sur acpr.banque-france.fr. L'ACPR ne tranche pas votre litige individuel mais peut sanctionner la banque (jusqu'à plusieurs millions d'euros) et créer un précédent.
+
+**Recours 4 — Juge**
+
+En dernier recours : juge des contentieux de la protection (litiges < 10 000 €), gratuit, sans avocat obligatoire. Joignez tous vos courriers, l'avis du médiateur, et chiffrez votre préjudice. Les banques perdent généralement quand elles refusent un remboursement dû.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Combien de temps puis-je contester un prélèvement après le débit ?",
+        a: "**13 mois** pour un prélèvement non autorisé (vous n'avez jamais signé de mandat avec ce créancier), conformément à l'article L.133-24 du Code monétaire et financier. **8 semaines** pour un prélèvement autorisé mais contesté (vous aviez un mandat mais le montant ou la cause sont incorrects), article L.133-25. Au-delà de ces délais, votre banque peut refuser le remboursement et vous devrez vous adresser directement au créancier en procédure classique de remboursement. Conseil : consultez votre relevé chaque mois pour repérer rapidement tout prélèvement anormal et agir dans les délais courts.",
+      },
+      {
+        q: "La banque peut-elle refuser le remboursement ?",
+        a: "Pour un prélèvement **non autorisé**, le remboursement est de droit et immédiat (article L.133-18). La banque ne peut refuser que si elle prouve que vous avez signé un mandat valide ou que vous avez agi de manière frauduleuse. Pour un prélèvement **autorisé mais contesté**, le remboursement n'est pas automatique : la banque examine le dossier et peut le refuser si elle estime que les conditions du mandat étaient respectées. Dans les deux cas, en cas de refus, vous pouvez saisir le service réclamation interne (15 jours), puis le médiateur bancaire (90 jours), puis le juge des contentieux de la protection. Un refus injustifié de remboursement engage la responsabilité civile de la banque.",
+      },
+      {
+        q: "Comment révoquer un mandat de prélèvement SEPA ?",
+        a: "**Deux étapes simultanées et obligatoires** : 1) **Auprès du créancier** par LRAR (révocation du mandat). Délai : la révocation prend effet à la prochaine échéance non encore présentée. 2) **Auprès de votre banque** par signalement écrit ou via votre application (rubrique \"Mandats de prélèvement\" → \"Révoquer\"). La banque bloque automatiquement les prélèvements futurs de ce créancier. Conseil : agissez au moins 1 jour ouvré avant la prochaine échéance pour que la révocation soit effective. Conservez l'AR du LRAR au créancier comme preuve. Si le créancier prélève quand même après la révocation, le prélèvement est non autorisé et vous bénéficiez du remboursement sous J+1.",
+      },
+      {
+        q: "Y a-t-il des frais d'opposition à payer ?",
+        a: "Non. La directive européenne DSP2 (Directive Services de Paiement 2), transposée en droit français en 2017, interdit explicitement toute facturation de frais d'opposition, frais de dossier ou pénalités sur les contestations de prélèvement. Si votre banque vous facture des frais à ce titre, c'est illégal et nul de plein droit. Demandez le remboursement par LRAR en citant l'article L.314-7 du Code monétaire et financier. Les frais de découvert éventuels résultant du prélèvement contesté doivent aussi être annulés/remboursés (article L.133-18 alinéa 2).",
+      },
+      {
+        q: "Mon créancier prétend que le mandat était valide : que faire ?",
+        a: "Demandez-lui par LRAR la **copie du mandat signé** que vous lui avez donné. Le mandat doit comporter votre signature manuscrite (ou électronique horodatée pour les mandats e-mandate), votre IBAN, le RUM (Référence Unique de Mandat), et la date. Si le créancier ne produit pas le mandat dans 8 jours, le prélèvement est juridiquement non autorisé et la banque doit rembourser. Si le créancier produit un mandat que vous contestez (signature falsifiée, conditions modifiées sans accord, etc.), faites appel à un expert graphologue pour signature contestée, et déposez plainte pour faux ou escroquerie. Conservez tout pour la procédure judiciaire éventuelle.",
+      },
+      {
+        q: "Puis-je faire opposition pour un abonnement résilié qui prélève quand même ?",
+        a: "Oui, et c'est l'un des cas les plus fréquents. Procédure : 1) **Vérifier la résiliation** auprès du créancier (relire la lettre de résiliation envoyée et l'accusé de réception). Si la résiliation est valide, le créancier n'a plus le droit de prélever. 2) **Faire opposition à votre banque** en qualifiant le prélèvement de \"non autorisé après résiliation\". Joignez la copie de votre lettre de résiliation et son AR. La banque doit rembourser sous J+1. 3) **Mise en demeure du créancier** par LRAR exigeant remboursement de tous les prélèvements postérieurs à la résiliation, citation de l'article 1343-5 du Code civil et mention que vous avez fait opposition à la banque. 4) Si le créancier refuse, saisir le médiateur compétent (médiateur de la consommation pour les services courants, médiateur des télécoms pour les opérateurs, médiateur de l'énergie pour EDF/Engie).",
+      },
+    ],
+  },
 ];
 
 export function getGuide(slug: string): Guide | undefined {
