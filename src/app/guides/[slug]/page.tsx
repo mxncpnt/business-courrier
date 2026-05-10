@@ -185,6 +185,36 @@ export default async function GuidePage({
           {guide.description}
         </p>
 
+        {/* CTA "haut" — conversion 5-15% en bas → 30-50% above-the-fold
+            (best practice UX). Design sobre cohérent avec le bloc "Guide
+            pratique associé" sur les pages courrier (accent-soft, border
+            discrète). Pas d'impact SEO négatif : ratio CTA/contenu ~15%
+            d'above-the-fold, lien interne contextuel renforce le maillage
+            hub-and-spoke. Affiché UNIQUEMENT si un letterType lié existe. */}
+        {relatedLetter && (
+          <aside className="mb-10 flex flex-col sm:flex-row sm:items-center gap-4 p-5 bg-jc-accent-soft border border-jc-accent/20 rounded-jc">
+            <div className="flex-1">
+              <div className="text-[11px] font-semibold tracking-[0.08em] uppercase text-jc-accent mb-1">
+                Besoin d&apos;envoyer ce courrier ?
+              </div>
+              <p className="text-[14px] text-jc-ink leading-snug">
+                JusteCourrier rédige et envoie pour vous{" "}
+                <strong className="font-semibold">
+                  {relatedLetter.title.toLowerCase()}
+                </strong>
+                {" "}en 2 minutes, dès 3,90&nbsp;€.
+              </p>
+            </div>
+            <Link
+              href={`/courrier/${relatedLetter.slug}`}
+              className="shrink-0 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-jc-primary text-white font-medium rounded-jc hover:bg-jc-primary-hover transition-colors text-sm no-underline whitespace-nowrap"
+            >
+              Générer ma lettre
+              <IconArrow />
+            </Link>
+          </aside>
+        )}
+
         {/* Sections — body parsé via GuideBody (markdown minimal :
             **bold**, listes "- item", paragraphes \n\n) */}
         {guide.sections.map((section, i) => (
