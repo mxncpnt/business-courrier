@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Newsreader, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./brand-tokens.css";
 import "./globals.css";
 
@@ -71,7 +72,14 @@ export default function RootLayout({
       lang="fr"
       className={`${inter.variable} ${newsreader.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col" style={{ fontFamily: "var(--jc-font-body)", backgroundColor: "var(--jc-bg)", color: "var(--jc-ink)" }}>{children}</body>
+      <body className="min-h-full flex flex-col" style={{ fontFamily: "var(--jc-font-body)", backgroundColor: "var(--jc-bg)", color: "var(--jc-ink)" }}>
+        {children}
+        {/* Vercel Web Analytics — mesure le parcours réel des visiteurs
+            (pages vues, sources, où ils décrochent). Indispensable pour
+            comprendre le funnel entre l'arrivée SEO et la génération de
+            lettre, aujourd'hui une boîte noire. */}
+        <Analytics />
+      </body>
     </html>
   );
 }
