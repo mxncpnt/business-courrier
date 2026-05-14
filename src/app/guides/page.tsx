@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { guides } from "@/config/guides";
-import { getLetterType } from "@/config/letter-types";
+import { categories, getLetterType } from "@/config/letter-types";
 import { createAuthClient } from "@/lib/supabase/server-auth";
 import { buildBreadcrumb, buildCollectionPage } from "@/lib/jsonld";
 import Logo from "@/components/Logo";
@@ -29,6 +29,21 @@ const breadcrumbLd = buildBreadcrumb([
   { name: "Accueil", path: "/" },
   { name: "Guides", path: "/guides" },
 ]);
+
+// Groupement des guides par cluster (catégorie du courrier lié).
+// À 15+ guides, la liste à plat devient illisible. Le groupement par
+// catégorie améliore l'UX ET le SEO (structure thématique = signal de
+// "topical authority" pour Google : il comprend que le site couvre des
+// domaines distincts de façon organisée). L'ordre suit celui de `categories`.
+const guidesByCategory = categories
+  .map((cat) => ({
+    category: cat,
+    items: guides.filter((g) => {
+      const letter = getLetterType(g.relatedLetterSlug);
+      return letter?.category === cat.slug;
+    }),
+  }))
+  .filter((group) => group.items.length > 0);
 
 export default async function GuidesPage() {
   let user = null;
@@ -121,42 +136,55 @@ export default async function GuidesPage() {
         </p>
       </section>
 
-      {/* ─── Articles ─── */}
+      {/* ─── Guides groupés par cluster ─── */}
       <section className="px-6 md:px-20 pt-2 pb-24 max-w-[860px] mx-auto">
-        <div className="flex flex-col gap-4">
-          {guides.map((guide) => {
-            const letter = getLetterType(guide.relatedLetterSlug);
-            return (
-              <Link
-                key={guide.slug}
-                href={`/guides/${guide.slug}`}
-                className="flex flex-col sm:flex-row sm:items-start gap-3 p-5 border border-jc-line rounded-jc bg-jc-bg-elev no-underline hover:border-jc-primary hover:-translate-y-px transition-all"
-              >
-                <div className="flex-1 min-w-0">
-                  <h2 className="text-[17px] font-semibold text-jc-ink leading-snug mb-1.5">
-                    {guide.title}
-                  </h2>
-                  <p className="text-[14px] leading-relaxed text-jc-ink-soft mb-2">
-                    {guide.description}
-                  </p>
-                  <div className="flex items-center gap-3 text-xs text-jc-ink-muted">
-                    <span>Lecture {guide.readingTime}</span>
-                    {letter && (
-                      <>
-                        <span>·</span>
-                        <span className="text-jc-accent">
-                          Courrier associé : {letter.title}
-                        </span>
-                      </>
-                    )}
-                  </div>
-                </div>
-                <span className="shrink-0 text-jc-accent mt-1 sm:mt-2">
-                  <IconArrow />
-                </span>
-              </Link>
-            );
-          })}
+        <div className="flex flex-col gap-12">
+          {guidesByCategory.map((group) => (
+            <div key={group.category.slug}>
+              <h2 className="flex items-center gap-2.5 text-[22px] font-display font-bold text-jc-ink mb-1 max-md:text-[19px]">
+                <span aria-hidden="true">{group.category.icon}</span>
+                {group.category.label}
+              </h2>
+              <p className="text-[14px] text-jc-ink-muted mb-4">
+                {group.category.description}
+              </p>
+              <div className="flex flex-col gap-3">
+                {group.items.map((guide) => {
+                  const letter = getLetterType(guide.relatedLetterSlug);
+                  return (
+                    <Link
+                      key={guide.slug}
+                      href={`/guides/${guide.slug}`}
+                      className="flex flex-col sm:flex-row sm:items-start gap-3 p-5 border border-jc-line rounded-jc bg-jc-bg-elev no-underline hover:border-jc-primary hover:-translate-y-px transition-all"
+                    >
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-[17px] font-semibold text-jc-ink leading-snug mb-1.5">
+                          {guide.title}
+                        </h3>
+                        <p className="text-[14px] leading-relaxed text-jc-ink-soft mb-2">
+                          {guide.description}
+                        </p>
+                        <div className="flex items-center gap-3 text-xs text-jc-ink-muted">
+                          <span>Lecture {guide.readingTime}</span>
+                          {letter && (
+                            <>
+                              <span>·</span>
+                              <span className="text-jc-accent">
+                                Courrier associé : {letter.title}
+                              </span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                      <span className="shrink-0 text-jc-accent mt-1 sm:mt-2">
+                        <IconArrow />
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
