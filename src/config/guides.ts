@@ -1471,6 +1471,362 @@ En dernier recours : juge des contentieux de la protection (litiges < 10 000 €
       },
     ],
   },
+
+  // ─── Guide 16 : Résilier assurance habitation ou auto (loi Hamon) ───
+  {
+    slug: "resilier-assurance-habitation-auto-loi-hamon",
+    title: "Résilier son assurance habitation ou auto (loi Hamon)",
+    metaTitle: "Résilier assurance auto ou habitation — Loi Hamon, après 1 an",
+    description:
+      "Loi Hamon : résiliez votre assurance auto ou habitation à tout moment après 1 an, sans frais ni motif. Procédure, délai, modèle de lettre.",
+    relatedLetterSlug: "resiliation-abonnement",
+    publishedAt: "2026-05-15",
+    updatedAt: "2026-05-15",
+    readingTime: "5 min",
+    sections: [
+      {
+        heading: "Ce que la loi Hamon a changé",
+        body: `La loi n° 2014-344 du 17 mars 2014, dite **loi Hamon** ou **loi consommation**, a profondément simplifié la résiliation des contrats d'assurance. Avant elle, il fallait guetter une fenêtre de 2 mois avant l'échéance annuelle, sous peine de reconduction tacite pour un an.
+
+Depuis le 1er janvier 2015, vous pouvez **résilier à tout moment, après la première année de contrat, sans frais ni pénalité et sans avoir à justifier d'un motif**. La règle est codifiée à l'article L.113-15-2 du Code des assurances.
+
+Contrats concernés par la résiliation Hamon :
+- **Assurance auto et moto** (obligatoire)
+- **Assurance habitation** (obligatoire pour les locataires)
+- **Assurances affinitaires** : extensions de garantie, assurances de produits (téléphone, électroménager...)
+
+Contrats **non concernés** par la loi Hamon : assurance-vie, assurance emprunteur (régie par la loi Lemoine de 2022, autre régime), garanties accidents de la vie, complémentaire santé (régie par la loi du 14 juillet 2019).
+
+**Le grand avantage** : pour l'assurance auto et l'assurance habitation du locataire, **le nouvel assureur effectue les démarches de résiliation à votre place**. Vous signez le nouveau contrat, le nouvel assureur résilie l'ancien et coordonne les dates. Aucune rupture de couverture, aucune lettre à rédiger vous-même dans ce cas.`,
+      },
+      {
+        heading: "Les conditions et les cas particuliers",
+        body: `**Condition unique pour la résiliation Hamon** : votre contrat doit avoir **au moins 12 mois d'ancienneté**, comptés de date à date depuis la prise d'effet initiale (pas depuis le dernier renouvellement).
+
+Avant 12 mois, la résiliation reste possible uniquement :
+- à la date d'échéance annuelle, avec préavis de 2 mois (loi Chatel : l'assureur doit vous rappeler la date limite, sinon vous pouvez résilier après)
+- ou pour **motif légitime** (article L.113-16 du Code des assurances) : déménagement, changement de situation matrimoniale, changement de profession, départ à la retraite, cessation d'activité. La résiliation prend alors effet 1 mois après notification, sur justificatif.
+
+**Cas spécifiques** :
+- **Vente du véhicule** : le contrat auto est suspendu de plein droit le lendemain de la cession. Vous notifiez l'assureur avec le certificat de cession ; il rembourse la portion de prime non courue.
+- **Déménagement** : motif légitime de résiliation de l'assurance habitation à tout moment, même avant 1 an, sur justificatif (nouveau bail, acte de vente).
+- **Hausse de tarif hors indexation contractuelle** : ouvre un droit de résiliation dans les 15 à 30 jours suivant la notification (article L.113-4), à vérifier dans vos conditions générales.
+- **Double assurance** : si vous découvrez être couvert deux fois pour le même risque, vous pouvez résilier le contrat le plus récent (article L.121-4).
+
+Pour l'assurance habitation, attention : si vous êtes **locataire**, l'assurance est **obligatoire**. Vous ne pouvez pas simplement résilier sans souscrire un nouveau contrat — vous risquez la résiliation de votre bail. Enchaînez toujours résiliation + nouveau contrat le même jour.`,
+      },
+      {
+        heading: "La procédure pas-à-pas",
+        body: `**Méthode 1 — Vous changez d'assureur (recommandée)**
+
+Pour l'assurance **auto** et l'assurance **habitation du locataire**, laissez le nouvel assureur tout gérer :
+1. Souscrivez le nouveau contrat chez le nouvel assureur, avec une date d'effet précise.
+2. Le nouvel assureur envoie lui-même la demande de résiliation à votre ancien assureur et coordonne les dates.
+3. L'ancien contrat prend fin 1 mois après réception de la demande ; le nouveau démarre sans rupture de couverture.
+4. L'ancien assureur vous rembourse la portion de prime non courue (au prorata).
+
+Service gratuit et prévu par la loi. Aucune lettre à rédiger.
+
+**Méthode 2 — Vous résiliez sans repreneur immédiat** (ex : assurance affinitaire, ou vous gérez vous-même)
+
+1. Lettre recommandée avec accusé de réception au siège de votre assureur (ou recommandé électronique, même valeur juridique).
+2. Contenu : vos coordonnées, numéro de contrat, date de prise d'effet du contrat, demande de résiliation au titre de l'article L.113-15-2 du Code des assurances (loi Hamon).
+3. La résiliation prend effet **1 mois après réception** de votre demande.
+4. L'assureur rembourse la prime trop perçue dans les 30 jours.
+
+Conservez l'accusé de réception : le préavis de 1 mois court à compter de cette date.
+
+**Continuité de couverture** : pour l'auto et l'habitation locataire (obligatoires), ne résiliez jamais sans avoir le nouveau contrat prêt à prendre le relais. Pour les assurances facultatives (affinitaires), pas de contrainte.`,
+      },
+      {
+        heading: "Les pièges et les recours",
+        body: `**Piège 1 — L'assureur exige un motif**. Faux après 12 mois d'ancienneté : la loi Hamon n'impose aucun motif. Toute exigence de justification est illégale. Citez l'article L.113-15-2.
+
+**Piège 2 — Frais de résiliation facturés**. Interdits par la loi (résiliation "sans frais ni pénalités"). Si l'assureur en facture, demandez le remboursement par LRAR.
+
+**Piège 3 — L'assureur prétend que vous n'avez pas 12 mois**. Vérifiez la date de prise d'effet sur votre contrat ou échéancier. Si l'assureur a tort, renvoyez une LRAR avec la preuve datée.
+
+**Piège 4 — Prélèvements après la résiliation**. Faites opposition à votre banque (gratuit, directive DSP2) et réclamez le remboursement par LRAR. Sans réponse à 15 jours, saisissez le médiateur.
+
+**Piège 5 — Non-remboursement de la prime non courue**. L'assureur doit vous rembourser la part de cotisation correspondant à la période postérieure à la résiliation (article L.113-15-2 alinéa 4). Délai usuel : 30 jours. Au-delà, mise en demeure.
+
+**Recours en cas de blocage** :
+1. **Service réclamation de l'assureur** : réponse sous 2 mois (engagement déontologique de la profession).
+2. **Médiateur de l'assurance** : gratuit, mediation-assurance.org, délai 3-6 mois, avis suivi dans environ 70 % des cas.
+3. **ACPR** : pour signaler un comportement irrégulier systémique de l'assureur (ne tranche pas votre litige individuel mais peut sanctionner).
+4. **Juge** : conciliateur de justice gratuit pour les petits litiges, juge des contentieux de la protection au-delà.
+
+Pendant la médiation, la prescription est suspendue (article L.114-2 du Code des assurances) — vous ne risquez pas la forclusion.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Quand puis-je résilier mon assurance auto ou habitation avec la loi Hamon ?",
+        a: "Après **12 mois d'ancienneté** sur votre contrat, comptés de date à date depuis la prise d'effet initiale (pas depuis le dernier renouvellement). À partir de ce moment, vous résiliez à tout moment, sans frais, sans pénalité et sans motif à fournir (article L.113-15-2 du Code des assurances). Avant 12 mois, la résiliation n'est possible qu'à l'échéance annuelle (préavis 2 mois) ou pour motif légitime : déménagement, changement de situation professionnelle ou matrimoniale, départ à la retraite (article L.113-16). La résiliation prend effet 1 mois après réception de votre demande par l'assureur.",
+      },
+      {
+        q: "Dois-je rédiger la lettre moi-même ?",
+        a: "Pas forcément. Pour l'assurance **auto** et l'assurance **habitation du locataire**, le nouvel assureur effectue gratuitement les démarches de résiliation à votre place : vous signez le nouveau contrat, il résilie l'ancien et coordonne les dates pour éviter toute rupture de couverture. Vous n'avez aucune lettre à écrire. En revanche, si vous résiliez une assurance affinitaire (extension de garantie, assurance produit) ou si vous voulez gérer vous-même, vous envoyez une lettre recommandée avec accusé de réception au siège de l'assureur en citant l'article L.113-15-2.",
+      },
+      {
+        q: "Y a-t-il des frais à payer pour résilier ?",
+        a: "Non, aucun. La loi Hamon prévoit explicitement une résiliation \"sans frais ni pénalités\" après 12 mois d'ancienneté. Toute facturation de frais de dossier, de pénalité ou de retenue sur cotisation est illégale et nulle de plein droit. Si votre assureur vous facture des frais, réclamez le remboursement par lettre recommandée en citant l'article L.113-15-2 du Code des assurances. L'assureur doit aussi vous rembourser la part de prime correspondant à la période postérieure à la résiliation effective (prorata temporis), dans un délai usuel de 30 jours.",
+      },
+      {
+        q: "Puis-je résilier mon assurance habitation si je suis locataire ?",
+        a: "Oui, mais l'assurance habitation est **obligatoire** pour les locataires. Vous ne pouvez pas rester sans assurance : un défaut d'assurance peut justifier la résiliation de votre bail par le propriétaire. La règle d'or : ne résiliez jamais l'ancien contrat sans avoir souscrit le nouveau, et faites en sorte que le nouveau prenne effet le jour même où l'ancien prend fin. Le plus simple est de laisser le nouvel assureur gérer la résiliation Hamon : il coordonne les dates pour qu'il n'y ait aucun jour sans couverture. Pour les propriétaires occupants, l'assurance habitation n'est pas légalement obligatoire (sauf copropriété), mais reste vivement recommandée.",
+      },
+      {
+        q: "Mon assureur a augmenté ma cotisation : puis-je résilier immédiatement ?",
+        a: "Cela dépend de l'origine de la hausse. Si l'augmentation résulte d'une **clause d'indexation prévue au contrat** (révision annuelle indexée sur un indice), elle est contractuelle et n'ouvre pas de droit spécifique. Si l'augmentation est **décidée unilatéralement par l'assureur hors indexation**, vous pouvez résilier dans un délai généralement de 15 à 30 jours après la notification de la hausse (article L.113-4 du Code des assurances), à vérifier dans vos conditions générales. Dans ce cas, conservez la notification de hausse et joignez-la à votre lettre. Et si vous avez plus de 12 mois d'ancienneté, la loi Hamon vous permet de toute façon de partir à tout moment, hausse ou pas.",
+      },
+      {
+        q: "Que faire si mon assureur continue de me prélever après la résiliation ?",
+        a: "Premier réflexe : faites **opposition au prélèvement** auprès de votre banque (gratuit depuis la directive DSP2, vous pouvez réclamer le remboursement sous 8 semaines). En parallèle, envoyez une **mise en demeure** par lettre recommandée à l'assureur, exigeant la cessation des prélèvements et le remboursement des sommes indûment prélevées, avec un délai de 15 jours et citation de l'article 1343-5 du Code civil. Sans réponse, saisissez le **médiateur de l'assurance** (mediation-assurance.org, gratuit, délai 3-6 mois). En dernier recours, le juge des contentieux de la protection (gratuit, sans avocat obligatoire pour les litiges inférieurs à 10 000 €).",
+      },
+    ],
+  },
+
+  // ─── Guide 17 : Contester des frais bancaires abusifs ───
+  {
+    slug: "contester-frais-bancaires-abusifs",
+    title: "Contester des frais bancaires abusifs : plafonds et recours",
+    metaTitle: "Contester des frais bancaires abusifs — Plafonds et lettre type",
+    description:
+      "Commission d'intervention, frais de rejet, frais de tenue de compte : plafonds légaux et procédure pour contester des frais bancaires abusifs.",
+    relatedLetterSlug: "contestation-facture",
+    publishedAt: "2026-05-15",
+    updatedAt: "2026-05-15",
+    readingTime: "6 min",
+    sections: [
+      {
+        heading: "Les types de frais bancaires et leurs plafonds légaux",
+        body: `Avant de contester, identifiez le type de frais prélevé sur votre relevé. La loi encadre strictement plusieurs d'entre eux.
+
+**Commission d'intervention** : facturée quand la banque traite une opération qui dépasse votre découvert autorisé. Plafonnée par la loi (article L.312-1-3 du Code monétaire et financier et arrêté du 5 novembre 2013) à **8 € par opération et 80 € par mois**. Pour les clients en situation de **fragilité financière**, le plafond tombe à **4 € par opération et 20 € par mois**.
+
+**Frais de rejet** :
+- Rejet de prélèvement ou de virement pour provision insuffisante : plafonné à **20 €** (peut être inférieur au montant de l'opération rejetée).
+- Rejet de chèque : plafonné à **30 €** pour un chèque inférieur ou égal à 50 €, **50 €** pour un chèque supérieur à 50 €.
+
+**Plafond global pour les clients fragiles** : depuis 2019, l'ensemble des frais d'incident est plafonné à **25 € par mois** pour les personnes en situation de fragilité financière, et à **20 € par mois** (plus une offre client spécifique à 3 €/mois) pour celles qui souscrivent l'offre dédiée.
+
+**Frais de tenue de compte, frais de carte, frais d'inactivité** : non plafonnés par la loi, mais doivent figurer dans la convention de compte signée. S'ils n'y figurent pas ou s'ils ont augmenté sans notification préalable de 2 mois, ils sont contestables.
+
+**Frais pour opérations à l'étranger, commissions de change** : encadrés pour les paiements en euros dans l'UE (règlement européen 2019/518), libres hors zone euro mais doivent être transparents.
+
+Première action : récupérez vos 12 derniers relevés et listez chaque ligne de frais. Beaucoup de banques dépassent les plafonds par erreur de paramétrage.`,
+      },
+      {
+        heading: "Quand les frais sont contestables",
+        body: `Tous les frais ne sont pas contestables, mais plusieurs situations ouvrent un droit clair à remboursement.
+
+**Frais dépassant les plafonds légaux** : si votre banque facture une commission d'intervention à 10 € au lieu de 8 €, ou dépasse 80 €/mois, le surplus est récupérable de plein droit. C'est l'erreur la plus fréquente et la plus simple à prouver (le relevé fait foi).
+
+**Frais non prévus à la convention de compte** : la banque ne peut facturer que les frais explicitement mentionnés dans la convention que vous avez signée. Un frais "surprise" non listé est contestable.
+
+**Frais augmentés sans notification** : toute modification tarifaire doit vous être notifiée **au moins 2 mois avant son entrée en vigueur** (article L.312-1-1 du Code monétaire et financier). Sans notification, la hausse est inopposable.
+
+**Frais en cascade abusifs** : un seul incident qui génère une avalanche de frais (rejet → commission → nouveau rejet → nouvelle commission) peut être contesté pour disproportion, surtout si la banque aurait pu vous alerter avant.
+
+**Frais facturés à un client fragile sans application du plafonnement** : si vous remplissez les critères de fragilité financière (inscription au FICP, surendettement, ou détection par la banque selon ses propres critères) et que la banque ne vous a pas appliqué le plafond de 25 €/mois, vous pouvez réclamer.
+
+**Frais sur un compte clôturé ou inactif non signalé** : la banque doit vous prévenir avant de facturer des frais d'inactivité, et la clôture de compte est gratuite (article L.312-1-7).
+
+En revanche, des frais correctement plafonnés, prévus au contrat et notifiés ne sont pas "abusifs" au sens juridique — même s'ils sont élevés. Dans ce cas, le levier est la négociation commerciale ou le changement de banque, pas la contestation.`,
+      },
+      {
+        heading: "La procédure de contestation",
+        body: `**Étape 1 — Réclamation écrite à votre agence**
+
+Adressez un courrier (recommandé avec accusé de réception de préférence) à votre conseiller ou au directeur d'agence. Contenu :
+- Identification (numéro de compte)
+- Liste précise et datée des frais contestés, ligne par ligne
+- Motif de contestation pour chaque frais (dépassement de plafond, absence de notification, frais non prévu...)
+- Référence des textes : article L.312-1-3 du Code monétaire et financier pour les plafonds, arrêté du 5 novembre 2013
+- Demande de remboursement chiffrée
+- Délai de réponse souhaité (15 jours)
+
+Beaucoup de litiges se règlent à ce stade : les conseillers ont une marge de geste commercial et préfèrent rembourser plutôt que perdre un client.
+
+**Étape 2 — Service réclamation du siège**
+
+Si l'agence ne répond pas ou refuse, saisissez le **service réclamation** de la banque (coordonnées dans la convention de compte ou sur le site). Délai de réponse imposé par la réglementation : **15 jours ouvrables**, ou jusqu'à 35 jours pour les cas complexes (avec justification).
+
+**Étape 3 — Médiateur bancaire**
+
+Sans réponse satisfaisante, saisissez gratuitement le **médiateur de votre banque** (chaque établissement en a un, indépendant). Saisine en ligne après épuisement du recours interne. Délai : **90 jours**. L'avis n'est pas contraignant mais les banques le suivent dans environ 80 % des cas.
+
+Coordonnées des principaux médiateurs : Médiateur de la FBF (lemediateur.fbf.fr) pour les banques privées, ou médiateurs dédiés (BNP Paribas, Société Générale, Crédit Agricole, LCL, Crédit Mutuel, La Banque Postale ont chacun le leur).
+
+**Étape 4 — Juge ou signalement**
+
+En dernier recours : juge des contentieux de la protection (gratuit, sans avocat, litiges < 10 000 €). En parallèle, signalez les pratiques abusives à l'**ACPR** (acpr.banque-france.fr) : elle ne tranche pas votre litige individuel mais peut sanctionner la banque.`,
+      },
+      {
+        heading: "Changer de banque : le vrai levier de négociation",
+        body: `La contestation règle le passé. Pour l'avenir, le levier le plus efficace contre les frais abusifs est la **menace crédible de départ** — et le passage à l'acte si nécessaire.
+
+**Le mandat de mobilité bancaire** (loi Macron, article L.312-1-7 du Code monétaire et financier) : depuis 2017, changer de banque est devenu très simple. Votre nouvelle banque s'occupe gratuitement de tout :
+- Transfert automatique de tous vos virements et prélèvements récurrents
+- Information de vos créanciers et débiteurs (employeur, organismes)
+- Le tout en **22 jours ouvrés** maximum
+
+La clôture de l'ancien compte est **gratuite et sans frais** (article L.312-1-7). La banque ne peut pas vous facturer la fermeture.
+
+**Avant de partir, négociez** : prenez rendez-vous avec votre conseiller, listez les frais que vous jugez excessifs, et annoncez clairement que vous comparez avec d'autres banques (notamment les banques en ligne qui ont souvent zéro frais de tenue de compte). Les banques traditionnelles ont des marges de geste commercial importantes pour retenir un client rentable.
+
+**Les banques en ligne et néobanques** : pour un profil sans besoin de conseil physique, elles éliminent l'essentiel des frais (tenue de compte, carte, virements). Comparez sur les comparateurs indépendants en regardant le coût annuel total, pas juste la prime de bienvenue.
+
+**Cas du client fragile** : si vous êtes en situation de fragilité financière, vous avez droit à l'**offre client fragile** (anciennement "offre spécifique") à 3 €/mois maximum, qui plafonne les frais d'incident et inclut des moyens de paiement adaptés. La banque doit vous la proposer activement ; si elle ne le fait pas, exigez-la par écrit.
+
+Conserver les preuves : convention de compte signée, relevés, courriers échangés. En cas de changement de banque, gardez l'accès aux relevés de l'ancien compte pendant au moins 5 ans.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Quel est le plafond légal des frais bancaires ?",
+        a: "Plusieurs plafonds existent. La **commission d'intervention** est plafonnée à 8 € par opération et 80 € par mois (4 € et 20 € pour les clients en situation de fragilité financière), selon l'arrêté du 5 novembre 2013. Les **frais de rejet** de prélèvement sont plafonnés à 20 €, les frais de rejet de chèque à 30 € (chèque ≤ 50 €) ou 50 € (chèque > 50 €). Pour les clients en fragilité financière, l'ensemble des frais d'incident est plafonné à 25 € par mois. Les frais de tenue de compte et de carte ne sont pas plafonnés par la loi, mais doivent figurer dans votre convention de compte et toute hausse doit être notifiée 2 mois à l'avance.",
+      },
+      {
+        q: "Comment savoir si je suis considéré comme \"client fragile\" ?",
+        a: "La fragilité financière est appréciée par votre banque selon des critères réglementaires et ses propres indicateurs (article R.312-4-3 du Code monétaire et financier). Sont notamment concernés : les personnes inscrites au FICP (Fichier des Incidents de remboursement des Crédits aux Particuliers), celles ayant déposé un dossier de surendettement, ou celles qui cumulent au moins 5 irrégularités de fonctionnement ou incidents de paiement sur un même mois. Si vous remplissez ces critères, la banque doit vous appliquer le plafonnement à 25 €/mois et vous proposer l'offre client fragile à 3 €/mois maximum. Si elle ne le fait pas spontanément, exigez-le par écrit en citant l'article L.312-1-3.",
+      },
+      {
+        q: "Sur combien de temps puis-je réclamer des frais déjà prélevés ?",
+        a: "Le délai de prescription pour réclamer des frais bancaires indûment prélevés est de **5 ans** (article 2224 du Code civil, prescription de droit commun). Vous pouvez donc remonter jusqu'à 5 ans en arrière. En pratique, concentrez-vous sur les 12-24 derniers mois : les preuves sont plus accessibles et le dossier plus simple à instruire. Récupérez vos relevés (la banque doit les conserver et vous les fournir gratuitement) et listez chaque ligne de frais contestée avec sa date. Plus votre réclamation est précise et chiffrée, plus elle a de chances d'aboutir rapidement.",
+      },
+      {
+        q: "La banque peut-elle augmenter ses frais sans me prévenir ?",
+        a: "Non. Toute modification du tarif de vos frais bancaires doit vous être communiquée par écrit (courrier ou support durable) **au moins 2 mois avant son entrée en vigueur** (article L.312-1-1 du Code monétaire et financier). Sans cette notification préalable, la hausse est inopposable et vous pouvez en demander le remboursement. La notification doit aussi vous rappeler que vous disposez d'un droit de résiliation sans frais si vous refusez la nouvelle tarification. Si vous ne réagissez pas dans les 2 mois, vous êtes réputé avoir accepté. Conservez toujours les courriers d'information tarifaire que la banque vous envoie.",
+      },
+      {
+        q: "Que faire si la banque refuse de me rembourser ?",
+        a: "Suivez la procédure par étapes. **1.** Réclamation écrite à l'agence (recommandé avec AR), délai 15 jours. **2.** Si refus, saisine du service réclamation du siège — la réglementation impose une réponse sous 15 jours ouvrables (35 jours pour les cas complexes). **3.** Si toujours pas satisfait, saisine gratuite du médiateur bancaire de votre établissement (chaque banque a le sien, indépendant), délai 90 jours, avis suivi dans ~80 % des cas. **4.** En dernier recours, le juge des contentieux de la protection (gratuit, sans avocat obligatoire, litiges < 10 000 €). Signalez en parallèle les pratiques à l'ACPR (acpr.banque-france.fr) qui peut sanctionner la banque même si elle ne tranche pas votre cas individuel.",
+      },
+      {
+        q: "Changer de banque est-il vraiment gratuit et simple ?",
+        a: "Oui. Depuis la loi Macron de 2015 (entrée en vigueur 2017), le **mandat de mobilité bancaire** rend le changement quasi automatique : votre nouvelle banque s'occupe gratuitement de transférer tous vos virements et prélèvements récurrents et d'informer vos créanciers et débiteurs, en 22 jours ouvrés maximum (article L.312-1-7 du Code monétaire et financier). La clôture de l'ancien compte est gratuite — aucune banque ne peut facturer la fermeture. C'est votre meilleur levier de négociation : annoncer à votre conseiller que vous comparez avec la concurrence pousse souvent la banque à faire un geste sur les frais. Si le geste n'est pas suffisant, le passage à l'acte est réellement simple aujourd'hui.",
+      },
+    ],
+  },
+
+  // ─── Guide 18 : Mise en demeure trouble de voisinage ───
+  {
+    slug: "mise-en-demeure-trouble-voisinage",
+    title: "Mise en demeure d'un voisin : trouble de voisinage",
+    metaTitle: "Mise en demeure voisin — Trouble de voisinage, procédure 2026",
+    description:
+      "Bruit, nuisances, empiètement : comment mettre en demeure un voisin. Trouble anormal de voisinage, conciliation obligatoire, recours, modèle de lettre.",
+    relatedLetterSlug: "mise-en-demeure-executer",
+    publishedAt: "2026-05-15",
+    updatedAt: "2026-05-15",
+    readingTime: "6 min",
+    sections: [
+      {
+        heading: "Qu'est-ce qu'un trouble anormal de voisinage",
+        body: `Le **trouble anormal de voisinage** est une notion construite par la jurisprudence, désormais consacrée par la loi du 15 avril 2024 qui l'a inscrite à l'article 1253 du Code civil. Le principe : nul ne doit causer à autrui un trouble qui excède les **inconvénients normaux du voisinage**.
+
+La clé est le mot **"anormal"**. Tout désagrément de voisinage n'est pas un trouble réparable : il faut que la gêne dépasse ce qu'on peut raisonnablement tolérer en vivant à proximité d'autrui. Le juge apprécie au cas par cas, selon plusieurs critères : l'intensité, la durée, la répétition, le moment (jour/nuit), l'environnement (zone rurale calme vs centre-ville animé), et l'antériorité (qui était là en premier).
+
+**Troubles fréquemment reconnus comme anormaux** :
+- **Bruit** : musique forte répétée, aboiements incessants, travaux hors horaires autorisés, fêtes nocturnes régulières
+- **Nuisances olfactives** : odeurs de fumée, de cuisine, de déjections animales, dépôts d'ordures
+- **Nuisances visuelles** : dépôt permanent de détritus, construction dégradant la vue de façon excessive
+- **Empiètement** : haie, arbre, construction qui déborde sur votre terrain ; branches qui surplombent
+- **Privation d'ensoleillement ou de vue** par une construction ou une végétation excessive
+- **Écoulement d'eaux**, infiltrations causées par le voisin
+
+**Troubles généralement non retenus** : un bruit occasionnel et modéré, les bruits de la vie courante (pas, conversations normales), une gêne purement subjective sans répétition ni intensité particulière.
+
+Le trouble est apprécié objectivement : c'est l'anormalité de la gêne qui compte, pas l'intention de nuire du voisin. Même un voisin de bonne foi peut être responsable d'un trouble anormal.`,
+      },
+      {
+        heading: "Les étapes amiables avant la mise en demeure",
+        body: `La justice attend de vous une tentative de résolution amiable progressive. Brûler les étapes affaiblit votre dossier.
+
+**Étape 1 — Le dialogue direct**. Aussi frustrant que cela puisse paraître, commencez par parler à votre voisin, calmement, en exposant concrètement la gêne. Beaucoup de troubles cessent à ce stade, le voisin n'ayant pas conscience du dérangement. Notez la date de cette démarche.
+
+**Étape 2 — Constituer un dossier de preuves**. C'est l'étape décisive et trop souvent négligée. Rassemblez :
+- Un **journal des nuisances** daté et détaillé (date, heure, durée, nature, intensité de chaque incident)
+- Des **enregistrements** audio ou vidéo horodatés (smartphone)
+- Des **témoignages écrits** d'autres voisins ou de visiteurs (attestation sur l'honneur, modèle CERFA 11527)
+- Des **constats** : main courante au commissariat pour le bruit, constat de commissaire de justice (ex-huissier, 200-400 €) pour un trouble matériel ou un empiètement
+- Pour le bruit : éventuellement un **constat de mesure acoustique** par un acousticien ou les services d'hygiène de la mairie
+
+**Étape 3 — Le courrier simple de demande amiable**. Avant la mise en demeure formelle, un premier courrier écrit (simple ou recommandé) qui expose le trouble, demande qu'il cesse, et propose une discussion. Il montre votre bonne foi et marque le point de départ écrit du litige.
+
+Sans réaction à ce courrier dans un délai raisonnable (15 jours à 1 mois), passez à la mise en demeure formelle.`,
+      },
+      {
+        heading: "Rédiger la mise en demeure",
+        body: `La mise en demeure est le courrier formel qui précède la phase judiciaire. Elle doit être précise, factuelle et documentée.
+
+**Contenu** :
+- Vos coordonnées complètes et celles du voisin (nom, adresse)
+- La qualification juridique : "trouble anormal de voisinage" au sens de l'article 1253 du Code civil
+- La description **précise et chronologique** des nuisances : nature, fréquence, horaires, durée, depuis quelle date
+- Le rappel de vos démarches amiables antérieures (dialogue, courrier simple) avec leurs dates
+- La référence aux preuves constituées (journal de nuisances, témoignages, constats — sans forcément les joindre, mais en les mentionnant)
+- La **demande explicite** : cessation du trouble, et le cas échéant remise en état (élagage, retrait d'un dépôt, insonorisation)
+- Un **délai raisonnable** pour agir : 8 à 15 jours pour un trouble simple à faire cesser, jusqu'à 1 mois pour des travaux (élagage, insonorisation)
+- L'annonce des **conséquences** en cas d'inaction : saisine du conciliateur de justice puis du tribunal, demande de dommages-intérêts pour le préjudice subi, demande de cessation sous astreinte
+
+**Forme** : lettre recommandée avec accusé de réception, impérativement. C'est la preuve datée que le voisin a été formellement informé et mis en demeure d'agir.
+
+**Ton** : factuel et ferme, jamais insultant ni menaçant au-delà des recours légaux. Un courrier agressif peut se retourner contre vous (le voisin pourrait invoquer un harcèlement). Restez sur le terrain des faits et du droit.
+
+Conservez une copie de la lettre et l'accusé de réception : ils constituent une pièce maîtresse de votre futur dossier judiciaire.`,
+      },
+      {
+        heading: "Les recours : conciliation obligatoire, puis tribunal",
+        body: `Si la mise en demeure reste sans effet, la voie judiciaire s'ouvre — mais elle est désormais précédée d'une étape obligatoire.
+
+**La conciliation préalable obligatoire**. Pour les conflits de voisinage, une tentative de résolution amiable (conciliation, médiation ou procédure participative) est **obligatoire avant de saisir le juge**, quel que soit le montant du litige (article 750-1 du Code de procédure civile, renforcé par les réformes récentes). Sans cette tentative, votre assignation est irrecevable.
+
+Le **conciliateur de justice** est gratuit. Saisine en ligne sur conciliateurs.fr ou auprès du tribunal / de la mairie. Il convoque les deux parties et tente de trouver un accord. Délai : 1 à 3 mois. En cas d'accord, un constat est signé et a force exécutoire si homologué par le juge. En cas d'échec, le conciliateur délivre un constat de non-conciliation qui ouvre la voie judiciaire.
+
+**Le constat de commissaire de justice**. En parallèle, faire dresser un constat par un commissaire de justice (ex-huissier) renforce considérablement votre dossier — il fait foi devant le tribunal. Coût : 200 à 400 € selon la complexité, récupérable si vous gagnez.
+
+**La saisine du tribunal judiciaire**. Si la conciliation échoue, vous saisissez le tribunal judiciaire. Vous pouvez demander :
+- La **cessation du trouble**, le cas échéant **sous astreinte** (somme due par jour de retard)
+- La **remise en état** (élagage, démolition d'un ouvrage en infraction, travaux d'insonorisation)
+- des **dommages-intérêts** pour le préjudice subi (perte de jouissance, préjudice moral, frais engagés)
+
+Pour les litiges jusqu'à 10 000 €, l'avocat n'est pas obligatoire et la procédure est gratuite. Au-delà, l'avocat devient obligatoire.
+
+**Protection juridique** : vérifiez votre contrat d'assurance habitation — beaucoup incluent une garantie "protection juridique" qui prend en charge les frais de procédure et l'assistance d'un avocat pour les litiges de voisinage. C'est souvent oublié et très utile.
+
+**Cas du locataire** : si vous êtes locataire et que le trouble vient d'un autre locataire du même bailleur, alertez aussi le propriétaire par LRAR : il a l'obligation de garantir la jouissance paisible du logement et peut agir contre le locataire fautif.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Qu'est-ce qui distingue un trouble \"normal\" d'un trouble \"anormal\" de voisinage ?",
+        a: "Le caractère **anormal** signifie que la gêne dépasse les inconvénients que l'on doit raisonnablement tolérer en vivant à proximité d'autrui (article 1253 du Code civil, consacré par la loi du 15 avril 2024). Le juge apprécie selon plusieurs critères : l'intensité de la gêne, sa durée, sa répétition, le moment (jour/nuit), l'environnement (un bruit toléré en centre-ville ne l'est pas en zone rurale calme) et l'antériorité. Un bruit occasionnel et modéré, les bruits de la vie courante ne sont pas anormaux. En revanche, une musique forte répétée, des aboiements incessants, des odeurs persistantes, un empiètement matériel le sont. Le trouble s'apprécie objectivement : même un voisin de bonne foi peut être responsable.",
+      },
+      {
+        q: "Dois-je tenter un règlement amiable avant d'aller au tribunal ?",
+        a: "Oui, c'est obligatoire. Pour les conflits de voisinage, une tentative de résolution amiable préalable (conciliation, médiation ou procédure participative) est exigée avant toute saisine du juge, quel que soit le montant (article 750-1 du Code de procédure civile). Sans cette tentative, votre assignation sera déclarée irrecevable. Le plus simple et gratuit est de saisir un **conciliateur de justice** (conciliateurs.fr). Au-delà de l'obligation légale, c'est aussi tactiquement utile : un dossier qui montre une escalade progressive et raisonnable (dialogue, courrier, mise en demeure, conciliation) est beaucoup plus solide devant le juge qu'une action brutale.",
+      },
+      {
+        q: "Quelles preuves dois-je réunir contre mon voisin ?",
+        a: "Constituez un dossier le plus complet possible : un **journal des nuisances** daté et détaillé (date, heure, durée, nature de chaque incident) ; des **enregistrements** audio/vidéo horodatés ; des **témoignages écrits** d'autres voisins ou de visiteurs (attestation sur l'honneur, modèle CERFA 11527) ; des **mains courantes** déposées au commissariat pour le bruit ; un **constat de commissaire de justice** (ex-huissier) pour un trouble matériel ou un empiètement (200-400 €, déterminant devant le juge) ; et pour le bruit, éventuellement une **mesure acoustique** par les services d'hygiène de la mairie ou un acousticien. Plus le dossier est documenté et étalé dans le temps, plus il établit le caractère répété et anormal du trouble.",
+      },
+      {
+        q: "Quel délai accorder à mon voisin dans la mise en demeure ?",
+        a: "Le délai doit être proportionné à ce qui est demandé. Pour faire **cesser un comportement** (baisser le volume, arrêter des nuisances), 8 à 15 jours suffisent. Pour des **travaux** (élaguer une haie ou un arbre, retirer un dépôt, réaliser une insonorisation), accordez 15 jours à 1 mois selon l'ampleur. Mentionnez une date butoir précise (\"avant le [date] inclus\"). Un délai trop court (moins de 8 jours) peut être jugé déraisonnable ; un délai trop long affaiblit l'effet de la mise en demeure. L'envoi se fait en lettre recommandée avec accusé de réception : c'est la preuve datée que le voisin a été formellement informé.",
+      },
+      {
+        q: "Mon voisin est locataire : qui dois-je mettre en demeure ?",
+        a: "Mettez en demeure **le voisin lui-même**, auteur du trouble, qui est responsable de son comportement. Mais si ce voisin est locataire, alertez **également son propriétaire bailleur** par lettre recommandée. Le bailleur a une obligation légale de garantir la jouissance paisible des lieux et peut agir contre son locataire fautif (rappel à l'ordre, voire résiliation du bail pour troubles de voisinage caractérisés). Doubler la mise en demeure (locataire fautif + son bailleur) augmente la pression et la probabilité que le trouble cesse. Si vous êtes vous-même locataire, signalez aussi le trouble à votre propre bailleur, qui vous doit la jouissance paisible de votre logement.",
+      },
+      {
+        q: "Puis-je obtenir des dommages-intérêts pour le trouble subi ?",
+        a: "Oui. Si le trouble est reconnu anormal, le juge peut condamner le voisin à vous verser des dommages-intérêts en réparation du préjudice subi : perte de jouissance de votre logement, préjudice moral (stress, fatigue liée au bruit), frais que vous avez engagés (constat d'huissier, mesure acoustique, déménagement temporaire). Le juge peut aussi ordonner la **cessation du trouble sous astreinte** (une somme due par le voisin pour chaque jour de retard à se conformer) et la **remise en état** (élagage, démolition d'un ouvrage en infraction, insonorisation). Pensez à vérifier la garantie \"protection juridique\" de votre assurance habitation : elle prend souvent en charge les frais de procédure et l'assistance d'un avocat pour ce type de litige.",
+      },
+    ],
+  },
 ];
 
 export function getGuide(slug: string): Guide | undefined {
