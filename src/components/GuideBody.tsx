@@ -36,10 +36,82 @@ export function parseInline(text: string): React.ReactNode {
 export default function GuideBody({ body }: { body: string }) {
   return (
     <>
-      {body.split("\n\n").map((block, i) => (
-        <BlockRenderer key={i} block={block} />
-      ))}
+      {body.split("\n\n").map((block, i) => {
+        const trimmed = block.trim();
+        if (trimmed.startsWith("> [!CONSEIL]")) {
+          return <ConseilCallout key={i} block={trimmed} />;
+        }
+        return <BlockRenderer key={i} block={block} />;
+      })}
     </>
+  );
+}
+
+/**
+ * Encadré « Conseil de l'expert » — signal d'expertise pour les guides
+ * juridiques. Le bloc est introduit en markdown par une ligne `> [!CONSEIL]`
+ * (style GitHub-flavored alerts) suivie d'une ou plusieurs lignes préfixées
+ * par `>`. Toutes les lignes sont concaténées en un seul paragraphe, parsé
+ * avec `parseInline` pour conserver le **gras** éventuel.
+ *
+ * Rendu : aside avec border-left accent + fond légèrement teinté, icône
+ * ampoule, label "Conseil de l'expert". `role="note"` + `aria-label` pour
+ * que les lecteurs d'écran annoncent correctement le bloc.
+ *
+ * Convention volontairement proche du markdown GitHub pour rester lisible
+ * dans le source TS sans dépendance externe.
+ */
+function ConseilCallout({ block }: { block: string }) {
+  const text = block
+    .split("\n")
+    .map((line) => {
+      let s = line.trim();
+      if (s.startsWith(">")) s = s.slice(1).trim();
+      if (s.startsWith("[!CONSEIL]")) s = s.slice("[!CONSEIL]".length).trim();
+      return s;
+    })
+    .filter(Boolean)
+    .join(" ");
+
+  return (
+    <aside
+      role="note"
+      aria-label="Conseil de l'expert"
+      className="my-5 rounded-lg p-4 sm:p-5"
+      style={{
+        backgroundColor:
+          "color-mix(in srgb, var(--jc-accent) 8%, var(--jc-bg))",
+        borderLeft: "4px solid var(--jc-accent)",
+      }}
+    >
+      <div
+        className="flex items-center gap-2 mb-2 text-[12px] font-semibold uppercase tracking-wider"
+        style={{ color: "var(--jc-accent)" }}
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M9 18h6" />
+          <path d="M10 22h4" />
+          <path d="M12 2a7 7 0 0 0-4 12.7c.4.3.7.7.9 1.1.2.4.3.8.3 1.2v1h5.6v-1c0-.4.1-.8.3-1.2.2-.4.5-.8.9-1.1A7 7 0 0 0 12 2Z" />
+        </svg>
+        <span>Conseil de l&apos;expert</span>
+      </div>
+      <p
+        className="text-[15px] leading-[1.7]"
+        style={{ color: "var(--jc-ink)" }}
+      >
+        {parseInline(text)}
+      </p>
+    </aside>
   );
 }
 
