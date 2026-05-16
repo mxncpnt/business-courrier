@@ -1827,6 +1827,104 @@ Pour les litiges jusqu'à 10 000 €, l'avocat n'est pas obligatoire et la proc�
       },
     ],
   },
+
+  // ─── Guide 19 : Heures supplémentaires impayées (Lot C 2026-05-16) ───
+  {
+    slug: "reclamer-heures-supplementaires-impayees",
+    title: "Heures supplémentaires impayées : comment réclamer son dû à l'employeur",
+    metaTitle: "Heures supplémentaires impayées — réclamer à son employeur",
+    description:
+      "Heures sup non payées ? Mise en demeure de l'employeur, articles L3171-4 et L3245-1, charge de la preuve partagée. Le guide complet pour récupérer son dû.",
+    relatedLetterSlug: "mise-en-demeure-payer",
+    publishedAt: "2026-05-16",
+    updatedAt: "2026-05-16",
+    readingTime: "6 min",
+    sections: [
+      {
+        heading: "Heures supplémentaires : de quoi parle-t-on exactement ?",
+        body: `Les heures supplémentaires sont les heures de travail effectuées au-delà de la durée légale, fixée à **35 heures par semaine** par l'article L3121-27 du Code du travail. Elles ouvrent droit à une majoration de salaire ou, par accord collectif, à un repos compensateur équivalent.
+
+Le taux de majoration est défini en priorité par la convention ou l'accord collectif applicable à l'entreprise. À défaut d'accord, c'est le Code du travail qui s'applique : **25 % pour les 8 premières heures supplémentaires** de la semaine (de la 36e à la 43e heure) et **50 % au-delà** de la 43e heure, selon l'article L3121-36.
+
+Attention au piège : toutes les heures travaillées au-delà de 35 heures ne sont pas mécaniquement des heures supplémentaires. Si vous êtes au forfait jours, ou si votre contrat prévoit une durée différente (par exemple 39 heures hebdomadaires avec RTT), le mode de décompte change. C'est la durée *réellement effectuée* sur la semaine — et non l'horaire affiché sur votre fiche de paie — qui sert de référence devant le juge.
+
+Plusieurs situations entraînent automatiquement la qualification d'heures supplémentaires, même sans demande formelle écrite :
+- Travail explicitement demandé par l'employeur (mail, SMS, demande orale prouvable par témoins)
+- Travail réalisé avec son accord tacite — par exemple si votre supérieur ne pouvait pas ignorer que vous restiez tard et n'a rien dit
+- Travail rendu nécessaire par l'accomplissement de vos missions, même non expressément demandé`,
+      },
+      {
+        heading: "Le cadre juridique : ce que dit vraiment le Code du travail",
+        body: `Trois articles structurent toute la matière. **L'article L3121-28 du Code du travail** prévoit que toute heure effectuée au-delà de la durée légale donne lieu à majoration. **L'article L3121-36** fixe les taux par défaut (25 % et 50 %). **L'article L3245-1** vous donne **3 ans** à compter de la date à laquelle le salaire aurait dû être versé pour réclamer les sommes dues — passé ce délai, la créance est prescrite et définitivement perdue.
+
+Vous pouvez donc remonter jusqu'à trois années glissantes. Concrètement, en mai 2026, vous pouvez encore réclamer les heures supplémentaires impayées depuis mai 2023 — mais pas au-delà.
+
+La question décisive, dans la quasi-totalité des litiges aux prud'hommes, est celle de la preuve. C'est sur ce point que l'article **L3171-4** est central. Il prévoit qu'en cas de litige sur le nombre d'heures effectuées, le salarié doit présenter « des éléments suffisamment précis quant aux heures non rémunérées qu'il prétend avoir accomplies ». L'employeur doit alors « fournir au juge les éléments de nature à justifier les horaires effectivement réalisés ».
+
+La jurisprudence est constante depuis l'arrêt de la Cour de cassation du **18 mars 2020 (Cass. soc., n° 18-10.919)** : le salarié n'a pas à prouver formellement toutes ses heures. Il lui suffit de produire des indices crédibles — captures d'emails envoyés tôt ou tard, tableaux personnels reconstitués, témoignages, relevés de badge, agendas Outlook, SMS professionnels. C'est ensuite à l'employeur d'apporter ses propres décomptes contradictoires.
+
+> [!CONSEIL]
+> La charge de la preuve est **partagée**, pas portée par le seul salarié. Vous n'avez pas besoin d'un dossier irréfutable au départ : un tableau de vos horaires reconstitué a posteriori, quelques captures d'emails envoyés à 21 h, ou un témoignage écrit de collègue suffisent à enclencher la procédure. C'est ensuite à l'employeur de produire ses propres relevés — et s'il n'en tient pas, le doute profite au salarié. Beaucoup de salariés abandonnent en croyant qu'il faut tout prouver seuls. C'est faux, et l'employeur compte parfois sur cette erreur.`,
+      },
+      {
+        heading: "Comment réclamer concrètement : du mail à la mise en demeure",
+        body: `La réclamation se construit en trois temps, du plus informel au plus contraignant.
+
+**Étape 1 — Demande écrite simple.** Envoyez d'abord un mail à votre responsable RH ou à votre supérieur hiérarchique. Exposez les faits : période concernée, nombre approximatif d'heures réclamées, demande de régularisation. Ce premier écrit n'a pas en lui-même de portée juridique forte, mais il constitue un commencement de preuve si l'employeur ne réagit pas, et il vous permet parfois d'obtenir une régularisation à l'amiable. Conservez systématiquement une trace (PDF de l'email envoyé, accusé de lecture si possible).
+
+**Étape 2 — Mise en demeure par lettre recommandée AR.** Si la demande informelle reste sans réponse au bout de 15 jours, ou si la réponse est un refus, passez à la mise en demeure. Cette lettre doit contenir :
+- Votre identité complète, votre poste et votre date d'entrée dans l'entreprise
+- La période couverte par la réclamation (du JJ/MM/AAAA au JJ/MM/AAAA)
+- Un décompte chiffré des heures supplémentaires impayées, semaine par semaine si possible, avec le taux de majoration applicable
+- Le montant total réclamé (heures × taux horaire brut × majoration)
+- Un délai imparti pour le paiement (généralement 15 jours)
+- La mention expresse qu'à défaut, vous saisirez le conseil de prud'hommes
+- Le visa des articles L3171-4 et L3245-1 du Code du travail
+
+L'envoi en recommandé avec accusé de réception est indispensable. C'est lui qui **interrompt la prescription triennale** (article 2240 du Code civil) et constitue la preuve formelle, datée, de votre réclamation. Un email ou un courrier simple ne suffisent pas.
+
+**Étape 3 — Saisine du conseil de prud'hommes.** Sans paiement ou accord amiable dans le délai imparti, vous saisissez le conseil de prud'hommes du lieu de votre travail. La procédure est gratuite, ne nécessite pas obligatoirement d'avocat (mais c'est recommandé au-delà de quelques milliers d'euros), et débute par une phase de conciliation obligatoire. Les pièces produites à ce stade — votre mise en demeure, vos décomptes, vos preuves indiciaires — forment le socle du dossier.`,
+      },
+      {
+        heading: "Que faire si l'employeur refuse de payer ou ne répond pas ?",
+        body: `Le silence de l'employeur, après mise en demeure, équivaut à un refus. Plusieurs leviers existent en parallèle de la saisine prud'homale, et peuvent être actionnés simultanément.
+
+**Saisir l'inspection du travail.** L'inspecteur du travail peut être saisi par courrier simple ou via la DREETS. Il a accès aux registres de l'entreprise, peut interroger l'employeur, et dresser un procès-verbal transmis au parquet en cas d'infraction caractérisée — par exemple un travail dissimulé par dissimulation d'heures. Cette saisine est gratuite et peut être anonyme.
+
+**Demander la requalification en travail dissimulé.** L'article L8221-5 du Code du travail considère comme travail dissimulé toute mention sur le bulletin de paie d'un nombre d'heures inférieur à celui réellement effectué — dès lors que l'employeur a agi de manière intentionnelle. Si cette qualification est retenue par les prud'hommes, vous pouvez prétendre à une **indemnité forfaitaire de 6 mois de salaire** (article L8223-1), qui se cumule intégralement avec le rappel d'heures supplémentaires lui-même.
+
+**Demander la résiliation judiciaire du contrat de travail.** Si le non-paiement persiste et constitue un manquement grave de l'employeur à ses obligations, vous pouvez demander aux prud'hommes la résiliation judiciaire à ses torts (Cass. soc., 7 juin 2017, n° 16-13.808). Les effets sont ceux d'un licenciement sans cause réelle et sérieuse : indemnité de licenciement, indemnité compensatrice de préavis, dommages et intérêts.
+
+**Ne démissionnez pas dans la précipitation.** C'est l'erreur la plus coûteuse. Une démission classique vous prive de toute indemnité, de l'assurance chômage, et complique la suite. Si vous voulez quitter l'entreprise, demandez la résiliation judiciaire (procédure ci-dessus) ou prenez acte de la rupture aux torts de l'employeur — démarche risquée qui doit impérativement être préparée avec un avocat ou un défenseur syndical.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Quel délai ai-je pour réclamer des heures supplémentaires non payées ?",
+        a: "Trois ans à compter de la date à laquelle le salaire aurait dû être versé, selon l'article L3245-1 du Code du travail. Concrètement, en mai 2026, vous pouvez remonter jusqu'aux heures supplémentaires non payées depuis mai 2023 — mais pas au-delà. Attention : ce délai court mois par mois. Plus vous attendez, plus les périodes les plus anciennes tombent en prescription et sont définitivement perdues. L'envoi d'une mise en demeure en recommandé AR interrompt la prescription : à compter de sa réception par l'employeur, un nouveau délai de 3 ans repart à zéro (article 2240 du Code civil). C'est pour cette raison qu'il faut envoyer la mise en demeure dès que possible, même si vous n'êtes pas encore prêt à saisir les prud'hommes.",
+      },
+      {
+        q: "Mon employeur peut-il refuser de me payer des heures que je n'ai pas demandé à faire ?",
+        a: "Pas systématiquement. Les heures supplémentaires sont dues dès lors qu'elles ont été effectuées avec **l'accord, même tacite, de l'employeur**. La jurisprudence considère que si l'employeur ne pouvait pas ignorer que le salarié restait au-delà de ses horaires et n'a pas réagi pour l'en empêcher, son accord est présumé. Inversement, si l'employeur a expressément interdit les heures supplémentaires et qu'il peut le prouver (note de service écrite, mail formel, témoins), il peut en refuser le paiement. En pratique, dans la grande majorité des litiges, l'accord tacite est retenu — surtout quand la charge de travail rendait objectivement les heures supplémentaires inévitables pour accomplir les missions confiées.",
+      },
+      {
+        q: "Quelles preuves dois-je apporter ?",
+        a: "Vous n'avez pas à produire une preuve formelle et complète. L'article L3171-4 du Code du travail prévoit que la charge de la preuve est partagée : vous devez apporter des « éléments suffisamment précis » pour étayer votre demande, et c'est ensuite à l'employeur de produire ses propres décomptes. Les éléments admis par les juges sont nombreux : tableau de vos horaires reconstitué à la main, captures d'écran d'emails envoyés tôt le matin ou tard le soir, relevés de badgeuse, agendas Outlook, témoignages écrits de collègues, SMS professionnels. Un seul de ces éléments suffit souvent à enclencher la procédure. C'est ensuite à l'employeur de prouver des horaires différents — et s'il ne tient pas de registre fiable des temps de travail, le doute profite au salarié.",
+      },
+      {
+        q: "Que faire si je suis au forfait jours ?",
+        a: "Le forfait jours obéit à un régime différent : vous n'êtes pas payé en heures mais en jours travaillés (218 jours maximum par an pour un temps plein, article L3121-64 du Code du travail). En principe, il n'y a donc pas d'heures supplémentaires au sens strict. Mais le forfait jours suppose le respect de plusieurs garanties : repos quotidien de 11 heures, repos hebdomadaire de 35 heures consécutives, entretien annuel sur la charge de travail. Si ces garanties n'ont pas été respectées, le forfait peut être déclaré privé d'effet par les prud'hommes — et l'intégralité des heures effectuées au-delà de 35 h par semaine devient alors récupérable en heures supplémentaires. C'est une procédure puissante, mais technique : un défenseur syndical ou un avocat est vivement recommandé.",
+      },
+      {
+        q: "Puis-je être licencié si je réclame mes heures supplémentaires ?",
+        a: "Non. Vous bénéficiez d'une protection légale contre les représailles. Tout licenciement motivé — directement ou indirectement — par votre réclamation est nul. Si vous êtes licencié peu après votre démarche et que vous pouvez établir un lien chronologique et factuel (par exemple un licenciement pour insuffisance professionnelle trois semaines après votre mise en demeure, sans avertissement préalable), la nullité du licenciement peut être prononcée par les prud'hommes. Vous obtenez alors votre réintégration ou, à votre choix, une indemnité minimale de 6 mois de salaire en plus des indemnités de licenciement classiques. Ne renoncez donc pas par crainte : le risque légal pèse sur l'employeur, pas sur vous.",
+      },
+      {
+        q: "L'employeur me propose de récupérer mes heures en repos plutôt que de me les payer. Puis-je accepter ?",
+        a: "Oui, mais à conditions strictes. La conversion d'heures supplémentaires en repos compensateur de remplacement (RCR) est prévue par l'article L3121-37 du Code du travail. Elle doit toutefois respecter trois règles : être prévue par convention ou accord collectif (à défaut, elle ne vous est pas opposable), le repos doit inclure la majoration (1 h 15 de repos pour 1 h supplémentaire majorée à 25 %), et il doit être pris dans le délai prévu par l'accord (souvent 2 mois) — sinon l'employeur reste tenu de payer en argent. Si l'employeur propose une « récupération » sans accord collectif valide et sans majoration, la proposition n'a aucune valeur juridique et vous restez fondé à réclamer le paiement majoré en numéraire.",
+      },
+    ],
+  },
 ];
 
 export function getGuide(slug: string): Guide | undefined {
