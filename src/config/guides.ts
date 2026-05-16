@@ -1925,6 +1925,434 @@ L'envoi en recommandé avec accusé de réception est indispensable. C'est lui q
       },
     ],
   },
+
+  // ─── Guide 20 : Requalification CDD en CDI (Lot C 2026-05-16) ───
+  {
+    slug: "requalification-cdd-en-cdi",
+    title: "Requalifier son CDD en CDI : motifs, démarche et indemnités",
+    metaTitle: "Requalification CDD en CDI — motifs et procédure",
+    description:
+      "CDD irrégulier ou abusif ? Requalification de plein droit en CDI : articles L1242-12, L1244-3, L1245-1. Procédure prud'homale accélérée et effet rétroactif.",
+    relatedLetterSlug: "mise-en-demeure-executer",
+    publishedAt: "2026-05-16",
+    updatedAt: "2026-05-16",
+    readingTime: "6 min",
+    sections: [
+      {
+        heading: "Quand un CDD est-il irrégulier ?",
+        body: `Le contrat à durée déterminée est l'exception, le CDI reste la règle (article L1221-2 du Code du travail). Le législateur a donc strictement encadré les cas de recours au CDD pour éviter qu'il ne devienne un mode de gestion permanente de l'emploi.
+
+Les cas autorisés sont limitativement énumérés par l'article L1242-2 :
+- Remplacement d'un salarié absent ou dont le contrat est suspendu
+- Accroissement temporaire d'activité dûment justifié
+- Emplois à caractère saisonnier ou d'usage constant
+- CDD à objet défini pour les cadres et ingénieurs (18 à 36 mois)
+- Contrats aidés relevant de la politique de l'emploi
+
+En dehors de ces cas, le recours au CDD est irrégulier — et la requalification en CDI est de droit. Plusieurs irrégularités, même formelles, suffisent à elles seules à entraîner cette requalification :
+- Absence ou imprécision du motif dans le contrat écrit (L1242-12)
+- Contrat non transmis au salarié dans les 2 jours ouvrables suivant l'embauche (L1242-13)
+- Absence pure et simple d'écrit
+- Succession de CDD sans respect du délai de carence légal (L1244-3)
+- Recours au CDD pour pourvoir durablement un emploi lié à l'activité normale et permanente de l'entreprise (L1242-1)
+
+La jurisprudence est très stricte sur la forme. Un simple oubli de mention obligatoire — nom du remplacé, qualification, durée — peut suffire à la requalification, indépendamment de la réalité du motif (Cass. soc., 4 décembre 2002, n° 00-44.020).`,
+      },
+      {
+        heading: "Le cadre juridique : motifs et sanctions",
+        body: `Trois articles structurent la requalification. **L'article L1242-12 du Code du travail** impose un écrit comportant la définition précise du motif. **L'article L1244-3** fixe le délai de carence à respecter entre deux CDD sur le même poste (un tiers de la durée du contrat précédent en règle générale). **L'article L1245-1** prévoit que tout manquement à ces règles entraîne la **requalification de plein droit** en CDI.
+
+L'irrégularité peut tenir au fond — le poste relève en réalité de l'activité normale et permanente — ou à la forme — mention manquante, signature tardive, motif mal qualifié. Les deux types d'irrégularité produisent le même effet : requalification automatique, sans appréciation possible par le juge sur l'opportunité.
+
+La Cour de cassation considère depuis longtemps que la requalification est une sanction objective. Elle s'applique dès qu'une irrégularité est constatée, indépendamment du préjudice subi par le salarié. Autrement dit : vous n'avez pas à prouver que vous avez été "lésé" — il suffit de démontrer l'irrégularité.
+
+L'employeur ne peut pas régulariser un CDD irrégulier en faisant signer un nouveau document après coup. La signature initiale fait foi, et tout ajustement postérieur est inopérant.
+
+> [!CONSEIL]
+> La requalification produit ses effets **dès le premier jour du contrat irrégulier**, pas à la date de la décision du juge ou de la saisine. Cela signifie que votre ancienneté, vos congés payés, votre prime d'ancienneté, votre indemnité conventionnelle de licenciement et votre indemnité légale sont recalculés à partir de la date d'origine. Si vous avez enchaîné 18 mois de CDD irréguliers et que vous obtenez la requalification, vous êtes considéré comme CDI depuis 18 mois — avec tous les droits attachés. L'impact financier est souvent considérable, et les salariés n'anticipent pas cette rétroactivité.`,
+      },
+      {
+        heading: "La démarche : mise en demeure et saisine prud'homale",
+        body: `La procédure se construit en deux temps.
+
+**Étape 1 — Mise en demeure par lettre recommandée AR.** Le salarié — ou l'ex-salarié si le CDD a déjà pris fin — adresse à l'employeur une lettre demandant la requalification. Cette lettre doit contenir :
+- L'identité du salarié, son poste et la date d'embauche
+- La liste précise des CDD concernés (dates, références, motifs)
+- L'irrégularité invoquée (article visé : L1242-12, L1244-3, L1242-1, etc.)
+- La demande expresse de requalification en CDI
+- Le rappel des conséquences : indemnité de requalification, rappel de salaire éventuel, et droits liés au CDI
+- Un délai imparti (15 jours) pour répondre avant saisine du conseil de prud'hommes
+
+Cette mise en demeure n'est pas obligatoire pour saisir les prud'hommes, mais elle est utile : elle ouvre la porte à un règlement amiable, et interrompt la prescription biennale (article L1471-1).
+
+**Étape 2 — Saisine du conseil de prud'hommes.** En l'absence d'accord, le salarié saisit la formation prud'homale du lieu de travail. La requalification bénéficie d'une **procédure accélérée prévue par l'article L1245-2** : l'affaire est portée directement devant le bureau de jugement, sans phase de conciliation préalable, et le jugement doit intervenir dans le mois suivant la saisine.
+
+Cette procédure rapide est un avantage stratégique : elle évite les délais habituels de 12 à 18 mois des prud'hommes, et met l'employeur sous pression. Les pièces à produire sont les contrats successifs, les bulletins de paie, les éventuels échanges écrits, et tout document attestant du caractère permanent du poste (organigramme, fiches de fonction, recrutements ultérieurs sur le même poste).`,
+      },
+      {
+        heading: "Les indemnités spécifiques à la requalification",
+        body: `La requalification ouvre droit à plusieurs indemnités cumulables.
+
+**Indemnité de requalification (L1245-2).** Minimum **un mois de salaire**, sans plafond. Les juges l'évaluent en fonction de la durée des CDD irréguliers et de l'ancienneté reconstituée. Dans les cas les plus longs ou les plus abusifs, cette indemnité peut atteindre 3 à 6 mois de salaire.
+
+**Indemnité de fin de contrat (prime de précarité).** Elle reste due au titre de chaque CDD effectué, indépendamment de la requalification (Cass. soc., 7 mars 2018, n° 16-13.194).
+
+**Si le CDD a déjà pris fin sans renouvellement.** La fin du CDD est requalifiée en licenciement sans cause réelle et sérieuse. Le salarié obtient en plus :
+- Indemnité légale ou conventionnelle de licenciement (selon l'ancienneté reconstituée)
+- Indemnité compensatrice de préavis (1 ou 2 mois selon l'ancienneté)
+- Dommages et intérêts pour licenciement sans cause réelle et sérieuse (selon le barème Macron, article L1235-3)
+
+**Si travail dissimulé caractérisé.** L'article L8223-1 prévoit une indemnité forfaitaire de **6 mois de salaire**, cumulable avec toutes les indemnités ci-dessus, si l'employeur a sciemment utilisé le CDD pour dissimuler un emploi permanent.
+
+**Effets sur Pôle Emploi / France Travail.** L'allocation d'aide au retour à l'emploi (ARE) est recalculée sur la base du salaire reconstitué, ce qui peut entraîner un rappel d'indemnités chômage si elles ont été versées sur une base sous-évaluée.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Combien de CDD successifs faut-il avoir signés avant de pouvoir demander la requalification ?",
+        a: "Il n'existe pas de seuil chiffré. La requalification ne dépend pas du *nombre* de CDD, mais de leur *régularité*. Un seul CDD suffit s'il est irrégulier sur la forme (absence d'écrit, motif imprécis, signature tardive) ou sur le fond (poste relevant de l'activité normale et permanente). À l'inverse, dix CDD parfaitement réguliers et bien motivés ne donnent pas droit à requalification. Cela étant, la succession de CDD sans respect du délai de carence prévu par l'article L1244-3 entraîne automatiquement la requalification — c'est le motif le plus fréquemment invoqué par les juges, car facile à prouver via les dates des contrats successifs.",
+      },
+      {
+        q: "Mon CDD a duré 2 ans, suis-je automatiquement en CDI ?",
+        a: "Non, la durée n'est pas un critère unique de requalification. Un CDD à objet défini ou un CDD pour remplacement peuvent durer 18 mois (24 mois avec renouvellement) en parfaite régularité. C'est la conformité au motif légal et le respect des formalités qui comptent, pas la durée. En revanche, si le CDD dépasse la durée maximale légale autorisée pour son motif (18 mois en règle générale), la requalification est de droit. Pour les CDD d'usage (BTP, hôtellerie, audiovisuel...), il n'existe pas de durée maximale mais la succession sur un même poste doit rester compatible avec le caractère par essence temporaire de l'emploi — sinon requalification.",
+      },
+      {
+        q: "L'employeur peut-il me licencier après ma demande de requalification ?",
+        a: "Le licenciement reste possible mais il bénéficie d'une protection renforcée. Tout licenciement motivé — directement ou indirectement — par la demande de requalification est nul. Si vous êtes licencié dans les semaines qui suivent votre lettre, et que le motif invoqué par l'employeur n'est pas solide (par exemple une « insuffisance professionnelle » sans avertissement préalable), la nullité peut être prononcée. Le salarié obtient alors sa réintégration ou, à son choix, une indemnité minimale de 6 mois de salaire en plus des indemnités classiques. Dans les faits, l'employeur préfère souvent attendre la fin du CDD pour ne pas renouveler — mais cette stratégie ne le protège pas, puisque la requalification rend cette non-reconduction abusive.",
+      },
+      {
+        q: "Quel délai ai-je pour saisir les prud'hommes ?",
+        a: "Le délai de prescription est de **2 ans** à compter du jour où le salarié a connu ou aurait dû connaître les faits permettant d'agir (article L1471-1 du Code du travail). Pour la requalification, ce point de départ est généralement la date du dernier CDD irrégulier, ou la date de connaissance du caractère permanent du poste. La prescription est interrompue par toute saisine du conseil de prud'hommes — ou par l'envoi d'une lettre recommandée AR de mise en demeure (article 2240 du Code civil). Au-delà de 2 ans, l'action est prescrite et le salarié perd définitivement son droit à requalification, même si l'irrégularité est manifeste.",
+      },
+      {
+        q: "Combien puis-je espérer obtenir financièrement ?",
+        a: "Le montant total dépend de la durée des CDD et du salaire. Au minimum : 1 mois de salaire au titre de l'indemnité de requalification (L1245-2). Si le CDD a pris fin et que la rupture est requalifiée en licenciement sans cause réelle et sérieuse, il faut ajouter : indemnité légale de licenciement (1/4 de mois par année d'ancienneté reconstituée), indemnité compensatrice de préavis (1 à 2 mois), et dommages-intérêts selon le barème Macron (entre 1 et 20 mois selon l'ancienneté). Si le travail dissimulé est caractérisé, ajouter 6 mois de salaire forfaitaires (L8223-1). Pour un CDD de 2 ans payé 2 500 € brut, le total peut facilement dépasser **15 000 à 25 000 euros**.",
+      },
+      {
+        q: "Le CDD d'intérim peut-il aussi être requalifié ?",
+        a: "Oui. Le contrat de mission (intérim) obéit à des règles similaires aux CDD classiques, prévues par les articles L1251-1 et suivants du Code du travail. La requalification peut être prononcée contre l'entreprise utilisatrice — et non contre la société d'intérim — dès lors que les motifs de recours sont irréguliers, que la durée maximale est dépassée, ou que le contrat est utilisé pour pourvoir durablement un emploi permanent. Les indemnités sont les mêmes : indemnité de requalification minimum 1 mois, plus le cas échéant indemnités de licenciement sans cause réelle et sérieuse. La saisine se fait également selon la procédure accélérée prévue à L1251-41.",
+      },
+    ],
+  },
+
+  // ─── Guide 21 : Contester un solde de tout compte erroné (Lot C 2026-05-16) ───
+  {
+    slug: "contester-solde-de-tout-compte",
+    title: "Contester un solde de tout compte erroné : délais et procédure",
+    metaTitle: "Contester un solde de tout compte — délais, procédure",
+    description:
+      "Solde de tout compte avec erreurs ou omissions ? Article L1234-20. Délai 6 mois si signé, 3 ans si non signé. Mise en demeure et procédure complète.",
+    relatedLetterSlug: "mise-en-demeure-payer",
+    publishedAt: "2026-05-16",
+    updatedAt: "2026-05-16",
+    readingTime: "5 min",
+    sections: [
+      {
+        heading: "Qu'est-ce que le solde de tout compte et que doit-il contenir ?",
+        body: `Le solde de tout compte (STC) est un document remis par l'employeur au salarié à la rupture du contrat de travail. Il liste l'ensemble des sommes versées à l'occasion de la rupture : derniers salaires, indemnité de congés payés non pris, indemnité de licenciement ou de fin de contrat, indemnité compensatrice de préavis, primes éventuelles, et tout autre élément de rémunération échu.
+
+L'article L1234-20 du Code du travail impose à l'employeur de l'établir et de le remettre au salarié, quel que soit le motif de la rupture : démission, licenciement, fin de CDD, rupture conventionnelle, retraite, départ négocié. Il doit être daté et signé par l'employeur.
+
+Le STC doit faire l'inventaire **détaillé poste par poste** des sommes versées. Une simple mention globale (« je vous verse 4 200 € pour solde de tout compte ») n'est pas valable juridiquement : la jurisprudence exige que chaque élément soit ventilé pour que le salarié puisse vérifier le calcul de chaque poste.
+
+Le STC s'accompagne en principe d'un bulletin de paie reprenant les éléments, d'un certificat de travail, et d'une attestation Pôle Emploi / France Travail. Ces documents constituent ensemble le « solde de tout compte » au sens large, mais c'est bien le reçu signé qui a la portée juridique encadrée par L1234-20.`,
+      },
+      {
+        heading: "Les délais de contestation : 6 mois si signé, 3 ans sans signature",
+        body: `L'article L1234-20 du Code du travail prévoit un régime double, selon que le salarié a signé ou non le reçu.
+
+**Si le salarié a signé** le reçu pour solde de tout compte avec la mention prévue par la loi, il dispose d'un délai de **6 mois** à compter de la signature pour le dénoncer. Au-delà, le reçu devient libératoire pour l'employeur sur les sommes qui y figurent. Concrètement, le salarié ne peut plus contester les montants énumérés.
+
+**Si le salarié n'a pas signé** (ou s'il a signé avec des réserves), la prescription de droit commun s'applique : **3 ans** pour les créances salariales (article L3245-1), 2 ans pour les autres créances liées au contrat de travail (article L1471-1).
+
+L'écart est considérable. Un salarié qui signe sans précaution se prive de 30 mois d'action.
+
+Important : la dénonciation doit être faite par **lettre recommandée avec AR**, motivée, et adressée à l'employeur. Elle peut viser tout ou partie du STC. Si elle vise un poste précis (par exemple un rappel d'heures supplémentaires omis), elle n'affecte pas le caractère libératoire pour les autres postes — c'est pourquoi la dénonciation doit être large si plusieurs erreurs sont suspectées.
+
+> [!CONSEIL]
+> La signature « pour solde de tout compte » est un piège juridique. La mention exacte requise par l'article R1234-19 est : « reçu pour solde de tout compte ». Sans cette formulation, ou si la mention figure en bas de page de manière dissimulée, la jurisprudence admet souvent que le délai de 6 mois ne s'applique pas. **Avant de signer**, relisez attentivement et signez avec la mention manuscrite « sous réserve » si vous avez un doute. Cette simple précaution préserve les 3 ans de prescription au lieu des 6 mois. Beaucoup d'employeurs comptent sur la précipitation du salarié à la sortie pour faire signer un STC erroné en sa défaveur.`,
+      },
+      {
+        heading: "Comment contester : mise en demeure et procédure",
+        body: `La contestation se fait en deux étapes.
+
+**Étape 1 — Lettre de dénonciation par recommandé AR.** Cette lettre doit :
+- Identifier précisément le reçu contesté (date de signature, montant total)
+- Lister les postes contestés avec, pour chacun, le montant figurant au STC et le montant qui aurait dû y figurer selon vos calculs
+- Joindre les pièces justificatives : bulletins de paie, contrat de travail, accord d'entreprise, relevés de présence
+- Demander le paiement de la différence dans un délai imparti (généralement 15 jours)
+- Mentionner les articles L1234-20 et L3245-1 du Code du travail
+- Indiquer qu'à défaut de paiement, vous saisirez le conseil de prud'hommes
+
+L'envoi en recommandé AR est indispensable : c'est la seule preuve recevable que la dénonciation a été faite dans le délai légal de 6 mois.
+
+**Étape 2 — Saisine du conseil de prud'hommes.** Sans accord, le salarié saisit le conseil de prud'hommes du lieu de travail. La phase de conciliation préalable est obligatoire pour ce type de contentieux. Si la conciliation échoue, l'affaire est renvoyée devant le bureau de jugement.
+
+La charge de la preuve appartient au salarié pour démontrer le caractère erroné du STC, mais l'employeur doit produire ses propres décomptes et justificatifs. Si l'employeur n'apporte aucun élément, le juge tranche en faveur du salarié sur la base des seuls éléments produits par celui-ci.`,
+      },
+      {
+        heading: "Quels postes peuvent être contestés rétroactivement ?",
+        body: `Plusieurs postes sont fréquemment sources d'erreurs et peuvent être rétroactivement réclamés via la contestation du STC.
+
+**Heures supplémentaires impayées.** Si vos heures supplémentaires n'ont pas été intégrées au STC, vous pouvez les réclamer sur la base de l'article L3171-4 du Code du travail. La prescription est de 3 ans, ce qui peut représenter des sommes substantielles.
+
+**Indemnité compensatrice de congés payés (ICCP).** Souvent mal calculée, surtout pour les contrats à temps partiel, les CDD successifs, ou en présence d'absences (arrêt maladie, congé maternité). Le calcul doit suivre la règle la plus favorable au salarié : 1/10 de la rémunération brute totale ou maintien intégral.
+
+**Indemnité de licenciement.** Calculée selon l'ancienneté reconstituée (1/4 de mois par année jusqu'à 10 ans, 1/3 au-delà selon l'article R1234-2). Vérifier que la convention collective applicable n'impose pas un calcul plus favorable, fréquent dans plusieurs secteurs.
+
+**Prime d'ancienneté, 13e mois, intéressement, participation.** Si le STC ne reprend pas la part proportionnelle due au titre de la période non encore versée, c'est une omission contestable.
+
+**Indemnité de fin de contrat (CDD).** La prime de précarité (10 % de la rémunération brute totale) doit figurer au STC. Son omission est extrêmement fréquente.
+
+**Reliquats de RTT non pris ou jours de CET non soldés.** Doivent être payés à la rupture, sauf accord collectif prévoyant un versement spécifique.
+
+À chaque fois, le calcul de la somme due se fait à partir des bulletins de paie, du contrat de travail, et de la convention collective applicable. En cas de doute, la consultation d'un défenseur syndical ou d'un avocat reste recommandée — beaucoup de prud'hommes constatent que des STC apparemment corrects sont en réalité sous-évalués de plusieurs milliers d'euros.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Que signifie exactement la mention « pour solde de tout compte » ?",
+        a: "Cette mention indique que le salarié reconnaît avoir reçu les sommes énumérées dans le reçu, et qu'il renonce à toute réclamation supplémentaire sur ces postes. Juridiquement, c'est une renonciation conditionnée par l'article L1234-20 du Code du travail : elle n'est libératoire pour l'employeur que sur les sommes effectivement énumérées dans le document. Si un poste a été oublié (par exemple une prime d'ancienneté), il reste réclamable indépendamment du caractère « définitif » du reçu. Sans cette mention exacte ou sans signature, le reçu n'est qu'un simple bulletin de paie et la prescription longue (3 ans pour les salaires) s'applique. La mention déclenche en revanche le délai court de 6 mois.",
+      },
+      {
+        q: "Puis-je signer le reçu puis le contester ensuite ?",
+        a: "Oui, dans le délai de 6 mois à compter de la signature, par lettre recommandée AR motivée. La signature ne vous prive pas du droit de contester — elle déclenche simplement le compte à rebours. Pour préserver vos droits au maximum, deux options : soit refuser de signer (3 ans de prescription au lieu de 6 mois), soit signer en ajoutant à la main la mention « **sous toutes réserves de mes droits, contestation à venir** ». Cette mention manuscrite est jugée par la Cour de cassation comme privant le reçu de son caractère libératoire (Cass. soc., 18 décembre 2019, n° 18-15.336). L'employeur ne peut pas refuser de vous remettre le STC si vous refusez de signer : il doit vous l'adresser par voie postale.",
+      },
+      {
+        q: "Quels postes du STC peuvent être contestés ?",
+        a: "Tous les postes peuvent être contestés s'ils sont erronés ou incomplets. Les contestations les plus fréquentes portent sur les heures supplémentaires impayées, l'indemnité compensatrice de congés payés (ICCP), l'indemnité de licenciement (souvent sous-évaluée en cas d'ancienneté mal reconstituée), la prime de précarité en CDD, les primes d'ancienneté ou 13e mois proratisés, les jours de RTT ou de CET non soldés. À chaque fois, la contestation doit s'appuyer sur des justificatifs : bulletins de paie, contrat de travail, convention collective, accord d'entreprise. Un calcul détaillé poste par poste augmente nettement les chances d'obtenir gain de cause.",
+      },
+      {
+        q: "Et si mon employeur refuse de me remettre mon STC ?",
+        a: "L'employeur a l'obligation légale de remettre le solde de tout compte à la rupture du contrat, sous peine de devoir réparer le préjudice subi. Si malgré une demande écrite il refuse ou tarde, envoyez une mise en demeure par lettre recommandée AR en visant l'article L1234-20 et en demandant la remise sous 8 jours. Sans réponse, vous pouvez saisir le conseil de prud'hommes en référé pour obtenir la remise sous astreinte (une somme journalière due par l'employeur pour chaque jour de retard). Vous pouvez également demander des dommages-intérêts pour le préjudice causé — notamment si le retard vous a empêché de percevoir vos allocations chômage ou de retrouver un emploi.",
+      },
+      {
+        q: "La signature engage-t-elle pour tous les postes, même ceux non détaillés ?",
+        a: "Non. Le caractère libératoire du reçu pour solde de tout compte ne s'applique **qu'aux sommes effectivement énumérées** dans le document (Cass. soc., 18 décembre 2013, n° 12-24.985). Si un poste — par exemple une prime annuelle ou des heures supplémentaires — n'a pas été mentionné, vous pouvez le réclamer sans être tenu par le délai de 6 mois. La prescription applicable est alors celle de droit commun : 3 ans pour les créances salariales. C'est pour cette raison que le STC doit être détaillé poste par poste : un STC se contentant d'une somme globale, sans détail, est très facilement contestable même après 6 mois.",
+      },
+      {
+        q: "Que faire si le STC inclut des sommes manifestement inexactes ?",
+        a: "Dans cette situation, ne signez surtout pas dans la précipitation. Demandez le détail des calculs à l'employeur — par mail, en gardant trace écrite. Comparez chaque poste avec vos bulletins de paie, votre contrat, et la convention collective applicable. Si vous identifiez une erreur, deux options : refuser de signer et envoyer une lettre recommandée AR demandant la rectification dans un délai de 15 jours, ou signer en ajoutant la mention manuscrite « sous toutes réserves de mes droits, montants contestés à venir » suivie de votre paragraphe. Cette seconde option préserve vos droits tout en vous permettant de toucher rapidement les sommes non contestées. Dans tous les cas, conservez l'original du STC, vos bulletins de paie, et copie de tous les échanges écrits.",
+      },
+    ],
+  },
+
+  // ─── Guide 22 : Demande de rupture conventionnelle (Lot C 2026-05-16) ───
+  {
+    slug: "demander-rupture-conventionnelle-employeur",
+    title: "Demander une rupture conventionnelle à son employeur : procédure et négociation",
+    metaTitle: "Demande de rupture conventionnelle — lettre et procédure",
+    description:
+      "Comment formuler une demande de rupture conventionnelle ? Article L1237-11, négociation, indemnité minimale, homologation DREETS, droit au chômage.",
+    relatedLetterSlug: "mise-en-demeure-executer",
+    publishedAt: "2026-05-16",
+    updatedAt: "2026-05-16",
+    readingTime: "6 min",
+    sections: [
+      {
+        heading: "Rupture conventionnelle : à quoi s'attendre",
+        body: `La rupture conventionnelle est un mode de rupture amiable du contrat de travail à durée indéterminée. Elle a été créée par la loi du 25 juin 2008 et codifiée aux articles L1237-11 à L1237-16 du Code du travail. Elle suppose le consentement libre et éclairé des deux parties — salarié et employeur — sur le principe même de la rupture et sur ses conditions financières.
+
+Pourquoi elle plaît au salarié : elle ouvre droit à l'**indemnité spécifique de rupture conventionnelle** (au moins équivalente à l'indemnité légale de licenciement) **et au chômage**, ce qui en fait une alternative très favorable à la démission.
+
+Pourquoi elle plaît parfois à l'employeur : elle sécurise juridiquement la rupture, en évitant les contentieux d'un licenciement (cause réelle et sérieuse, procédure, indemnités majorées en cas d'absence de motif). Pour un salarié qui veut partir, elle évite à l'employeur le risque d'une démission donnée sous le coup de l'émotion et requalifiée ensuite en licenciement.
+
+Ce qu'elle n'est pas : un licenciement à l'amiable. La rupture conventionnelle est un acte juridique distinct, soumis à un formalisme strict, à une homologation administrative, et à un délai de rétractation. Une simple "lettre de licenciement amiable" signée à deux n'a pas la même valeur juridique et peut être requalifiée — soit en démission, soit en licenciement sans cause réelle et sérieuse.
+
+Public concerné : tous les salariés en CDI, y compris en période d'essai (sauf accord contraire), y compris les salariés protégés (avec autorisation de l'inspection du travail). Les CDD ne peuvent pas faire l'objet d'une rupture conventionnelle classique mais d'une rupture conventionnelle d'un commun accord (régime distinct, article L1243-1).`,
+      },
+      {
+        heading: "Le cadre juridique : ce qui est négociable et ce qui ne l'est pas",
+        body: `**Ce qui est imposé par la loi et non négociable :**
+- Le caractère écrit et formel de la convention (article L1237-11)
+- L'entretien préalable obligatoire entre les parties (L1237-12)
+- Le délai de rétractation de 15 jours calendaires (L1237-13)
+- L'homologation par la DREETS (Direction régionale de l'économie, de l'emploi, du travail et des solidarités) ou son refus dans les 15 jours ouvrables (L1237-14)
+- Le montant minimum de l'indemnité spécifique : au moins égal à l'indemnité légale ou conventionnelle de licenciement (L1237-13)
+
+**Ce qui est négociable entre les parties :**
+- Le montant exact de l'indemnité (souvent au-delà du minimum légal, surtout pour des ruptures d'initiative employeur)
+- La date de fin du contrat de travail (dans la limite imposée par l'homologation)
+- L'éventuelle dispense d'exécution du préavis, et son éventuelle compensation financière
+- La levée ou non d'une éventuelle clause de non-concurrence (et son indemnisation)
+- Le traitement des éléments accessoires : matériel professionnel, droits acquis (CET, RTT non pris), formation engagée, intéressement et participation au prorata
+
+L'employeur n'a aucune obligation de proposer plus que le minimum légal. Mais s'il a un intérêt à voir partir le salarié — par exemple si la procédure de licenciement est complexe ou risquée juridiquement — la négociation peut conduire à une indemnité bien supérieure. Le rapport de force dépend de la situation : ancienneté, qualité du dossier salarié, climat dans l'entreprise, urgence pour l'employeur.
+
+> [!CONSEIL]
+> La rupture conventionnelle **n'est pas un droit**. L'employeur peut la refuser sans avoir à se justifier, et la jurisprudence est constante sur ce point : aucun juge ne peut imposer à un employeur de signer. Beaucoup de salariés confondent demande et résiliation unilatérale : si vous quittez le poste après un refus, c'est une démission — pas une rupture conventionnelle. La demande doit ouvrir une négociation, pas l'imposer. Si l'employeur refuse, vos options restent la démission (sans chômage), la prise d'acte de rupture aux torts de l'employeur (risquée, nécessite un avocat), ou l'attente d'une opportunité.`,
+      },
+      {
+        heading: "Comment formuler la demande à son employeur",
+        body: `La demande peut être verbale ou écrite. Une demande écrite, par lettre remise en main propre contre décharge ou par recommandé AR, a deux avantages : elle laisse une trace, et elle formalise le démarrage de la procédure dès la date d'envoi.
+
+**Structure recommandée de la lettre :**
+- Identification : nom, fonction, ancienneté
+- Phrase d'introduction expliquant la démarche (sans formule maladroite type "je veux partir" — préférer "je souhaite engager avec vous une discussion en vue d'une rupture conventionnelle")
+- Brève motivation, sans agressivité : changement professionnel, projet personnel, évolution de carrière. Évitez les griefs envers l'entreprise : ils créent un climat défavorable à la négociation.
+- Proposition concrète : date d'effet souhaitée, conditions financières envisagées
+- Demande d'un entretien dans un délai raisonnable (15 jours)
+- Formule de politesse
+
+**Ce qu'il ne faut pas faire :**
+- Annoncer un départ ferme en cas de refus — cela transforme la lettre en démission déguisée
+- Mentionner un nouvel emploi obtenu — cela affaiblit la position de négociation et peut faire requalifier la rupture si la chronologie est défavorable
+- Énumérer des reproches à l'encontre de l'employeur — réserver ces éléments à une éventuelle prise d'acte si la négociation échoue
+
+**Si l'employeur est ouvert à la discussion**, un ou plusieurs entretiens informels précèdent l'entretien officiel prévu par L1237-12. Lors de ces échanges, le salarié peut se faire assister par un membre du personnel de son choix, et l'employeur par toute personne de son choix dans l'entreprise (si l'effectif le permet).`,
+      },
+      {
+        heading: "Après l'accord : entretien, signature, homologation",
+        body: `Une fois le principe et les conditions arrêtés, la procédure formelle se déroule en plusieurs étapes encadrées par les articles L1237-12 à L1237-14.
+
+**1. Entretien préalable obligatoire (L1237-12).** Au moins un entretien doit avoir lieu entre les parties pour discuter des modalités. Le salarié peut s'y faire assister par un salarié de l'entreprise ou, en l'absence d'IRP, par un conseiller du salarié inscrit sur une liste préfectorale. L'employeur ne peut s'y faire assister que si le salarié l'est lui-même. Aucun procès-verbal n'est obligatoire, mais il est conseillé d'en rédiger un signé par les deux parties.
+
+**2. Signature de la convention.** La convention doit être rédigée sur le formulaire CERFA n° 14598*01 (ou télédéclarée sur le portail TéléRC). Elle précise : identité des parties, date envisagée de rupture, montant de l'indemnité spécifique, modalités d'exécution éventuelle du préavis.
+
+**3. Délai de rétractation (L1237-13).** Chacune des deux parties dispose d'un délai de **15 jours calendaires** à compter de la signature pour se rétracter, par lettre recommandée AR. Ni l'employeur ni le salarié n'ont à justifier d'un motif. Pendant ce délai, le contrat de travail continue normalement.
+
+**4. Homologation par la DREETS (L1237-14).** À l'issue du délai de rétractation, la convention est transmise à la DREETS (ex-DIRECCTE) qui dispose de **15 jours ouvrables** pour l'homologuer. Le silence vaut homologation tacite. L'administration vérifie le respect du formalisme et l'absence d'indices d'un consentement vicié. Elle peut refuser, notamment si l'indemnité est inférieure au minimum légal ou si le délai de rétractation n'a pas été respecté.
+
+**5. Rupture effective.** Le contrat prend fin au plus tôt le lendemain du jour de l'homologation administrative, ou à la date convenue si elle est postérieure. À cette date, l'employeur remet le solde de tout compte, le certificat de travail, et l'attestation France Travail. Le salarié peut s'inscrire au chômage.
+
+**Délai total de la procédure** : environ 5 à 6 semaines entre la signature et la rupture effective, sans compter la phase préalable de négociation.`,
+      },
+    ],
+    faq: [
+      {
+        q: "L'employeur peut-il refuser ma demande de rupture conventionnelle ?",
+        a: "Oui, sans avoir à se justifier. La rupture conventionnelle suppose le consentement libre des deux parties, et aucune disposition légale n'oblige l'employeur à accepter une demande du salarié. Aucun juge ne peut imposer la signature. En cas de refus, vos options se limitent à : continuer à exercer votre poste, démissionner (sans droit au chômage sauf cas particuliers de démission légitime), ou prendre acte de la rupture aux torts de l'employeur si vous avez des griefs sérieux (procédure risquée, à préparer avec un avocat). Une nouvelle demande peut être tentée plus tard si la situation évolue — il n'y a pas de délai imposé entre deux demandes.",
+      },
+      {
+        q: "Quel est le montant minimum de l'indemnité de rupture conventionnelle ?",
+        a: "L'article L1237-13 du Code du travail impose un montant au moins égal à l'**indemnité légale de licenciement** : 1/4 de mois de salaire par année d'ancienneté jusqu'à 10 ans, puis 1/3 de mois par année au-delà (article R1234-2). Si une convention collective ou un accord d'entreprise prévoit une indemnité de licenciement supérieure, c'est ce montant qui s'impose comme plancher. Le salaire de référence est le 1/12 de la rémunération brute des 12 derniers mois, ou le 1/3 des 3 derniers mois si plus favorable. Au-delà de ce minimum, tout est négociable. Pour les ruptures d'initiative employeur (l'entreprise veut faire partir le salarié), l'indemnité atteint souvent 2 à 4 fois l'indemnité légale.",
+      },
+      {
+        q: "Puis-je toucher le chômage après une rupture conventionnelle ?",
+        a: "Oui, c'est l'un des grands avantages de cette procédure. L'indemnité de rupture conventionnelle, lorsqu'elle ne dépasse pas le minimum légal ou conventionnel, ne donne lieu à aucun différé d'indemnisation chômage spécifique. Si l'indemnité dépasse ce minimum, un différé spécifique d'indemnisation est calculé (article 21 de la convention d'assurance chômage). Vous pouvez aussi être soumis au différé de congés payés (jours de CP versés en solde de tout compte). En pratique, l'allocation chômage commence en général 7 jours après l'inscription, à condition d'avoir 6 mois d'affiliation sur les 24 derniers mois (ou 36 si plus de 53 ans).",
+      },
+      {
+        q: "Combien de temps prend la procédure complète ?",
+        a: "Environ 5 à 6 semaines entre la signature de la convention et la rupture effective, sans compter la phase préalable de négociation qui peut durer de quelques jours à plusieurs mois. Le détail : entretien préalable obligatoire (au moins 1 jour entre la convocation et l'entretien, en pratique 1 à 2 semaines), puis signature de la convention, puis délai de rétractation de 15 jours calendaires, puis transmission à la DREETS qui dispose de 15 jours ouvrables pour homologuer, puis date de rupture (au plus tôt le lendemain de l'homologation). La date de rupture peut être différée si les parties le souhaitent — par exemple pour permettre au salarié de finaliser un projet.",
+      },
+      {
+        q: "Et si je change d'avis pendant la procédure ?",
+        a: "Vous pouvez vous rétracter unilatéralement pendant les **15 jours calendaires** suivant la signature de la convention, sans avoir à justifier d'un motif (article L1237-13). La rétractation doit être notifiée à l'autre partie par tout moyen offrant date certaine — concrètement, par lettre recommandée avec AR. Passé ce délai, la rétractation n'est plus possible : la convention produit ses effets après homologation. Si vous changez d'avis après la rupture, vous ne pouvez plus revenir en arrière — vous devrez chercher un nouveau poste, y compris éventuellement dans la même entreprise via une réembauche distincte. À noter : la rétractation par l'une des parties éteint la convention dans son intégralité, même si l'autre partie souhaite la maintenir.",
+      },
+      {
+        q: "Quelle est la différence avec un licenciement à l'amiable ?",
+        a: "Il n'existe juridiquement aucune notion de « licenciement à l'amiable » en droit français. Toute rupture du contrat de travail relève de catégories légales précises : licenciement (à l'initiative de l'employeur, avec cause réelle et sérieuse), démission (à l'initiative du salarié), rupture conventionnelle (commun accord formalisé), ou prise d'acte (à l'initiative du salarié, avec griefs envers l'employeur). Une « rupture amiable » qui ne respecterait pas le formalisme de la rupture conventionnelle serait requalifiée par les prud'hommes — généralement en licenciement sans cause réelle et sérieuse, avec toutes les indemnités correspondantes, à la charge de l'employeur. C'est pour cela qu'il faut impérativement passer par le formulaire CERFA et l'homologation DREETS, et non pas se contenter d'un courrier signé à deux.",
+      },
+    ],
+  },
+
+  // ─── Guide 23 : Loi Lemoine assurance emprunteur (Lot C 2026-05-16) ───
+  {
+    slug: "resilier-assurance-emprunteur-loi-lemoine",
+    title: "Résilier son assurance emprunteur grâce à la loi Lemoine : guide complet",
+    metaTitle: "Résilier assurance emprunteur loi Lemoine — mode d'emploi",
+    description:
+      "Loi Lemoine du 28 février 2022 : résiliation à tout moment de l'assurance emprunteur. Procédure pas à pas, délai banque 10 jours, équivalence des garanties.",
+    relatedLetterSlug: "resiliation-abonnement",
+    publishedAt: "2026-05-16",
+    updatedAt: "2026-05-16",
+    readingTime: "6 min",
+    sections: [
+      {
+        heading: "Loi Lemoine : ce qui a changé depuis 2022",
+        body: `La loi n° 2022-270 du 28 février 2022 — dite « loi Lemoine » — a profondément modifié les règles de résiliation et de substitution de l'assurance emprunteur des crédits immobiliers. Elle codifie aux articles L313-30 et suivants du Code de la consommation un droit nouveau : la **résiliation à tout moment** du contrat d'assurance, sans frais et sans pénalité.
+
+Avant cette loi, le marché était verrouillé. Les emprunteurs ne pouvaient changer d'assurance que pendant la première année (loi Hamon de 2014, art. L113-12-2 du Code des assurances), puis à chaque date d'anniversaire (amendement Bourquin de 2018). En pratique, la majorité des emprunteurs restaient avec l'assurance de groupe de leur banque, souvent 2 à 3 fois plus chère qu'une délégation d'assurance externe.
+
+**Trois changements majeurs depuis la loi Lemoine :**
+
+1. **Résiliation à tout moment.** Pour tous les crédits immobiliers, qu'ils soient récents ou anciens, l'emprunteur peut résilier son assurance et la remplacer par un autre contrat à n'importe quel moment, sans attendre une date anniversaire.
+
+2. **Suppression du questionnaire de santé** pour les prêts immobiliers à usage non professionnel inférieurs à 200 000 € par emprunteur, et dont l'échéance intervient avant les 60 ans de l'emprunteur.
+
+3. **Information renforcée.** La banque est tenue d'informer chaque année l'emprunteur de son droit de résiliation et de substitution, ainsi que du coût annuel de son assurance (article L313-31 du Code de la consommation).
+
+**Enjeu financier moyen pour un emprunteur :** la délégation d'assurance permet typiquement d'économiser de 5 000 à 20 000 euros sur la durée d'un prêt immobilier de 200 000 euros sur 20 ans, selon le profil et l'âge.`,
+      },
+      {
+        heading: "Le cadre juridique et la condition d'équivalence des garanties",
+        body: `Trois articles structurent le mécanisme. **L'article L313-30 du Code de la consommation** prévoit le droit à la résiliation à tout moment. **L'article L313-31** organise la procédure de substitution et fixe les délais de réponse de la banque. **L'article L313-32** précise les motifs pour lesquels la banque peut refuser le nouveau contrat.
+
+Le droit de résiliation n'est cependant pas inconditionnel. La banque conserve un **droit d'examen sur l'équivalence des garanties** entre l'ancien et le nouveau contrat. Si le nouveau contrat n'offre pas une couverture au moins équivalente sur les risques exigés à la souscription, la banque peut légalement refuser la substitution.
+
+L'équivalence se mesure par rapport à une grille standardisée définie par le Comité Consultatif du Secteur Financier (CCSF). Cette grille liste les garanties exigibles : décès, perte totale et irréversible d'autonomie (PTIA), invalidité permanente totale ou partielle (IPT, IPP), incapacité temporaire totale (ITT). À la signature du prêt, la banque exige un certain nombre de ces garanties — généralement 10 à 15 critères précis sur la grille des 26 critères CCSF. Le nouveau contrat doit couvrir au minimum ces mêmes critères.
+
+**Délai de réponse de la banque : 10 jours ouvrés** à compter de la réception du dossier complet (article L313-31). Le silence à l'issue de ce délai vaut acceptation tacite — c'est un point essentiel pour faire pression en cas de blocage.
+
+> [!CONSEIL]
+> L'équivalence des garanties est le point le plus délicat en pratique. Joignez systématiquement à votre demande la **fiche standardisée d'information (FSI) du nouveau contrat** complétée par l'assureur, ainsi que les conditions générales et particulières. Sans ces documents, le délai légal de 10 jours ouvrés **ne commence pas à courir**, et la banque peut traîner indéfiniment en demandant des compléments. Ajoutez aussi une lettre type reprenant point par point les critères de la grille CCSF exigés à la souscription, en démontrant que chacun est couvert. Cette préparation préalable transforme un dossier "compliqué" en dossier que la banque ne peut plus refuser sans motif sérieux.`,
+      },
+      {
+        heading: "La procédure pas à pas : du choix du nouveau contrat à la confirmation",
+        body: `La procédure se déroule en cinq étapes.
+
+**Étape 1 — Identifier les garanties exigées par la banque.** Vous trouvez la liste des critères exigés dans votre contrat de prêt initial, ou plus simplement dans la **fiche standardisée d'information (FSI)** remise par la banque à la souscription (article L313-10 du Code de la consommation). Conservez ce document précieusement — il sert de référence pour démontrer l'équivalence.
+
+**Étape 2 — Trouver un nouveau contrat équivalent.** Comparez les offres de plusieurs assureurs (mutuelles, courtiers en ligne, compagnies indépendantes). Demandez à chacun de remplir une FSI sur leur produit, en cochant les critères CCSF couverts. Comparez ligne à ligne avec votre FSI bancaire. Le tarif annuel et l'économie sur la durée restante du prêt sont les autres critères clés.
+
+**Étape 3 — Envoyer la demande de substitution.** Adressez à votre banque (et non à l'assureur initial) une lettre recommandée AR contenant :
+- Votre demande expresse de résiliation et de substitution
+- L'identification du prêt concerné (numéro, date de souscription, capital initial)
+- Les coordonnées du nouvel assureur
+- La FSI du nouveau contrat
+- Les conditions générales et particulières du nouveau contrat
+- Une lettre démontrant l'équivalence des garanties point par point
+- Le visa de l'article L313-30 du Code de la consommation
+- Une demande de réponse dans le délai légal de 10 jours ouvrés
+
+**Étape 4 — Attendre la réponse de la banque.** La banque dispose de 10 jours ouvrés à compter de la réception du dossier complet pour accepter ou refuser. Le silence vaut acceptation. En cas de refus, la banque doit motiver précisément quel critère n'est pas équivalent. Un refus non motivé ou motivé de manière vague est contestable.
+
+**Étape 5 — Signature et bascule.** En cas d'acceptation, vous signez le nouveau contrat à la date convenue. La banque modifie l'avenant au contrat de prêt. L'ancien contrat prend fin à la date de prise d'effet du nouveau. Vous récupérez la quote-part de prime déjà payée et non consommée auprès de l'ancien assureur.`,
+      },
+      {
+        heading: "Que faire si la banque refuse la substitution ?",
+        body: `Un refus de la banque n'est pas une fin de non-recevoir. Trois leviers existent en cas de blocage.
+
+**Étape 1 — Demander la motivation précise du refus.** L'article L313-32 impose à la banque de préciser quel critère exact n'est pas couvert par le nouveau contrat. Un refus du type "garanties insuffisantes" sans précision n'est pas valable. Demandez par écrit le détail du critère manquant.
+
+**Étape 2 — Faire compléter le nouveau contrat.** Si le critère manquant est mineur, l'assureur peut souvent l'ajouter à votre contrat (par exemple en passant d'une couverture ITT de 90 à 60 jours de franchise). Une fois le contrat ajusté, vous renouvelez la demande de substitution avec la nouvelle FSI.
+
+**Étape 3 — Saisir le médiateur bancaire.** Si la banque persiste dans un refus manifestement injustifié, vous pouvez saisir gratuitement le médiateur de la consommation de votre banque (ses coordonnées figurent sur tous les courriers bancaires et sur le site web de la banque). Cette saisine est gratuite et la médiation aboutit dans environ 50 % des cas en faveur du consommateur lorsque le dossier est solide.
+
+**Étape 4 — Saisir le tribunal judiciaire.** En dernier recours, vous pouvez saisir le tribunal judiciaire compétent pour faire constater l'équivalence et obtenir le remboursement des primes payées en trop. Cette procédure nécessite l'assistance d'un avocat pour les montants supérieurs à 10 000 euros.
+
+**Sanction administrative possible.** L'ACPR (Autorité de contrôle prudentiel et de résolution) peut sanctionner les banques qui pratiquent des refus systématiques ou abusifs (jusqu'à 100 millions d'euros d'amende pour des établissements). Une plainte auprès de l'ACPR via leur site web peut motiver la banque à reconsidérer sa position.
+
+**Délai de prescription des actions.** L'action en remboursement des primes payées en trop se prescrit par 5 ans (article 2224 du Code civil) à compter de la date à laquelle la banque aurait dû accepter la substitution.`,
+      },
+    ],
+    faq: [
+      {
+        q: "À partir de quand puis-je résilier mon assurance emprunteur grâce à la loi Lemoine ?",
+        a: "Depuis le **1er juin 2022** pour les nouveaux contrats souscrits, et depuis le **1er septembre 2022** pour les contrats en cours (toutes générations confondues). Concrètement, en mai 2026, tout emprunteur peut résilier à n'importe quel moment, sans attendre une date anniversaire. La résiliation prend effet à la date convenue avec la banque dans le cadre de la substitution, généralement entre 15 et 30 jours après l'acceptation. Vous récupérez la quote-part de prime non consommée auprès de l'assureur sortant — c'est une obligation légale, à ne pas oublier de réclamer.",
+      },
+      {
+        q: "La banque peut-elle me refuser le changement d'assurance ?",
+        a: "Oui, mais uniquement si elle peut démontrer que le nouveau contrat n'offre pas une couverture au moins équivalente sur les critères exigés à la souscription. L'article L313-32 du Code de la consommation impose à la banque de motiver précisément son refus en pointant le critère manquant. Un refus vague ou tardif n'est pas valable. En pratique, la non-équivalence porte le plus souvent sur l'invalidité permanente partielle (IPP), les délais de carence, ou la couverture de certaines pathologies. Si le critère manquant est mineur, l'assureur peut souvent ajuster le nouveau contrat pour l'inclure. Sinon, vous pouvez saisir le médiateur bancaire ou l'ACPR.",
+      },
+      {
+        q: "Quel est le délai de réponse de la banque ?",
+        a: "**10 jours ouvrés** à compter de la réception du dossier complet (article L313-31 du Code de la consommation). Le silence à l'issue de ce délai vaut acceptation tacite. C'est un levier puissant : si la banque ne répond pas ou répond hors délai, vous pouvez vous prévaloir de cette acceptation tacite et exiger la substitution. Pour que ce délai commence effectivement à courir, le dossier transmis doit être complet : demande motivée, FSI du nouveau contrat, conditions générales et particulières, démonstration d'équivalence point par point. Un dossier incomplet permet à la banque de demander des compléments sans que le délai ne court — d'où l'importance d'un dossier irréprochable dès le premier envoi en recommandé AR.",
+      },
+      {
+        q: "Que dois-je vérifier sur le nouveau contrat d'assurance ?",
+        a: "Trois choses essentielles. Premièrement, **l'équivalence des garanties** par rapport à votre contrat actuel : le nouvel assureur doit couvrir au minimum les mêmes critères de la grille CCSF que ceux exigés par votre banque à la souscription. Deuxièmement, **les exclusions** : sports à risque, pathologies préexistantes, situations professionnelles. Si vous avez des conditions particulières, vérifiez qu'elles sont bien couvertes. Troisièmement, **le coût total sur la durée restante du prêt** — pas seulement la première année. Certains contrats appliquent une prime croissante avec l'âge qui rattrape voire dépasse le contrat de groupe sur les dernières années du prêt. Un courtier spécialisé peut vous faire une comparaison ligne à ligne — ses honoraires sont généralement nuls pour vous (rémunération par l'assureur).",
+      },
+      {
+        q: "Le changement d'assurance a-t-il un impact sur les conditions de mon prêt ?",
+        a: "En principe, non. La substitution d'assurance n'affecte ni le taux d'intérêt, ni la durée, ni le montant des mensualités du prêt. Seule la part « assurance » de votre mensualité globale est modifiée. La banque ne peut pas conditionner l'acceptation à un quelconque ajustement du contrat de prêt. Une seule exception : si votre prêt comporte une clause de domiciliation des revenus liée à l'assurance (clause aujourd'hui très rare et restreinte depuis 2019), un ajustement marginal peut être négocié. Dans tous les cas, demandez à la banque un avenant écrit confirmant que les autres conditions du prêt restent inchangées.",
+      },
+      {
+        q: "Et pour les anciens prêts antérieurs à 2022 ?",
+        a: "La loi Lemoine s'applique également **aux contrats d'assurance emprunteur en cours**, y compris ceux liés à des prêts souscrits avant 2022. Depuis le 1er septembre 2022, tous les emprunteurs peuvent résilier à tout moment, quelle que soit la date de souscription du prêt initial. Aucun emprunteur n'est exclu du dispositif. À noter : si votre prêt approche de son terme (moins de 2 ou 3 ans restants), l'économie potentielle peut être modeste et il vaut peut-être mieux garder le contrat existant. Faites un calcul précis incluant les éventuels frais d'avenant facturés par la banque (souvent 0 à 100 euros) avant de basculer.",
+      },
+    ],
+  },
 ];
 
 export function getGuide(slug: string): Guide | undefined {
