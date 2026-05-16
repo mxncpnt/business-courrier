@@ -2446,6 +2446,617 @@ L'équivalence se mesure par rapport à une grille standardisée définie par le
       },
     ],
   },
+
+  // ─── Guide 24 : Refus mobilité bancaire (Lot D 2026-05-16) ───
+  {
+    slug: "refus-mobilite-bancaire-recours",
+    title: "Mobilité bancaire bloquée : forcer le transfert de vos prélèvements",
+    metaTitle: "Mobilité bancaire — recours en cas de blocage",
+    description:
+      "Nouvelle banque ne transfère pas vos prélèvements ? Article L312-1-7 du Code monétaire et financier, mandat Macron, recours médiateur et ACPR.",
+    relatedLetterSlug: "reclamation-service-client",
+    category: "banque-assurance",
+    publishedAt: "2026-05-16",
+    updatedAt: "2026-05-16",
+    readingTime: "5 min",
+    sections: [
+      {
+        heading: "Le service d'aide à la mobilité bancaire : à quoi vous avez droit",
+        body: `La mobilité bancaire est un dispositif légal créé par la loi Macron du 6 août 2015 (loi n° 2015-990), entré en vigueur le 6 février 2017. Son objectif : permettre à tout particulier de changer de banque sans avoir à contacter individuellement chacun des organismes qui prélèvent ou créditent son compte courant.
+
+Le dispositif est entièrement gratuit. La nouvelle banque, choisie par le client, prend en charge toutes les démarches de transfert : prélèvements automatiques (énergie, télécom, assurance, abonnements, impôts), virements récurrents entrants (salaire, allocations, retraite), et notification aux émetteurs (employeur, fournisseurs).
+
+Sont concernés : tous les comptes courants particuliers domiciliés en France. Sont exclus : les comptes professionnels, les comptes joints à plus de deux titulaires, les comptes en devises, les livrets d'épargne et les comptes-titres (PEA, assurance-vie, PER) — ces produits suivent une procédure de transfert distincte, le plus souvent payante.
+
+Le délai légal de prise en charge du transfert est de **22 jours ouvrés** à compter de la signature du mandat de mobilité bancaire. À l'issue de ce délai, l'ensemble des opérations récurrentes doit basculer automatiquement sur le nouveau compte.
+
+En pratique, plus d'un million de Français utilisent ce service chaque année — mais une part significative rencontre des blocages : prélèvements non transférés, double prélèvement, anciens fournisseurs qui continuent à débiter l'ancien compte. C'est sur ces blocages que le présent guide se concentre.`,
+      },
+      {
+        heading: "Le cadre juridique : ce que la banque doit faire",
+        body: `Le dispositif repose sur l'**article L312-1-7 du Code monétaire et financier**, complété par le décret n° 2016-1289 du 30 septembre 2016. Trois obligations principales s'appliquent à la **nouvelle banque** (et non à l'ancienne) :
+
+**1. Recueillir le mandat de mobilité.** À l'ouverture du compte, la nouvelle banque doit proposer le service. Le client signe un mandat unique qui l'autorise à effectuer toutes les démarches en son nom.
+
+**2. Demander à l'ancienne banque la liste des opérations récurrentes.** L'ancienne banque dispose de 5 jours ouvrés pour transmettre la liste des prélèvements et virements des 13 derniers mois.
+
+**3. Notifier les émetteurs et bénéficiaires.** La nouvelle banque adresse à chaque organisme (énergie, télécom, employeur, etc.) une notification l'invitant à modifier les coordonnées bancaires. Chaque émetteur doit prendre acte du changement dans un délai légal de **10 jours ouvrés** suivant la réception de la notification.
+
+L'ancienne banque, elle, a une obligation passive : transmettre la liste, accepter les opérations de transition pendant la période de bascule, et clôturer le compte si le client en fait la demande. Elle ne fait **rien** d'autre que ce que la nouvelle banque lui demande.
+
+Cette répartition des rôles a une conséquence centrale, souvent ignorée : si un prélèvement n'est pas correctement transféré, le défaillant peut être soit la nouvelle banque (qui n'a pas notifié), soit l'émetteur (qui n'a pas mis à jour), mais quasi jamais l'ancienne banque. C'est pour cette raison que le premier recours doit cibler la nouvelle banque, pas l'ancienne.
+
+> [!CONSEIL]
+> En cas de blocage, c'est à votre **nouvelle banque** qu'il faut écrire d'abord — pas à l'ancienne. Beaucoup de clients s'épuisent à relancer l'ancienne banque qui leur répond, à juste titre, qu'elle n'a aucune obligation active. Le mandat Macron donne à la nouvelle banque le pouvoir et la responsabilité d'exécuter le transfert. Si elle ne le fait pas dans les délais légaux, c'est elle qu'on met en demeure et c'est elle qui doit dédommager le client de tout préjudice (frais de rejet, agios, incidents de paiement). Cette inversion mentale fait gagner des semaines.`,
+      },
+      {
+        heading: "La démarche pas à pas : du mandat Macron au recours",
+        body: `La procédure se déroule en quatre étapes.
+
+**Étape 1 — Signature du mandat Macron à l'ouverture du nouveau compte.** Le mandat est un document standard fourni par la nouvelle banque, à signer dans son agence ou en ligne. Il demande votre RIB ancienne banque et l'autorisation d'agir en votre nom. À partir de la signature, le compte à rebours de 22 jours ouvrés démarre.
+
+**Étape 2 — Vérification du transfert au jour J+22.** Trois semaines après la signature, vérifiez sur vos relevés des deux banques :
+- Chaque prélèvement récurrent doit désormais figurer sur le nouveau compte
+- Aucun prélèvement ne doit subsister sur l'ancien compte
+- Les virements entrants (salaire, allocations) sont basculés
+- L'ancien compte peut être fermé sans frais sur simple demande
+
+Si tout est OK, vous pouvez clôturer le compte ancien. Sinon, passez aux étapes 3 et 4.
+
+**Étape 3 — Première relance écrite à la nouvelle banque.** Si un prélèvement n'a pas été transféré à J+22, adressez à votre **nouvelle banque** (et non à l'ancienne) une lettre — email puis recommandé AR si nécessaire — listant :
+- Les prélèvements non transférés
+- La date de signature du mandat de mobilité
+- L'identification précise des émetteurs concernés
+- Le préjudice éventuellement subi (frais de rejet, agios, incidents)
+- Une demande de régularisation sous 8 jours
+- Le visa de l'article L312-1-7 du Code monétaire et financier
+
+**Étape 4 — Mise en demeure formelle.** Sans réponse satisfaisante sous 8 jours, envoyez une mise en demeure par lettre recommandée AR. Cette lettre doit explicitement mentionner :
+- Le non-respect du délai légal de 22 jours ouvrés
+- Le préjudice cumulé (avec montants chiffrés)
+- L'exigence de régularisation immédiate et d'indemnisation des frais
+- L'annonce de saisine du médiateur bancaire à défaut
+
+L'envoi en recommandé interrompt la prescription quinquennale (article 2224 du Code civil) et constitue une preuve formelle pour la suite.`,
+      },
+      {
+        heading: "Si la banque persiste à bloquer : médiateur et ACPR",
+        body: `Au-delà de la mise en demeure, plusieurs recours gratuits restent ouverts.
+
+**Saisir le médiateur bancaire de votre nouvelle banque.** Chaque établissement bancaire est obligatoirement adhérent à un dispositif de médiation (article L316-1 du Code monétaire et financier). Les coordonnées du médiateur figurent sur tous les courriers bancaires et sur le site web de la banque. La saisine est gratuite, le médiateur dispose de **90 jours maximum** pour rendre un avis. La médiation aboutit en faveur du consommateur dans environ 50 à 70 % des cas de mobilité bancaire mal exécutée, dossier solide à l'appui.
+
+**Saisir l'ACPR (Autorité de contrôle prudentiel et de résolution).** L'ACPR est le régulateur des banques. Elle peut sanctionner les établissements qui pratiquent des manquements systématiques au service de mobilité bancaire (jusqu'à 100 millions d'euros pour les grands groupes). Une plainte motivée déposée en ligne sur leur site (acpr.banque-france.fr, rubrique « signaler une difficulté ») n'aboutit pas à une indemnisation directe — l'ACPR n'a pas compétence sur les litiges individuels — mais elle déclenche une remontée vers la banque concernée, qui régularise alors souvent en urgence pour éviter une enquête.
+
+**Saisir le tribunal judiciaire.** Pour des préjudices significatifs (incidents de paiement répétés, refus de prêt lié à un découvert non maîtrisé, frais cumulés au-delà de 500 €), une action devant le tribunal judiciaire est envisageable. La procédure simplifiée pour les litiges inférieurs à 5 000 € (déclaration au greffe) ne nécessite pas d'avocat. Au-delà, l'assistance d'un avocat est obligatoire — pensez à vérifier votre éventuelle protection juridique souscrite via une assurance habitation ou auto.
+
+**Indemnisation prévue par la loi.** L'article L312-1-7 du Code monétaire et financier prévoit que la nouvelle banque est responsable des préjudices résultant d'un manquement à ses obligations de mobilité. Elle doit indemniser : les frais d'incidents de paiement, les agios indus, les pénalités contractuelles facturées par les fournisseurs en raison de prélèvements rejetés. Cette indemnisation est de droit, pas une faveur commerciale — elle doit figurer explicitement dans la demande au médiateur ou au juge.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Quel est le délai légal de mobilité bancaire ?",
+        a: "**22 jours ouvrés à compter de la signature du mandat Macron**, selon l'article L312-1-7 du Code monétaire et financier et le décret n° 2016-1289. Pendant ce délai, la nouvelle banque doit récupérer la liste des opérations récurrentes auprès de l'ancienne banque (qui a 5 jours ouvrés pour répondre), puis notifier chaque émetteur et bénéficiaire (qui a 10 jours ouvrés pour mettre à jour les coordonnées). Si à J+22 un prélèvement n'est pas transféré, le délai légal est dépassé et la nouvelle banque est en faute. Notez que 22 jours **ouvrés** = environ 4 à 5 semaines calendaires, selon les jours fériés.",
+      },
+      {
+        q: "Quels prélèvements et virements sont concernés par la mobilité bancaire ?",
+        a: "Toutes les opérations **récurrentes** des 13 derniers mois sur votre ancien compte courant : prélèvements automatiques (énergie, eau, télécom, abonnements, mutuelle, assurance, impôts, loyer prélevé), virements récurrents entrants (salaire, allocations CAF, pension de retraite, indemnités France Travail), et virements récurrents sortants (loyer si vous le programmez vous-même). Ne sont **pas** concernés : les paiements ponctuels par carte, les chèques émis avant la bascule, les opérations sur livrets d'épargne, le PEA, l'assurance-vie ou le PER (qui suivent une procédure de transfert distincte, souvent payante).",
+      },
+      {
+        q: "La banque peut-elle me facturer le service de mobilité bancaire ?",
+        a: "Non, c'est strictement gratuit. L'article L312-1-7 du Code monétaire et financier impose la gratuité totale du service. Aucune banque ne peut facturer la signature du mandat, le transfert des opérations, ou la clôture de l'ancien compte. Si vous voyez apparaître des frais liés à la mobilité bancaire sur votre relevé, c'est illégal — contestez immédiatement par écrit et exigez le remboursement. Seuls les services connexes peuvent être facturés selon les conditions tarifaires : par exemple un chéquier supplémentaire ou une carte premium sur le nouveau compte. Mais le service de mobilité lui-même reste gratuit, dans tous les cas.",
+      },
+      {
+        q: "Que faire si un prélèvement non transféré me met à découvert ou cause un incident ?",
+        a: "Faites opposition immédiatement à votre banque pour stopper l'hémorragie (gratuit pour les prélèvements SEPA, article L133-25 du Code monétaire et financier). Documentez l'incident : capture d'écran du prélèvement, relevé montrant le découvert, frais éventuels facturés. Adressez à votre nouvelle banque une mise en demeure par recommandé AR exigeant la régularisation immédiate du transfert, le remboursement intégral des frais d'incident, et l'indemnisation des conséquences (par exemple si le découvert vous a coûté une pénalité de retard chez votre bailleur ou un refus de paiement ailleurs). L'article L312-1-7 met cette indemnisation à la charge de la nouvelle banque en cas de manquement à ses obligations de mobilité.",
+      },
+      {
+        q: "Mon ancienne banque refuse de fermer mon compte, que faire ?",
+        a: "L'ancienne banque est obligée de procéder à la clôture sur simple demande écrite, sans frais et dans un délai raisonnable (30 jours maximum en pratique). Adressez une demande de clôture par lettre recommandée AR, en précisant la date de bascule effective des opérations récurrentes, l'adresse à laquelle adresser le solde créditeur éventuel, et la demande de confirmation écrite de la clôture. Sans réponse sous 30 jours, saisissez le médiateur de cette banque, puis l'ACPR. Aucun frais ne peut être facturé pour la clôture d'un compte courant particulier (article R312-1-2 du Code monétaire et financier). Si la banque vous facture des frais de clôture, c'est illégal.",
+      },
+      {
+        q: "La mobilité bancaire concerne-t-elle les livrets et le PEA ?",
+        a: "Non. Le service Macron ne couvre **que les comptes courants particuliers**. Les livrets d'épargne (Livret A, LDDS, LEP, livret jeune), le PEA, l'assurance-vie, le PER et les comptes-titres suivent chacun une procédure de transfert distincte, parfois payante. Pour un livret A par exemple, vous pouvez en ouvrir un nouveau dans votre nouvelle banque et clôturer l'ancien, mais l'article L221-3 du Code monétaire et financier interdit de détenir deux livrets A simultanément — la bascule doit donc être étanche. Pour le PEA, le transfert d'établissement est payant (frais réglementés, généralement entre 75 et 150 €) et prend 2 à 4 semaines. Anticipez ces démarches en parallèle du compte courant si vous voulez tout regrouper.",
+      },
+    ],
+  },
+
+  // ─── Guide 25 : Mise en demeure bailleur travaux urgents (Lot D 2026-05-16) ───
+  {
+    slug: "mise-en-demeure-bailleur-travaux-urgents",
+    title: "Bailleur qui ne fait pas les travaux : forcer la réalisation",
+    metaTitle: "Mise en demeure bailleur — chaudière, fuite, infiltration",
+    description:
+      "Chaudière en panne, fuite, infiltration : forcer le bailleur à intervenir. Article 6 de la loi 89-462, décret 2002-120 sur le logement décent, procédure.",
+    relatedLetterSlug: "mise-en-demeure-executer",
+    category: "logement-bail",
+    publishedAt: "2026-05-16",
+    updatedAt: "2026-05-16",
+    readingTime: "6 min",
+    sections: [
+      {
+        heading: "Quels travaux le bailleur doit-il vraiment réaliser ?",
+        body: `La loi du 6 juillet 1989 (n° 89-462), pierre angulaire du droit locatif français, répartit clairement les obligations entre bailleur et locataire. L'**article 6 de la loi 89-462** fait peser sur le bailleur une obligation centrale : délivrer au locataire un logement décent ne laissant pas apparaître de risques manifestes pouvant porter atteinte à la sécurité physique ou à la santé, et doté des éléments le rendant conforme à l'usage d'habitation.
+
+Cette obligation est précisée par le **décret n° 2002-120 du 30 janvier 2002** dit « décret décence », qui liste les caractéristiques d'un logement décent : surface minimale, sécurité électrique et gaz, ventilation, chauffage, étanchéité, eau potable, équipements sanitaires.
+
+Concrètement, le bailleur doit prendre en charge **tous les travaux nécessaires au maintien en état de jouissance** du logement, à l'exception de l'entretien courant et des menues réparations qui relèvent du locataire (**décret n° 87-712 du 26 août 1987**). Sont à la charge du bailleur :
+- Réparation ou remplacement de la chaudière (sauf entretien annuel à la charge du locataire)
+- Réparation des fuites d'eau d'origine structurelle (canalisation, joint d'évacuation collectif)
+- Traitement des infiltrations en toiture ou par les murs extérieurs
+- Réparation ou remplacement de la chasse d'eau, des robinets, des prises électriques défaillantes
+- Réfection des peintures et papiers peints en cas de dégradation due à la vétusté
+- Réparation de l'installation électrique non conforme
+
+Sont à la charge du locataire : changement d'ampoules, entretien annuel de la chaudière, joints de robinets, joints de WC, débouchage simple, remplacement des petites pièces d'usure.`,
+      },
+      {
+        heading: "Le cadre juridique : décence et jouissance paisible",
+        body: `Trois textes fondent les obligations du bailleur :
+- **Article 6 de la loi du 6 juillet 1989** : obligation de délivrer un logement décent et conforme à l'usage d'habitation
+- **Décret n° 2002-120 du 30 janvier 2002** : critères techniques de décence
+- **Décret n° 87-712 du 26 août 1987** : liste limitative des réparations locatives à la charge du locataire (tout ce qui n'y figure pas est à la charge du bailleur)
+
+À cela s'ajoute l'**article 1719 du Code civil**, qui impose au bailleur de faire jouir paisiblement le preneur pendant la durée du bail. Tout trouble durable à la jouissance — chaudière qui tombe en panne en hiver, infiltration dans une chambre, salle de bain inutilisable — constitue un manquement.
+
+En cas d'inaction du bailleur après mise en demeure, plusieurs voies sont ouvertes :
+- Saisine de la **commission départementale de conciliation (CDC)** : gratuite, obligatoire dans certains cas avant la procédure judiciaire, délai 2 mois
+- Saisine du **tribunal judiciaire** (juge des contentieux de la protection) : peut ordonner les travaux sous astreinte et accorder des dommages-intérêts
+- Saisine du **service communal d'hygiène et de santé (SCHS)** si le logement présente un risque pour la santé (humidité importante, intoxication, plomb)
+
+> [!CONSEIL]
+> **Ne retenez jamais le loyer en représailles**, même si le bailleur ignore vos demandes. C'est l'erreur la plus coûteuse, et la plus répandue. Retenir le loyer constitue une faute du locataire qui peut entraîner la résiliation du bail à vos torts — peu importe la gravité du manquement du bailleur. La règle est posée par la Cour de cassation depuis des décennies : seul le juge peut autoriser une consignation des loyers (article 1721 du Code civil). Si vous ne payez pas, le bailleur peut vous expulser pour défaut de paiement, et le juge tranchera *ensuite* la question des travaux — mais vous aurez perdu le logement entre temps. La voie sûre est : continuer à payer le loyer, mettre en demeure par recommandé, saisir la CDC puis le juge.`,
+      },
+      {
+        heading: "La mise en demeure : forme, contenu, délais",
+        body: `La mise en demeure est l'étape charnière. Sans elle, aucun recours efficace n'est ouvert.
+
+**Avant la mise en demeure : signaler par écrit.** Avant toute action contentieuse, signalez le désordre par écrit au bailleur — email ou lettre simple. C'est souvent suffisant pour débloquer les situations sans conflit. Conservez la trace.
+
+**Si le bailleur ne réagit pas sous 15 jours : passez à la mise en demeure formelle.** La lettre recommandée avec accusé de réception doit contenir :
+- Votre identité et celle du bailleur, avec adresses précises
+- L'identification du logement loué (adresse, date de signature du bail)
+- Une description précise du désordre (nature, date d'apparition, conséquences sur l'occupation)
+- Des photos datées du désordre, idéalement avec horodatage
+- Le rappel des obligations du bailleur (article 6 de la loi 89-462, décret 2002-120, article 1719 du Code civil)
+- Un délai imparti pour l'intervention (15 à 30 jours selon l'urgence — 8 jours seulement pour une panne de chauffage en hiver ou une fuite active)
+- L'annonce des recours en cas d'inaction : saisine de la CDC, du tribunal judiciaire, du service communal d'hygiène
+- Une demande de réponse écrite
+
+L'envoi en recommandé AR est indispensable — il constitue la preuve formelle et interrompt la prescription quinquennale (article 2224 du Code civil).
+
+**Cas d'urgence absolue.** Si le désordre rend le logement inhabitable (panne de chauffage en plein hiver, fuite massive, électrocution potentielle), vous pouvez :
+- Faire intervenir un professionnel à vos frais pour la mise en sécurité immédiate (limiter le préjudice est une obligation du locataire selon la jurisprudence)
+- Conserver la facture pour réclamer le remboursement au bailleur
+- Saisir le juge des contentieux de la protection en référé (procédure d'urgence, jugement en quelques jours)
+
+Ne faites pas vous-même des travaux de remise en état durables sans accord préalable du bailleur. Vous risquez de ne pas être remboursé.`,
+      },
+      {
+        heading: "Si le bailleur ne réagit pas : CDC et juge",
+        body: `Au-delà du délai imparti dans la mise en demeure, plusieurs leviers s'enchaînent.
+
+**Saisir la commission départementale de conciliation (CDC).** Présente dans chaque préfecture, la CDC est compétente pour les litiges locatifs. Sa saisine est **gratuite** et se fait par lettre simple. Elle convoque les deux parties à une audience dans un délai de 2 mois. La conciliation aboutit dans environ 60 % des cas, sans frais ni avocat. Même en cas d'échec, le procès-verbal d'audience est une pièce précieuse pour la suite. Pour certains litiges (notamment décence du logement), la saisine de la CDC est **obligatoire avant** toute procédure judiciaire.
+
+**Saisir le tribunal judiciaire.** Sans solution amiable, le tribunal judiciaire du lieu du logement est compétent. Pour les litiges relatifs à la jouissance d'un logement loué, vous saisissez le **juge des contentieux de la protection** (juge spécialisé). La procédure est gratuite jusqu'à 5 000 € de litige (déclaration au greffe). Au-delà, l'assistance d'un avocat est obligatoire — pensez à votre éventuelle protection juridique.
+
+Le juge peut prononcer :
+- L'**injonction de réaliser les travaux**, généralement assortie d'une **astreinte** (par exemple 50 € par jour de retard à compter du jugement)
+- Une **réduction proportionnelle du loyer** pendant la période où le logement n'était pas conforme
+- Des **dommages-intérêts** pour préjudice de jouissance (typiquement 5 à 30 % du loyer mensuel par mois de désordre)
+- Le **remboursement des frais engagés** pour la mise en sécurité d'urgence
+
+**Saisir le service communal d'hygiène et de santé (SCHS).** Si le logement présente un risque pour la santé (humidité importante, moisissures, plomb, monoxyde de carbone, vermine), vous pouvez saisir le maire ou le préfet via le service communal d'hygiène. L'inspecteur visite le logement, dresse un constat, et peut adresser au bailleur une injonction de travaux assortie d'une astreinte administrative. Cette procédure est gratuite, anonyme si demandé, et particulièrement efficace dans les cas d'insalubrité caractérisée.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Quelle différence entre travaux locatifs et travaux à charge du bailleur ?",
+        a: "Les **travaux locatifs** (à la charge du locataire) sont limitativement énumérés par le décret n° 87-712 du 26 août 1987 : entretien courant et menues réparations comme remplacement de joints, ampoules, raccords de peinture, entretien annuel de la chaudière, débouchage simple. **Tout ce qui n'y figure pas est à la charge du bailleur** : remplacement de la chaudière, fuite structurelle, infiltration, vétusté généralisée, électricité non conforme, équipements sanitaires hors service. En cas de doute, le critère pratique : si la réparation est due à l'usure normale (vétusté) ou à un défaut structurel, c'est le bailleur ; si elle est due à un mauvais entretien quotidien par le locataire, c'est le locataire. La jurisprudence est constante : le doute profite au locataire.",
+      },
+      {
+        q: "Mon bailleur dit que c'est ma responsabilité, comment trancher ?",
+        a: "Renvoyez-le explicitement au décret n° 87-712 du 26 août 1987 qui liste les réparations locatives. Si le désordre invoqué (chaudière, fuite, infiltration, équipements vétustes) n'y figure pas, ce n'est pas locatif. Demandez par écrit au bailleur de justifier son refus en visant un article du décret précis. En cas de désaccord persistant, saisissez la commission départementale de conciliation (gratuite) qui tranchera. Vous pouvez aussi solliciter un constat d'huissier (environ 150 à 250 €) qui établira l'origine du désordre — souvent décisif pour distinguer vétusté (bailleur) de mauvais entretien (locataire). Les frais d'huissier sont remboursables par le bailleur si vous gagnez.",
+      },
+      {
+        q: "Puis-je faire les travaux moi-même et déduire le coût du loyer ?",
+        a: "**Non, pas sans autorisation préalable du juge.** Faire vous-même les travaux et déduire le coût du loyer constitue une compensation interdite (article 1347-1 du Code civil) et est requalifié par les juges en non-paiement partiel du loyer — donc en faute du locataire. Seule exception : les mesures conservatoires d'urgence (couper l'eau pour stopper une fuite, intervention d'un professionnel pour une panne de chauffage en hiver) qui sont remboursables par le bailleur sur facture. Pour des travaux durables, seul le juge peut autoriser la compensation après examen du dossier. La règle de prudence : continuez à payer le loyer intégral, saisissez le juge, et obtenez le remboursement sur jugement.",
+      },
+      {
+        q: "Combien de temps le bailleur a-t-il pour intervenir ?",
+        a: "La loi ne fixe pas de délai universel — c'est le caractère **raisonnable** du délai au regard du désordre qui prime. Pour une chaudière en panne en hiver, 8 à 15 jours sont raisonnables ; pour une infiltration sans urgence vitale, 30 à 60 jours ; pour des travaux lourds nécessitant des devis (ravalement, étanchéité), 2 à 3 mois sont acceptables. La pratique courante : 15 jours pour les désordres courants, 8 jours pour les urgences (chauffage, eau, électricité), 30 jours pour les travaux nécessitant des entreprises. Précisez le délai dans votre mise en demeure et justifiez-le par la nature du désordre. Si le bailleur explique avoir mandaté une entreprise et attendre son intervention, le délai est interrompu — mais demandez un échéancier écrit.",
+      },
+      {
+        q: "Une fuite chez moi a abîmé mes meubles, qui paie ?",
+        a: "Cela dépend de l'origine de la fuite. Si elle vient d'un défaut structurel du logement (canalisation collective, étanchéité de la toiture, fuite chez un voisin via murs ou plafond), le bailleur — ou l'assurance multirisque habitation du bailleur — doit indemniser. Si elle vient d'un défaut d'entretien du locataire (joint non remplacé, machine à laver mal raccordée), le locataire est responsable. Dans tous les cas : déclarez le sinistre à votre propre assurance habitation (obligation contractuelle) dans les 5 jours, avec photos et constat amiable si la fuite implique un voisin. Votre assurance gère l'expertise et la répartition des responsabilités via la convention IRSI entre assureurs. Conservez les factures d'achat des meubles abîmés pour l'évaluation.",
+      },
+      {
+        q: "Le bailleur peut-il me résilier le bail si je le mets en demeure ?",
+        a: "Non. La résiliation du bail par le bailleur n'est possible que dans des cas limitativement énumérés par la loi 89-462 (article 15) : congé pour reprise personnelle, congé pour vente, motif légitime et sérieux (défaut de paiement, troubles de voisinage caractérisés, sous-location interdite, etc.). Une mise en demeure régulièrement adressée pour des travaux de décence ne constitue **jamais** un motif légitime et sérieux. Bien au contraire, le bailleur qui chercherait à se débarrasser d'un locataire ayant osé exercer ses droits commettrait un abus susceptible d'engager sa responsabilité. La protection est solide : vous bénéficiez du droit de jouissance paisible (article 1719 du Code civil) et de la stabilité locative (article 10 de la loi 89-462).",
+      },
+    ],
+  },
+
+  // ─── Guide 26 : Préavis réduit mutation professionnelle (Lot D 2026-05-16) ───
+  {
+    slug: "preavis-reduit-mutation-professionnelle",
+    title: "Préavis réduit à 1 mois pour mutation, perte d'emploi ou premier emploi",
+    metaTitle: "Préavis 1 mois logement — mutation, perte d'emploi",
+    description:
+      "Préavis réduit à 1 mois en location vide : motifs reconnus (mutation, perte d'emploi, premier emploi, santé). Article 15-I de la loi 89-462, modèle de lettre.",
+    relatedLetterSlug: "resiliation-bail",
+    category: "logement-bail",
+    publishedAt: "2026-05-16",
+    updatedAt: "2026-05-16",
+    readingTime: "5 min",
+    sections: [
+      {
+        heading: "Qui peut bénéficier du préavis réduit ?",
+        body: `Le préavis légal pour un locataire qui résilie son bail est de **3 mois en location vide** (non meublée) et **1 mois en location meublée**, selon l'article 15-I de la loi du 6 juillet 1989. Toutefois, le législateur a prévu plusieurs cas dans lesquels le préavis en location vide est ramené à **1 mois** — le même qu'en location meublée.
+
+Ces cas relèvent de la situation personnelle et professionnelle du locataire. Ils sont **limitativement énumérés** par l'article 15-I de la loi 89-462. Vous ne pouvez pas inventer un motif — il doit correspondre exactement à l'une des situations prévues.
+
+**Les motifs de préavis réduit reconnus :**
+- **Mutation professionnelle** (changement de lieu de travail à l'initiative de l'employeur)
+- **Obtention d'un premier emploi** (entrée dans la vie active)
+- **Perte d'emploi** (licenciement, rupture conventionnelle, fin de CDD non renouvelé — hors démission)
+- **Nouvel emploi consécutif à une perte d'emploi**
+- **État de santé** justifiant un changement de domicile, attesté par certificat médical, pour les personnes de **plus de 60 ans**
+- **Bénéficiaire du RSA ou de l'AAH**
+- **Logement situé en zone tendue** (article 18 de la loi 89-462) — préavis automatiquement réduit, sans motif particulier
+
+La zone tendue mérite une attention spéciale : elle couvre 28 agglomérations françaises (Île-de-France, grandes métropoles, côte méditerranéenne). Dans ces zones, le préavis est automatiquement de **1 mois pour tous les locataires**, sans avoir à justifier d'un motif. Pour vérifier : consultez le simulateur officiel sur service-public.fr ou demandez à votre bailleur la mention du zonage dans le bail.
+
+Hors zone tendue, les motifs ci-dessus doivent être prouvés. La preuve doit accompagner la lettre de congé.`,
+      },
+      {
+        heading: "Les motifs reconnus par la loi",
+        body: `**Mutation professionnelle.** Définie par la jurisprudence comme un changement de lieu de travail décidé par l'employeur, qu'il soit géographique ou de service. La distance entre l'ancien et le nouveau lieu de travail n'est **pas un critère légal** (Cass. 3e civ., 6 octobre 2010, n° 09-69.835). Une mutation Paris → Lyon ouvre droit au préavis réduit, mais aussi une mutation Paris → Saint-Denis si elle découle d'une décision employeur. Justificatifs : avenant au contrat, lettre de mutation, ordre de mission.
+
+**Premier emploi.** Entrée dans la vie active après études, qu'il s'agisse d'un CDI, CDD ou contrat d'apprentissage. La jurisprudence admet aussi le premier emploi à la suite d'une longue période d'inactivité (chômage long, maladie). Justificatifs : contrat de travail, attestation employeur.
+
+**Perte d'emploi.** Licenciement (économique, faute, autre), rupture conventionnelle homologuée, fin de CDD non renouvelé. **La démission n'ouvre pas droit** au préavis réduit, sauf si elle est requalifiée en prise d'acte aux torts de l'employeur. Justificatifs : lettre de licenciement, convention de rupture homologuée, attestation de fin de CDD.
+
+**Nouvel emploi consécutif à perte d'emploi.** Si vous avez perdu votre emploi puis retrouvé un emploi (CDI, CDD, intérim) impliquant un déménagement, le préavis est réduit. Justificatifs : preuve de la perte d'emploi + nouveau contrat.
+
+**État de santé pour les plus de 60 ans.** Limitation spécifique aux seniors : le certificat médical doit attester que l'état de santé justifie le déménagement. Pour les moins de 60 ans, l'état de santé ne donne pas droit au préavis réduit (Cass. 3e civ., 11 mai 2017, n° 16-15.255).
+
+**Bénéficiaire RSA ou AAH.** Justifié par attestation CAF.
+
+> [!CONSEIL]
+> Le motif du préavis réduit doit être **prouvé ET expressément mentionné dans la lettre de congé** — pas évoqué après coup. Un préavis réduit revendiqué *a posteriori*, après envoi d'une lettre de congé « classique », est inopposable au bailleur (Cass. 3e civ., 13 juillet 2017, n° 16-20.030). Le bailleur peut alors légitimement exiger les 3 mois et facturer le loyer correspondant. Joignez systématiquement à votre lettre les justificatifs du motif : avenant de mutation, lettre de licenciement, certificat médical, attestation CAF. Sans justificatif joint au moment du congé, vous n'êtes pas protégé.`,
+      },
+      {
+        heading: "Comment rédiger la lettre de congé",
+        body: `La lettre de congé doit respecter un formalisme strict (article 15-I de la loi 89-462).
+
+**Forme obligatoire :**
+- Lettre recommandée avec accusé de réception, OU
+- Acte d'huissier (rarement utilisé), OU
+- Remise en main propre contre récépissé ou émargement
+
+L'email seul, le simple courrier ou le SMS ne sont **pas** des formes valables (Cass. 3e civ., 17 mars 2021, n° 19-25.355).
+
+**Contenu obligatoire :**
+- Vos coordonnées complètes (nom, prénom, adresse actuelle = celle du logement loué)
+- Les coordonnées du bailleur (nom, adresse)
+- L'identification du logement (adresse complète, date de signature du bail)
+- La déclaration claire de votre intention de résilier le bail
+- Le **motif du préavis réduit** s'il y a lieu, mentionné explicitement (« je vous notifie un préavis réduit à un mois en application de l'article 15-I de la loi du 6 juillet 1989, pour les motifs suivants : mutation professionnelle, dont vous trouverez justificatif joint »)
+- La date de prise d'effet du congé (« le préavis prendra effet à la date de réception de la présente lettre »)
+- La date de départ effectif (= date de réception + 1 mois ou 3 mois selon le cas)
+- Une demande de fixation d'un rendez-vous d'état des lieux de sortie
+- La date et votre signature
+
+**Justificatifs à joindre :**
+- Mutation : avenant ou lettre employeur
+- Premier emploi : contrat de travail
+- Perte d'emploi : lettre de licenciement ou convention de rupture
+- État de santé : certificat médical (plus de 60 ans uniquement)
+- RSA / AAH : attestation CAF récente
+- Zone tendue : aucun justificatif requis (mais vérifiez le zonage)
+
+**Calcul du préavis :** le préavis commence à courir à la **réception** de la lettre par le bailleur (date du tampon AR), pas à la date d'envoi. Anticipez les délais postaux : prévoyez 3 à 5 jours entre l'envoi et la réception. Pendant le préavis, vous restez tenu de payer le loyer, et le bailleur peut faire visiter le logement (2 heures par jour ouvrable, sauf accord contraire).`,
+      },
+      {
+        heading: "Que faire si le bailleur refuse le préavis réduit ?",
+        body: `Le bailleur peut contester le préavis réduit sur deux motifs : le motif invoqué n'est pas reconnu par la loi, ou les justificatifs sont insuffisants.
+
+**Étape 1 — Vérifier la solidité du dossier.** Relisez l'article 15-I de la loi 89-462. Si votre situation correspond clairement à un motif (mutation, perte d'emploi, etc.) et que vous avez joint un justificatif, le préavis réduit s'impose au bailleur, peu importe son avis personnel. Si la situation est plus ambiguë (par exemple démission qui pourrait être requalifiée), prenez le temps de vérifier avec un juriste avant d'envoyer.
+
+**Étape 2 — Lettre de réponse écrite.** Si le bailleur conteste par écrit, répondez par recommandé AR en visant l'article exact et en joignant une copie supplémentaire du justificatif. Précisez que vous avez respecté toutes les conditions légales et que le préavis prend effet à la date de réception de votre lettre initiale.
+
+**Étape 3 — Saisine de la commission départementale de conciliation.** Si le bailleur persiste et exige les 3 mois, saisissez la CDC (gratuite, lettre simple, audience sous 2 mois). La CDC tranchera et son avis, bien que non contraignant, est généralement suivi par les deux parties.
+
+**Étape 4 — Saisine du tribunal judiciaire.** En dernier recours, le tribunal judiciaire — précisément le juge des contentieux de la protection — tranche en référé ou au fond. Gratuit pour les litiges inférieurs à 5 000 €. Le juge peut condamner le bailleur à rembourser les loyers indus s'il a appliqué un préavis de 3 mois alors que vous remplissiez les conditions du préavis d'un mois.
+
+**Risque inverse — ce que vous ne devez pas faire.** Ne quittez **jamais** le logement avant la fin du préavis (1 mois ou 3 mois selon le cas) en supposant que le bailleur acceptera. Si la fin du préavis n'est pas formellement actée, vous restez locataire et redevable du loyer jusqu'à l'état des lieux de sortie. Continuez à payer jusqu'à la date officielle et organisez l'état des lieux de sortie de manière formelle.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Quels motifs ouvrent droit au préavis d'1 mois en location vide ?",
+        a: "Les motifs sont limitativement énumérés par l'article 15-I de la loi du 6 juillet 1989 : mutation professionnelle, obtention d'un premier emploi, perte involontaire d'emploi (licenciement, rupture conventionnelle, fin de CDD), nouvel emploi consécutif à une perte d'emploi, état de santé justifiant un déménagement (pour les plus de 60 ans uniquement, attesté par certificat médical), bénéficiaire du RSA ou de l'AAH, attribution d'un logement social, et zone géographique tendue (article 18 de la loi 89-462). Tout autre motif — convenance personnelle, achat d'un autre logement, rapprochement familial — n'ouvre pas droit au préavis réduit en location vide. La démission n'est pas considérée comme une perte d'emploi au sens de la loi.",
+      },
+      {
+        q: "Le préavis réduit s'applique-t-il aussi en location meublée ?",
+        a: "En location meublée, le préavis légal est déjà d'**1 mois** par défaut (article 25-8 de la loi 89-462), sans avoir besoin d'invoquer un motif particulier. Les motifs de préavis réduit ne s'appliquent donc qu'en location vide, où le préavis par défaut est de 3 mois et peut être ramené à 1 mois sur justificatif. Si vous êtes en meublé, vous bénéficiez automatiquement du préavis court — vérifiez toutefois que votre bail est bien un bail meublé légal (mobilier minimum obligatoire défini par le décret n° 2015-981) et non un bail vide déguisé, ce qui changerait totalement les règles.",
+      },
+      {
+        q: "À quelle distance la mutation doit-elle se trouver pour ouvrir droit au préavis réduit ?",
+        a: "Aucune distance minimale n'est imposée par la loi. La Cour de cassation a expressément jugé (Cass. 3e civ., 6 octobre 2010, n° 09-69.835) qu'une mutation professionnelle ouvre droit au préavis réduit indépendamment de la distance entre l'ancien et le nouveau lieu de travail. Une mutation Paris → Saint-Denis est aussi valable qu'une mutation Paris → Marseille. Le critère légal est la **décision de l'employeur** (mutation imposée ou acceptée), pas la distance géographique. En revanche, le bailleur peut contester si le « déménagement » apparaît artificiel — par exemple si vous restez dans le même quartier sans changement réel de mode de vie. Mieux vaut justifier par écrit que la mutation a impliqué un changement effectif de domicile.",
+      },
+      {
+        q: "Mon CDD se termine, est-ce une perte d'emploi ouvrant droit au préavis réduit ?",
+        a: "Oui, la fin d'un CDD non renouvelé est considérée par la jurisprudence comme une perte involontaire d'emploi (Cass. 3e civ., 8 décembre 2009, n° 08-19.184). Cela ouvre droit au préavis réduit d'un mois. Justificatif à joindre : attestation employeur de fin de CDD non renouvelé, ou attestation France Travail prenant acte de l'inscription comme demandeur d'emploi. En revanche, la fin de CDD au terme normal *avec* offre de CDI refusée par le salarié n'est plus une perte involontaire, et le préavis réduit ne s'applique pas. De même, la rupture anticipée de CDD à l'initiative du salarié (équivalent démission) ne donne pas droit au préavis réduit.",
+      },
+      {
+        q: "Le bailleur peut-il refuser le préavis réduit si je remplis les conditions ?",
+        a: "Non, juridiquement. Si vous remplissez les conditions légales (motif reconnu par l'article 15-I + justificatif joint à la lettre de congé), le préavis réduit s'impose au bailleur, qui n'a aucun pouvoir d'appréciation. S'il continue à exiger les 3 mois et facture le loyer correspondant, vous pouvez saisir la commission départementale de conciliation puis le juge des contentieux de la protection. Le juge condamnera le bailleur à rembourser les loyers indus, et éventuellement à des dommages-intérêts pour résistance abusive. Conservez bien la preuve de l'envoi en recommandé, l'AR signé, le justificatif joint, et tous les échanges écrits postérieurs.",
+      },
+      {
+        q: "Et si j'ai oublié de mentionner le motif dans ma lettre de congé ?",
+        a: "Le préavis réduit revendiqué *après* l'envoi du congé est inopposable au bailleur (Cass. 3e civ., 13 juillet 2017, n° 16-20.030). Si vous avez envoyé une lettre de congé sans mentionner le motif, deux options : (1) envoyer immédiatement une lettre rectificative en recommandé AR mentionnant le motif et joignant le justificatif, et accepter que le préavis ne commence à courir qu'à la réception de cette seconde lettre (vous perdez quelques jours mais récupérez le préavis réduit), ou (2) renoncer au préavis réduit et accepter les 3 mois. La rectification a posteriori est tolérée par la jurisprudence à condition d'être faite **avant** le départ effectif du logement et de respecter les formes (recommandé AR + justificatif joint).",
+      },
+    ],
+  },
+
+  // ─── Guide 27 : Contester une augmentation de loyer abusive (Lot D 2026-05-16) ───
+  {
+    slug: "contester-augmentation-loyer-abusive",
+    title: "Contester une augmentation de loyer abusive : IRL, zone tendue, renouvellement",
+    metaTitle: "Contester augmentation loyer — IRL et zone tendue",
+    description:
+      "Augmentation de loyer hors IRL ou abusive ? Article 17-1 de la loi 89-462, indice INSEE, distinction révision annuelle / hausse au renouvellement.",
+    relatedLetterSlug: "contestation-facture",
+    category: "logement-bail",
+    publishedAt: "2026-05-16",
+    updatedAt: "2026-05-16",
+    readingTime: "6 min",
+    sections: [
+      {
+        heading: "Révision annuelle vs hausse au renouvellement : deux régimes",
+        body: `L'augmentation du loyer en cours de bail obéit à deux régimes juridiques distincts qu'il faut absolument savoir distinguer.
+
+**1. La révision annuelle en cours de bail.** Si le contrat prévoit une clause de révision (présente dans la quasi-totalité des baux modernes), le bailleur peut, **une fois par an à la date anniversaire**, augmenter le loyer selon l'évolution de l'**indice de référence des loyers (IRL)** publié trimestriellement par l'INSEE. L'IRL reflète l'inflation. Sans clause de révision dans le bail, **aucune révision n'est possible** — le loyer reste figé pendant toute la durée du bail.
+
+**2. La hausse au renouvellement.** Au terme du bail (3 ans en location vide, 1 an en meublé), le propriétaire peut proposer un nouveau loyer. C'est la seule occasion où une hausse hors IRL est légalement envisageable — et encore, uniquement dans des cas très précis : sous-évaluation manifeste par rapport au marché local, ou travaux d'amélioration importants. Cette procédure est strictement encadrée par les articles 17-2 et 17-3 de la loi du 6 juillet 1989.
+
+Les deux régimes obéissent à des règles totalement différentes. La confusion la plus fréquente : un bailleur qui veut augmenter le loyer en cours de bail au-delà de l'IRL — c'est **illégal**, même si vous êtes d'accord. Si vous acceptez par ignorance, vous pouvez réclamer le remboursement rétroactif des sommes payées en trop.
+
+**Cas particulier des zones tendues.** Dans les 28 agglomérations classées zones tendues (article 17 de la loi 89-462), les règles sont encore plus strictes :
+- Au renouvellement, le bailleur ne peut **pas** ajuster librement le loyer même en cas de sous-évaluation manifeste — il doit respecter le plafond fixé par l'observatoire local des loyers
+- Dans certaines villes (Paris, Lille, Lyon, Bordeaux, Grenoble, Montpellier, et plusieurs autres), un dispositif d'**encadrement des loyers** plafonne directement les loyers, en cours de bail comme à la première location, sous peine d'amende administrative.`,
+      },
+      {
+        heading: "Le cadre juridique : IRL, zones tendues, plafonds",
+        body: `L'**article 17-1 de la loi du 6 juillet 1989** prévoit que la révision annuelle du loyer en cours de bail doit s'appuyer sur l'IRL publié par l'INSEE. La formule est imposée par décret :
+
+**Nouveau loyer = Loyer actuel × (IRL nouveau / IRL ancien)**
+
+Concrètement : si votre loyer était de 800 € en mai 2025 avec un IRL de 145,32, et qu'en mai 2026 l'IRL est passé à 147,40, le nouveau loyer peut être au maximum de 800 × (147,40 / 145,32) = **811,45 €**, soit une hausse de 11,45 € (+1,43 %).
+
+L'IRL est publié chaque trimestre. Le bailleur doit prendre la valeur de l'**IRL du trimestre prévu au bail** (généralement le dernier IRL publié avant la date anniversaire). Toute formule différente est invalide.
+
+**Plafonnement spécifique en zone tendue (loi du 16 août 2022 dite « bouclier loyer »).** Dans les zones tendues, en plus de l'IRL, un mécanisme de plafonnement s'applique : la hausse trimestrielle de l'IRL est plafonnée. Vérifiez le plafond actuel sur economie.gouv.fr.
+
+**Conditions pour une hausse au renouvellement** (article 17-2 de la loi 89-462). Le bailleur peut proposer une augmentation supérieure à l'IRL **uniquement** dans deux cas :
+- **Sous-évaluation manifeste** par rapport aux loyers de référence du marché local, démontrée par au moins **6 références locatives comparables** (en location vide, 3 en cas de zone < 1 million d'habitants)
+- **Travaux d'amélioration significatifs** (pas de simple entretien) au moins équivalents à la dernière année de loyer
+
+La procédure de proposition de hausse au renouvellement est elle aussi strictement encadrée : la proposition doit être adressée au locataire **au moins 6 mois avant la fin du bail**, par lettre recommandée AR, avec mention des références utilisées. Le locataire dispose de 4 mois pour accepter, refuser, ou saisir la commission départementale de conciliation. Hors de ce calendrier, la procédure est nulle.
+
+> [!CONSEIL]
+> **En zone tendue, la hausse hors IRL en cours de bail est tout simplement impossible** — et même au renouvellement, elle n'est admise qu'en cas de travaux d'amélioration ou de sous-évaluation manifeste prouvée par 6 références. Beaucoup de bailleurs en zone tendue proposent des augmentations « négociées » de 30 à 50 € en cours de bail, en jouant sur la peur du conflit. **C'est illégal**, et le locataire peut réclamer le remboursement rétroactif des sommes payées en trop pendant 3 ans (article 7-1 de la loi 89-462). Avant de signer un avenant, vérifiez systématiquement : suis-je en zone tendue ? sommes-nous au renouvellement ou en cours de bail ? la hausse respecte-t-elle l'IRL ?`,
+      },
+      {
+        heading: "Comment contester par écrit",
+        body: `La contestation par écrit est l'étape obligatoire avant tout recours.
+
+**Étape 1 — Identifier précisément la nature de la hausse.** Avant de contester, déterminez :
+- Êtes-vous en cours de bail ou au renouvellement ?
+- Y a-t-il une clause de révision dans le bail ?
+- La hausse correspond-elle au calcul IRL, ou la dépasse-t-elle ?
+- Êtes-vous en zone tendue ? Le logement est-il dans une zone d'encadrement des loyers ?
+
+Cette analyse détermine la nature de l'irrégularité, et donc le visa juridique à invoquer.
+
+**Étape 2 — Lettre de contestation par recommandé AR.** La lettre doit contenir :
+- Vos coordonnées et celles du bailleur
+- L'identification du logement et la date de signature du bail
+- L'historique des loyers (montant initial, révisions successives)
+- Le détail précis de l'augmentation contestée (date, montant, calcul appliqué par le bailleur)
+- Le calcul correct selon votre analyse (avec référence à l'IRL applicable)
+- Le visa de l'article 17-1 (révision annuelle) ou 17-2 (renouvellement) de la loi 89-462
+- Le rappel du caractère illégal de la hausse pratiquée
+- Une demande de mise en conformité dans un délai imparti (15 jours)
+- Une demande de remboursement des sommes éventuellement payées en trop
+- L'annonce de saisine de la commission départementale de conciliation à défaut
+
+**Étape 3 — Calcul du trop-perçu rétroactif.** Si vous avez payé une hausse illégale depuis plusieurs mois, vous pouvez réclamer le remboursement rétroactif sur **3 ans** (article 7-1 de la loi 89-462). Le calcul : (loyer payé chaque mois – loyer légal selon IRL) × nombre de mois.
+
+**Étape 4 — Saisir la commission départementale de conciliation.** Sans réponse satisfaisante du bailleur sous 15 jours, saisissez la CDC par lettre simple. La CDC est compétente pour les litiges relatifs à la révision et à la hausse au renouvellement. Audience gratuite sous 2 mois. En cas d'échec, le tribunal judiciaire prend le relais.`,
+      },
+      {
+        heading: "Si le bailleur persiste : commission de conciliation et juge",
+        body: `Plusieurs recours s'enchaînent en cas de blocage persistant.
+
+**Commission départementale de conciliation.** Gratuite, accessible par simple lettre, audience contradictoire sous 2 mois. La CDC est particulièrement efficace en matière de hausse au renouvellement : elle peut valider ou invalider les références produites par le bailleur, et fixer un loyer médian. Son avis n'est pas contraignant mais est généralement suivi par les juges en cas de saisine ultérieure.
+
+**Tribunal judiciaire (juge des contentieux de la protection).** Pour les litiges locatifs, le juge des contentieux de la protection est compétent. Procédure gratuite pour les litiges inférieurs à 5 000 €. Le juge peut :
+- Déclarer la hausse illégale et fixer le loyer correct
+- Condamner le bailleur à **rembourser les sommes payées en trop** depuis 3 ans
+- Accorder des dommages-intérêts pour résistance abusive
+- Ordonner la mention rectificative dans tous les avis de loyer ultérieurs
+
+**Encadrement des loyers : sanctions administratives.** Dans les villes appliquant l'encadrement (Paris, Lille, Lyon, etc.), si votre loyer dépasse le plafond légal lié à l'observatoire local des loyers, vous pouvez signaler le manquement à la DDPP (Direction départementale de la protection des populations). Sanctions : amende administrative jusqu'à 5 000 € pour un bailleur particulier, 15 000 € pour un bailleur professionnel. Le signalement n'aboutit pas directement à un remboursement, mais déclenche une pression sur le bailleur qui régularise généralement.
+
+**Prescription.** La prescription pour réclamer le remboursement des loyers payés en trop est de **3 ans** (article 7-1 de la loi 89-462). Toute hausse illégale payée il y a plus de 3 ans est définitivement perdue — d'où l'importance d'agir vite quand on constate l'irrégularité. La prescription est interrompue par l'envoi d'une lettre recommandée AR ou par la saisine de la CDC ou du juge.`,
+      },
+    ],
+    faq: [
+      {
+        q: "Comment calculer la hausse maximale autorisée par l'IRL ?",
+        a: "La formule légale est : **Nouveau loyer = Loyer actuel × (IRL nouveau / IRL ancien)**. L'IRL est publié chaque trimestre par l'INSEE — vérifiez la valeur sur insee.fr ou service-public.fr. Concrètement : si votre loyer était de 900 € en juin 2025 avec un IRL référence (par exemple IRL T1 2025 = 145,32), et qu'en juin 2026 l'IRL applicable (IRL T1 2026 = 147,40) est connu, le nouveau loyer maximum est de 900 × (147,40 / 145,32) = **912,89 €**, soit une hausse de 12,89 €. Toute augmentation supérieure est illégale, sauf hausse au renouvellement avec procédure spécifique. En zone tendue, un plafonnement supplémentaire de l'IRL peut s'appliquer, à vérifier sur economie.gouv.fr. Si le bailleur n'a pas révisé pendant plusieurs années, il ne peut **pas** rattraper les années écoulées au-delà du délai de 1 an (article 17-1).",
+      },
+      {
+        q: "Qu'est-ce qu'une zone tendue ?",
+        a: "Une zone tendue est une commune où le marché du logement est jugé déséquilibré (déficit important entre offre et demande). Elles sont définies par le décret n° 2013-392 du 10 mai 2013, mis à jour régulièrement. Aujourd'hui, 28 grandes agglomérations sont concernées, dont Paris et toute l'Île-de-France, Lyon, Lille, Bordeaux, Marseille, Montpellier, Toulouse, Nantes, Strasbourg, et la côte méditerranéenne. En zone tendue, le préavis locataire passe à 1 mois (au lieu de 3), et les hausses de loyer au renouvellement sont strictement plafonnées. Pour vérifier si votre commune est en zone tendue : utilisez le simulateur officiel sur service-public.fr (« Zone tendue : votre logement est-il concerné ? ») ou consultez le bail qui mentionne souvent le zonage.",
+      },
+      {
+        q: "Que faire si le bailleur a augmenté le loyer sans clause de révision dans le bail ?",
+        a: "Sans clause de révision expresse dans le bail, **aucune révision n'est possible** — le loyer reste figé pendant toute la durée du bail (Cass. 3e civ., 14 novembre 2006, n° 05-15.581). Toute augmentation pratiquée sans clause est illégale, et vous pouvez réclamer le remboursement rétroactif sur 3 ans. Vérifiez votre bail : la clause de révision doit être explicite (« Le loyer sera révisé chaque année à la date anniversaire selon l'évolution de l'IRL »). Si la clause est ambiguë ou absente, faites une lettre recommandée AR au bailleur visant l'article 17-1 de la loi 89-462 et exigeant le remboursement. Si le bailleur résiste, la commission de conciliation ou le juge donneront raison au locataire.",
+      },
+      {
+        q: "Le bailleur peut-il rattraper plusieurs années de révisions non appliquées ?",
+        a: "Non. L'article 17-1 de la loi 89-462 et la jurisprudence constante (Cass. 3e civ., 11 mai 2011, n° 10-13.617) prévoient que la révision annuelle doit être appliquée **à la date anniversaire** prévue au bail. Si le bailleur ne révise pas pendant plusieurs années, il ne peut pas rattraper rétroactivement les hausses non appliquées au-delà du délai légal d'**1 an**. Concrètement : si la révision n'a pas été notifiée dans l'année suivant la date anniversaire, elle est définitivement perdue pour cette année-là. Le bailleur peut seulement réviser pour l'année à venir, à partir du dernier IRL applicable. Cette règle protège le locataire contre des rattrapages massifs lors de la vente du logement ou du renouvellement.",
+      },
+      {
+        q: "Mon bail comporte une clause de révision floue, comment l'interpréter ?",
+        a: "Toute clause de révision doit obligatoirement viser l'IRL (indice de référence des loyers) publié par l'INSEE — c'est le seul indice légal autorisé en location d'habitation depuis la loi du 8 février 2008. Une clause visant un autre indice (par exemple l'indice du coût de la construction, l'indice général des prix) est **nulle**, et la révision ne peut pas s'appliquer. Si la clause vise « les indices INSEE en général » sans préciser IRL, l'ambiguïté profite au locataire (article 1190 du Code civil) — vous pouvez refuser toute révision tant que le bailleur n'a pas démontré l'application de l'IRL. Si la clause est totalement absente, aucune révision n'est possible. Conservez précieusement votre bail original.",
+      },
+      {
+        q: "Le bailleur peut-il refuser de baisser le loyer après plusieurs années de hausses excessives ?",
+        a: "Si vous démontrez que les hausses pratiquées au-delà de l'IRL étaient illégales, vous avez droit au **remboursement rétroactif sur 3 ans** ET à la fixation du loyer à son niveau légal (loyer initial révisé selon IRL strict). Le bailleur ne peut pas refuser cette régularisation s'il y est condamné par le juge. En revanche, hors illégalité prouvée, vous ne pouvez pas exiger une baisse — sauf si vous êtes dans une commune appliquant l'encadrement des loyers et que votre loyer dépasse le plafond légal (Paris, Lille, Lyon, Bordeaux, Grenoble, Montpellier, et plusieurs autres). Dans ce cas, vous pouvez exiger un alignement sur le plafond légal et obtenir un remboursement des sommes payées en trop. Procédure : lettre recommandée + saisine CDC + tribunal judiciaire si nécessaire.",
+      },
+    ],
+  },
+
+  // ─── Guide 28 : Résilier assurance auto après vente du véhicule (Lot D 2026-05-16) ───
+  {
+    slug: "resilier-assurance-auto-vente-vehicule",
+    title: "Résilier son assurance auto après la vente du véhicule",
+    metaTitle: "Résilier assurance auto après vente — L121-11 Code assurances",
+    description:
+      "Véhicule vendu, comment résilier l'assurance auto ? Article L121-11 du Code des assurances, effet 10 jours, remboursement de la prime non consommée.",
+    relatedLetterSlug: "resiliation-abonnement",
+    category: "banque-assurance",
+    publishedAt: "2026-05-16",
+    updatedAt: "2026-05-16",
+    readingTime: "5 min",
+    sections: [
+      {
+        heading: "Vente de véhicule : ce qui change pour votre assurance",
+        body: `Lorsque vous vendez votre véhicule, le contrat d'assurance auto qui le couvre ne s'éteint pas automatiquement. Le contrat reste en vigueur — et les prélèvements continuent — tant que vous n'avez pas formellement résilié auprès de votre assureur.
+
+L'erreur la plus fréquente : penser que la cession du véhicule via le certificat de vente (cerfa n° 15776) suffit à éteindre l'assurance. **C'est faux**. Le certificat de vente n'a aucun effet sur le contrat d'assurance. L'assureur n'est notifié que si vous le faites vous-même, par écrit.
+
+Sans démarche de votre part, deux conséquences :
+- L'assureur continue à prélever la prime annuelle
+- Le contrat reste en vigueur, mais sans véhicule à assurer — la prime devient « pour rien »
+
+L'acquéreur du véhicule, lui, est tenu d'assurer le véhicule **dès la prise de possession**. Il dispose de quelques semaines pour souscrire son propre contrat. Pendant ce délai, deux assurances peuvent théoriquement coexister sur le même véhicule, mais c'est l'assurance de l'acquéreur qui jouera en cas de sinistre — l'assurance du vendeur étant suspendue de droit à la date de transfert de propriété (article L121-11 du Code des assurances).
+
+Pour formaliser la résiliation, l'article L121-11 prévoit une procédure claire que nous détaillons dans les sections suivantes.
+
+**Cas particuliers :**
+- **Don du véhicule** : même régime que la vente, la cession est traitée comme un transfert de propriété
+- **Destruction (épave)** : résiliation immédiate possible avec justificatif (certificat de destruction d'un centre VHU agréé)
+- **Achat d'un nouveau véhicule** : possible de transférer le contrat (avenant) plutôt que de résilier — souvent plus simple`,
+      },
+      {
+        heading: "Le cadre juridique : L121-11 et l'effet 10 jours",
+        body: `Le régime de la résiliation après vente de véhicule est posé par l'**article L121-11 du Code des assurances**. Ce texte prévoit deux mécanismes complémentaires.
+
+**1. Suspension automatique de la garantie à la cession (alinéa 1).** Dès que vous vendez ou cédez le véhicule, l'assurance est **automatiquement suspendue** à compter du lendemain à zéro heure. Vous n'êtes plus couvert pour ce véhicule à compter de cette date — l'acquéreur doit avoir son propre contrat.
+
+**2. Résiliation du contrat (alinéa 2).** La suspension automatique n'éteint **pas** le contrat. Pour le résilier définitivement et arrêter les prélèvements, vous devez notifier l'assureur par écrit. La résiliation prend effet **10 jours après la notification** par lettre recommandée. Pendant ces 10 jours, le contrat continue formellement (sans véhicule assuré, donc sans effet pratique) et la prime au prorata reste due.
+
+**Mécanisme combiné en pratique :**
+- Jour J : vente du véhicule → suspension automatique de la garantie
+- Jour J+1 : envoi du recommandé de résiliation
+- Jour J+11 : résiliation effective du contrat
+- Remboursement de la prime non consommée : entre J+11 et la fin de la période d'assurance prépayée
+
+**Sans notification écrite, rien ne change**. La suspension automatique de garantie protège l'assureur (il n'a plus à indemniser un véhicule qui ne vous appartient plus), mais ne déclenche **aucun** remboursement. La prime continue à être prélevée jusqu'à la résiliation formelle ou la fin de la période contractuelle.
+
+> [!CONSEIL]
+> La résiliation prend effet **10 jours après notification en recommandé**, pas à la date de la vente. Sans recommandé, l'assureur continue à prélever — légalement — et n'a aucune obligation de rembourser rétroactivement à la date de cession. Beaucoup de vendeurs croient (à tort) qu'un simple appel téléphonique ou un email à l'assureur suffit : ce n'est pas le cas. L'article L121-11 exige une **lettre recommandée** (ou autre support durable avec preuve d'envoi). Sans cette forme, la résiliation est inopposable et l'assureur peut continuer à facturer en toute légalité. Conservez l'AR : c'est lui qui fait courir le délai de 10 jours.`,
+      },
+      {
+        heading: "La procédure : déclaration, lettre, justificatifs",
+        body: `La procédure complète se déroule en quatre étapes.
+
+**Étape 1 — Établir le certificat de vente (cerfa 15776).** Lors de la cession, vous remplissez avec l'acquéreur le certificat de cession à télécharger sur service-public.fr ou demarches.interieur.gouv.fr. Vous en conservez un exemplaire signé. Ce document atteste la date et les conditions du transfert de propriété — il est indispensable comme justificatif auprès de l'assureur.
+
+**Étape 2 — Rédiger la lettre de résiliation.** La lettre recommandée AR adressée à l'assureur doit contenir :
+- Vos coordonnées complètes (nom, prénom, adresse, numéro de client / contrat)
+- L'identification du véhicule assuré (immatriculation, marque, modèle)
+- La déclaration de la vente avec date précise
+- La référence du contrat d'assurance
+- La demande expresse de résiliation au titre de l'article L121-11 du Code des assurances
+- La demande de remboursement de la prime non consommée au prorata
+- La fourniture d'un RIB pour le remboursement
+- La date et votre signature
+
+**Étape 3 — Joindre les justificatifs.**
+- Copie du certificat de cession signé par les deux parties (cerfa 15776)
+- Copie de votre pièce d'identité
+- Pour un don ou une cession à un proche : mention manuscrite « cession gratuite » sur le certificat
+- Pour une destruction : certificat de destruction délivré par le centre VHU (véhicules hors d'usage) agréé
+
+**Étape 4 — Envoyer en recommandé AR.** L'envoi en recommandé est **obligatoire** pour faire courir le délai de 10 jours et obtenir une preuve formelle. Un envoi simple, un email ou un appel téléphonique ne suffisent pas. Conservez l'AR : c'est la preuve de la date de réception qui détermine la date de résiliation.
+
+**Délais à respecter :**
+- Notification de la résiliation : **sans délai légal**, mais le plus rapidement possible après la vente pour limiter les prélèvements
+- Délai de prise d'effet de la résiliation : **10 jours après réception** par l'assureur
+- Délai de remboursement de la prime non consommée : **30 jours maximum** après la résiliation, selon l'article L113-12-3 du Code des assurances`,
+      },
+      {
+        heading: "Récupérer la prime non consommée",
+        body: `Le remboursement de la prime non consommée est un droit imposé par l'**article L113-12-3 du Code des assurances**. Calcul et procédure.
+
+**Calcul du remboursement.** L'assureur doit rembourser la part de prime payée d'avance et correspondant à la période postérieure à la résiliation. Le calcul est au prorata du nombre de jours restant. Exemple : prime annuelle de 600 €, échéance 1er janvier — 31 décembre, résiliation le 30 juin → 6 mois consommés (300 €), 6 mois à rembourser (300 €).
+
+**Frais et retenues.** L'assureur peut retenir uniquement :
+- Les frais de dossier prévus aux conditions générales (généralement 10 à 30 € maximum)
+- Les éventuelles indemnités de sinistre versées sur la période, qui ne sont pas remboursables
+
+L'assureur ne peut **pas** retenir de pénalité de résiliation : la résiliation après vente est de droit et ne donne lieu à aucune pénalité.
+
+**Délai légal de remboursement.** L'assureur dispose de **30 jours maximum** à compter de la résiliation effective pour effectuer le remboursement. Au-delà, des intérêts au taux légal sont dus (article 1231-6 du Code civil).
+
+**Si l'assureur tarde ou refuse.** Mise en demeure par lettre recommandée AR avec :
+- Le rappel de la résiliation effective (date, référence)
+- Le calcul détaillé du remboursement attendu
+- Le visa de l'article L113-12-3 du Code des assurances
+- L'exigence du remboursement sous 8 jours
+- L'annonce de saisine du médiateur de l'assurance à défaut
+
+Sans suite, saisissez :
+- Le **médiateur de l'assurance** (gratuit, lettre simple) : il dispose de 90 jours pour rendre un avis. Aboutit en faveur du consommateur dans environ 70 % des cas
+- L'**ACPR** (Autorité de contrôle prudentiel et de résolution) : régulateur du secteur, peut sanctionner les assureurs qui pratiquent des manquements systématiques
+- Le **tribunal judiciaire** : procédure gratuite jusqu'à 5 000 €
+
+**Achat d'un nouveau véhicule : transférer plutôt que résilier.** Si vous rachetez un véhicule dans la foulée, demandez à votre assureur un **avenant de transfert** plutôt qu'une résiliation suivie d'une nouvelle souscription. Cela évite : les frais de souscription, la perte du bonus, la nouvelle déclaration de profil conducteur. L'avenant simple modifie l'identification du véhicule assuré, l'ancien contrat continue à courir. Documents à fournir : la nouvelle carte grise, le contrat de vente du nouveau véhicule.`,
+      },
+    ],
+    faq: [
+      {
+        q: "À quelle date prend effet la résiliation de l'assurance auto après vente ?",
+        a: "Deux dates à distinguer. La **suspension de la garantie** prend effet automatiquement le lendemain de la vente à zéro heure (article L121-11 alinéa 1 du Code des assurances) — à compter de cette date, vous n'êtes plus couvert pour le véhicule cédé. La **résiliation effective du contrat** (qui arrête les prélèvements) prend effet **10 jours après la réception** par l'assureur de votre lettre recommandée AR (alinéa 2). Concrètement : si vous vendez le véhicule le 15 juin et envoyez le recommandé le 16 juin, l'assureur le reçoit le 18 juin et la résiliation prend effet le 28 juin. Entre le 16 et le 28, la prime au prorata reste due. Le remboursement de la prime non consommée se fait pour la période postérieure au 28 juin, dans un délai de 30 jours.",
+      },
+      {
+        q: "Quels justificatifs joindre à ma lettre de résiliation ?",
+        a: "Joindre obligatoirement : (1) une **copie du certificat de cession signé** par vous et l'acquéreur (cerfa 15776, téléchargeable sur service-public.fr), qui établit la date et le caractère réel de la vente ; (2) une **copie de votre pièce d'identité** ; (3) un **RIB** pour le remboursement de la prime non consommée. Pour les cas particuliers : pour un don, mentionner « cession gratuite » sur le certificat ; pour une destruction (épave), joindre le **certificat de destruction** délivré par le centre VHU agréé ; pour une vente à l'export, joindre la déclaration de cession à l'étranger. Sans justificatif, l'assureur peut suspendre le traitement du dossier en demandant des compléments — d'où l'importance de joindre tout dès le premier envoi pour faire courir le délai de 10 jours.",
+      },
+      {
+        q: "Mon assureur tarde à me rembourser la prime non consommée, que faire ?",
+        a: "L'article L113-12-3 du Code des assurances impose un remboursement dans un délai de **30 jours** à compter de la résiliation effective. Au-delà, des intérêts au taux légal sont dus de plein droit (article 1231-6 du Code civil). Procédure : (1) mise en demeure par lettre recommandée AR à l'assureur, avec calcul détaillé du remboursement et visa des articles ; (2) sans réponse sous 8 jours, saisine du médiateur de l'assurance (coordonnées sur le site de votre assureur ou sur mediation-assurance.org) — gratuite, audience contradictoire, avis dans les 90 jours ; (3) en dernier recours, saisine du tribunal judiciaire (gratuit jusqu'à 5 000 €). Vous pouvez aussi signaler le manquement à l'ACPR via leur site, qui peut sanctionner les assureurs récidivistes.",
+      },
+      {
+        q: "J'achète un nouveau véhicule, puis-je transférer mon contrat ?",
+        a: "Oui, c'est généralement plus avantageux que de résilier puis souscrire un nouveau contrat. Demandez à votre assureur un **avenant de transfert** : il modifie l'identification du véhicule assuré (immatriculation, marque, modèle) sans rompre le contrat. Avantages : conservation du bonus-malus acquis, pas de frais de souscription, continuité de couverture, simplification administrative. La prime est recalculée au prorata selon le nouveau véhicule (souvent légèrement différente selon la valeur et la catégorie). Documents à fournir : la nouvelle carte grise, le contrat de vente du nouveau véhicule. L'avenant prend effet à la date de prise de possession du nouveau véhicule. Inversement, si vous quittez votre assureur, vous pouvez changer à tout moment après 1 an de souscription (loi Hamon de 2014, article L113-15-2).",
+      },
+      {
+        q: "La résiliation est-elle possible si je donne le véhicule à un proche ?",
+        a: "Oui, le don suit le même régime que la vente. L'article L121-11 du Code des assurances vise « tout transfert de propriété », qu'il soit à titre onéreux ou à titre gratuit. Procédure identique : remplissez le certificat de cession (cerfa 15776) en cochant « cession à titre gratuit » et mentionnez « don » dans le motif, faites signer le destinataire, puis adressez à votre assureur la lettre recommandée AR de résiliation avec copie du certificat. La garantie est suspendue automatiquement à compter du lendemain du don, la résiliation prend effet 10 jours après réception du recommandé, et le remboursement de la prime non consommée suit le même délai de 30 jours. Le destinataire du don doit, comme un acheteur classique, souscrire son propre contrat d'assurance dès la prise de possession.",
+      },
+      {
+        q: "Quel délai dois-je respecter pour résilier après la vente ?",
+        a: "Il n'existe **aucun délai légal maximum** pour notifier la résiliation à votre assureur après la vente — mais chaque jour de retard est un jour de prime qui continue à courir. La pratique recommandée : envoyer le recommandé AR **dans les 48 à 72 heures** suivant la signature du certificat de cession. La suspension automatique de garantie (alinéa 1 de L121-11) protège l'assureur d'avoir à indemniser un véhicule qui ne vous appartient plus, mais elle ne déclenche aucun remboursement — seule la résiliation formelle (alinéa 2) le fait. Plus vous tardez, plus la prime court. À l'inverse, anticiper la résiliation **avant** la vente n'est pas possible : la résiliation suppose la vente effective, donc le certificat de cession signé.",
+      },
+    ],
+  },
 ];
 
 export function getGuide(slug: string): Guide | undefined {
