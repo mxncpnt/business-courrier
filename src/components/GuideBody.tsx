@@ -1,13 +1,21 @@
 import React from "react";
 
 /**
- * Parse une portion de texte et interprète le bold inline `**texte**`.
- * Renvoie un fragment React avec <strong> aux bons endroits.
+ * Parse une portion de texte et interprète :
+ *   - `**texte**` → <strong> (gras)
+ *   - `*texte*`   → <em>     (italique, utile pour les expressions latines
+ *                              et les emphases discrètes dans les guides
+ *                              juridiques — ex: *a posteriori*, *ensuite*)
+ *
+ * Ordre de traitement : on parse d'abord les gras `**...**`, puis les
+ * italiques `*...*` sur chaque segment non-gras. Cela évite de matcher
+ * accidentellement l'intérieur d'un gras comme italique.
+ *
  * Exporté pour réutilisation dans la FAQ et tout autre rendu inline.
  */
 export function parseInline(text: string): React.ReactNode {
-  const parts = text.split(/(\*\*[^*]+\*\*)/g);
-  return parts.map((part, i) => {
+  const boldParts = text.split(/(\*\*[^*]+\*\*)/g);
+  return boldParts.map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       return (
         <strong key={i} className="font-semibold text-jc-ink">
@@ -15,7 +23,24 @@ export function parseInline(text: string): React.ReactNode {
         </strong>
       );
     }
-    return <React.Fragment key={i}>{part}</React.Fragment>;
+    // Sur les segments non-gras, on tente le parsing italique.
+    // `[^*\n]+?` : contenu sans astérisque ni saut de ligne, non-greedy
+    // pour éviter qu'un seul `*` n'avale tout jusqu'au suivant à 50 mots.
+    const italicParts = part.split(/(\*[^*\n]+?\*)/g);
+    return (
+      <React.Fragment key={i}>
+        {italicParts.map((sub, j) => {
+          if (sub.startsWith("*") && sub.endsWith("*") && sub.length > 2) {
+            return (
+              <em key={j} className="italic">
+                {sub.slice(1, -1)}
+              </em>
+            );
+          }
+          return <React.Fragment key={j}>{sub}</React.Fragment>;
+        })}
+      </React.Fragment>
+    );
   });
 }
 
