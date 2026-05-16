@@ -2,6 +2,7 @@ import Link from "next/link";
 import { letterTypes } from "@/config/letter-types";
 import { createAuthClient } from "@/lib/supabase/server-auth";
 import { buildOrganization } from "@/lib/jsonld";
+import { siretFormatted } from "@/config/business";
 import HeroLetter from "@/components/HeroLetter";
 import Logo from "@/components/Logo";
 import {
@@ -10,6 +11,8 @@ import {
   IconBolt,
   IconShield,
   IconDoc,
+  IconLock,
+  IconMail,
 } from "@/components/Icons";
 
 // Canonical explicite sur la home : sans ça, on hérite du root layout (qui n'a
@@ -321,6 +324,57 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* ─── Bande Réassurance institutionnelle ─── */}
+      {/* Signaux d'identité légale et de sécurité technique, distincts de la
+          Trust band plus haut qui porte sur les promesses produit. Placés juste
+          avant le footer pour récupérer l'attention de l'utilisateur en bas de
+          page, après le CTA final. Pas de logos tiers (Stripe / La Poste /
+          AFNOR) — wording texte uniquement, juridiquement safe et tout aussi
+          convaincant. La mention SIRET en clair sert de "tu peux me vérifier
+          chez l'INSEE", c'est le point qui fait le plus la différence en
+          conversion sur un visiteur méfiant. */}
+      <section
+        aria-label="Réassurance"
+        className="px-6 md:px-20 py-10 bg-jc-surface border-t border-jc-line"
+      >
+        <div className="max-w-[1100px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            {
+              icon: <IconLock />,
+              t: "Paiement sécurisé Stripe",
+              d: "Carte bancaire chiffrée. Aucune donnée stockée chez nous.",
+            },
+            {
+              icon: <IconMail />,
+              t: "Lettre déposée à La Poste",
+              d: "Preuve de dépôt fournie. Suivi inclus pour les recommandés AR.",
+            },
+            {
+              icon: <IconDoc />,
+              t: "Mise en page AFNOR",
+              d: "Format conforme à la norme NF Z11-001 attendue par les administrations.",
+            },
+            {
+              icon: <IconShield />,
+              t: "Entreprise française",
+              d: `JusteCourrier · SIRET ${siretFormatted}`,
+            },
+          ].map((item) => (
+            <div key={item.t} className="flex items-start gap-3">
+              <div className="text-jc-accent shrink-0 mt-0.5">{item.icon}</div>
+              <div className="min-w-0">
+                <h3 className="text-[14px] font-semibold text-jc-ink leading-snug mb-1">
+                  {item.t}
+                </h3>
+                <p className="text-[13px] text-jc-ink-soft leading-snug">
+                  {item.d}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ─── Footer ─── */}
       </main>
 
@@ -406,11 +460,21 @@ export default async function Home() {
           </div>
 
           {/* Barre basse */}
-          <div className="border-t border-jc-line pt-5 flex justify-between flex-wrap gap-2">
-            <span>
-              © {new Date().getFullYear()} JusteCourrier · SIRET 104 347 919 00011
-            </span>
-            <span>Édité en France</span>
+          <div className="border-t border-jc-line pt-5">
+            {/* Mention partenaire postal — transparence sur l'opérateur d'envoi,
+                dans le même esprit que les pages /tarifs et /cgv. Volontairement
+                discret pour ne pas concurrencer le signal "La Poste" porté par
+                la bande Réassurance. */}
+            <p className="text-[12px] mb-3 text-jc-ink-muted">
+              Service postal opéré via notre partenaire{" "}
+              <span className="text-jc-ink-soft font-medium">MySendingBox</span>.
+            </p>
+            <div className="flex justify-between flex-wrap gap-2">
+              <span>
+                © {new Date().getFullYear()} JusteCourrier · SIRET {siretFormatted}
+              </span>
+              <span>Édité en France</span>
+            </div>
           </div>
         </div>
       </footer>
