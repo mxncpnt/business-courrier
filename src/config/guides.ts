@@ -1,3 +1,71 @@
+/**
+ * Catégorie thématique d'un guide — distincte du `letterType` (type de courrier).
+ * Le découpage par domaine de vie (logement, banque, conso, énergie, admin,
+ * travail) est plus didactique pour l'utilisateur et meilleur pour le SEO
+ * (topical authority par domaine plutôt que par type de lettre).
+ *
+ * Source de vérité unique pour les chips de filtrage sur /guides, le
+ * groupement de la page liste, et les futures pages catégorie dédiées
+ * (`/guides/logement-bail`, etc. — Phase 2 quand on dépassera 50 guides).
+ */
+export type GuideCategory =
+  | "logement-bail"
+  | "banque-assurance"
+  | "consommation"
+  | "energie"
+  | "administrations"
+  | "travail";
+
+export const GUIDE_CATEGORIES: {
+  slug: GuideCategory;
+  label: string;
+  icon: string;
+  description: string;
+}[] = [
+  {
+    slug: "logement-bail",
+    label: "Logement & Bail",
+    icon: "🏠",
+    description:
+      "Locataire, propriétaire, copropriété, voisinage, travaux dans le logement.",
+  },
+  {
+    slug: "banque-assurance",
+    label: "Banque, Assurance & Crédit",
+    icon: "🏦",
+    description:
+      "Frais bancaires, prélèvements, assurance auto, santé, emprunteur et indemnisations.",
+  },
+  {
+    slug: "consommation",
+    label: "Consommation & Abonnements",
+    icon: "🛒",
+    description:
+      "Salle de sport, télécom, mutuelle, e-commerce, transports : faire valoir vos droits de consommateur.",
+  },
+  {
+    slug: "energie",
+    label: "Énergie",
+    icon: "⚡",
+    description:
+      "Contester une facture EDF, Engie ou tout fournisseur d'énergie.",
+  },
+  {
+    slug: "administrations",
+    label: "Administrations & Services Publics",
+    icon: "🏛️",
+    description:
+      "CAF, France Travail, CPAM, mairies, préfectures : recours et réclamations.",
+  },
+  {
+    slug: "travail",
+    label: "Travail & Emploi",
+    icon: "💼",
+    description:
+      "Heures supplémentaires, CDD, solde de tout compte, rupture conventionnelle.",
+  },
+];
+
 export interface Guide {
   slug: string;
   title: string;
@@ -5,6 +73,8 @@ export interface Guide {
   description: string;
   /** Slug du letterType lié (pour le CTA) */
   relatedLetterSlug: string;
+  /** Catégorie thématique du guide (domaine de vie) — voir GuideCategory */
+  category: GuideCategory;
   publishedAt: string;
   updatedAt: string;
   readingTime: string;
@@ -22,6 +92,7 @@ export const guides: Guide[] = [
   // ─── Guide 1 : Résiliation salle de sport ───
   {
     slug: "resilier-salle-de-sport",
+    category: "consommation",
     title: "Comment résilier son abonnement en salle de sport",
     metaTitle: "Résilier sa salle de sport — Modèle de lettre gratuit",
     description:
@@ -97,6 +168,7 @@ En dernier recours, vous pouvez faire opposition aux prélèvements bancaires au
   // ─── Guide 2 : Contestation facture énergie ───
   {
     slug: "contester-facture-energie",
+    category: "energie",
     title: "Comment contester une facture d'énergie trop élevée",
     metaTitle: "Contester une facture EDF / Engie — Lettre type et démarches",
     description:
@@ -174,6 +246,7 @@ Le médiateur rend un avis dans un délai de 90 jours. Cet avis n'est pas contra
   // ─── Guide 3 : Mise en demeure loyer impayé ───
   {
     slug: "mise-en-demeure-loyer-impaye",
+    category: "logement-bail",
     title: "Mise en demeure pour loyer impayé : guide du propriétaire",
     metaTitle: "Mise en demeure loyer impayé — Modèle et procédure",
     description:
@@ -255,6 +328,7 @@ Enfin, rappelons que la trêve hivernale (1er novembre au 31 mars) interdit tout
   // ─── Guide 4 : Résiliation Free Mobile (loi Chatel) ───
   {
     slug: "resilier-free-mobile-loi-chatel",
+    category: "consommation",
     title: "Résilier son forfait Free Mobile : guide complet",
     metaTitle: "Résilier Free Mobile (loi Chatel) — Procédure et modèle de lettre",
     description:
@@ -344,6 +418,7 @@ Si Free continue à prélever après la résiliation effective, faites oppositio
   // ─── Guide 5 : Mise en demeure travaux artisan ───
   {
     slug: "mise-en-demeure-travaux-artisan",
+    category: "logement-bail",
     title: "Mise en demeure d'un artisan pour travaux non terminés",
     metaTitle: "Mise en demeure travaux artisan — Lettre type et procédure",
     description:
@@ -431,6 +506,7 @@ Si l'artisan a une assurance responsabilité civile professionnelle (obligatoire
   // ─── Guide 6 : Mise en demeure restitution caution location ───
   {
     slug: "mise-en-demeure-restitution-caution-location",
+    category: "logement-bail",
     title: "Mise en demeure pour restitution du dépôt de garantie",
     metaTitle: "Caution non rendue — Mise en demeure du propriétaire (modèle 2026)",
     description:
@@ -520,6 +596,7 @@ Si le propriétaire est en faillite ou insolvable, la dette devient compliquée 
   // ─── Guide 7 : Réclamation vol annulé règlement 261/2004 ───
   {
     slug: "reclamation-vol-annule-reglement-261-2004",
+    category: "consommation",
     title: "Vol annulé ou retardé : votre indemnisation jusqu'à 600 €",
     metaTitle: "Indemnisation vol annulé — Règlement européen 261/2004 (2026)",
     description:
@@ -614,6 +691,7 @@ Conservez vos preuves jusqu'à obtention du paiement : carte d'embarquement, com
   // ─── Guide 8 : Résiliation bail locataire zone tendue ───
   {
     slug: "resilier-bail-locataire-zone-tendue",
+    category: "logement-bail",
     title: "Résilier son bail en zone tendue : préavis 1 mois",
     metaTitle: "Résiliation bail zone tendue — Préavis 1 mois locataire (2026)",
     description:
@@ -703,6 +781,7 @@ Le préavis court à partir de la réception du courrier par le bailleur (date d
   // ─── Guide 9 : Mise en demeure livraison non effectuée e-commerce ───
   {
     slug: "mise-en-demeure-livraison-non-effectuee-ecommerce",
+    category: "consommation",
     title: "Commande non livrée : mise en demeure du vendeur",
     metaTitle: "Livraison non effectuée — Mise en demeure et remboursement (2026)",
     description:
@@ -799,6 +878,7 @@ Si le vendeur conteste la résiliation et refuse de rembourser, saisissez le tri
   // ─── Guide 10 : Contestation décision CAF ───
   {
     slug: "contestation-decision-caf",
+    category: "administrations",
     title: "Contester une décision CAF : RAPO et délais",
     metaTitle: "Contester décision CAF — Recours amiable obligatoire (2026)",
     description:
@@ -901,6 +981,7 @@ La CAF a **2 mois pour répondre** au RAPO (article L.142-4-1). Sans réponse à
   // ─── Guide 11 : Contester un PV de stationnement ───
   {
     slug: "contester-pv-stationnement",
+    category: "administrations",
     title: "Contester un PV de stationnement : procédure complète",
     metaTitle: "Contester un PV de stationnement — Procédure et lettre type",
     description:
@@ -1003,6 +1084,7 @@ En dernier recours, **le défenseur des droits** peut être saisi gratuitement (
   // ─── Guide 12 : Réclamation France Travail / indu ───
   {
     slug: "reclamation-france-travail-indu",
+    category: "administrations",
     title: "Réclamation France Travail : indu, suspension, refus",
     metaTitle: "Réclamation France Travail (Pôle emploi) — Indu et suspension",
     description:
@@ -1106,6 +1188,7 @@ Pour les **litiges relatifs au montant de l'allocation** ou à la durée d'indem
   // ─── Guide 13 : Mise en demeure assurance refus indemnisation ───
   {
     slug: "mise-en-demeure-assurance-refus-indemnisation",
+    category: "banque-assurance",
     title: "Mise en demeure d'une assurance qui refuse d'indemniser",
     metaTitle: "Mise en demeure assurance — Refus d'indemniser sinistre (2026)",
     description:
@@ -1223,6 +1306,7 @@ L'expertise judiciaire (référé-expertise) coûte 2 000 à 5 000 € avancés 
   // ─── Guide 14 : Résilier sa mutuelle santé (loi 2019) ───
   {
     slug: "resilier-mutuelle-sante-loi-2019",
+    category: "banque-assurance",
     title: "Résilier sa mutuelle santé à tout moment (loi 14/07/2019)",
     metaTitle: "Résilier sa mutuelle santé — Loi 2019, après 1 an, sans frais",
     description:
@@ -1340,6 +1424,7 @@ Certaines mutuelles (Harmonie, Macif, MAIF) permettent la résiliation directeme
   // ─── Guide 15 : Opposition à prélèvement bancaire non autorisé ───
   {
     slug: "opposition-prelevement-bancaire-non-autorise",
+    category: "banque-assurance",
     title: "Opposition à prélèvement bancaire : remboursement et procédure",
     metaTitle: "Opposition prélèvement bancaire — Remboursement non autorisé",
     description:
@@ -1475,6 +1560,7 @@ En dernier recours : juge des contentieux de la protection (litiges < 10 000 €
   // ─── Guide 16 : Résilier assurance habitation ou auto (loi Hamon) ───
   {
     slug: "resilier-assurance-habitation-auto-loi-hamon",
+    category: "banque-assurance",
     title: "Résilier son assurance habitation ou auto (loi Hamon)",
     metaTitle: "Résilier assurance auto ou habitation — Loi Hamon, après 1 an",
     description:
@@ -1590,6 +1676,7 @@ Pendant la médiation, la prescription est suspendue (article L.114-2 du Code de
   // ─── Guide 17 : Contester des frais bancaires abusifs ───
   {
     slug: "contester-frais-bancaires-abusifs",
+    category: "banque-assurance",
     title: "Contester des frais bancaires abusifs : plafonds et recours",
     metaTitle: "Contester des frais bancaires abusifs — Plafonds et lettre type",
     description:
@@ -1714,6 +1801,7 @@ Conserver les preuves : convention de compte signée, relevés, courriers échan
   // ─── Guide 18 : Mise en demeure trouble de voisinage ───
   {
     slug: "mise-en-demeure-trouble-voisinage",
+    category: "logement-bail",
     title: "Mise en demeure d'un voisin : trouble de voisinage",
     metaTitle: "Mise en demeure voisin — Trouble de voisinage, procédure 2026",
     description:
@@ -1831,6 +1919,7 @@ Pour les litiges jusqu'à 10 000 €, l'avocat n'est pas obligatoire et la proc�
   // ─── Guide 19 : Heures supplémentaires impayées (Lot C 2026-05-16) ───
   {
     slug: "reclamer-heures-supplementaires-impayees",
+    category: "travail",
     title: "Heures supplémentaires impayées : comment réclamer son dû à l'employeur",
     metaTitle: "Heures supplémentaires impayées — réclamer à son employeur",
     description:
@@ -1929,6 +2018,7 @@ L'envoi en recommandé avec accusé de réception est indispensable. C'est lui q
   // ─── Guide 20 : Requalification CDD en CDI (Lot C 2026-05-16) ───
   {
     slug: "requalification-cdd-en-cdi",
+    category: "travail",
     title: "Requalifier son CDD en CDI : motifs, démarche et indemnités",
     metaTitle: "Requalification CDD en CDI — motifs et procédure",
     description:
@@ -2038,6 +2128,7 @@ Cette procédure rapide est un avantage stratégique : elle évite les délais h
   // ─── Guide 21 : Contester un solde de tout compte erroné (Lot C 2026-05-16) ───
   {
     slug: "contester-solde-de-tout-compte",
+    category: "travail",
     title: "Contester un solde de tout compte erroné : délais et procédure",
     metaTitle: "Contester un solde de tout compte — délais, procédure",
     description:
@@ -2140,6 +2231,7 @@ La charge de la preuve appartient au salarié pour démontrer le caractère erro
   // ─── Guide 22 : Demande de rupture conventionnelle (Lot C 2026-05-16) ───
   {
     slug: "demander-rupture-conventionnelle-employeur",
+    category: "travail",
     title: "Demander une rupture conventionnelle à son employeur : procédure et négociation",
     metaTitle: "Demande de rupture conventionnelle — lettre et procédure",
     description:
@@ -2249,6 +2341,7 @@ L'employeur n'a aucune obligation de proposer plus que le minimum légal. Mais s
   // ─── Guide 23 : Loi Lemoine assurance emprunteur (Lot C 2026-05-16) ───
   {
     slug: "resilier-assurance-emprunteur-loi-lemoine",
+    category: "banque-assurance",
     title: "Résilier son assurance emprunteur grâce à la loi Lemoine : guide complet",
     metaTitle: "Résilier assurance emprunteur loi Lemoine — mode d'emploi",
     description:
