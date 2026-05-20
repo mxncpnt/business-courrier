@@ -692,18 +692,20 @@ Conservez vos preuves jusqu'à obtention du paiement : carte d'embarquement, com
   {
     slug: "resilier-bail-locataire-zone-tendue",
     category: "logement-bail",
-    title: "Résilier son bail en zone tendue : préavis 1 mois",
-    metaTitle: "Résiliation bail zone tendue — Préavis 1 mois locataire (2026)",
+    title: "Lettre de résiliation de bail en zone tendue (préavis 1 mois)",
+    metaTitle: "Lettre de résiliation bail zone tendue — préavis 1 mois",
     description:
-      "En zone tendue, le préavis du locataire est réduit à 1 mois. Liste des communes concernées, motifs, procédure, modèle de lettre LRAR.",
+      "Quittez votre logement en zone tendue avec un préavis d'1 mois. Modèle de lettre de congé, communes concernées et envoi en recommandé AR.",
     relatedLetterSlug: "resiliation-bail",
     publishedAt: "2026-05-05",
-    updatedAt: "2026-05-05",
+    updatedAt: "2026-05-20",
     readingTime: "5 min",
     sections: [
       {
-        heading: "Qu'est-ce qu'une « zone tendue » et pourquoi ça change tout",
-        body: `La zone tendue est un statut réglementaire défini par le décret n° 2013-392 du 10 mai 2013, modifié plusieurs fois depuis. Elle vise les communes où la demande de logement est largement supérieure à l'offre, créant des tensions sur les loyers et la disponibilité.
+        heading: "Vous quittez un logement en zone tendue : préavis réduit à 1 mois",
+        body: `Si vous louez un logement vide dans une commune classée en zone tendue, vous pouvez donner congé à votre bailleur avec un préavis réduit à **1 mois** au lieu de 3 — automatiquement, sans avoir à justifier d'un motif. Ce guide vous explique comment vérifier votre situation, puis rédiger et envoyer la lettre de congé qui sécurise ce préavis court.
+
+La zone tendue est un statut réglementaire défini par le décret n° 2013-392 du 10 mai 2013, modifié plusieurs fois depuis. Elle vise les communes où la demande de logement est largement supérieure à l'offre, créant des tensions sur les loyers et la disponibilité.
 
 Conséquence pratique pour le locataire : en zone tendue, le préavis de départ est réduit de 3 mois (régime classique) à **1 mois** (article 15-I de la loi du 6 juillet 1989), sans avoir à justifier d'un motif particulier. C'est un droit automatique pour tout locataire d'un logement vide situé dans une commune classée.
 
