@@ -2678,22 +2678,24 @@ Le juge peut prononcer :
     ],
   },
 
-  // ─── Guide 26 : Préavis réduit mutation professionnelle (Lot D 2026-05-16) ───
+  // ─── Guide 26 : Préavis réduit mutation professionnelle (Lot D 2026-05-16, re-ciblé 2026-06-10) ───
   {
     slug: "preavis-reduit-mutation-professionnelle",
-    title: "Préavis réduit à 1 mois pour mutation, perte d'emploi ou premier emploi",
-    metaTitle: "Préavis 1 mois logement — mutation, perte d'emploi",
+    title: "Lettre de congé locataire pour mutation, perte d'emploi ou premier emploi (préavis 1 mois)",
+    metaTitle: "Lettre de congé locataire — préavis 1 mois mutation/emploi",
     description:
-      "Préavis réduit à 1 mois en location vide : motifs reconnus (mutation, perte d'emploi, premier emploi, santé). Article 15-I de la loi 89-462, modèle de lettre.",
+      "Quittez votre logement avec un préavis d'1 mois pour mutation, perte d'emploi ou premier emploi. Modèle de lettre de congé, motifs reconnus, envoi en recommandé AR.",
     relatedLetterSlug: "resiliation-bail",
     category: "logement-bail",
     publishedAt: "2026-05-16",
-    updatedAt: "2026-05-16",
+    updatedAt: "2026-06-10",
     readingTime: "5 min",
     sections: [
       {
-        heading: "Qui peut bénéficier du préavis réduit ?",
-        body: `Le préavis légal pour un locataire qui résilie son bail est de **3 mois en location vide** (non meublée) et **1 mois en location meublée**, selon l'article 15-I de la loi du 6 juillet 1989. Toutefois, le législateur a prévu plusieurs cas dans lesquels le préavis en location vide est ramené à **1 mois** — le même qu'en location meublée.
+        heading: "Vous quittez votre logement pour raison professionnelle : préavis réduit à 1 mois",
+        body: `Si vous donnez congé à votre bailleur dans le cadre d'une mutation, d'une perte d'emploi, d'un premier emploi ou d'un nouvel emploi après chômage, votre préavis tombe à **1 mois** au lieu de 3 — à condition de joindre le justificatif et de le mentionner explicitement dans la lettre de congé. Ce guide vous explique quels motifs sont reconnus, comment rédiger la lettre, et comment éviter le piège qui rend le préavis réduit inopposable.
+
+Le préavis légal pour un locataire qui résilie son bail est de **3 mois en location vide** (non meublée) et **1 mois en location meublée**, selon l'article 15-I de la loi du 6 juillet 1989. Le législateur a prévu plusieurs cas dans lesquels le préavis en location vide est ramené à **1 mois** — le même qu'en location meublée.
 
 Ces cas relèvent de la situation personnelle et professionnelle du locataire. Ils sont **limitativement énumérés** par l'article 15-I de la loi 89-462. Vous ne pouvez pas inventer un motif — il doit correspondre exactement à l'une des situations prévues.
 
